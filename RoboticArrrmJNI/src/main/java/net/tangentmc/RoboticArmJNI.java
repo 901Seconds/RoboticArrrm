@@ -15,4 +15,14 @@ public class RoboticArmJNI implements RoboticArm {
     public void setAngles(int theta1, int theta2) {
 
     }
+
+    @Override
+    public void setAngle(double theta1, double theta2) {
+
+    }
+
+    @Override
+    public RoboticArmModel getModel() {
+        return null;
+    }
 }

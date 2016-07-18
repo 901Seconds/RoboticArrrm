@@ -2,7 +2,11 @@ import net.tangentmc.RoboticArmModel;
 import processing.core.PApplet;
 import net.tangentmc.RoboticArm;
 
+import java.awt.*;
 import java.lang.invoke.MethodHandles;
+import java.util.Queue;
+import java.util.concurrent.LinkedBlockingQueue;
+
 import static net.tangentmc.Utils.*;
 
 public class RoboticArmSimulation extends PApplet implements RoboticArm {
@@ -11,6 +15,21 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
     public static RoboticArmSimulation instance;
     public RoboticArmSimulation() {
         instance=this;
+        width =800;
+        height = 600;
+        xCoOrdCenter = width / 4;
+        yCoOrdCenter = height / 2;
+        o1X = xCoOrdCenter - d / 2;
+        o1Y = yCoOrdCenter;
+        o2X = xCoOrdCenter + d / 2;
+        o2Y = yCoOrdCenter;
+        q1X = 3 * width / 4 - d / 2;
+        q1Y = yCoOrdCenter - 100;
+        q2X = 3 * width / 4 + d / 2;
+        q2Y = yCoOrdCenter - 100;
+//        launchAdjustment();
+        theArms = new RoboticArmModel(o1X, o1Y, o2X, o2Y);
+        theOtherArms = new RoboticArmModel(q1X, q1Y, q2X, q2Y);
     }
 
     public static void createDraw() {
@@ -50,27 +69,15 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
 
 
     public void settings() {
-        size(2000, 1200);
+        size(1280, 800);
     }
 
     public void setup() {
         //XMLer.pointsFromSVG("file.svg");
-        xCoOrdCenter = width / 4;
-        yCoOrdCenter = height / 2;
-        o1X = xCoOrdCenter - d / 2;
-        o1Y = yCoOrdCenter;
-        o2X = xCoOrdCenter + d / 2;
-        o2Y = yCoOrdCenter;
-        q1X = 3 * width / 4 - d / 2;
-        q1Y = yCoOrdCenter - 100;
-        q2X = 3 * width / 4 + d / 2;
-        q2Y = yCoOrdCenter - 100;
+        noLoop();
 
         textSize(20);
         background(30, 35, 40);
-//        launchAdjustment();
-        theArms = new RoboticArmModel(o1X, o1Y, o2X, o2Y);
-        theOtherArms = new RoboticArmModel(q1X, q1Y, q2X, q2Y);
     }
 
 //    private void launchAdjustment() {
@@ -79,11 +86,10 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
 //        //String[] args = null;
 //        //PIDAdjuster.main(args);
 //    }
-
+    double theta1, theta2;
     public void draw() {
-        if (coOrds == null) return;
         erasePrevFrame();
-        setTargets();
+        /*setTargets();
 
         double[] elbows = theArms.findElbowPosition(targetX, targetY);
 
@@ -96,7 +102,7 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
         drawArms(elbows, -1, 1);
         gCursor();
         drawPIDDisplay();
-
+        */
         drawOtherArms(theta1, theta2);
     }
 
@@ -273,14 +279,20 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
         ellipse(targetX, targetY, 10, 10);
     }
 
-    @Override
     public double[] findElbowPosition(double x, double y) {
         return instance.theArms.findElbowPosition(x,y);
     }
 
     @Override
-    public void setAngles(double[] allPoints) {
-        coOrds = allPoints;
+    public void setAngle(double theta1, double theta2) {
+        this.theta1 = theta1;
+        this.theta2 = theta2;
+        loop();
+    }
+
+    @Override
+    public RoboticArmModel getModel() {
+        return theOtherArms;
     }
 }
 

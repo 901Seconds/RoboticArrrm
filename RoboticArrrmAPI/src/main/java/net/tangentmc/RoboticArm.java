@@ -1,6 +1,6 @@
 package net.tangentmc;
 
 public interface RoboticArm {
-    double[] findElbowPosition(double x, double y);
-    void setAngles(double[] allPoints);
+    void setAngle(double theta1, double theta2);
+    RoboticArmModel getModel();
 }
