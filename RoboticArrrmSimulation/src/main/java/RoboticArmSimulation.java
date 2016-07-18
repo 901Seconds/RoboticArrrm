@@ -36,38 +36,22 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
     float o2X;
     float o2Y;
 
-    float q1X;
-    float q1Y;
-    float q2X;
-    float q2Y;
-
-    float targetX, targetY;
-    //not used
-    //float h1X, h1Y, h2X, h2Y;
-
-    double[] coOrds;
     public static volatile double kP = 0;
     public static volatile double kI = 0;
     public static volatile double kD = 0;
 
-    RoboticArmModel theArms, theOtherArms;
+    RoboticArmModel theArms;
 
 
     public void settings() {
-        size(1280, 800);
-        xCoOrdCenter = width / 4;
-        yCoOrdCenter = height / 2;
-        o1X = xCoOrdCenter - d / 2;
+        size(800, 800);
+        xCoOrdCenter = width/2;
+        yCoOrdCenter = height/2;
+        o1X = xCoOrdCenter - d/2;
         o1Y = yCoOrdCenter;
-        o2X = xCoOrdCenter + d / 2;
+        o2X = xCoOrdCenter + d/2;
         o2Y = yCoOrdCenter;
-        q1X = 3 * width / 4 - d / 2;
-        q1Y = yCoOrdCenter - 100;
-        q2X = 3 * width / 4 + d / 2;
-        q2Y = yCoOrdCenter - 100;
-//        launchAdjustment();
         theArms = new RoboticArmModel(o1X, o1Y, o2X, o2Y);
-        theOtherArms = new RoboticArmModel(q1X, q1Y, q2X, q2Y);
     }
 
     public void setup() {
@@ -87,6 +71,7 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
     double theta1, theta2;
     public void draw() {
         erasePrevFrame();
+        drawAngleGraph(theta1, theta2);
         /*setTargets();
 
         double[] elbows = theArms.findElbowPosition(targetX, targetY);
@@ -95,32 +80,32 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
         double theta2 = theArms.findTheta(elbows, 2, 1);
 
         drawAngleVis(theta1, theta2);
-//        drawAngleGraph(theta1, theta2);
+//
         drawRanges();
         drawArms(elbows, -1, 1);
         gCursor();
         drawPIDDisplay();
         */
-        drawOtherArms(theta1, theta2);
+        drawArms(theta1, theta2);
     }
 
-    private void drawOtherArms(double theta1, double theta2) {
+    private void drawArms(double theta1, double theta2) {
         fill(150, 150, 150, 150);
-        double e1X = q1X + l * Math.cos(theta1);
-        double e1Y = q1Y - l * Math.sin(theta1);
-        double e2X = q2X + l * Math.cos(theta2);
-        double e2Y = q2Y - l * Math.sin(theta2);
+        double e1X = o1X + l * Math.cos(theta1);
+        double e1Y = o1Y - l * Math.sin(theta1);
+        double e2X = o2X + l * Math.cos(theta2);
+        double e2Y = o2Y - l * Math.sin(theta2);
         //shoulders
-        ellipse(q1X, q1Y, 10, 10);
-        ellipse(q2X, q2Y, 10, 10);
+        ellipse(o1X, o1Y, 10, 10);
+        ellipse(o2X, o2Y, 10, 10);
         //elbows
         ellipse(e1X, e1Y, 10, 10);
         ellipse(e2X, e2Y, 10, 10);
         stroke(200, 200, 200, 150);
-        line(q1X, q1Y, e1X, e1Y);
-        line(q2X, q2Y, e2X, e2Y);
+        line(o1X, o1Y, e1X, e1Y);
+        line(o2X, o2Y, e2X, e2Y);
 
-        double[] tCPs = theOtherArms.findTCPPos(theta1, theta2);
+        double[] tCPs = theArms.findTCPPos(theta1, theta2);
         line(tCPs[0], tCPs[1], tCPs[2], tCPs[3]);
         line(e1X, e1Y, tCPs[0], tCPs[1]);
         line(e1X, e1Y, tCPs[2], tCPs[3]);
@@ -162,18 +147,18 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
         rect(150, 500, 10, -20 * (float) kD);
     }
 
-    private void drawAngleGraph(float theta1, float theta2) {
+    private void drawAngleGraph(double theta1, double theta2) {
         stroke(255, 0, 0);
         fill(200, 0, 0);
-        point(((float) (frameCount % 700) * width / 700), height - 40 * theta1);
+        point(((float) (frameCount % 700) * width / 700), (float)(height - 40 * theta1));
         text("left", 80, 40);
         stroke(0, 255, 0);
         fill(0, 200, 0);
-        point(((float) (frameCount % 700) * width / 700), height - 40 * theta2);
+        point(((float) (frameCount % 700) * width / 700), (float)(height - 40 * theta2));
         text("right", 80, 70);
         fill(30, 35, 40, 3);
         noStroke();
-        rect(((float) ((frameCount - 20) % 700) * width / 700), height - 150, 200, 150);
+        rect(((float) ((frameCount - 20) % 700) * width / 700), (float)height - 150, 200, 150);
     }
 
     private void drawAngleVis(double theta1, double theta2) {
@@ -212,47 +197,47 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
         rect(0, height / 2, width, height / 2 - 200);
     }
 
-    private float interPolate(float proportion, float Co1, float Co2) {
-        return Co1 + proportion * (Co2 - Co1);
-
-    }
-
-
-    private void drawArms(double[] elbowPos, int leftConfig, int rightConfig) {
-        stroke(0xff, 0xff, 0xff, 0x22);
-        line(elbowPos[0], elbowPos[1], elbowPos[2], elbowPos[3]);
-        line(elbowPos[4], elbowPos[5], elbowPos[6], elbowPos[7]);
-        ellipse((elbowPos[0] + elbowPos[2]) / 2, (elbowPos[1] + elbowPos[3]) / 2, absLength(elbowPos[0], elbowPos[2], elbowPos[1], elbowPos[3]), absLength(elbowPos[0], elbowPos[2], elbowPos[1], elbowPos[3]));
-        ellipse((elbowPos[4] + elbowPos[6]) / 2, (elbowPos[5] + elbowPos[7]) / 2, absLength(elbowPos[4], elbowPos[6], elbowPos[5], elbowPos[7]), absLength(elbowPos[4], elbowPos[6], elbowPos[5], elbowPos[7]));
-
-        if (leftConfig <= 0) {
-            stroke(0xff, 0x00, 0x00, 0x88);
-            line(targetX, targetY, elbowPos[0], elbowPos[1]);
-            stroke(0x00, 0x00, 0xff, 0x88);
-            line(o1X, o1Y, elbowPos[0], elbowPos[1]);
-        }
-        if (rightConfig <= 0) {
-            stroke(0xff, 0x00, 0x00, 0x88);
-            line(targetX, targetY, elbowPos[4], elbowPos[5]);
-            stroke(0x00, 0x00, 0xff, 0x88);
-            line(o2X, o2Y, elbowPos[4], elbowPos[5]);
-        }
-
-        if (leftConfig >= 0) {
-            stroke(0xff, 0x00, 0x00, 0xdd);
-            line(targetX, targetY, elbowPos[2], elbowPos[3]);
-            stroke(0x00, 0x00, 0xff, 0xdd);
-            line(o1X, o1Y, elbowPos[2], elbowPos[3]);
-        }
-        if (rightConfig >= 0) {
-            stroke(0xff, 0x00, 0x00, 0xdd);
-            line(targetX, targetY, elbowPos[6], elbowPos[7]);
-            stroke(0x00, 0x00, 0xff, 0xdd);
-            line(o2X, o2Y, elbowPos[6], elbowPos[7]);
-        }
-
-
-    }
+//    private float interPolate(float proportion, float Co1, float Co2) {
+//        return Co1 + proportion * (Co2 - Co1);
+//
+//    }
+//
+//
+//    private void drawArms(double[] elbowPos, int leftConfig, int rightConfig) {
+//        stroke(0xff, 0xff, 0xff, 0x22);
+//        line(elbowPos[0], elbowPos[1], elbowPos[2], elbowPos[3]);
+//        line(elbowPos[4], elbowPos[5], elbowPos[6], elbowPos[7]);
+//        ellipse((elbowPos[0] + elbowPos[2]) / 2, (elbowPos[1] + elbowPos[3]) / 2, absLength(elbowPos[0], elbowPos[2], elbowPos[1], elbowPos[3]), absLength(elbowPos[0], elbowPos[2], elbowPos[1], elbowPos[3]));
+//        ellipse((elbowPos[4] + elbowPos[6]) / 2, (elbowPos[5] + elbowPos[7]) / 2, absLength(elbowPos[4], elbowPos[6], elbowPos[5], elbowPos[7]), absLength(elbowPos[4], elbowPos[6], elbowPos[5], elbowPos[7]));
+//
+//        if (leftConfig <= 0) {
+//            stroke(0xff, 0x00, 0x00, 0x88);
+//            line(targetX, targetY, elbowPos[0], elbowPos[1]);
+//            stroke(0x00, 0x00, 0xff, 0x88);
+//            line(o1X, o1Y, elbowPos[0], elbowPos[1]);
+//        }
+//        if (rightConfig <= 0) {
+//            stroke(0xff, 0x00, 0x00, 0x88);
+//            line(targetX, targetY, elbowPos[4], elbowPos[5]);
+//            stroke(0x00, 0x00, 0xff, 0x88);
+//            line(o2X, o2Y, elbowPos[4], elbowPos[5]);
+//        }
+//
+//        if (leftConfig >= 0) {
+//            stroke(0xff, 0x00, 0x00, 0xdd);
+//            line(targetX, targetY, elbowPos[2], elbowPos[3]);
+//            stroke(0x00, 0x00, 0xff, 0xdd);
+//            line(o1X, o1Y, elbowPos[2], elbowPos[3]);
+//        }
+//        if (rightConfig >= 0) {
+//            stroke(0xff, 0x00, 0x00, 0xdd);
+//            line(targetX, targetY, elbowPos[6], elbowPos[7]);
+//            stroke(0x00, 0x00, 0xff, 0xdd);
+//            line(o2X, o2Y, elbowPos[6], elbowPos[7]);
+//        }
+//
+//
+//    }
 
     //draws the reach of the ulnars pivoting from shoulders and the total working
     //area as the intersections of two ellipses centered at the shoulders
@@ -270,16 +255,16 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
         ellipse(o2X, o2Y, 2 * l, 2 * l);
     }
 
-    //displays the mouse position
-    void gCursor() {
-        noStroke();
-        fill(200);
-        ellipse(targetX, targetY, 10, 10);
-    }
+//    //displays the mouse position
+//    void gCursor() {
+//        noStroke();
+//        fill(200);
+//        ellipse(targetX, targetY, 10, 10);
+//    }
 
-    public double[] findElbowPosition(double x, double y) {
-        return instance.theArms.findElbowPosition(x,y);
-    }
+//    public double[] findElbowPosition(double x, double y) {
+//        return instance.theArms.findElbowPosition(x,y);
+//    }
 
     @Override
     public void setAngle(double theta1, double theta2) {
@@ -290,7 +275,7 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
 
     @Override
     public RoboticArmModel getModel() {
-        return theOtherArms;
+        return theArms;
     }
 }
 
