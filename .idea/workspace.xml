@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="562fd72b-2674-4bdb-9358-2e62d0a324de" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RoboticArrrmSimulation/src/main/java/RoboticArmPlotter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmSimulation/target/classes/RoboticArmSimulation.class" afterPath="$PROJECT_DIR$/RoboticArrrmSimulation/target/classes/RoboticArmSimulation.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArmTest/target/classes/RobotTest.class" afterPath="$PROJECT_DIR$/RoboticArmTest/target/classes/RobotTest.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmSimulation/src/main/java/RoboticArmPlotter.java" afterPath="$PROJECT_DIR$/RoboticArrrmSimulation/src/main/java/RoboticArmPlotter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmSimulation/src/main/java/RoboticArmSimulation.java" afterPath="$PROJECT_DIR$/RoboticArrrmSimulation/src/main/java/RoboticArmSimulation.java" />
     </list>
     <ignored path="RoboticArrrm.iws" />
@@ -72,33 +72,33 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RoboticArmSimulation.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="RoboticArmSimulation.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RoboticArrrmSimulation/src/main/java/RoboticArmSimulation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="132" column="33" selection-start-line="132" selection-start-column="33" selection-end-line="132" selection-end-column="33" />
+            <state relative-caret-position="258">
+              <caret line="151" column="5" selection-start-line="151" selection-start-column="5" selection-end-line="151" selection-end-column="5" />
               <folding>
-                <element signature="e#4112#4113#0" expanded="true" />
-                <element signature="e#4173#4174#0" expanded="true" />
-                <element signature="e#5799#5800#0" expanded="true" />
-                <element signature="e#5834#5835#0" expanded="true" />
-                <marker date="1468845287202" expanded="false" signature="432:443" ph=" { " />
-                <marker date="1468845287202" expanded="false" signature="457:463" ph=" }" />
+                <element signature="e#3796#3797#0" expanded="true" />
+                <element signature="e#3857#3858#0" expanded="true" />
+                <element signature="e#4423#4424#0" expanded="true" />
+                <element signature="e#4458#4459#0" expanded="true" />
+                <marker date="1468845985595" expanded="false" signature="432:443" ph=" { " />
+                <marker date="1468845985595" expanded="false" signature="457:463" ph=" }" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RoboticArmPlotter.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RoboticArmPlotter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RoboticArrrmSimulation/src/main/java/RoboticArmPlotter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="68" column="26" selection-start-line="68" selection-start-column="26" selection-end-line="68" selection-end-column="26" />
+            <state relative-caret-position="258">
+              <caret line="42" column="45" selection-start-line="42" selection-start-column="45" selection-end-line="42" selection-end-column="45" />
               <folding>
                 <element signature="e#610#611#0" expanded="true" />
                 <element signature="e#641#642#0" expanded="true" />
-                <element signature="e#1212#1213#0" expanded="true" />
-                <element signature="e#1273#1274#0" expanded="true" />
+                <element signature="e#1582#1583#0" expanded="true" />
+                <element signature="e#1643#1644#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -179,8 +179,8 @@
         <option value="$PROJECT_DIR$/RoboticArmTest/src/main/java/RobotTest.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/RoboticArrrmAPI/src/main/java/net/tangentmc/SVGer.java" />
-        <option value="$PROJECT_DIR$/RoboticArrrmSimulation/src/main/java/RoboticArmSimulation.java" />
         <option value="$PROJECT_DIR$/RoboticArrrmSimulation/src/main/java/RoboticArmPlotter.java" />
+        <option value="$PROJECT_DIR$/RoboticArrrmSimulation/src/main/java/RoboticArmSimulation.java" />
       </list>
     </option>
   </component>
@@ -939,7 +939,7 @@
       <updated>1468813717057</updated>
       <workItem from="1468813722436" duration="9439000" />
       <workItem from="1468829740719" duration="4215000" />
-      <workItem from="1468838466108" duration="7005000" />
+      <workItem from="1468838466108" duration="7543000" />
     </task>
     <task id="LOCAL-00001" summary="Add test">
       <created>1468820944141</created>
@@ -990,11 +990,18 @@
       <option name="project" value="LOCAL" />
       <updated>1468844595806</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Plot to a seperate screen.">
+      <created>1468845484430</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1468845484430</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20659000" />
+    <option name="totallyTimeSpent" value="21197000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1360" y="27" width="1920" height="1029" extended-state="6" />
@@ -1046,7 +1053,8 @@
     <MESSAGE value="add gitignore&#10;" />
     <MESSAGE value="Loop over all shapes" />
     <MESSAGE value="This is a much better gitignore tbh" />
-    <option name="LAST_COMMIT_MESSAGE" value="This is a much better gitignore tbh" />
+    <MESSAGE value="Plot to a seperate screen." />
+    <option name="LAST_COMMIT_MESSAGE" value="Plot to a seperate screen." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1110,12 +1118,12 @@
         <state relative-caret-position="1512">
           <caret line="97" column="40" selection-start-line="97" selection-start-column="40" selection-end-line="97" selection-end-column="40" />
           <folding>
-            <element signature="e#4112#4113#0" expanded="true" />
-            <element signature="e#4173#4174#0" expanded="true" />
-            <element signature="e#5799#5800#0" expanded="true" />
-            <element signature="e#5834#5835#0" expanded="true" />
-            <marker date="1468845287202" expanded="false" signature="432:443" ph=" { " />
-            <marker date="1468845287202" expanded="false" signature="457:463" ph=" }" />
+            <element signature="e#3796#3797#0" expanded="true" />
+            <element signature="e#3857#3858#0" expanded="true" />
+            <element signature="e#4423#4424#0" expanded="true" />
+            <element signature="e#4458#4459#0" expanded="true" />
+            <marker date="1468845985595" expanded="false" signature="432:443" ph=" { " />
+            <marker date="1468845985595" expanded="false" signature="457:463" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -1193,12 +1201,12 @@
         <state relative-caret-position="4842">
           <caret line="287" column="27" selection-start-line="287" selection-start-column="27" selection-end-line="287" selection-end-column="27" />
           <folding>
-            <element signature="e#4112#4113#0" expanded="true" />
-            <element signature="e#4173#4174#0" expanded="true" />
-            <element signature="e#5799#5800#0" expanded="true" />
-            <element signature="e#5834#5835#0" expanded="true" />
-            <marker date="1468845287202" expanded="false" signature="432:443" ph=" { " />
-            <marker date="1468845287202" expanded="false" signature="457:463" ph=" }" />
+            <element signature="e#3796#3797#0" expanded="true" />
+            <element signature="e#3857#3858#0" expanded="true" />
+            <element signature="e#4423#4424#0" expanded="true" />
+            <element signature="e#4458#4459#0" expanded="true" />
+            <marker date="1468845985595" expanded="false" signature="432:443" ph=" { " />
+            <marker date="1468845985595" expanded="false" signature="457:463" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -1321,30 +1329,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RoboticArrrmSimulation/src/main/java/RoboticArmSimulation.java">
+    <entry file="file://$PROJECT_DIR$/RoboticArrrmSimulation/src/main/java/RoboticArmPlotter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="132" column="33" selection-start-line="132" selection-start-column="33" selection-end-line="132" selection-end-column="33" />
+        <state relative-caret-position="258">
+          <caret line="42" column="45" selection-start-line="42" selection-start-column="45" selection-end-line="42" selection-end-column="45" />
           <folding>
-            <element signature="e#4112#4113#0" expanded="true" />
-            <element signature="e#4173#4174#0" expanded="true" />
-            <element signature="e#5799#5800#0" expanded="true" />
-            <element signature="e#5834#5835#0" expanded="true" />
-            <marker date="1468845287202" expanded="false" signature="432:443" ph=" { " />
-            <marker date="1468845287202" expanded="false" signature="457:463" ph=" }" />
+            <element signature="e#610#611#0" expanded="true" />
+            <element signature="e#641#642#0" expanded="true" />
+            <element signature="e#1582#1583#0" expanded="true" />
+            <element signature="e#1643#1644#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RoboticArrrmSimulation/src/main/java/RoboticArmPlotter.java">
+    <entry file="file://$PROJECT_DIR$/RoboticArrrmSimulation/src/main/java/RoboticArmSimulation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="68" column="26" selection-start-line="68" selection-start-column="26" selection-end-line="68" selection-end-column="26" />
+        <state relative-caret-position="258">
+          <caret line="151" column="5" selection-start-line="151" selection-start-column="5" selection-end-line="151" selection-end-column="5" />
           <folding>
-            <element signature="e#610#611#0" expanded="true" />
-            <element signature="e#641#642#0" expanded="true" />
-            <element signature="e#1212#1213#0" expanded="true" />
-            <element signature="e#1273#1274#0" expanded="true" />
+            <element signature="e#3796#3797#0" expanded="true" />
+            <element signature="e#3857#3858#0" expanded="true" />
+            <element signature="e#4423#4424#0" expanded="true" />
+            <element signature="e#4458#4459#0" expanded="true" />
+            <marker date="1468845985595" expanded="false" signature="432:443" ph=" { " />
+            <marker date="1468845985595" expanded="false" signature="457:463" ph=" }" />
           </folding>
         </state>
       </provider>

@@ -51,7 +51,7 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
     public void settings() {
         size(1280, 800);
         xCoOrdCenter = 300;
-        yCoOrdCenter = 300;
+        yCoOrdCenter = 400;
         q1X = xCoOrdCenter - d / 2;
         q1Y = yCoOrdCenter - 100;
         q2X = xCoOrdCenter + d / 2;
@@ -60,19 +60,11 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
     }
 
     public void setup() {
-        //XMLer.pointsFromSVG("file.svg");
         noLoop();
 
         textSize(20);
         background(30, 35, 40);
     }
-
-//    private void launchAdjustment() {
-//        Thread adjustment = new Thread(new PIDAdjuster());
-//        adjustment.start();
-//        //String[] args = null;
-//        //PIDAdjuster.main(args);
-//    }
     double theta1, theta2;
     public void draw() {
         erasePrevFrame();
@@ -91,8 +83,6 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
         drawPIDDisplay();
         */
         drawOtherArms(theta1, theta2);
-        drawAngleVis(theta1, theta2);
-       drawAngleGraph(theta1, theta2);
     }
 
     private void drawOtherArms(double theta1, double theta2) {
@@ -130,7 +120,7 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
         fill(255, 0, 0);
         ellipse(tCPs[2], tCPs[3], 10, 10);
 
-        plotter.drawPoints(tCPs);
+        plotter.drawPoints(tCPs,theta1,theta2);
     }
 
     private void ellipse(double X1, double Y1, double width, double height) {
@@ -149,41 +139,10 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
         rect(150, 500, 10, -20 * (float) kD);
     }
 
-    private void drawAngleGraph(double theta1, double theta2) {
-        stroke(255, 0, 0);
-        fill(200, 0, 0);
-        point(((float) (frameCount % 700) * width / 700), (float)(height - 40 * theta1));
-        stroke(0, 255, 0);
-        fill(0, 200, 0);
-        point(((float) (frameCount % 700) * width / 700), (float)(height - 40 * theta2));
-        fill(30, 35, 40, 3);
-        noStroke();
-        rect((((frameCount - 20) % 700) * width / 700), height - 150, 200, 150);
-    }
-
-    private void drawAngleVis(double theta1, double theta2) {
-        noStroke();
-        text("left", xCoOrdCenter-50, 40);
-        text("right", xCoOrdCenter-50, 70);
-        fill(200);
-        rect(xCoOrdCenter, 20, (float)theta1 * 150, 20);
-        rect(xCoOrdCenter, 50, (float)theta2 * 150, 20);
-    }
-
     private void erasePrevFrame() {
         noStroke();
         fill(30, 35, 40);
-        rect(0, 0, width / 2, height - 200);
-        rect(0, 0, width, height / 2);
-        fill(30, 35, 40, 1);
-        rect(0, height / 2, width, height);
-    }
-
-    //displays the mouse position
-    void gCursor() {
-        noStroke();
-        fill(200);
-        ellipse(targetX, targetY, 10, 10);
+        rect(0, 0, width, height);
     }
     @Override
     public void setAngle(double theta1, double theta2) {

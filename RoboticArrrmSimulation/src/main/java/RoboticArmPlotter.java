@@ -38,9 +38,21 @@ public class RoboticArmPlotter extends PApplet {
         if (tCPs == null) return;
         erasePrevFrame();
         fill(200);
-        ellipse(tCPs[0], tCPs[1] + height / 2 , 10, 10);
+        ellipse(tCPs[0], tCPs[1] + height / 4 , 10, 10);
         fill(255, 0, 0);
-        ellipse(tCPs[2], tCPs[3] + height / 2 , 10, 10);
+        ellipse(tCPs[2], tCPs[3] + height / 4 , 10, 10);
+        drawAngleGraph(theta1,theta2);
+        drawAngleVis(theta1,theta2);
+    }
+
+    private void drawAngleVis(double theta1, double theta2) {
+        noStroke();
+        fill(200);
+        text("left", 100, 40);
+        text("right", 100, 70);
+        fill(200);
+        rect(width/2, 20, (float)theta1 * 150, 20);
+        rect(width/2, 50, (float)theta2 * 150, 20);
     }
 
 
@@ -68,9 +80,14 @@ public class RoboticArmPlotter extends PApplet {
         noStroke();
         fill(30, 35, 40, 1);
         rect(0, 0, width, height);
+        fill(30, 35, 40);
+        rect(0, 0, width, 100);
     }
-    public void drawPoints(double[] tCPs) {
+    double theta1,theta2;
+    public void drawPoints(double[] tCPs, double theta1, double theta2) {
         this.tCPs = tCPs;
+        this.theta1 = theta1;
+        this.theta2 = theta2;
         loop();
     }
 }
