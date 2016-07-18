@@ -1,22 +1,21 @@
-import net.tangentmc.RoboticArmModel;
 import processing.core.PApplet;
-import net.tangentmc.RoboticArm;
 
-import java.awt.*;
 import java.lang.invoke.MethodHandles;
-import java.util.Queue;
-import java.util.concurrent.LinkedBlockingQueue;
-
-import static net.tangentmc.Utils.*;
 
 public class RoboticArmPlotter extends PApplet {
 
-
+    //Only used by create draw.
     private static RoboticArmPlotter instance;
+    @Deprecated
     public RoboticArmPlotter() {
+        //Check this was created correctly. May help catch future bugs.
+        if (!Thread.currentThread().getStackTrace()[2].getClassName().equals("sun.reflect.NativeConstructorAccessorImpl")) {
+            throw new RuntimeException("You may not create an instance of this class outside of processing!");
+        }
         instance=this;
     }
 
+    //A little hack that gets the instance created by processing.
     public static RoboticArmPlotter createDraw() {
         main(MethodHandles.lookup().lookupClass().getName());
         return instance;

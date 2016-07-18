@@ -17,8 +17,7 @@ public class RobotTest {
     }
     public RobotTest() {
         points = new SVGer().pointsFromXML("file.svg");
-        RoboticArmSimulation.createDraw();
-        RoboticArm arm = RoboticArmSimulation.instance;
+        RoboticArm arm = RoboticArmSimulation.createDraw();
         Utils.AngleTuple[][] angles = new Utils.AngleTuple[points.length][];
         for (int i = 0; i < points.length; i++) {
             angles[i] = Utils.getAllAngles(arm.getModel(),Utils.getAllPoints(points[i]));

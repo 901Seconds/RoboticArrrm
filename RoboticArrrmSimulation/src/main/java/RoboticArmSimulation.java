@@ -11,12 +11,17 @@ import static net.tangentmc.Utils.*;
 
 public class RoboticArmSimulation extends PApplet implements RoboticArm {
 
-
-    public static RoboticArmSimulation instance;
+    //used during creation
+    private static RoboticArmSimulation instance;
+    @Deprecated
     public RoboticArmSimulation() {
+        //Check this was created correctly. May help catch future bugs.
+        if (!Thread.currentThread().getStackTrace()[2].getClassName().equals("sun.reflect.NativeConstructorAccessorImpl")) {
+            throw new RuntimeException("You may not create an instance of this class outside of processing!");
+        }
         instance=this;
     }
-
+    //A little hack that gets the instance created by processing.
     public static RoboticArmSimulation createDraw() {
         main(MethodHandles.lookup().lookupClass().getName());
         return instance;
@@ -67,6 +72,7 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
     }
     double theta1, theta2;
     public void draw() {
+        translate(200,100);
         erasePrevFrame();
         /*setTargets();
 
@@ -142,7 +148,7 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
     private void erasePrevFrame() {
         noStroke();
         fill(30, 35, 40);
-        rect(0, 0, width, height);
+        rect(-200, -100, width, height);
     }
     @Override
     public void setAngle(double theta1, double theta2) {
