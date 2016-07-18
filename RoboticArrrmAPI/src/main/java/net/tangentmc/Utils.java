@@ -1,5 +1,7 @@
 package net.tangentmc;
 
+import java.util.Arrays;
+
 /**
  * Created by surface on 18/07/2016.
  */
@@ -23,11 +25,14 @@ public class Utils {
 
     public static double[] getAllPoints(double[] discreteCoOrds) {
         double[] points = new double[discreteCoOrds.length*100];
-        for (int frameCount=0; frameCount<points.length; frameCount+=2) {
+        for (int frameCount=0; frameCount<points.length-1; frameCount+=1) {
             int i = (frameCount / 50) % (discreteCoOrds.length);
+            i/=2;
+            i*=2;
             points[frameCount] = interPolate(((float) (frameCount % 100) / 100), discreteCoOrds[i % discreteCoOrds.length], discreteCoOrds[(i + 2) % discreteCoOrds.length]);
             points[frameCount+1] = interPolate(((float) (frameCount % 100) / 100), discreteCoOrds[(i + 1) % discreteCoOrds.length], discreteCoOrds[(i + 3) % discreteCoOrds.length]);
         }
+        System.out.println(Arrays.toString(points));
         return points;
     }
 
