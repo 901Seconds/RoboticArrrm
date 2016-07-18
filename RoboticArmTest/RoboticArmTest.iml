@@ -11,6 +11,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="RoboticArrrmJNI" />
+    <orderEntry type="module" module-name="RoboticArrrmAPI" />
+    <orderEntry type="module" module-name="RoboticArrrmSimulation" />
     <orderEntry type="library" name="Maven: org.processing:core:3.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.xmlgraphics:xmlgraphics-commons:2.1" level="project" />
     <orderEntry type="library" name="Maven: commons-io:commons-io:1.3.1" level="project" />
@@ -26,6 +29,5 @@
     <orderEntry type="library" name="Maven: xerces:xercesImpl:2.5.0" level="project" />
     <orderEntry type="library" name="Maven: batik:batik-parser:1.6-1" level="project" />
     <orderEntry type="library" name="Maven: batik:batik-awt-util:1.6-1" level="project" />
-    <orderEntry type="module" module-name="RoboticArrrmAPI" />
   </component>
 </module>

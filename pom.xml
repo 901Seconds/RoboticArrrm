@@ -12,6 +12,7 @@
         <module>RoboticArrrmAPI</module>
         <module>RoboticArrrmJNI</module>
         <module>RoboticArrrmSimulation</module>
+        <module>RoboticArmTest</module>
     </modules>
     <dependencies>
         <dependency>

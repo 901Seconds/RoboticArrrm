@@ -50,8 +50,8 @@ public class SVGer {
 //    }
 
     @Deprecated
-    float[] pointsFromXML(String fileName) {
-        float[] points = null;
+    public double[] pointsFromXML(String fileName) {
+        double[] points = null;
         File opened = new File(fileName);
         try {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -95,7 +95,7 @@ public class SVGer {
                             break;
                         }
                     }
-                    float[] clean = new float[end];
+                    double[] clean = new double[end];
 
 //                    System.out.println("\nfinal array ");
                     for (int j = 0; j < clean.length; j++) {
