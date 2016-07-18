@@ -2,10 +2,7 @@ import net.tangentmc.RoboticArmModel;
 import processing.core.PApplet;
 import net.tangentmc.RoboticArm;
 
-import java.awt.*;
 import java.lang.invoke.MethodHandles;
-import java.util.Queue;
-import java.util.concurrent.LinkedBlockingQueue;
 
 import static net.tangentmc.Utils.*;
 
@@ -40,17 +37,11 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
     float q1Y;
     float q2X;
     float q2Y;
-
-    float targetX, targetY;
-    //not used
-    //float h1X, h1Y, h2X, h2Y;
-
-    double[] coOrds;
     public static volatile double kP = 0;
     public static volatile double kI = 0;
     public static volatile double kD = 0;
 
-    RoboticArmModel theOtherArms;
+    RoboticArmModel theArms;
     RoboticArmPlotter plotter = RoboticArmPlotter.createDraw();
 
     public void settings() {
@@ -61,7 +52,7 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
         q1Y = yCoOrdCenter - 100;
         q2X = xCoOrdCenter + d / 2;
         q2Y = yCoOrdCenter - 100;
-        theOtherArms = new RoboticArmModel(q1X, q1Y, q2X, q2Y);
+        theArms = new RoboticArmModel(q1X, q1Y, q2X, q2Y);
     }
 
     public void setup() {
@@ -72,22 +63,9 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
     }
     double theta1, theta2;
     public void draw() {
-        translate(200,100);
+        //Shift the bot towards the center of the screen
+        translate(200,200);
         erasePrevFrame();
-        /*setTargets();
-
-        double[] elbows = theArms.findElbowPosition(targetX, targetY);
-
-        double theta1 = theArms.findTheta(elbows, 1, -1);
-        double theta2 = theArms.findTheta(elbows, 2, 1);
-
-        drawAngleVis(theta1, theta2);
-//        drawAngleGraph(theta1, theta2);
-        drawRanges();
-        drawArms(elbows, -1, 1);
-        gCursor();
-        drawPIDDisplay();
-        */
         drawOtherArms(theta1, theta2);
     }
 
@@ -107,7 +85,7 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
         line(q1X, q1Y, e1X, e1Y);
         line(q2X, q2Y, e2X, e2Y);
 
-        double[] tCPs = theOtherArms.findTCPPos(theta1, theta2);
+        double[] tCPs = theArms.findTCPPos(theta1, theta2);
         line(tCPs[0], tCPs[1], tCPs[2], tCPs[3]);
         line(e1X, e1Y, tCPs[0], tCPs[1]);
         line(e1X, e1Y, tCPs[2], tCPs[3]);
@@ -137,14 +115,6 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
         line((float)X1,(float)Y1,(float)X2,(float)Y2);
     }
 
-    private void drawPIDDisplay() {
-        fill(200, 200, 200, 100);
-        noStroke();
-        rect(50, 500, 10, -20 * (float) kP);
-        rect(100, 500, 10, -20 * (float) kI);
-        rect(150, 500, 10, -20 * (float) kD);
-    }
-
     private void erasePrevFrame() {
         noStroke();
         fill(30, 35, 40);
@@ -159,7 +129,7 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
 
     @Override
     public RoboticArmModel getModel() {
-        return theOtherArms;
+        return theArms;
     }
 }
 

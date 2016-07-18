@@ -11,7 +11,7 @@ import java.util.Arrays;
  * Created by sanjay on 18/07/16.
  */
 public class RobotTest {
-    Point.Double[][] points;
+    Shape[] points;
     public static void main(String[] args) {
         new RobotTest();
     }

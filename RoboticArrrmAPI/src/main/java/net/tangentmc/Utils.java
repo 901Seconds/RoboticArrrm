@@ -4,7 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.FlatteningPathIterator;
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -27,20 +30,21 @@ public class Utils {
         return angles;
     }
 
-    public static Point.Double[] getAllPoints(Point2D.Double[] discreteCoords) {
-        Point.Double[] points = new Point.Double[(discreteCoords.length-1)*100];
-        for (int i2 = 0; i2 <discreteCoords.length-1; i2++) {
-            for (int i =0; i < 100; i++) {
-                points[(i2*100)+i] = new Point2D.Double(interPolate(i/100d, discreteCoords[i2].getX(), discreteCoords[i2 + 1].getX()),
-                        interPolate(i/100d, discreteCoords[i2].getY(), discreteCoords[i2 + 1].getY()));
-            }
+    public static Point.Double[] getAllPoints(Shape shape) {
+        FlatteningPathIterator iter;
+        ArrayList<Point.Double> points;
+        iter=new FlatteningPathIterator(shape.getPathIterator(new AffineTransform()), 0.001);
+        points=new ArrayList<>();
+        double[] coords=new double[6];
+        while (!iter.isDone()) {
+            iter.currentSegment(coords);
+            double x=coords[0];
+            double y=coords[1];
+            points.add(new Point.Double(x,y));
+            iter.next();
         }
-        return points;
-    }
-
-    private static double interPolate(double proportion, double Co1, double Co2) {
-        return Co1 + proportion * (Co2 - Co1);
-
+        System.out.print(points);
+        return points.toArray(new Point.Double[0]);
     }
     @AllArgsConstructor
     @Getter
