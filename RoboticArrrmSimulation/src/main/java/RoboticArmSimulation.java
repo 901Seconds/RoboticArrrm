@@ -15,21 +15,6 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
     public static RoboticArmSimulation instance;
     public RoboticArmSimulation() {
         instance=this;
-        width =800;
-        height = 600;
-        xCoOrdCenter = width / 4;
-        yCoOrdCenter = height / 2;
-        o1X = xCoOrdCenter - d / 2;
-        o1Y = yCoOrdCenter;
-        o2X = xCoOrdCenter + d / 2;
-        o2Y = yCoOrdCenter;
-        q1X = 3 * width / 4 - d / 2;
-        q1Y = yCoOrdCenter - 100;
-        q2X = 3 * width / 4 + d / 2;
-        q2Y = yCoOrdCenter - 100;
-//        launchAdjustment();
-        theArms = new RoboticArmModel(o1X, o1Y, o2X, o2Y);
-        theOtherArms = new RoboticArmModel(q1X, q1Y, q2X, q2Y);
     }
 
     public static void createDraw() {
@@ -70,6 +55,19 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
 
     public void settings() {
         size(1280, 800);
+        xCoOrdCenter = width / 4;
+        yCoOrdCenter = height / 2;
+        o1X = xCoOrdCenter - d / 2;
+        o1Y = yCoOrdCenter;
+        o2X = xCoOrdCenter + d / 2;
+        o2Y = yCoOrdCenter;
+        q1X = 3 * width / 4 - d / 2;
+        q1Y = yCoOrdCenter - 100;
+        q2X = 3 * width / 4 + d / 2;
+        q2Y = yCoOrdCenter - 100;
+//        launchAdjustment();
+        theArms = new RoboticArmModel(o1X, o1Y, o2X, o2Y);
+        theOtherArms = new RoboticArmModel(q1X, q1Y, q2X, q2Y);
     }
 
     public void setup() {
