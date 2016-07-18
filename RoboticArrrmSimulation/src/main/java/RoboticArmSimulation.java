@@ -5,11 +5,11 @@ import net.tangentmc.RoboticArm;
 import java.lang.invoke.MethodHandles;
 import static net.tangentmc.Utils.*;
 
-public class RoboticArmDrawer extends PApplet implements RoboticArm {
+public class RoboticArmSimulation extends PApplet implements RoboticArm {
 
 
-    public static RoboticArmDrawer instance;
-    public RoboticArmDrawer() {
+    public static RoboticArmSimulation instance;
+    public RoboticArmSimulation() {
         instance=this;
     }
 

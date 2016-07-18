@@ -12,7 +12,7 @@ public class Utils {
         return Math.sqrt(Math.pow(hyp, 2) - Math.pow(adj, 2));
     }
 
-    public double[] getAllAngles(RoboticArmModel m, double[] points) {
+    public static double[] getAllAngles(RoboticArmModel m, double[] points) {
         double[] angles = new double[points.length];
         for (int i = 0; i < points.length; i+=2) {
             angles[i]=m.findTheta(1,1,points[i],points[i+1]);
@@ -20,4 +20,20 @@ public class Utils {
         }
         return angles;
     }
+
+    public static double[] getAllPoints(double[] discreteCoOrds) {
+        double[] points = new double[discreteCoOrds.length*100];
+        for (int frameCount=0; frameCount<points.length; frameCount+=2) {
+            int i = (frameCount / 50) % (discreteCoOrds.length);
+            points[frameCount] = interPolate(((float) (frameCount % 100) / 100), discreteCoOrds[i % discreteCoOrds.length], discreteCoOrds[(i + 2) % discreteCoOrds.length]);
+            points[frameCount+1] = interPolate(((float) (frameCount % 100) / 100), discreteCoOrds[(i + 1) % discreteCoOrds.length], discreteCoOrds[(i + 3) % discreteCoOrds.length]);
+        }
+        return points;
+    }
+
+    private static double interPolate(double proportion, double Co1, double Co2) {
+        return Co1 + proportion * (Co2 - Co1);
+
+    }
+
 }

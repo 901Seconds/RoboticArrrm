@@ -88,7 +88,7 @@ public class RoboticArmModel {
 
 
 
-    double[] findTCPPos(double theta1, double theta2) {
+    public double[] findTCPPos(double theta1, double theta2) {
 
         //e is for elbow, 1 is for left, 2 is for right
         double e1X, e1Y, e2X, e2Y;
