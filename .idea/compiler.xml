@@ -24,12 +24,14 @@
         <processorPath useClasspath="true" />
         <module name="RoboticArrrmAPI" />
         <module name="RoboticArrrmJNI" />
+        <module name="RoboticArrrmSimulation" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="RoboticArrrm" target="1.5" />
       <module name="RoboticArrrmAPI" target="1.5" />
       <module name="RoboticArrrmJNI" target="1.5" />
+      <module name="RoboticArrrmSimulation" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

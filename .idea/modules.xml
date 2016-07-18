@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/RoboticArrrm.iml" filepath="$PROJECT_DIR$/RoboticArrrm.iml" />
       <module fileurl="file://$PROJECT_DIR$/RoboticArrrmAPI/RoboticArrrmAPI.iml" filepath="$PROJECT_DIR$/RoboticArrrmAPI/RoboticArrrmAPI.iml" />
       <module fileurl="file://$PROJECT_DIR$/RoboticArrrmJNI/RoboticArrrmJNI.iml" filepath="$PROJECT_DIR$/RoboticArrrmJNI/RoboticArrrmJNI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RoboticArrrmSimulation/RoboticArrrmSimulation.iml" filepath="$PROJECT_DIR$/RoboticArrrmSimulation/RoboticArrrmSimulation.iml" />
     </modules>
   </component>
 </project>
