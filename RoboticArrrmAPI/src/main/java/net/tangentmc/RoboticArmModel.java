@@ -1,12 +1,13 @@
-import net.tangentmc.RoboticArm;
+package net.tangentmc;
+
+
 import org.apache.batik.dom.svg.SVGOMPoint;
-import processing.core.PApplet;
 
 import static net.tangentmc.Utils.*;
 /**
  * Created by surface on 18/07/2016.
  */
-public class RoboticArmSimulation extends PApplet implements RoboticArm{
+public class RoboticArmModel {
 
     //2*lengths ulnar and forearm
     double l=180;
@@ -19,21 +20,21 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm{
     double o2X;
     double o2Y;
 
-    public RoboticArmSimulation() {
+    public RoboticArmModel() {
 //        o1X=width/2-d/2;
 //        o1Y=height/2;
 //        o2X=width/2+d/2;
 //        o2Y=width/2;
     }
 
-    public RoboticArmSimulation(double shoulder1X, double shoulder1Y, double shoulder2X, double shoulder2Y) {
+    public RoboticArmModel(double shoulder1X, double shoulder1Y, double shoulder2X, double shoulder2Y) {
         o1X=shoulder1X;
         o1Y=shoulder1Y;
         o2X=shoulder2X;
         o2Y=shoulder2Y;
     }
 
-    public RoboticArmSimulation(double shoulder1X, double shoulder1Y, double shoulder2X, double shoulder2Y, double armLength) {
+    public RoboticArmModel(double shoulder1X, double shoulder1Y, double shoulder2X, double shoulder2Y, double armLength) {
         o1X=shoulder1X;
         o1Y=shoulder1Y;
         o2X=shoulder2X;
@@ -75,6 +76,10 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm{
         }
         angle= Math.atan2(Y1-Y2,-X1+X2);
         return angle;
+    }
+
+    public double findTheta(int shoulderNum, int leftRight, double x, double y) {
+        return findTheta(findElbowPosition(x,y),shoulderNum,leftRight);
     }
 
     double[] findElbowPos(SVGOMPoint targetPoint) {
@@ -154,7 +159,4 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm{
         return points;
     }
 
-    public void setAngles(int theta1, int theta2) {
-
-    }
 }

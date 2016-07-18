@@ -29,11 +29,11 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="RoboticArmTest" target="1.5" />
-      <module name="RoboticArrrm" target="1.5" />
+      <module name="RoboticArmTest" target="1.8" />
+      <module name="RoboticArrrm" target="1.8" />
       <module name="RoboticArrrmAPI" target="1.5" />
-      <module name="RoboticArrrmJNI" target="1.5" />
-      <module name="RoboticArrrmSimulation" target="1.5" />
+      <module name="RoboticArrrmJNI" target="1.8" />
+      <module name="RoboticArrrmSimulation" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
