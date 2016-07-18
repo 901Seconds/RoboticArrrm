@@ -49,8 +49,8 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
 
     public void settings() {
         size(1280, 800);
-        xCoOrdCenter = 500;
-        yCoOrdCenter = 400;
+        xCoOrdCenter = 300;
+        yCoOrdCenter = 300;
         q1X = xCoOrdCenter - d / 2;
         q1Y = yCoOrdCenter - 100;
         q2X = xCoOrdCenter + d / 2;
@@ -179,7 +179,7 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
         rect(0, 0, width / 2, height - 200);
         rect(0, 0, width, height / 2);
         fill(30, 35, 40, 1);
-        rect(0, height / 2, width, height / 2 - 200);
+        rect(0, height / 2, width, height);
     }
 
     //displays the mouse position

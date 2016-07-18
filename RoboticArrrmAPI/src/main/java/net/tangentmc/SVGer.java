@@ -55,13 +55,14 @@ public class SVGer {
 //    }
 
     @Deprecated
-    public Point.Double[] pointsFromXML(String fileName) {
-        Point.Double[] points = null;
+    public Point.Double[][] pointsFromXML(String fileName) {
+        Point.Double[][] points = null;
         File opened = new File(fileName);
         try {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document doc = builder.parse(opened);
             NodeList pathList = doc.getElementsByTagName("path");
+            points = new Point2D.Double[pathList.getLength()][];
             for (int i = 0; i < pathList.getLength(); i++) {
                 org.w3c.dom.Node p = pathList.item(i);
                 if (p.getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
@@ -70,13 +71,13 @@ public class SVGer {
                     Pattern pattern = Pattern.compile("[A-z]?(\\d*\\.\\d*,\\d*\\.\\d*)");
                     Matcher pointsets = pattern.matcher(d);
                     //this counts the z, so its perfect for adding a point to the end
-                    points = new Point.Double[d.split("[A-z]?(\\d*\\.\\d*,\\d*\\.\\d*)").length];
+                    points[i] = new Point.Double[d.split("[A-z]?(\\d*\\.\\d*,\\d*\\.\\d*)").length];
                     int jDest = 0;
                     while(pointsets.find()) {
                         String[] split = pointsets.group(1).split(",");
-                        points[jDest++] = new Point2D.Double(Double.parseDouble(split[0]),Double.parseDouble(split[1]));
+                        points[i][jDest++] = new Point2D.Double(Double.parseDouble(split[0]),Double.parseDouble(split[1]));
                     }
-                    points[jDest] = points[0];
+                    points[i][jDest] = points[i][0];
                 }
             }
         } catch (ParserConfigurationException e) {
