@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/RoboticArrrm.iml" filepath="$PROJECT_DIR$/RoboticArrrm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RoboticArrrmAPI/RoboticArrrmAPI.iml" filepath="$PROJECT_DIR$/RoboticArrrmAPI/RoboticArrrmAPI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RoboticArrrmJNI/RoboticArrrmJNI.iml" filepath="$PROJECT_DIR$/RoboticArrrmJNI/RoboticArrrmJNI.iml" />
+    </modules>
+  </component>
+</project>
