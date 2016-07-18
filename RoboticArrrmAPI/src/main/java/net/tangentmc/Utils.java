@@ -1,5 +1,12 @@
 package net.tangentmc;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+import java.awt.*;
+import java.awt.geom.Point2D;
+import java.util.Arrays;
+
 /**
  * Created by surface on 18/07/2016.
  */
@@ -12,21 +19,21 @@ public class Utils {
         return Math.sqrt(Math.pow(hyp, 2) - Math.pow(adj, 2));
     }
 
-    public static double[] getAllAngles(RoboticArmModel m, double[] points) {
-        double[] angles = new double[points.length];
-        for (int i = 0; i < points.length; i+=2) {
-            angles[i]=m.findTheta(1,1,points[i],points[i+1]);
-            angles[i+1]=m.findTheta(2,-1,points[i],points[i+1]);
+    public static AngleTuple[] getAllAngles(RoboticArmModel m, Point.Double[] points) {
+        AngleTuple[] angles = new AngleTuple[points.length];
+        for (int i = 0; i < points.length; i++) {
+            angles[i]=new AngleTuple(m.findTheta(1,-1,points[i].getX(),points[i].getY()),m.findTheta(2,1,points[i].getX(),points[i].getY()));
         }
         return angles;
     }
 
-    public static double[] getAllPoints(double[] discreteCoOrds) {
-        double[] points = new double[discreteCoOrds.length*100];
-        for (int frameCount=0; frameCount<points.length; frameCount+=2) {
-            int i = (frameCount / 50) % (discreteCoOrds.length);
-            points[frameCount] = interPolate(((float) (frameCount % 100) / 100), discreteCoOrds[i % discreteCoOrds.length], discreteCoOrds[(i + 2) % discreteCoOrds.length]);
-            points[frameCount+1] = interPolate(((float) (frameCount % 100) / 100), discreteCoOrds[(i + 1) % discreteCoOrds.length], discreteCoOrds[(i + 3) % discreteCoOrds.length]);
+    public static Point.Double[] getAllPoints(Point2D.Double[] discreteCoords) {
+        Point.Double[] points = new Point.Double[(discreteCoords.length-1)*100];
+        for (int i2 = 0; i2 <discreteCoords.length-1; i2++) {
+            for (int i =0; i < 100; i++) {
+                points[(i2*100)+i] = new Point2D.Double(interPolate(i/100d, discreteCoords[i2].getX(), discreteCoords[i2 + 1].getX()),
+                        interPolate(i/100d, discreteCoords[i2].getY(), discreteCoords[i2 + 1].getY()));
+            }
         }
         return points;
     }
@@ -34,6 +41,11 @@ public class Utils {
     private static double interPolate(double proportion, double Co1, double Co2) {
         return Co1 + proportion * (Co2 - Co1);
 
+    }
+    @AllArgsConstructor
+    @Getter
+    public static class AngleTuple {
+        double theta1,theta2;
     }
 
 }

@@ -8,9 +8,14 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import java.awt.*;
+import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by surface on 18/07/2016.
@@ -50,8 +55,8 @@ public class SVGer {
 //    }
 
     @Deprecated
-    public double[] pointsFromXML(String fileName) {
-        double[] points = null;
+    public Point.Double[] pointsFromXML(String fileName) {
+        Point.Double[] points = null;
         File opened = new File(fileName);
         try {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -62,49 +67,16 @@ public class SVGer {
                 if (p.getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
                     Element path = (Element) p;
                     String d = path.getAttribute("d");
-//                    System.out.println(d);
-                    String[] pointsets = d.split("[^\\d|.|z\\-\\.]");
-                    float[] allPointsInThisPath = new float[pointsets.length];
-                    int jDest = -1;
-                    for (int jSource = 0; jSource < pointsets.length; jSource++) {
-                        Scanner sc = new Scanner(pointsets[jSource]);
-                        while (sc.hasNextFloat()) {
-                            float now = sc.nextFloat();
-                            if (now != 0) {
-                                jDest++;
-                                allPointsInThisPath[jDest] = now;
-                                continue;
-                            }
-
-
-                        }
-                        if (pointsets[jSource].equalsIgnoreCase("z")) {
-//                            System.out.println("pointset[j] equaledignorecase z");
-                            allPointsInThisPath[jDest + 1] = allPointsInThisPath[0];
-                            allPointsInThisPath[jDest + 2] = allPointsInThisPath[1];
-                        }
-
-//                        System.out.println(pointsets[jSource]);
-
+                    Pattern pattern = Pattern.compile("[A-z]?(\\d*\\.\\d*,\\d*\\.\\d*)");
+                    Matcher pointsets = pattern.matcher(d);
+                    //this counts the z, so its perfect for adding a point to the end
+                    points = new Point.Double[d.split("[A-z]?(\\d*\\.\\d*,\\d*\\.\\d*)").length];
+                    int jDest = 0;
+                    while(pointsets.find()) {
+                        String[] split = pointsets.group(1).split(",");
+                        points[jDest++] = new Point2D.Double(Double.parseDouble(split[0]),Double.parseDouble(split[1]));
                     }
-                    int end = 0;
-
-                    for (int j = 0; j < allPointsInThisPath.length; j++) {
-                        if (allPointsInThisPath[j] == 0) {
-                            end = j;
-                            break;
-                        }
-                    }
-                    double[] clean = new double[end];
-
-//                    System.out.println("\nfinal array ");
-                    for (int j = 0; j < clean.length; j++) {
-                        clean[j] = allPointsInThisPath[j];
-//                        System.out.println(clean[j]);
-
-                    }
-//                    System.out.println();
-                    points = clean;
+                    points[jDest] = points[0];
                 }
             }
         } catch (ParserConfigurationException e) {

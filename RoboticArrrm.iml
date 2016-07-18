@@ -26,5 +26,6 @@
     <orderEntry type="library" name="Maven: xerces:xercesImpl:2.5.0" level="project" />
     <orderEntry type="library" name="Maven: batik:batik-parser:1.6-1" level="project" />
     <orderEntry type="library" name="Maven: batik:batik-awt-util:1.6-1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.projectlombok:lombok:1.16.10" level="project" />
   </component>
 </module>
