@@ -17,8 +17,9 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
         instance=this;
     }
 
-    public static void createDraw() {
+    public static RoboticArmSimulation createDraw() {
         main(MethodHandles.lookup().lookupClass().getName());
+        return instance;
     }
 
     //2*lengths ulnar and forearm
@@ -45,7 +46,7 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
     public static volatile double kD = 0;
 
     RoboticArmModel theOtherArms;
-
+    RoboticArmPlotter plotter = RoboticArmPlotter.createDraw();
 
     public void settings() {
         size(1280, 800);
@@ -129,11 +130,7 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
         fill(255, 0, 0);
         ellipse(tCPs[2], tCPs[3], 10, 10);
 
-
-        fill(200);
-        ellipse(tCPs[0], tCPs[1] + height / 2 +150, 10, 10);
-        fill(255, 0, 0);
-        ellipse(tCPs[2], tCPs[3] + height / 2 +150, 10, 10);
+        plotter.drawPoints(tCPs);
     }
 
     private void ellipse(double X1, double Y1, double width, double height) {
