@@ -45,13 +45,13 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
     RoboticArmPlotter plotter = RoboticArmPlotter.createDraw();
 
     public void settings() {
-        size(1280, 800);
-        xCoOrdCenter = 300;
-        yCoOrdCenter = 400;
+        size(800, 800);
+        xCoOrdCenter = width/2;
+        yCoOrdCenter = height/2;
         q1X = xCoOrdCenter - d / 2;
-        q1Y = yCoOrdCenter - 100;
+        q1Y = yCoOrdCenter;
         q2X = xCoOrdCenter + d / 2;
-        q2Y = yCoOrdCenter - 100;
+        q2Y = yCoOrdCenter;
         theArms = new RoboticArmModel(q1X, q1Y, q2X, q2Y);
     }
 
@@ -64,7 +64,7 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
     double theta1, theta2;
     public void draw() {
         //Shift the bot towards the center of the screen
-        translate(200,200);
+        //translate(200,200);
         erasePrevFrame();
         drawOtherArms(theta1, theta2);
     }
@@ -118,7 +118,7 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
     private void erasePrevFrame() {
         noStroke();
         fill(30, 35, 40);
-        rect(-200, -100, width, height);
+        rect(0, 0, width, height);
     }
     @Override
     public void setAngle(double theta1, double theta2) {

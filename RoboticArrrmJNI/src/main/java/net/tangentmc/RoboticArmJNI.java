@@ -28,6 +28,6 @@ public class RoboticArmJNI implements RoboticArm {
 
     @Override
     public void setPenMode(boolean down) {
-        
+
     }
 }
