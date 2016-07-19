@@ -5,6 +5,7 @@ import net.tangentmc.Utils;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -18,20 +19,24 @@ public class RobotTest {
     public RobotTest() {
         points = new SVGer().pointsFromXML("file.svg");
         RoboticArm arm = RoboticArmSimulation.createDraw();
-        Utils.AngleTuple[][] angles = new Utils.AngleTuple[points.length][];
+
+        ArrayList<Utils.AngleTuple[]> angles = new ArrayList<>();
         for (int i = 0; i < points.length; i++) {
-            angles[i] = Utils.getAllAngles(arm.getModel(),Utils.getAllPoints(points[i]));
+            angles.addAll(Utils.getAllAngles(arm.getModel(),Utils.getAllPoints(points[i])));
         }
         while (true) {
-            for (int i = 0; i < angles.length; i++) {
-                for (int i2 = 0; i2 < angles[i].length; i2++) {
-                    arm.setAngle(angles[i][i2].getTheta1(),angles[i][i2].getTheta2());
+            for (int i = 0; i < angles.size(); i++) {
+                arm.setAngle(angles.get(i)[0].getTheta1(),angles.get(i)[0].getTheta2());
+                arm.setPenMode(true);
+                for (int i2 = 0; i2 < angles.get(i).length; i2++) {
+                    arm.setAngle(angles.get(i)[i2].getTheta1(),angles.get(i)[i2].getTheta2());
                     try {
                         Thread.sleep(20);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
+                arm.setPenMode(false);
             }
 
         }

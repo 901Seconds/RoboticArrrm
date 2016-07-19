@@ -22,22 +22,34 @@ public class Utils {
         return Math.sqrt(Math.pow(hyp, 2) - Math.pow(adj, 2));
     }
 
-    public static AngleTuple[] getAllAngles(RoboticArmModel m, Point.Double[] points) {
-        AngleTuple[] angles = new AngleTuple[points.length];
-        for (int i = 0; i < points.length; i++) {
-            angles[i]=new AngleTuple(m.findTheta(1,-1,points[i].getX(),points[i].getY()),m.findTheta(2,1,points[i].getX(),points[i].getY()));
+    public static ArrayList<AngleTuple[]> getAllAngles(RoboticArmModel m, ArrayList<Point.Double[]> pointcol) {
+        ArrayList<AngleTuple[]> anglecol = new ArrayList<>();
+        for (Point.Double[] points: pointcol) {
+            AngleTuple[] angles = new AngleTuple[points.length];
+            for (int i = 0; i < points.length; i++) {
+                angles[i] = new AngleTuple(m.findTheta(1, -1, points[i].getX(), points[i].getY()), m.findTheta(2, 1, points[i].getX(), points[i].getY()));
+            }
+            anglecol.add(angles);
         }
-        return angles;
+        return anglecol;
     }
 
-    public static Point.Double[] getAllPoints(Shape shape) {
+    public static ArrayList<Point.Double[]> getAllPoints(Shape shape) {
+        ArrayList<Point.Double[]> pointcol = new ArrayList<>();
         ArrayList<Point.Double> points = new ArrayList<>();
             double[] coords = new double[6];
             for (InterpolatedPathIterator it = new InterpolatedPathIterator(shape.getPathIterator(new AffineTransform()),0.01); !it.isDone(); it.next()) {
                 it.currentSegment(coords);
+                //If a path is 10 pixels away, its likely a path that has been moved
+                //So we seperate it out into its own path.
+                if (points.size() > 0 && points.get(points.size()-1).distanceSq(coords[0],coords[1]) > 10 ){
+                    pointcol.add(points.toArray(new Point2D.Double[0]));
+                    points.clear();
+                }
                 points.add(new Point2D.Double(coords[0],coords[1]));
             }
-        return points.toArray(new Point2D.Double[0]);
+            pointcol.add(points.toArray(new Point2D.Double[0]));
+        return pointcol;
     }
     public static double interPolate(double proportion, double Co1, double Co2) {
         return Co1+proportion*(Co2-Co1);

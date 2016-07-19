@@ -20,13 +20,6 @@ public class RoboticArmModel {
     double o2X;
     double o2Y;
 
-    public RoboticArmModel() {
-//        o1X=width/2-d/2;
-//        o1Y=height/2;
-//        o2X=width/2+d/2;
-//        o2Y=width/2;
-    }
-
     public RoboticArmModel(double shoulder1X, double shoulder1Y, double shoulder2X, double shoulder2Y) {
         o1X=shoulder1X;
         o1Y=shoulder1Y;
@@ -43,7 +36,7 @@ public class RoboticArmModel {
         d=o2X-o1X;
     }
 
-    public double findTheta(double[] elbows, int shoulderNum, int leftRight) {
+    private double findTheta(double[] elbows, int shoulderNum, int leftRight) {
         double angle;
         double X1=0,Y1=0,X2=0,Y2=0;
         if(shoulderNum==1) {
@@ -78,16 +71,9 @@ public class RoboticArmModel {
         return angle;
     }
 
-    public double findTheta(int shoulderNum, int leftRight, double x, double y) {
+    double findTheta(int shoulderNum, int leftRight, double x, double y) {
         return findTheta(findElbowPosition(x,y),shoulderNum,leftRight);
     }
-
-    double[] findElbowPos(SVGOMPoint targetPoint) {
-        return  findElbowPosition((double)targetPoint.getX(), (double)targetPoint.getY());
-    }
-
-
-
     public double[] findTCPPos(double theta1, double theta2) {
 
         //e is for elbow, 1 is for left, 2 is for right
@@ -102,9 +88,6 @@ public class RoboticArmModel {
         double eCY = (e1Y+e2Y)/2;
 
         double tcpRad = findOp(l,absLength(e1X,e2X,e1Y,e2Y)/2);
-
-        //angle of a line passing through both elbows
-        double elbowLineAngle = Math.atan2(e1Y-e2Y,e1X-e2X);
         //inverse reciprocal of that line's angle
         double invRepElbowLineAngle = Math.atan2(e1X-e2X,-(e1Y-e2Y));
 
@@ -119,7 +102,7 @@ public class RoboticArmModel {
     }
 
 
-    public double[] findElbowPosition(double targetX, double targetY) {
+    private double[] findElbowPosition(double targetX, double targetY) {
         //co-ordinates of the center point of a line drawn from the shoulders to the mouse
         double o1XC = (targetX+o1X)/2;
         double o1YC = (targetY+o1Y)/2;
@@ -137,9 +120,7 @@ public class RoboticArmModel {
 
         //finds the angle of the line from the shoulders to the mouse
         //and the inverse reciprocal
-        double o1Angle = Math.atan2((targetY-o1Y),(targetX-o1X));
         double o1NormalAngle = Math.atan2(-(targetX-o1X),(targetY-o1Y));
-        double o2Angle = Math.atan2((targetY-o2Y),(targetX-o2X));
         double o2NormalAngle = Math.atan2(-(targetX-o2X),(targetY-o2Y));
 
         //uses the length of the line as determined by the radius of the circle
@@ -155,8 +136,7 @@ public class RoboticArmModel {
         double o2NormalX2 = o2XC - o2R* Math.cos(o2NormalAngle);
         double o2NormalY2 = o2YC - o2R* Math.sin(o2NormalAngle);
 
-        double[] points = {o1NormalX1,o1NormalY1,o1NormalX2,o1NormalY2,o2NormalX1,o2NormalY1,o2NormalX2,o2NormalY2};
-        return points;
+        return new double[]{o1NormalX1,o1NormalY1,o1NormalX2,o1NormalY2,o2NormalX1,o2NormalY1,o2NormalX2,o2NormalY2};
     }
 
 }

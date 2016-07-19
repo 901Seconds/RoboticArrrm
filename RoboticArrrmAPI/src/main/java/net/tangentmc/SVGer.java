@@ -25,38 +25,6 @@ import java.util.regex.Pattern;
  * Created by surface on 18/07/2016.
  */
 public class SVGer {
-
-    //    public static SVGPoint[] pointsFromSVG(String fileName) {
-//
-//        SVGOMPathElement theElement;
-//        //theElement.
-//
-//        Document doc = null;
-//        try {
-//            String parser = XMLResourceDescriptor.getXMLParserClassName();
-//            SAXSVGDocumentFactory f = new SAXSVGDocumentFactory(parser);
-//            URI file = new File("file.svg").toURI();
-//            System.out.println("uri creation happened");
-//            String uri = file.toString();
-//            doc = f.createDocument(uri);
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//            System.out.println("your'e farrrked");
-//            return null;
-//        }
-//        NodeList h = (doc.getElementsByTagName("path"));
-//        System.out.println(h.item(0));
-//        SVGOMPathElement thePath = (SVGOMPathElement)h.item(0);
-//        //System.out.println(thePath.getPathLength());
-//        SVGPoint[] points = new SVGPoint[1000];
-//        for(int i=0; i<1000; i++) {
-//            System.out.println(thePath.getPointAtLength(i));
-//            points[i] = thePath.getPointAtLength(((float)(i)));
-//            System.out.println(points[i].getX() + ", " + points[1].getY());
-//        }
-//
-//        return null;//points;
-//    }
     public static Shape parsePathShape(String svgPathShape) {
         try {
             AWTPathProducer pathProducer = new AWTPathProducer();

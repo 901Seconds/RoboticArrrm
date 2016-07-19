@@ -131,6 +131,12 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
     public RoboticArmModel getModel() {
         return theArms;
     }
+    public boolean penDown = false;
+    @Override
+    public void setPenMode(boolean down) {
+        penDown = down;
+        System.out.print("PEN DOWN: "+down);
+    }
 }
 
 
