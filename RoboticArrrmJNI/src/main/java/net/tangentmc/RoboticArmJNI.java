@@ -25,4 +25,9 @@ public class RoboticArmJNI implements RoboticArm {
     public RoboticArmModel getModel() {
         return null;
     }
+
+    @Override
+    public void setPenMode(boolean down) {
+        
+    }
 }
