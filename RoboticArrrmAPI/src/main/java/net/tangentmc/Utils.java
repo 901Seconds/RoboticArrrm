@@ -31,20 +31,17 @@ public class Utils {
     }
 
     public static Point.Double[] getAllPoints(Shape shape) {
-        FlatteningPathIterator iter;
-        ArrayList<Point.Double> points;
-        iter=new FlatteningPathIterator(shape.getPathIterator(new AffineTransform()), 0.001);
-        points=new ArrayList<>();
-        double[] coords=new double[6];
-        while (!iter.isDone()) {
-            iter.currentSegment(coords);
-            double x=coords[0];
-            double y=coords[1];
-            points.add(new Point.Double(x,y));
-            iter.next();
-        }
-        System.out.print(points);
-        return points.toArray(new Point.Double[0]);
+        ArrayList<Point.Double> points = new ArrayList<>();
+            double[] coords = new double[6];
+            for (InterpolatedPathIterator it = new InterpolatedPathIterator(shape.getPathIterator(new AffineTransform()),0.01); !it.isDone(); it.next()) {
+                it.currentSegment(coords);
+                points.add(new Point2D.Double(coords[0],coords[1]));
+            }
+        return points.toArray(new Point2D.Double[0]);
+    }
+    public static double interPolate(double proportion, double Co1, double Co2) {
+        return Co1+proportion*(Co2-Co1);
+
     }
     @AllArgsConstructor
     @Getter
