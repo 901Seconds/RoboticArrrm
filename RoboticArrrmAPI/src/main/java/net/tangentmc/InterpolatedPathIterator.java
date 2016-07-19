@@ -87,6 +87,7 @@ public class InterpolatedPathIterator implements PathIterator {
     private boolean done;                       // True when iteration is done
     private double startX, startY;
     private boolean started = false;
+    private boolean isCurved = false;
     /**
      * Constructs a new <code>FlatteningPathIterator</code> object that
      * flattens a path as it iterates over it.  The iterator does not
@@ -222,6 +223,7 @@ public class InterpolatedPathIterator implements PathIterator {
                 break;
 
             case SEG_CLOSE:
+                if (isCurved) break;
                 if (iter >= 100) {
                     iter = 0;
                     curx = hold[0];
@@ -234,6 +236,7 @@ public class InterpolatedPathIterator implements PathIterator {
                 iter++;
                 break;
             case SEG_QUADTO:
+                isCurved = true;
                 if (holdIndex >= holdEnd) {
                     // Move the coordinates to the end of the array.
                     holdIndex = hold.length - 6;
@@ -279,6 +282,7 @@ public class InterpolatedPathIterator implements PathIterator {
                 levelIndex--;
                 break;
             case SEG_CUBICTO:
+                isCurved = true;
                 if (holdIndex >= holdEnd) {
                     // Move the coordinates to the end of the array.
                     holdIndex = hold.length - 8;

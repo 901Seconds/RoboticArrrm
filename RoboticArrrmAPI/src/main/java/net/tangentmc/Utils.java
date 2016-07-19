@@ -2,6 +2,7 @@ package net.tangentmc;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -57,6 +58,7 @@ public class Utils {
         return Co1+proportion*(Co2-Co1);
 
     }
+    @ToString
     @AllArgsConstructor
     @Getter
     public static class AngleTuple {

@@ -13,8 +13,11 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
+import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
+import java.awt.font.TextLayout;
 import java.awt.geom.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -162,9 +165,8 @@ public class SVGer {
                         x = Double.parseDouble(path.getAttribute("x"));
                     if (path.hasAttribute("y"))
                         y = Double.parseDouble(path.getAttribute("y"));
-                    Font f = new JLabel().getFont();
-                    GlyphVector v = f.createGlyphVector(new Canvas().getFontMetrics(f).getFontRenderContext(), path.getTextContent());
-                    shapes.add(v.getOutline((float)x,(float)y));
+                    Font font = new Font(null, Font.PLAIN, 10);
+                    shapes.add(getTextShape(path.getTextContent(),font,x,y));
                 }
             }
 
@@ -174,7 +176,13 @@ public class SVGer {
         }
         return shapes.toArray(new Shape[0]);
     }
-
+    private Shape getTextShape(String str, Font font, double x, double y) {
+        BufferedImage bufferImage = new BufferedImage(2,2, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2d = bufferImage.createGraphics();
+        FontRenderContext frc = g2d.getFontRenderContext();
+        TextLayout tl = new TextLayout(str, font, frc);
+        return tl.getOutline(AffineTransform.getTranslateInstance(x,y));
+    }
     private Point2D.Double getPoints(String point) {
         String[] split = point.split(",");
         return new Point2D.Double(Double.parseDouble(split[0]),Double.parseDouble(split[1]));
