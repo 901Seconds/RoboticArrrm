@@ -46,6 +46,11 @@ JNIEXPORT jint JNICALL Java_net_tangentmc_RoboticArmJNI_find_angles
     find_pen();
     if (side) return theta1 else return theta2;
 }
+JNIEXPORT void JNICALL Java_net_tangentmc_RoboticArmJNI_set_pen_mode
+  (JNIEnv * env, jint val)
+{
+
+}
 //
 void motors_pulse(int u1,int u2,int dt)
 {

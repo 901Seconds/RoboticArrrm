@@ -26,6 +26,7 @@ public class RobotTest {
         }
         while (true) {
             for (int i = 0; i < angles.size(); i++) {
+                //TODO: In here we need to transition from the last theta to this one before dropping the pen
                 arm.setAngle(angles.get(i)[0].getTheta1(),angles.get(i)[0].getTheta2());
                 arm.setPenMode(true);
                 for (int i2 = 0; i2 < angles.get(i).length; i2++) {
