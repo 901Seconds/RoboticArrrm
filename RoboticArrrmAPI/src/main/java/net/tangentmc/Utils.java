@@ -46,6 +46,8 @@ public class Utils {
                     pointcol.add(points.toArray(new Point2D.Double[0]));
                     points.clear();
                 }
+                coords[0] = coords[0]+200;
+                coords[1] = coords[1]+150;
                 points.add(new Point2D.Double(coords[0],coords[1]));
             }
             pointcol.add(points.toArray(new Point2D.Double[0]));
