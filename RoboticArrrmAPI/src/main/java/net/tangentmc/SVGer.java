@@ -77,6 +77,7 @@ public class SVGer {
         try {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document doc = builder.parse(opened);
+
             NodeList pathList = doc.getElementsByTagName("path");
             shapes = new Shape[pathList.getLength()];
             for (int i = 0; i < pathList.getLength(); i++) {
@@ -87,6 +88,7 @@ public class SVGer {
                     shapes[i] = parsePathShape(d);
                 }
             }
+
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }

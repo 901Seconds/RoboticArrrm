@@ -3,11 +3,9 @@ package net.tangentmc;
 import java.awt.geom.CubicCurve2D;
 import java.awt.geom.PathIterator;
 import java.awt.geom.QuadCurve2D;
-import java.util.Arrays;
 import java.util.NoSuchElementException;
-
 /**
- * Created by sanjay on 19/07/16.
+ * A Modified FlatteningPathIterator that also Interpolates straight lines.
  */
 /*
  * Copyright 1997-1998 Sun Microsystems, Inc.  All Rights Reserved.
@@ -43,16 +41,16 @@ import java.util.NoSuchElementException;
  * @author Jim Graham
  */
 public class InterpolatedPathIterator implements PathIterator {
-    static final int GROW_SIZE = 24;    // Multiple of cubic & quad curve size
+    private static final int GROW_SIZE = 24;    // Multiple of cubic & quad curve size
 
-    PathIterator src;                   // The source iterator
+    private PathIterator src;                   // The source iterator
 
-    double squareflat;                  // Square of the flatness parameter
+    private double squareflat;                  // Square of the flatness parameter
     // for testing against squared lengths
 
-    int limit;                          // Maximum number of recursion levels
+    private int limit;                          // Maximum number of recursion levels
 
-    double hold[] = new double[14];     // The cache of interpolated coords
+    private double hold[] = new double[14];     // The cache of interpolated coords
     // Note that this must be long enough
     // to store a full cubic segment and
     // a relative cubic segment to avoid
@@ -62,33 +60,33 @@ public class InterpolatedPathIterator implements PathIterator {
     // to the size of a full quad segment
     // and 2 relative quad segments.
 
-    double curx, cury;                  // The ending x,y of the last segment
+    private double curx, cury;                  // The ending x,y of the last segment
 
-    double movx, movy;                  // The x,y of the last move segment
+    private double movy;                  // The x,y of the last move segment
 
-    int holdType;                       // The type of the curve being held
+    private int holdType;                       // The type of the curve being held
     // for interpolation
 
-    int holdEnd;                        // The index of the last curve segment
+    private int holdEnd;                        // The index of the last curve segment
     // being held for interpolation
 
-    int holdIndex;                      // The index of the curve segment
+    private int holdIndex;                      // The index of the curve segment
     // that was last interpolated.  This
     // is the curve segment ready to be
     // returned in the next call to
     // currentSegment().
 
-    int levels[];                       // The recursion level at which
+    private int levels[];                       // The recursion level at which
     // each curve being held in storage
     // was generated.
 
-    int levelIndex;                     // The index of the entry in the
+    private int levelIndex;                     // The index of the entry in the
     // levels array of the curve segment
     // at the holdIndex
 
-    boolean done;                       // True when iteration is done
-    double startX, startY;
-    boolean started = false;
+    private boolean done;                       // True when iteration is done
+    private double startX, startY;
+    private boolean started = false;
     /**
      * Constructs a new <code>FlatteningPathIterator</code> object that
      * flattens a path as it iterates over it.  The iterator does not
@@ -117,9 +115,6 @@ public class InterpolatedPathIterator implements PathIterator {
      * control points and the flattened curve
      * @param limit the maximum number of recursive subdivisions
      * allowed for any curved segment
-     * @exception <code>IllegalArgumentException</code> if
-     *          <code>flatness</code> or <code>limit</code>
-     *          is less than zero
      */
     public InterpolatedPathIterator(PathIterator src, double flatness,
                                     int limit) {
@@ -135,23 +130,6 @@ public class InterpolatedPathIterator implements PathIterator {
         this.levels = new int[limit + 1];
         // prime the first path segment
         next(false);
-    }
-
-    /**
-     * Returns the flatness of this iterator.
-     * @return the flatness of this <code>FlatteningPathIterator</code>.
-     */
-    public double getFlatness() {
-        return Math.sqrt(squareflat);
-    }
-
-    /**
-     * Returns the recursion limit of this iterator.
-     * @return the recursion limit of this
-     * <code>FlatteningPathIterator</code>.
-     */
-    public int getRecursionLimit() {
-        return limit;
     }
 
     /**
@@ -179,7 +157,7 @@ public class InterpolatedPathIterator implements PathIterator {
      * Ensures that the hold array can hold up to (want) more values.
      * It is currently holding (hold.length - holdIndex) values.
      */
-    void ensureHoldCapacity(int want) {
+    private void ensureHoldCapacity(int want) {
         if (holdIndex - want < 0) {
             int have = hold.length - holdIndex;
             int newsize = hold.length + GROW_SIZE;
@@ -201,8 +179,8 @@ public class InterpolatedPathIterator implements PathIterator {
     public void next() {
         next(true);
     }
-    int iter = 100;
-    double prevx,prevy;
+    private int iter = 100;
+    private double prevx,prevy;
     private void next(boolean doNext) {
         int level;
         if (holdIndex >= holdEnd && iter >= 100) {
@@ -230,10 +208,6 @@ public class InterpolatedPathIterator implements PathIterator {
                         startX = curx;
                         startY = cury;
                         started = true;
-                    }
-                    if (holdType == SEG_MOVETO) {
-                        movx = curx;
-                        movy = cury;
                     }
                     holdIndex = 0;
                     holdEnd = 0;
@@ -264,7 +238,7 @@ public class InterpolatedPathIterator implements PathIterator {
                     // Move the coordinates to the end of the array.
                     holdIndex = hold.length - 6;
                     holdEnd = hold.length - 2;
-                    hold[holdIndex + 0] = curx;
+                    hold[holdIndex] = curx;
                     hold[holdIndex + 1] = cury;
                     hold[holdIndex + 2] = hold[0];
                     hold[holdIndex + 3] = hold[1];
@@ -309,7 +283,7 @@ public class InterpolatedPathIterator implements PathIterator {
                     // Move the coordinates to the end of the array.
                     holdIndex = hold.length - 8;
                     holdEnd = hold.length - 2;
-                    hold[holdIndex + 0] = curx;
+                    hold[holdIndex] = curx;
                     hold[holdIndex + 1] = cury;
                     hold[holdIndex + 2] = hold[0];
                     hold[holdIndex + 3] = hold[1];
@@ -367,9 +341,6 @@ public class InterpolatedPathIterator implements PathIterator {
      * @param coords an array that holds the data returned from
      * this method
      * @return the path segment type of the current path segment.
-     * @exception <code>NoSuchElementException</code> if there
-     *          are no more elements in the flattening path to be
-     *          returned.
      * @see PathIterator#SEG_MOVETO
      * @see PathIterator#SEG_LINETO
      * @see PathIterator#SEG_CLOSE
@@ -402,9 +373,6 @@ public class InterpolatedPathIterator implements PathIterator {
      * @param coords an array that holds the data returned from
      * this method
      * @return the path segment type of the current path segment.
-     * @exception <code>NoSuchElementException</code> if there
-     *          are no more elements in the flattening path to be
-     *          returned.
      * @see PathIterator#SEG_MOVETO
      * @see PathIterator#SEG_LINETO
      * @see PathIterator#SEG_CLOSE
@@ -414,7 +382,7 @@ public class InterpolatedPathIterator implements PathIterator {
             throw new NoSuchElementException("flattening iterator out of bounds");
         }
         int type = holdType;
-        coords[0] = hold[holdIndex + 0];
+        coords[0] = hold[holdIndex];
         coords[1] = hold[holdIndex + 1];
         if (type != SEG_MOVETO) {
             type = SEG_LINETO;
