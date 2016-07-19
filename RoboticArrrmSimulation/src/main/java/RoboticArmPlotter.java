@@ -37,9 +37,9 @@ public class RoboticArmPlotter extends PApplet {
         if (tCPs == null) return;
         erasePrevFrame();
         fill(200);
-        ellipse(tCPs[0], tCPs[1] + height / 4 , 10, 10);
+        ellipse(tCPs[0], tCPs[1], 1, 1);
         fill(255, 0, 0);
-        ellipse(tCPs[2], tCPs[3] + height / 4 , 10, 10);
+        ellipse(tCPs[2], tCPs[3] , 1, 1);
         drawAngleGraph(theta1,theta2);
         drawAngleVis(theta1,theta2);
         drawPIDDisplay();

@@ -1,12 +1,11 @@
 package net.tangentmc;
 
+import java.awt.*;
 import java.awt.geom.CubicCurve2D;
 import java.awt.geom.PathIterator;
 import java.awt.geom.QuadCurve2D;
 import java.util.NoSuchElementException;
-/**
- * A Modified FlatteningPathIterator that also Interpolates straight lines.
- */
+
 /*
  * Copyright 1997-1998 Sun Microsystems, Inc.  All Rights Reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
@@ -33,12 +32,7 @@ import java.util.NoSuchElementException;
  */
 
 /**
- * The <code>FlatteningPathIterator</code> class returns a flattened view of
- * another {@link PathIterator} object.  Other {@link java.awt.Shape Shape}
- * classes can use this class to provide flattening behavior for their paths
- * without having to perform the interpolation calculations themselves.
- *
- * @author Jim Graham
+ * A Modified FlatteningPathIterator that also Interpolates straight lines.
  */
 public class InterpolatedPathIterator implements PathIterator {
     private static final int GROW_SIZE = 24;    // Multiple of cubic & quad curve size
@@ -181,10 +175,11 @@ public class InterpolatedPathIterator implements PathIterator {
         next(true);
     }
     private int iter = 100;
+    private double iterlength = 100;
     private double prevx,prevy;
     private void next(boolean doNext) {
         int level;
-        if (holdIndex >= holdEnd && iter >= 100) {
+        if (holdIndex >= holdEnd && iter >= iterlength) {
             if (doNext) {
                 src.next();
             }
@@ -196,10 +191,11 @@ public class InterpolatedPathIterator implements PathIterator {
             levelIndex = 0;
             levels[0] = 0;
         }
+        //Custom interpolation of lines.
         switch (holdType) {
             case SEG_MOVETO:
             case SEG_LINETO:
-                if (iter >= 100) {
+                if (iter >= iterlength) {
                     iter = 0;
                     prevx = curx;
                     prevy = cury;
@@ -214,11 +210,12 @@ public class InterpolatedPathIterator implements PathIterator {
                     holdEnd = 0;
                 }
                 if (holdType == SEG_LINETO) {
-                    hold[0] = Utils.interPolate(iter / 100d, prevx, curx);
-                    hold[1] = Utils.interPolate(iter / 100d, prevy, cury);
+                    iterlength = Point.distance(prevx,prevy,curx,cury);
+                    hold[0] = Utils.interPolate(iter / iterlength, prevx, curx);
+                    hold[1] = Utils.interPolate(iter / iterlength, prevy, cury);
                     iter++;
                 } else {
-                    iter = 100;
+                    iter = (int) Math.ceil(iterlength);
                 }
                 break;
 
@@ -231,8 +228,9 @@ public class InterpolatedPathIterator implements PathIterator {
                     holdIndex = 0;
                     holdEnd = 0;
                 }
-                hold[0] = Utils.interPolate(iter / 100d, curx, startX);
-                hold[1] = Utils.interPolate(iter / 100d, cury, startY);
+                iterlength = Point.distance(startX,startY,curx,cury);
+                hold[0] = Utils.interPolate(iter / iterlength, curx, startX);
+                hold[1] = Utils.interPolate(iter / iterlength, cury, startY);
                 iter++;
                 break;
             case SEG_QUADTO:

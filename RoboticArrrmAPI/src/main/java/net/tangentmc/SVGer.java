@@ -160,13 +160,29 @@ public class SVGer {
                 org.w3c.dom.Node p = pathList.item(i);
                 if (p.getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
                     Element path = (Element) p;
-                    double x=0,y=0;
+                    double x = 0, y = 0;
                     if (path.hasAttribute("x"))
                         x = Double.parseDouble(path.getAttribute("x"));
                     if (path.hasAttribute("y"))
                         y = Double.parseDouble(path.getAttribute("y"));
-                    Font font = new Font(null, Font.PLAIN, 10);
-                    shapes.add(getTextShape(path.getTextContent(),font,x,y));
+                    if (path.hasChildNodes()) {
+                        Element tPath = path;
+                        for (int i1 = 0; i1 < tPath.getChildNodes().getLength(); i1++) {
+                            path = (Element) tPath.getChildNodes().item(i1);
+                            double size = 10;
+                            if (path.hasAttribute("style")) {
+                                String styleAttribs = path.getAttribute("style");
+                                for (String s : styleAttribs.split(";")) {
+                                    if (s.contains("font-size")) {
+                                        size = Double.parseDouble(s.replace("font-size:", "").replace("px", ""));
+                                    }
+                                }
+                            }
+                            Font font = new Font(null, Font.PLAIN, (int)size);
+                            shapes.add(getTextShape(path.getTextContent(), font, x, y));
+                        }
+
+                    }
                 }
             }
 
