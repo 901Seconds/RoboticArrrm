@@ -1,25 +1,38 @@
 package net.tangentmc;
 
-/**
- * Created by sanjay on 18/07/16.
- */
+import static net.tangentmc.Utils.*;
+
+
 //TODO: create a model that represents the robot
 public class RoboticArmJNI implements RoboticArm {
-    public native void motors_pulse(int u1,int u2,int dt);
-    public native int find_angles(int side);
-    public native void set_pen_mode(int mode);
-    public double[] findElbowPosition(double x, double y) {
-        return new double[0];
-    }
 
-    public void setAngles(int theta1, int theta2) {
+    private final int LEFT_SERVO_PIN_NUMBER = 4;
+    private final int RIGHT_SERVO_PIN_NUMBER = 17;
 
+    double o1X, o1Y, o2X, o2Y;
+    double d, l;
+
+    RoboticArmModel theModel;
+
+    public RoboticArmJNI(double shoulder1X, double shoulder1Y, double shoulder2X, double shoulder2Y, double appendageLength) {
+        o1X=shoulder1X;
+        o1Y=shoulder1Y;
+        o2X=shoulder2X;
+        o2Y=shoulder2Y;
+        d=absLength(o1X,o2X,o1Y,o2Y);
+        l=appendageLength;
+        theModel = new RoboticArmModel(o1X,o1Y,o2X,o2Y,l);
     }
 
     @Override
     public void setAngle(double theta1, double theta2) {
-
+        int leftPulse = (int)(500*theta1) + 500;
+        int rightPulse = (int)(500*theta2) + 500;
+        setServo(LEFT_SERVO_PIN_NUMBER, leftPulse);
+        setServo(RIGHT_SERVO_PIN_NUMBER, rightPulse);
     }
+
+    private native void setServo(int pin, int pulseWidth);
 
     @Override
     public RoboticArmModel getModel() {
@@ -28,6 +41,6 @@ public class RoboticArmJNI implements RoboticArm {
 
     @Override
     public void setPenMode(boolean down) {
-        set_pen_mode(down?1:0);
+
     }
 }

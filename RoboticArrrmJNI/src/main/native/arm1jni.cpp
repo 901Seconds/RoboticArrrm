@@ -37,6 +37,7 @@ JNIEXPORT void JNICALL Java_net_tangentmc_RoboticArmJNI_motors_pulse
 {
     motors_pulse(u1,u2,dt);
 }
+
 JNIEXPORT jint JNICALL Java_net_tangentmc_RoboticArmJNI_find_angles
   (JNIEnv * env, jint side)
 {
