@@ -4,15 +4,13 @@ package net.tangentmc;
 import org.apache.batik.dom.svg.SVGOMPoint;
 
 import static net.tangentmc.Utils.*;
-/**
- * Created by surface on 18/07/2016.
- */
+
 public class RoboticArmModel {
 
     //2*lengths ulnar and forearm
-    double l=180;
+    private double l=180;
     //2*distance between shoulders
-    double d=236;
+    private double d=236;
 
     //o is for shoulder, 1 means left, 2 meas right
     double o1X;
@@ -100,6 +98,14 @@ public class RoboticArmModel {
         points[3] = eCY - tcpRad* Math.sin(invRepElbowLineAngle);
 
         return points;
+    }
+
+    public double getWorkSpaceWidth() {
+        return 4*l-d;
+    }
+
+    public double getWorkSpaceHeight() {
+        return 2*findOp(2*l,d);
     }
 
 
