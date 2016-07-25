@@ -18,6 +18,7 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
         }
         instance=this;
     }
+
     //A little hack that gets the instance created by processing.
     public static RoboticArmSimulation createDraw() {
         main(MethodHandles.lookup().lookupClass().getName());
@@ -132,7 +133,7 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
         return theArms;
     }
     public boolean penDown = false;
-    @Override
+    //@Override
     public void setPenMode(boolean down) {
         penDown = down;
         System.out.print("PEN DOWN: "+down);

@@ -8,22 +8,28 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/**
- * Created by sanjay on 18/07/16.
- */
+
 public class RobotTest {
     Shape[] points;
+
     public static void main(String[] args) {
         new RobotTest();
     }
+
     public RobotTest() {
+        //loads svg file into an array of shapes
         points = new SVGer().pointsFromXML("file.svg");
+
+        //creates new arm simulation
         RoboticArm arm = RoboticArmSimulation.createDraw();
 
+        //produces a list of angle pairs from the array of shapes by giving them to the robotic arm model created by the simulation
         ArrayList<Utils.AngleTuple[]> angles = new ArrayList<>();
         for (int i = 0; i < points.length; i++) {
             angles.addAll(Utils.getAllAngles(arm.getModel(),Utils.getAllPoints(points[i])));
         }
+
+        //goes through the list of angle pairs and sets theta1 ann theta2 to them.
         while (true) {
             for (int i = 0; i < angles.size(); i++) {
                 //TODO: In here we need to transition from the last theta to this one before dropping the pen
@@ -41,5 +47,6 @@ public class RobotTest {
             }
 
         }
+
     }
 }

@@ -191,6 +191,7 @@ public class SVGer {
             e.printStackTrace();
         }
         return shapes.toArray(new Shape[0]);
+
     }
     private Shape getTextShape(String str, Font font, double x, double y) {
         BufferedImage bufferImage = new BufferedImage(2,2, BufferedImage.TYPE_INT_RGB);

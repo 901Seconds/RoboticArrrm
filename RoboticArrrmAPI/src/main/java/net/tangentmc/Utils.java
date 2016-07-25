@@ -28,7 +28,7 @@ public class Utils {
         for (Point.Double[] points: pointcol) {
             AngleTuple[] angles = new AngleTuple[points.length];
             for (int i = 0; i < points.length; i++) {
-                angles[i] = new AngleTuple(m.findTheta(1, -1, points[i].getX(), points[i].getY()), m.findTheta(2, 1, points[i].getX(), points[i].getY()));
+                angles[i] = new AngleTuple(m.findTheta(1, 1, points[i].getX(), points[i].getY()), m.findTheta(2, 1, points[i].getX(), points[i].getY()));
             }
             anglecol.add(angles);
         }
@@ -54,15 +54,29 @@ public class Utils {
             pointcol.add(points.toArray(new Point2D.Double[0]));
         return pointcol;
     }
+
     public static double interPolate(double proportion, double Co1, double Co2) {
         return Co1+proportion*(Co2-Co1);
 
     }
+
     @ToString
-    @AllArgsConstructor
+//    @AllArgsConstructor
     @Getter
     public static class AngleTuple {
         double theta1,theta2;
+
+        public AngleTuple(double theta1, double theta2) {
+            this.theta1=theta1;
+            this.theta2=theta2;
+        }
+
+        public double getTheta1() {
+            return theta1;
+        }
+        public double getTheta2() {
+            return theta2;
+        }
     }
 
 }
