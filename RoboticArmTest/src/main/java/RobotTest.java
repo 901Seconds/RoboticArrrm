@@ -1,12 +1,9 @@
 import net.tangentmc.RoboticArm;
-import net.tangentmc.RoboticArmModel;
 import net.tangentmc.SVGer;
 import net.tangentmc.Utils;
 
 import java.awt.*;
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 public class RobotTest {
@@ -18,7 +15,7 @@ public class RobotTest {
 
     public RobotTest() {
         //loads svg file into an array of shapes
-        points = new SVGer().pointsFromXML("file.svg");
+        points = new SVGer().shapesFromXML("file.svg");
 
         //creates new arm simulation
         RoboticArm arm = RoboticArmSimulation.createDraw();

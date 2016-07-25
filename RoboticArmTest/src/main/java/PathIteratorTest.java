@@ -3,8 +3,6 @@ import net.tangentmc.SVGer;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.geom.*;
 import java.util.ArrayList;
 
@@ -12,7 +10,7 @@ public class PathIteratorTest {
     public static void main(String[] args) {
         JFrame frame = new JFrame("FlatteningPathIterator test");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        Shape[] shapes = new SVGer().pointsFromXML("file.svg");
+        Shape[] shapes = new SVGer().shapesFromXML("file.svg");
         Shape s=shapes[0];
         PaintPanel app = new PaintPanel(s);
         JScrollPane scroll = new JScrollPane(app);

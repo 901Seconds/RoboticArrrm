@@ -44,7 +44,7 @@ public class SVGer {
     }
 
 
-    public Shape[] pointsFromXML(String fileName) {
+    public Shape[] shapesFromXML(String fileName) {
         ArrayList<Shape> shapes = new ArrayList<>();
         File opened = new File(fileName);
         try {
