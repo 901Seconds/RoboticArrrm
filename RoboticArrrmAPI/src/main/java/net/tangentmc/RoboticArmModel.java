@@ -25,6 +25,7 @@ public class RoboticArmModel {
         o1Y=shoulder1Y;
         o2X=shoulder2X;
         o2Y=shoulder2Y;
+        d=o2X-o1X;
     }
 
     public RoboticArmModel(double shoulder1X, double shoulder1Y, double shoulder2X, double shoulder2Y, double armLength) {
