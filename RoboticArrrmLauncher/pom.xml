@@ -7,16 +7,18 @@
     <groupId>net.tangentmc</groupId>
     <artifactId>RoboticArrrmLauncher</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <plugins>
-        <plugin>
-            <groupId>com.zenjava</groupId>
-            <artifactId>javafx-maven-plugin</artifactId>
-            <version>8.5.0</version>
-            <configuration>
-                <mainClass>RoboticArrrmLauncher.net.tangentmc.Launcher</mainClass>
-            </configuration>
-        </plugin>
-    </plugins>
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.10</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+    <properties>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+    </properties>
 
 
 </project>
