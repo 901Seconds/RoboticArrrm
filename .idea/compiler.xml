@@ -25,6 +25,7 @@
         <module name="RoboticArmTest" />
         <module name="RoboticArrrmAPI" />
         <module name="RoboticArrrmJNI" />
+        <module name="RoboticArrrmLauncher" />
         <module name="RoboticArrrmSimulation" />
       </profile>
     </annotationProcessing>
@@ -33,6 +34,7 @@
       <module name="RoboticArrrm" target="1.8" />
       <module name="RoboticArrrmAPI" target="1.8" />
       <module name="RoboticArrrmJNI" target="1.8" />
+      <module name="RoboticArrrmLauncher" target="1.5" />
       <module name="RoboticArrrmSimulation" target="1.8" />
     </bytecodeTargetLevel>
   </component>

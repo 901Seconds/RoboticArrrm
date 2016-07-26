@@ -16,7 +16,7 @@ public class RobotTest {
         points = new SVGer().shapesFromXML("file.svg");
 
         //creates new arm simulation
-        RoboticArm arm = new RoboticArmJNI(-80,0,80,0,90);
+        RoboticArm arm = new RoboticArmSimulation();
 
         //produces a list of angle pairs from the array of shapes by giving them to the robotic arm model created by the simulation
         ArrayList<AngleTuple[]> angles = new ArrayList<>();
