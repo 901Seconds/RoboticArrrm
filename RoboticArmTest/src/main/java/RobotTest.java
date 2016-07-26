@@ -1,4 +1,5 @@
 import net.tangentmc.RoboticArm;
+import net.tangentmc.RoboticArmJNI;
 import net.tangentmc.SVGer;
 import net.tangentmc.Utils;
 
@@ -18,7 +19,7 @@ public class RobotTest {
         points = new SVGer().shapesFromXML("file.svg");
 
         //creates new arm simulation
-        RoboticArm arm = RoboticArmSimulation.createDraw();
+        RoboticArm arm = new RoboticArmJNI(-80,0,80,0,90);
 
         //produces a list of angle pairs from the array of shapes by giving them to the robotic arm model created by the simulation
         ArrayList<Utils.AngleTuple[]> angles = new ArrayList<>();

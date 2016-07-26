@@ -25,4 +25,12 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
     </properties>
+
+    <distributionManagement>
+        <repository>
+            <id>tangentmc</id>
+            <name>TangentMC Internal Repository</name>
+            <url>https://maven.tangentmc.net/repository/tangent/</url>
+        </repository>
+    </distributionManagement>
 </project>

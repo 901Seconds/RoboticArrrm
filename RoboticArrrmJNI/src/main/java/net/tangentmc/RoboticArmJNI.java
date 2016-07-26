@@ -13,7 +13,9 @@ public class RoboticArmJNI implements RoboticArm {
     double d, l;
 
     RoboticArmModel theModel;
-
+    static {
+        System.load("/home/kingciar1/Projects/RoboticArrrm/RoboticArrrmJNI/target/classes/roboticarmlib.so");
+    }
     public RoboticArmJNI(double shoulder1X, double shoulder1Y, double shoulder2X, double shoulder2Y, double appendageLength) {
         o1X=shoulder1X;
         o1Y=shoulder1Y;
