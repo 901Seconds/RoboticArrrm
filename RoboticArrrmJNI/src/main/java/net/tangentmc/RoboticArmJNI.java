@@ -22,6 +22,7 @@ public class RoboticArmJNI implements RoboticArm {
         d=absLength(o1X,o2X,o1Y,o2Y);
         l=appendageLength;
         theModel = new RoboticArmModel(o1X,o1Y,o2X,o2Y,l);
+        init();
     }
 
     @Override
@@ -33,6 +34,8 @@ public class RoboticArmJNI implements RoboticArm {
     }
 
     private native void setServo(int pin, int pulseWidth);
+
+    private native void init();
 
     @Override
     public RoboticArmModel getModel() {
