@@ -1,7 +1,4 @@
-import net.tangentmc.RoboticArm;
-import net.tangentmc.RoboticArmJNI;
-import net.tangentmc.SVGer;
-import net.tangentmc.Utils;
+import net.tangentmc.*;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -22,7 +19,7 @@ public class RobotTest {
         RoboticArm arm = new RoboticArmJNI(-80,0,80,0,90);
 
         //produces a list of angle pairs from the array of shapes by giving them to the robotic arm model created by the simulation
-        ArrayList<Utils.AngleTuple[]> angles = new ArrayList<>();
+        ArrayList<AngleTuple[]> angles = new ArrayList<>();
         for (int i = 0; i < points.length; i++) {
             angles.addAll(Utils.getAllAngles(arm.getModel(),Utils.getAllPoints(points[i])));
         }
