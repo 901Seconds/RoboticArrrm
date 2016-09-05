@@ -12,7 +12,7 @@ public class RoboticArmModel {
     //2*distance between shoulders
     private double d=236;
 
-    //o is for shoulder, 1 means left, 2 meas right
+    //o is for shoulder, 1 means left, 2 means right
     double o1X;
     double o1Y;
     double o2X;

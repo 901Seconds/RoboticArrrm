@@ -221,7 +221,7 @@ public class InterpolatedPathIterator implements PathIterator {
 
             case SEG_CLOSE:
                 if (isCurved) break;
-                if (iter >= 100) {
+                if (iter >= iterlength) {
                     iter = 0;
                     curx = hold[0];
                     cury = hold[1];

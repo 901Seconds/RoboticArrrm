@@ -10,14 +10,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.processing/core -->
         <dependency>
-            <groupId>org.processing</groupId>
-            <artifactId>core</artifactId>
-            <version>3.1.1</version>
+            <groupId>com.sanjay900</groupId>
+            <artifactId>ProcessingWrapper</artifactId>
+            <version>1.2</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.xmlgraphics/xmlgraphics-commons -->
-
 
     </dependencies>
 

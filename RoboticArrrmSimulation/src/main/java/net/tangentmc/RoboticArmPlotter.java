@@ -1,29 +1,12 @@
+package net.tangentmc;
+
+import com.sanjay900.ProcessingRunner;
 import processing.core.PApplet;
 
-import java.lang.invoke.MethodHandles;
-
 public class RoboticArmPlotter extends PApplet {
-
-    //Only used by create draw.
-    private static RoboticArmPlotter instance;
-    @Deprecated
     public RoboticArmPlotter() {
-        //Check this was created correctly. May help catch future bugs.
-        if (!Thread.currentThread().getStackTrace()[2].getClassName().equals("sun.reflect.NativeConstructorAccessorImpl")) {
-            throw new RuntimeException("You may not create an instance of this class outside of processing!");
-        }
-        instance=this;
+        ProcessingRunner.run(this);
     }
-
-    //A little hack that gets the instance created by processing.
-    public static RoboticArmPlotter createDraw() {
-        main(MethodHandles.lookup().lookupClass().getName());
-        return instance;
-    }
-
-
-
-
     public void settings() {
         size(1280, 800);
     }

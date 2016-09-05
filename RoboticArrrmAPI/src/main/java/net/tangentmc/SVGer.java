@@ -158,8 +158,22 @@ public class SVGer {
             pathList = doc.getElementsByTagName("text");
             for (int i = 0; i < pathList.getLength(); i++) {
                 org.w3c.dom.Node p = pathList.item(i);
+
+                double size = 10;
+                String fontFamily = null;
                 if (p.getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
                     Element path = (Element) p;
+                    if (path.hasAttribute("style")) {
+                        String styleAttribs = path.getAttribute("style");
+                        for (String s : styleAttribs.split(";")) {
+                            if (s.contains("font-size")) {
+                                size = Double.parseDouble(s.replace("font-size:", "").replace("px", ""));
+                            }
+                            if (s.contains("font-family")) {
+                                fontFamily = s.replace("font-family:","").replace("\'","");
+                            }
+                        }
+                    }
                     double x = 0, y = 0;
                     if (path.hasAttribute("x"))
                         x = Double.parseDouble(path.getAttribute("x"));
@@ -169,16 +183,19 @@ public class SVGer {
                         Element tPath = path;
                         for (int i1 = 0; i1 < tPath.getChildNodes().getLength(); i1++) {
                             path = (Element) tPath.getChildNodes().item(i1);
-                            double size = 10;
                             if (path.hasAttribute("style")) {
                                 String styleAttribs = path.getAttribute("style");
                                 for (String s : styleAttribs.split(";")) {
                                     if (s.contains("font-size")) {
                                         size = Double.parseDouble(s.replace("font-size:", "").replace("px", ""));
                                     }
+                                    if (s.contains("font-family")) {
+                                        fontFamily = s.replace("font-family:","").replace("\'","");
+                                    }
                                 }
                             }
-                            Font font = new Font(null, Font.PLAIN, (int)size);
+                            if (path.getTextContent().isEmpty()) continue;
+                            Font font = new Font(fontFamily, Font.PLAIN, (int)size);
                             shapes.add(getTextShape(path.getTextContent(), font, x, y));
                         }
 

@@ -1,30 +1,15 @@
-import net.tangentmc.RoboticArmModel;
-import processing.core.PApplet;
-import net.tangentmc.RoboticArm;
+package net.tangentmc;
 
-import java.lang.invoke.MethodHandles;
+import com.sanjay900.ProcessingRunner;
+import processing.core.PApplet;
 
 import static net.tangentmc.Utils.*;
 
 public class RoboticArmSimulation extends PApplet implements RoboticArm {
 
-    //used during creation
-    private static RoboticArmSimulation instance;
-    @Deprecated
     public RoboticArmSimulation() {
-        //Check this was created correctly. May help catch future bugs.
-        if (!Thread.currentThread().getStackTrace()[2].getClassName().equals("sun.reflect.NativeConstructorAccessorImpl")) {
-            throw new RuntimeException("You may not create an instance of this class outside of processing!");
-        }
-        instance=this;
+        ProcessingRunner.run(this);
     }
-
-    //A little hack that gets the instance created by processing.
-    public static RoboticArmSimulation createDraw() {
-        main(MethodHandles.lookup().lookupClass().getName());
-        return instance;
-    }
-
     //2*lengths ulnar and forearm
     final float l = 180;
     //2*distance between shoulders
@@ -43,8 +28,7 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
     public static volatile double kD = 0;
 
     RoboticArmModel theArms;
-    RoboticArmPlotter plotter = RoboticArmPlotter.createDraw();
-
+    RoboticArmPlotter plotter = new RoboticArmPlotter();
     public void settings() {
         size(800, 800);
         xCoOrdCenter = width/2;
