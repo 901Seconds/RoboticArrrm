@@ -1,5 +1,7 @@
 package net.tangentmc;
 
+import java.util.HashMap;
+
 import static net.tangentmc.Utils.*;
 
 
@@ -13,9 +15,6 @@ public class RoboticArmJNI implements RoboticArm {
     double d, l;
 
     RoboticArmModel theModel;
-    static {
-        System.load("/home/kingciar1/Projects/RoboticArrrm/RoboticArrrmJNI/target/classes/roboticarmlib.so");
-    }
     public RoboticArmJNI(double shoulder1X, double shoulder1Y, double shoulder2X, double shoulder2Y, double appendageLength) {
         o1X=shoulder1X;
         o1Y=shoulder1Y;
@@ -24,20 +23,17 @@ public class RoboticArmJNI implements RoboticArm {
         d=absLength(o1X,o2X,o1Y,o2Y);
         l=appendageLength;
         theModel = new RoboticArmModel(o1X,o1Y,o2X,o2Y,l);
-        init();
     }
-
+    public native double readAngle(int servo);
+    public native void setServo(int servo, double pulse);
     @Override
     public void setAngle(double theta1, double theta2) {
         int leftPulse = (int)(500*theta1) + 500;
         int rightPulse = (int)(500*theta2) + 500;
+
         setServo(LEFT_SERVO_PIN_NUMBER, leftPulse);
         setServo(RIGHT_SERVO_PIN_NUMBER, rightPulse);
     }
-
-    private native void setServo(int pin, int pulseWidth);
-
-    private native void init();
 
     @Override
     public RoboticArmModel getModel() {

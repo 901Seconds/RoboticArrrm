@@ -2,15 +2,15 @@ package net.tangentmc;
 
 import ecs100.UI;
 import ecs100.UIFileChooser;
-import javafx.scene.transform.Affine;
+import processing.core.PApplet;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Created by sanjay on 5/09/2016.
@@ -22,6 +22,7 @@ public class Launcher {
     double scaleX = 1;
     double scaleY = 1;
     boolean left = false;
+    double sliderTime = 10;
     AffineTransform transform = new AffineTransform();
     public static void main(String[] args) {
         new Launcher();
@@ -31,6 +32,8 @@ public class Launcher {
         UI.addButton("Pick SVG", this::load);
         UI.addButton("Simulate", this::simulate);
         UI.setMouseMotionListener(this::mouseMove);
+        UI.addSlider("Wait",0,10,s->sliderTime=s);
+        UI.addButton("Clear Simulation",this::clearSim);
         ((JComponent) UI.theUI.canvas).addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -40,31 +43,51 @@ public class Launcher {
         });
     }
 
-    RoboticArm armSimu;
+    private void clearSim() {
+        armSimu.flagClear();
+    }
 
+    RoboticArmSimulation armSimu;
+    AtomicBoolean running = new AtomicBoolean(false);
     private void simulate() {
+        running.set(false);
+        AngleTuple last;
         if (armSimu == null)
             armSimu = new RoboticArmSimulation();
-        ArrayList<AngleTuple[]> angles = new ArrayList<>();
-        for (int i = 0; i < shapes.length; i++) {
-           ArrayList<Point.Double[]> points = Utils.getAllPoints(transform.createTransformedShape(shapes[i]));
-            angles.addAll(Utils.getAllAngles(armSimu.getModel(), points));
+        ArrayList<AngleTuple[]> anglesFromShapes = new ArrayList<>();
+        for (Shape shape : shapes) {
+            ArrayList<Point.Double[]> points = Utils.getAllPoints(transform.createTransformedShape(shape));
+            anglesFromShapes.addAll(Utils.getAllAngles(armSimu.getModel(), points));
         }
-        for (int i = 0; i < angles.size(); i++) {
-            armSimu.setAngle(angles.get(i)[0].getTheta1(), angles.get(i)[0].getTheta2());
-            armSimu.setPenMode(true);
-
-            for (int i2 = 0; i2 < angles.get(i).length; i2++) {
-                armSimu.setAngle(angles.get(i)[i2].getTheta1(), angles.get(i)[i2].getTheta2());
-                try {
-                    Thread.sleep(20);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
+        running.set(true);
+        last = anglesFromShapes.get(0)[0];
+        for (AngleTuple[] angles : anglesFromShapes) {
             armSimu.setPenMode(false);
+            interpBetween(last,angles[0]);
+            last = angles[0];
+            armSimu.setPenMode(true);
+            for (AngleTuple angle : angles) {
+                if (!running.get()) return;
+                interpBetween(last,angles[0]);
+                last = angle;
+            }
         }
 
+    }
+
+    private void interpBetween(AngleTuple last, AngleTuple angle) {
+        float t = 0;
+        while (t < 1) {
+            float theta1 = PApplet.lerp((float)last.getTheta1(),(float)angle.getTheta1(),t);
+            float theta2 = PApplet.lerp((float)last.getTheta2(),(float)angle.getTheta2(),t);
+            armSimu.setAngle(theta1, theta2);
+            t+=0.1;
+            try {
+                Thread.sleep((long) sliderTime);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     double lastX = -1,lastY = -1;
@@ -125,6 +148,7 @@ public class Launcher {
     }
 
     private void draw() {
+        UI.getGraphics().setTransform(new AffineTransform());
         UI.clearGraphics();
         UI.getGraphics().translate(xSpc,ySpc);
         UI.getGraphics().scale(scaleX,scaleY);
@@ -132,8 +156,6 @@ public class Launcher {
         for (Shape s: shapes) {
             UI.getGraphics().draw(s);
         }
-        UI.getGraphics().scale(1/scaleX,1/scaleY);
-        UI.getGraphics().translate(-xSpc,-ySpc);
         UI.repaintAllGraphics();
     }
 }

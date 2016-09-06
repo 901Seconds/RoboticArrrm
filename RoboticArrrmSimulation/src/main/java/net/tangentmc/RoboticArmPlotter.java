@@ -4,6 +4,8 @@ import com.sanjay900.ProcessingRunner;
 import processing.core.PApplet;
 
 public class RoboticArmPlotter extends PApplet {
+    public boolean willClear = false;
+
     public RoboticArmPlotter() {
         ProcessingRunner.run(this);
     }
@@ -13,10 +15,15 @@ public class RoboticArmPlotter extends PApplet {
 
     public void setup() {
         noLoop();
+        noSmooth();
         background(30, 35, 40);
     }
     double[] tCPs;
     public void draw() {
+        if (willClear) {
+            background(30, 35, 40);
+            willClear = false;
+        }
         if (tCPs == null) return;
         erasePrevFrame();
         fill(200);

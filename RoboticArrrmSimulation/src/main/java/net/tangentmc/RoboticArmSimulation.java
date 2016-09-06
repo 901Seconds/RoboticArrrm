@@ -14,7 +14,6 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
     final float l = 180;
     //2*distance between shoulders
     final float d = 236;
-
     //centerpoint between shoulders
     float xCoOrdCenter;
     float yCoOrdCenter;
@@ -120,7 +119,10 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
     //@Override
     public void setPenMode(boolean down) {
         penDown = down;
-        System.out.print("PEN DOWN: "+down);
+    }
+
+    public void flagClear() {
+        plotter.willClear = true;
     }
 }
 
