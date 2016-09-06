@@ -37,7 +37,7 @@
                         <source>
                             <directory>../src/main/native</directory>
                             <fileNames>
-                                <fileName>jni_example.c</fileName>
+                                <fileName>NativeStuff.c</fileName>
                             </fileNames>
                         </source>
                     </sources>
