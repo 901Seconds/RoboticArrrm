@@ -11,35 +11,71 @@
 
     <artifactId>RoboticArrrmJNI</artifactId>
     <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>native-maven-plugin</artifactId>
-                    <extensions>true</extensions>
-                    <configuration>
-                        <!--  trigger javah -->
-                        <javahOS>armv6hf</javahOS>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
 
-                        <compilerProvider>generic-classic</compilerProvider>
-                        <compilerExecutable>gcc</compilerExecutable>
-                        <linkerExecutable>gcc</linkerExecutable>
-                        <sources>
-                            <source>
-                                <directory>src/main/native</directory>
-                                <fileNames>
-                                    <fileName>arm_jni.c</fileName>
-                                </fileNames>
-                            </source>
-                        </sources>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>native-maven-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <!--  trigger javah -->
+                    <javahOS>linux</javahOS>
 
-                        <linkerStartOptions>
-                            <linkerStartOption>-shared -Wl,--add-stdcall-alias</linkerStartOption>
-                        </linkerStartOptions>
+                    <compilerProvider>generic-classic</compilerProvider>
+                    <compilerExecutable>gcc</compilerExecutable>
 
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
+                    <linkerExecutable>gcc</linkerExecutable>
+                    <sources>
+                        <source>
+                            <directory>../src/main/native</directory>
+                            <fileNames>
+                                <fileName>jni_example.c</fileName>
+                            </fileNames>
+                        </source>
+                    </sources>
+
+                    <compilerStartOptions>
+                        <compilerStartOption>-fPIC</compilerStartOption>
+                    </compilerStartOptions>
+
+                    <linkerStartOptions>
+                        <linkerStartOption>-shared</linkerStartOption>
+                    </linkerStartOptions>
+
+                    <!--linkerOutputDirectory>${project.build.directory}</linkerOutputDirectory>
+                    <linkerFinalName>libjniExampleNative</linkerFinalName-->
+
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <id>javah</id>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <javahOS>linux</javahOS>
+                            <javahProvider>default</javahProvider>
+                            <javahOutputDirectory>${project.build.directory}/custom-javah</javahOutputDirectory>
+                            <workingDirectory>${basedir}</workingDirectory>
+                            <javahOutputFileName>NativeStuff.h</javahOutputFileName>
+                            <javahClassNames>
+                                <javahClassName>net.tricoder.jnitest.NativeStuff</javahClassName>
+                            </javahClassNames>
+                        </configuration>
+                        <goals>
+                            <goal>javah</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+            </plugin>
+        </plugins>
     </build>
 </project>
