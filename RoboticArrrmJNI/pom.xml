@@ -62,7 +62,7 @@
                         <configuration>
                             <javahOS>linux</javahOS>
                             <javahProvider>default</javahProvider>
-                            <javahOutputDirectory>${project.build.directory}/custom-javah</javahOutputDirectory>
+                            <javahOutputDirectory>${project.build.directory}</javahOutputDirectory>
                             <workingDirectory>${basedir}</workingDirectory>
                             <javahOutputFileName>NativeStuff.h</javahOutputFileName>
                             <javahClassNames>
