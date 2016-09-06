@@ -19,14 +19,14 @@
                     <extensions>true</extensions>
                     <configuration>
                         <!--  trigger javah -->
-                        <javahOS>arm</javahOS>
+                        <javahOS>armv6hf</javahOS>
 
                         <compilerProvider>generic-classic</compilerProvider>
                         <compilerExecutable>gcc</compilerExecutable>
                         <linkerExecutable>gcc</linkerExecutable>
                         <sources>
                             <source>
-                                <directory>../src/main/native</directory>
+                                <directory>src/main/native</directory>
                                 <fileNames>
                                     <fileName>arm_jni.c</fileName>
                                 </fileNames>
@@ -42,5 +42,4 @@
             </plugins>
         </pluginManagement>
     </build>
-
 </project>
