@@ -62,9 +62,9 @@
                         <configuration>
                             <javahOS>linux</javahOS>
                             <javahProvider>default</javahProvider>
-                            <javahOutputDirectory>${project.build.directory}</javahOutputDirectory>
+                            <javahOutputDirectory>src/main/native</javahOutputDirectory>
                             <workingDirectory>${basedir}</workingDirectory>
-                            <javahOutputFileName>NativeStuff.h</javahOutputFileName>
+                            <javahOutputFileName>nativeStuff.h</javahOutputFileName>
                             <javahClassNames>
                                 <javahClassName>net.tangentmc.NativeStuff</javahClassName>
                             </javahClassNames>
