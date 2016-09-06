@@ -35,7 +35,7 @@
                     <linkerExecutable>gcc</linkerExecutable>
                     <sources>
                         <source>
-                            <directory>../src/main/native</directory>
+                            <directory>src/main/native</directory>
                             <fileNames>
                                 <fileName>NativeStuff.c</fileName>
                             </fileNames>
