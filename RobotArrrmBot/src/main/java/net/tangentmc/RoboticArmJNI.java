@@ -16,6 +16,8 @@ public class RoboticArmJNI implements RoboticArm {
         RoboticArmJNI arm = new RoboticArmJNI(100,100,100,100,100);
         UI.addSlider("Servo 1",500,2500,d->arm.setServo(0,d));
         UI.addSlider("Servo 2",500,2500,d->arm.setServo(1,d));
+        UI.addButton("Read Theta 1",()->UI.println("Theta 1: "+arm.readAngle(0)));
+        UI.addButton("Read Theta 2",()->UI.println("Theta 1: "+arm.readAngle(1)));
         UI.addButton("Pen Down",()->arm.setPenMode(true));
         UI.addButton("Pen Up",()->arm.setPenMode(false));
     }
