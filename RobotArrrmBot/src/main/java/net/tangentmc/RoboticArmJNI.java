@@ -86,6 +86,6 @@ public class RoboticArmJNI implements RoboticArm {
 
     @Override
     public void setPenMode(boolean down) {
-        setServo(3,down?2000:1000);
+        setServo(2,down?2000:1000);
     }
 }
