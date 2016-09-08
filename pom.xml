@@ -14,6 +14,7 @@
         <module>RoboticArrrmSimulation</module>
         <module>RoboticArmTest</module>
         <module>RobotArrrmBot</module>
+        <module>RoboticArrrmLauncher</module>
     </modules>
 
     <dependencies>
