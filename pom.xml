@@ -29,7 +29,7 @@
     </dependencies>
     <repositories>
         <repository>
-            <url>http://socketio.tangentmc.net:8081/repository/tangent/</url>
+            <url>https://maven.tangentmc.net/repository/tangent/</url>
             <id>tangentmc</id>
         </repository>
     </repositories>
