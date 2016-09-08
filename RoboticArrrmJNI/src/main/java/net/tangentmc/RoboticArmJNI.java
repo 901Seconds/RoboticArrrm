@@ -13,7 +13,7 @@ public class RoboticArmJNI implements RoboticArm {
     public static void main(String[] args) {
         UI.initialise();
         RoboticArmJNI arm = new RoboticArmJNI(100,100,100,100,100);
-        UI.addSlider("Servo 1",800,1100,d->{arm.setServo(0,d);UI.println("Servo 1 pulse: "+d);});
+        UI.addSlider("Servo 1",1000,2000,d->{arm.setServo(0,d);UI.println("Servo 1 pulse: "+d);});
         UI.addSlider("Servo 2",800,1100,d->{arm.setServo(1,d);UI.println("Servo 2 pulse: "+d);});
         UI.addButton("Read Theta 1",()->UI.println("Theta 1: "+arm.readAngle(0)));
         UI.addButton("Read Theta 2",()->UI.println("Theta 2: "+arm.readAngle(1)));
