@@ -10,6 +10,12 @@ import static net.tangentmc.Utils.absLength;
 
 //TODO: create a model that represents the robot
 public class RoboticArmJNI implements RoboticArm {
+    public static void main(String[] args) {
+        RoboticArmJNI arm = new RoboticArmJNI(100,100,100,100,100);
+        UI.addSlider("Servo 1",500,3000,d->arm.setServo(0,d));
+        UI.addSlider("Servo 2",500,3000,d->arm.setServo(1,d));
+        UI.addSlider("Pen",500,3000,d->arm.setServo(2,d));
+    }
     static {
         try {
             NativeLoader.loadLibrary("RoboticArrrmJNI-1.0-SNAPSHOT");
@@ -33,9 +39,6 @@ public class RoboticArmJNI implements RoboticArm {
         theModel = new RoboticArmModel(o1X,o1Y,o2X,o2Y,l);
         init();
         //calibrate();
-        UI.addSlider("Servo 1",500,3000,d->setServo(0,d));
-        UI.addSlider("Servo 2",500,3000,d->setServo(1,d));
-        UI.addSlider("Pen",500,3000,d->setServo(2,d));
     }
     public native void init();
     public native double readAngle(int servo);
