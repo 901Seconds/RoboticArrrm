@@ -53,7 +53,12 @@
                     </library>
                 </libraries>
                 <linker>
-                    <libs>E101</libs>
+                    <libs>
+                        <lib>
+                            <name>E101</name>
+                            <type>shared</type>
+                        </lib>
+                    </libs>
                 </linker>
             </configuration>
         </plugin>
