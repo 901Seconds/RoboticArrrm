@@ -13,6 +13,7 @@ public class RoboticArmJNI implements RoboticArm {
         arm.init();
         for (int mt = 0; mt < 2; mt++) {
             System.out.print("MOTOR: "+mt);
+            double last = 0;
             for (int i = 1000; i < 2000; i += 100) {
                 arm.setServo(mt, i);
                 try {
@@ -20,7 +21,8 @@ public class RoboticArmJNI implements RoboticArm {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                System.out.println(i/arm.readAngle(mt));
+                System.out.println(i/arm.readAngle(mt)-last);
+                last = i/arm.readAngle(mt);
 
             }
         }
