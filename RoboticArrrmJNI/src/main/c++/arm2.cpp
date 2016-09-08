@@ -240,9 +240,9 @@ double measure_angle(int motor) {
               draw_motors();
               update_screen();
     if (motor == 1)
-        return sarm.theta1;
-    else
         return sarm.theta2;
+    else
+        return sarm.theta1;
 }
 // measure angles of the elbows
 void measure_angles(int deb)
