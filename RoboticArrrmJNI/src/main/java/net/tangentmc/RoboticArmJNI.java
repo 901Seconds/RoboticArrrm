@@ -10,6 +10,7 @@ public class RoboticArmJNI implements RoboticArm {
     public static void main(String[] args) {
         NarSystem.loadLibrary();
         RoboticArmJNI arm = new RoboticArmJNI(100,100,100,100,100);
+        arm.init();
         while (true) {
             System.out.print("ARM1"+arm.readAngle(0));
             System.out.print("ARM2"+arm.readAngle(1));
@@ -30,6 +31,8 @@ public class RoboticArmJNI implements RoboticArm {
         d=absLength(o1X,o2X,o1Y,o2Y);
         l=appendageLength;
         theModel = new RoboticArmModel(o1X,o1Y,o2X,o2Y,l);
+    }
+    public native void init();
     }
     public native double readAngle(int servo);
     public native void setServo(int servo, double pulse);

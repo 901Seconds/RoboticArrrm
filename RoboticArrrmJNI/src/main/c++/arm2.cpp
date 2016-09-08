@@ -421,7 +421,11 @@ void set_arm(){
     scanf("%d",&(sarm.R));
 
 }
-
+void initialize() {
+ init(0);  // initialize GPIO
+   init_arm();
+   open_screen_stream();
+}
 int main()
 {
    init(0);  // initialize GPIO
