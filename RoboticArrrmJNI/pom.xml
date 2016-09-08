@@ -33,7 +33,7 @@
                     <configuration>
                         <transformers>
                             <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                <mainClass>net.tangentmc.NativeStuff</mainClass>
+                                <mainClass>net.tangentmc.RoboticArmJNI</mainClass>
                             </transformer>
                         </transformers>
                     </configuration>
@@ -61,7 +61,7 @@
                 <archive>
                     <manifest>
                         <addClasspath>true</addClasspath>
-                        <mainClass>net.tangentmc.NativeStuff</mainClass>
+                        <mainClass>net.tangentmc.RoboticArmJNI</mainClass>
                     </manifest>
                 </archive>
             </configuration>
