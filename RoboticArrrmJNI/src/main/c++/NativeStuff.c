@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <jni.h>
-#include <arm2.h>
+#include "arm2.h"
 
 
 JNIEXPORT void JNICALL Java_net_tangentmc_RoboticArmJNI_setServo
