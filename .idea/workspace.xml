@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="562fd72b-2674-4bdb-9358-2e62d0a324de" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmJNI/RoboticArrrmJNI.iml" afterPath="$PROJECT_DIR$/RoboticArrrmJNI/RoboticArrrmJNI.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmJNI/pom.xml" afterPath="$PROJECT_DIR$/RoboticArrrmJNI/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java" afterPath="$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java" />
     </list>
     <ignored path="RoboticArrrm.iws" />
@@ -66,8 +64,8 @@
       <file leaf-file-name="RoboticArmJNI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="25" column="17" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
+            <state relative-caret-position="51">
+              <caret line="15" column="22" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -874,14 +872,7 @@
       <workItem from="1472174630749" duration="459000" />
       <workItem from="1473049082051" duration="12975000" />
       <workItem from="1473199534321" duration="2765000" />
-      <workItem from="1473182449213" duration="18173000" />
-    </task>
-    <task id="LOCAL-00017" summary="Why is it that the very first line is not drawn?">
-      <created>1468969629785</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1468969629785</updated>
+      <workItem from="1473182449213" duration="18371000" />
     </task>
     <task id="LOCAL-00018" summary="Add a Launcher, Allow moving of the svg around the stage">
       <created>1473060854936</created>
@@ -1219,11 +1210,18 @@
       <option name="project" value="LOCAL" />
       <updated>1473308358661</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="Test UI debug">
+      <created>1473308585877</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1473308585877</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="94309000" />
+    <option name="totallyTimeSpent" value="94507000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1288,7 +1286,8 @@
     <MESSAGE value="test" />
     <MESSAGE value="Initilize the arm." />
     <MESSAGE value="Start calibration code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Start calibration code" />
+    <MESSAGE value="Test UI debug" />
+    <option name="LAST_COMMIT_MESSAGE" value="Test UI debug" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1625,8 +1624,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="25" column="17" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
+        <state relative-caret-position="51">
+          <caret line="15" column="22" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
