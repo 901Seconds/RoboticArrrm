@@ -235,7 +235,10 @@ void draw_joints()
        set_pixel(x22,y22,255,0,0); 
 }
 double measure_angle(int motor) {
-    measure_angles(0);
+    take_picture();
+              measure_angles(2);
+              draw_motors();
+              update_screen();
     if (motor == 1)
         return sarm.theta1;
     else
