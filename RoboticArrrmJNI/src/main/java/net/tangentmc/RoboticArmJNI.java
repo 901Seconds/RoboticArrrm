@@ -17,16 +17,16 @@ public class RoboticArmJNI implements RoboticArm {
         for (int mt = 0; mt < 2; mt++) {
             arm.setServo(mt, 1000);
             try {
-                Thread.sleep(100);
+                Thread.sleep(1100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             double last =arm.readAngle(mt);
             UI.println("MOTOR: "+mt);
-            for (int i = 1100; i < 2000; i += 100) {
+            for (int i = 1010; i < 2000; i += 10) {
                 arm.setServo(mt, i);
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(1100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
