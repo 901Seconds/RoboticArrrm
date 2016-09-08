@@ -7,7 +7,9 @@ import static net.tangentmc.Utils.*;
 
 //TODO: create a model that represents the robot
 public class RoboticArmJNI implements RoboticArm {
-
+    static {
+        NarSystem.loadLibrary();
+    }
     private final int LEFT_SERVO_PIN_NUMBER = 4;
     private final int RIGHT_SERVO_PIN_NUMBER = 17;
 
