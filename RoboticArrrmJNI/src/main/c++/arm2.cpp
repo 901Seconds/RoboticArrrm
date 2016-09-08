@@ -190,7 +190,7 @@ void make_job()
      update_screen();
      if (STEP) {
        printf(" Push ENTER\n");
-       char stop = getchar();
+       getchar();
      }
      //Sleep(1,0);
    } 
