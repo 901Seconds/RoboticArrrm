@@ -93,10 +93,10 @@ void print_arm_data()
 void print_picture_data()
 {
    int i;
-   //printf(" Picture data: %d segments\n",job.n_seg); 
+   printf(" Picture data: %d segments\n",job.n_seg);
    for (i = 0 ; i < job.n_seg ; i++)
    {
-     //printf(" i=%d  pwm1=%d pwm2=%d pwm3=%d\n",
+     printf(" i=%d  pwm1=%d pwm2=%d pwm3=%d\n",
        i,job.states[i].pwm1, job.states[i].pwm2, job.states[i].pwm3);
    } 
 }
@@ -126,8 +126,8 @@ int read_draw_file(const char* file_name)
      job.states[job.n_seg].pwm2 = p2; 
      job.states[job.n_seg].pwm3 = p3; 
      //printf("   p1=%d p2=%d p3=%d\n",
-       job.states[job.n_seg].pwm1,job.states[job.n_seg].pwm2,
-       job.states[job.n_seg].pwm3);
+      // job.states[job.n_seg].pwm1,job.states[job.n_seg].pwm2,
+      // job.states[job.n_seg].pwm3);
      job.n_seg++;
    }
    fclose(file);
@@ -163,7 +163,7 @@ void set_motors(int in1,int in2, int in3)
    gettimeofday(&sarm.time2,NULL);
    double dt = (double)(sarm.time2.tv_usec -sarm.time1.tv_usec)/1000.0+
               (double)(sarm.time2.tv_sec -sarm.time1.tv_sec)*1000.0;
-   f//printf(debug_file,"%f %f %f\n", dt,sarm.theta1,sarm.theta2);
+   //printf(debug_file,"%f %f %f\n", dt,sarm.theta1,sarm.theta2);
 }
 
 
@@ -177,7 +177,7 @@ void make_job()
    for (i = 0 ; i < job.n_seg ; i++)
    {
      //printf("seg = %d p1=%d p2=%d p3=%d\n",
-       i,job.states[i].pwm1, job.states[i].pwm2, job.states[i].pwm3);
+      // i,job.states[i].pwm1, job.states[i].pwm2, job.states[i].pwm3);
      //printf("  move now..\n");
      // pic.lines[i].pen == 'd' - 1(true) or 0 
 //     pen_up_down((int)( pic.lines[i].pen));
@@ -277,7 +277,7 @@ void measure_angles(int deb)
       luma1[phi_count]= lum;
       if (deb==2) {
           ////printf("phi1 = %d x11=%d y11=%d phic=%d lum=%d\n",
-            phi, x11,y11,phi_count, luma1[phi_count]);      
+            //phi, x11,y11,phi_count, luma1[phi_count]);
       }
 
      if ( phi_count > 0) {
@@ -488,7 +488,7 @@ int main()
 
        if (input == 'i') // print arm info
        {
-           //printf("xm1=%d ym1=%d xm2=%d ym2=%d R=%d \n",
+           printf("xm1=%d ym1=%d xm2=%d ym2=%d R=%d \n",
              sarm.xm1, sarm.ym1,sarm.xm2,sarm.ym2,sarm.R);
        }
        if (input == 'o') //edit arm parameters
