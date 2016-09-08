@@ -33,7 +33,6 @@ public class RoboticArmJNI implements RoboticArm {
         theModel = new RoboticArmModel(o1X,o1Y,o2X,o2Y,l);
     }
     public native void init();
-    }
     public native double readAngle(int servo);
     public native void setServo(int servo, double pulse);
     @Override
