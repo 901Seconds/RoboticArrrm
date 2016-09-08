@@ -1,3 +1,0 @@
-while in the directory containing the java JNI class
-
-javah -o "RoboticArrrm.h" -classpath "/home/kingciar1/Projects/RoboticArrrm/RoboticArrrmJNI/target/classes/" net.tangentmc.RoboticArmJNI
