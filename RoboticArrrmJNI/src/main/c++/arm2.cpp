@@ -83,9 +83,9 @@ void init_arm()
 
 void print_arm_data()
 {
-   //printf(" Motor positions: xm1=%d ym1=%d xm2=%d ym2=%d\n",
+   printf(" Motor positions: xm1=%d ym1=%d xm2=%d ym2=%d\n",
              sarm.xm1,sarm.ym1,sarm.xm2,sarm.ym2);
-   //printf(" Joint positions: xj1=%d yj1=%d xj2=%d yj2=%d\n",
+   printf(" Joint positions: xj1=%d yj1=%d xj2=%d yj2=%d\n",
              sarm.xj1,sarm.yj1,sarm.xj2,sarm.yj2);
 }
 
@@ -336,7 +336,7 @@ void measure_angles(int deb)
       luma2[phi_count]= lum;
       if (deb==2) {
          ////printf("phi2 = %d x11=%d y11=%d phic=%d lum=%d\n",
-             phi, x11,y11,phi_count, luma2[phi_count]);      
+             //phi, x11,y11,phi_count, luma2[phi_count]);
      }
      if ( phi_count > 0) {
          if (luma2[phi_count]< luma2[phi_count-1] - thr){
@@ -389,7 +389,7 @@ void measure_angles(int deb)
     draw_joints();
 
      ////printf("measured angles: theta1=%f theta2=%f\n",
-              sarm.theta1, sarm.theta2);
+              //sarm.theta1, sarm.theta2);
     if (deb == 2){
       fclose(luma);
     }
@@ -410,7 +410,6 @@ int show_video(int count)
    return 0;
 }
 
-// edit arm parameters
 void set_arm(){
     //printf("xm1=?\n");
     scanf("%d",&(sarm.xm1));
