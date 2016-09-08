@@ -4,6 +4,7 @@
 #include <time.h>
 #include <sys/time.h>
 #include <math.h>
+#include "arm2.h"
 
 typedef struct {
    int xm1;
