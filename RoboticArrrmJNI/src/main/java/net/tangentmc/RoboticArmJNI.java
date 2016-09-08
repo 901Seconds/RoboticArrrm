@@ -23,7 +23,7 @@ public class RoboticArmJNI implements RoboticArm {
             }
             double last =arm.readAngle(mt);
             UI.println("MOTOR: "+mt);
-            for (int i = 1050; i < 2000; i += 50) {
+            for (int i = 100; i < 3000; i += 50) {
                 arm.setServo(mt, i);
                 try {
                     Thread.sleep(250);
