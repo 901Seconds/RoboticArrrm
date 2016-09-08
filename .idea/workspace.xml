@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="562fd72b-2674-4bdb-9358-2e62d0a324de" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmJNI/src/main/c++/NativeStuff.c" afterPath="$PROJECT_DIR$/RoboticArrrmJNI/src/main/c++/NativeStuff.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmJNI/src/main/c++/arm2.cpp" afterPath="$PROJECT_DIR$/RoboticArrrmJNI/src/main/c++/arm2.cpp" />
     </list>
     <ignored path="RoboticArrrm.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -975,7 +973,7 @@
       <workItem from="1472174630749" duration="459000" />
       <workItem from="1473049082051" duration="12975000" />
       <workItem from="1473199534321" duration="2765000" />
-      <workItem from="1473182449213" duration="11403000" />
+      <workItem from="1473182449213" duration="11414000" />
     </task>
     <task id="LOCAL-00001" summary="Add test">
       <created>1468820944141</created>
@@ -1250,11 +1248,18 @@
       <option name="project" value="LOCAL" />
       <updated>1473301572326</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="test">
+      <created>1473301785491</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1473301785491</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="87539000" />
+    <option name="totallyTimeSpent" value="87550000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
