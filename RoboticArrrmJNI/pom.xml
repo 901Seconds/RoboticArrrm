@@ -57,6 +57,7 @@
                         <lib>
                             <name>E101</name>
                             <type>shared</type>
+                            <directory>/usr/lib/</directory>
                         </lib>
                     </libs>
                 </linker>
