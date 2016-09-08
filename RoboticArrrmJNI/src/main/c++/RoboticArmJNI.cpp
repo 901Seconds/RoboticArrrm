@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <jni.h>
 #include "arm2.h"
-extern "c" {
+extern "C" {
 JNIEXPORT void JNICALL Java_net_tangentmc_RoboticArmJNI_setServo
   (JNIEnv * env, jobject obj, jint servo, jdouble pulse)
 {
