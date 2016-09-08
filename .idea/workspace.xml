@@ -4,8 +4,6 @@
     <list default="true" id="562fd72b-2674-4bdb-9358-2e62d0a324de" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RobotArrrmBot/pom.xml" afterPath="$PROJECT_DIR$/RobotArrrmBot/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmJNI/RoboticArrrmJNI.iml" afterPath="$PROJECT_DIR$/RoboticArrrmJNI/RoboticArrrmJNI.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmJNI/pom.xml" afterPath="$PROJECT_DIR$/RoboticArrrmJNI/pom.xml" />
     </list>
     <ignored path="RoboticArrrm.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -54,7 +52,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RoboticArmJNI.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RoboticArmJNI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RobotArrrmBot/src/main/java/net/tangentmc/RoboticArmJNI.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="357">
@@ -67,11 +65,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RobotArrrmBot/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="366">
-              <caret line="46" column="19" selection-start-line="46" selection-start-column="19" selection-end-line="46" selection-end-column="19" />
+            <state relative-caret-position="77">
+              <caret line="29" column="21" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -987,14 +985,7 @@
       <workItem from="1473049082051" duration="12975000" />
       <workItem from="1473199534321" duration="2765000" />
       <workItem from="1473182449213" duration="21551000" />
-      <workItem from="1473334286204" duration="6611000" />
-    </task>
-    <task id="LOCAL-00035" summary="test">
-      <created>1473300835121</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1473300835121</updated>
+      <workItem from="1473334286204" duration="6709000" />
     </task>
     <task id="LOCAL-00036" summary="test">
       <created>1473300994371</created>
@@ -1332,11 +1323,18 @@
       <option name="project" value="LOCAL" />
       <updated>1473369235466</updated>
     </task>
-    <option name="localTasksCounter" value="84" />
+    <task id="LOCAL-00084" summary="Missing dependancies in POM">
+      <created>1473369354528</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1473369354528</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="104298000" />
+    <option name="totallyTimeSpent" value="104396000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1382,7 +1380,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="This is a much better gitignore tbh" />
     <MESSAGE value="Plot to a seperate screen." />
     <MESSAGE value="Moved graphs to second display" />
     <MESSAGE value="add some checks and comments so we don't run into instance issues." />
@@ -1407,7 +1404,8 @@
     <MESSAGE value="Resolve dependancy cycle" />
     <MESSAGE value="Java 1.8" />
     <MESSAGE value="Fix duplicated tags in pom" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix duplicated tags in pom" />
+    <MESSAGE value="Missing dependancies in POM" />
+    <option name="LAST_COMMIT_MESSAGE" value="Missing dependancies in POM" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1712,14 +1710,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RobotArrrmBot/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
-          <caret line="46" column="19" selection-start-line="46" selection-start-column="19" selection-end-line="46" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RobotArrrmBot/src/main/java/net/tangentmc/RoboticArmJNI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -1728,6 +1718,14 @@
             <element signature="e#2450#2451#0" expanded="false" />
             <element signature="e#2477#2478#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RobotArrrmBot/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="77">
+          <caret line="29" column="21" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
+          <folding />
         </state>
       </provider>
     </entry>
