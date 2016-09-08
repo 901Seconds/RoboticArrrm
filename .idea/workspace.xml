@@ -4,6 +4,7 @@
     <list default="true" id="562fd72b-2674-4bdb-9358-2e62d0a324de" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmLauncher/RoboticArrrmLauncher.iml" afterPath="$PROJECT_DIR$/RoboticArrrmLauncher/RoboticArrrmLauncher.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmLauncher/pom.xml" afterPath="$PROJECT_DIR$/RoboticArrrmLauncher/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
     </list>
     <ignored path="RoboticArrrm.iws" />
@@ -36,8 +37,8 @@
       <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+            <state relative-caret-position="264">
+              <caret line="71" column="51" selection-start-line="71" selection-start-column="51" selection-end-line="71" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -46,8 +47,8 @@
       <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RoboticArrrmAPI/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="34" column="29" selection-start-line="34" selection-start-column="29" selection-end-line="38" selection-end-column="17" />
+            <state relative-caret-position="336">
+              <caret line="36" column="36" selection-start-line="36" selection-start-column="36" selection-end-line="36" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -133,8 +134,8 @@
       <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RoboticArrrmLauncher/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-131">
-              <caret line="36" column="21" selection-start-line="36" selection-start-column="21" selection-end-line="36" selection-end-column="21" />
+            <state relative-caret-position="366">
+              <caret line="88" column="12" selection-start-line="88" selection-start-column="12" selection-end-line="88" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -195,7 +196,6 @@
         <option value="$PROJECT_DIR$/RoboticArrrmJNI/src/main/c++/RoboticArmJNI.cpp" />
         <option value="$PROJECT_DIR$/RoboticArrrmJNI/src/main/c++/arm2.h" />
         <option value="$PROJECT_DIR$/RoboticArrrmJNI/src/main/c++/arm2.cpp" />
-        <option value="$PROJECT_DIR$/RoboticArrrmLauncher/pom.xml" />
         <option value="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/DrawShape.java" />
         <option value="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/WebSocketServer.java" />
         <option value="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/Launcher.java" />
@@ -204,6 +204,7 @@
         <option value="$PROJECT_DIR$/RoboticArrrmJNI/pom.xml" />
         <option value="$PROJECT_DIR$/RobotArrrmBot/pom.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/RoboticArrrmLauncher/pom.xml" />
       </list>
     </option>
   </component>
@@ -902,14 +903,7 @@
       <workItem from="1473049082051" duration="12975000" />
       <workItem from="1473199534321" duration="2765000" />
       <workItem from="1473182449213" duration="21551000" />
-      <workItem from="1473334286204" duration="6939000" />
-    </task>
-    <task id="LOCAL-00037" summary="test">
-      <created>1473301259912</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1473301259912</updated>
+      <workItem from="1473334286204" duration="7155000" />
     </task>
     <task id="LOCAL-00038" summary="test">
       <created>1473301486153</created>
@@ -1247,11 +1241,18 @@
       <option name="project" value="LOCAL" />
       <updated>1473369457778</updated>
     </task>
-    <option name="localTasksCounter" value="86" />
+    <task id="LOCAL-00086" summary="Build the launcher">
+      <created>1473369687684</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1473369687684</updated>
+    </task>
+    <option name="localTasksCounter" value="87" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="104626000" />
+    <option name="totallyTimeSpent" value="104842000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1297,7 +1298,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Moved graphs to second display" />
     <MESSAGE value="add some checks and comments so we don't run into instance issues." />
     <MESSAGE value="PathIteratorTest can interpolate curves. WHY CANT Utils?" />
     <MESSAGE value="Create our own PathIterator that flattens curves and interpolates straight lines." />
@@ -1322,7 +1322,8 @@
     <MESSAGE value="Fix duplicated tags in pom" />
     <MESSAGE value="Missing dependancies in POM" />
     <MESSAGE value="We probably dont want Bot depending on itself tbh" />
-    <option name="LAST_COMMIT_MESSAGE" value="We probably dont want Bot depending on itself tbh" />
+    <MESSAGE value="Build the launcher" />
+    <option name="LAST_COMMIT_MESSAGE" value="Build the launcher" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1587,14 +1588,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RoboticArrrmAPI/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="34" column="29" selection-start-line="34" selection-start-column="29" selection-end-line="38" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RoboticArmTest/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="629">
@@ -1632,16 +1625,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+        <state relative-caret-position="264">
+          <caret line="71" column="51" selection-start-line="71" selection-start-column="51" selection-end-line="71" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RoboticArrrmAPI/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="36" column="36" selection-start-line="36" selection-start-column="36" selection-end-line="36" selection-end-column="36" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/RoboticArrrmLauncher/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-131">
-          <caret line="36" column="21" selection-start-line="36" selection-start-column="21" selection-end-line="36" selection-end-column="21" />
+        <state relative-caret-position="366">
+          <caret line="88" column="12" selection-start-line="88" selection-start-column="12" selection-end-line="88" selection-end-column="12" />
           <folding />
         </state>
       </provider>
