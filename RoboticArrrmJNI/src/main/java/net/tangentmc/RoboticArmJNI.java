@@ -1,5 +1,7 @@
 package net.tangentmc;
 
+import ecs100.UI;
+
 import java.util.HashMap;
 
 import static net.tangentmc.Utils.*;
@@ -21,7 +23,7 @@ public class RoboticArmJNI implements RoboticArm {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                System.out.println(i/arm.readAngle(mt)-last);
+                UI.println(i/arm.readAngle(mt)-last);
                 last = i/arm.readAngle(mt);
 
             }

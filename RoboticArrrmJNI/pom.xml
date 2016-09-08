@@ -110,6 +110,11 @@
         <version>2.1.3</version>
         <scope>compile</scope>
     </dependency>
+    <dependency>
+        <groupId>nz.ac.victoria.ecs</groupId>
+        <artifactId>ecs</artifactId>
+        <version>RELEASE</version>
+    </dependency>
 </dependencies>
 
 <profiles>
