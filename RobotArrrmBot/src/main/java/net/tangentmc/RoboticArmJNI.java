@@ -12,6 +12,7 @@ import static net.tangentmc.Utils.absLength;
 //TODO: create a model that represents the robot
 public class RoboticArmJNI implements RoboticArm {
     public static void main(String[] args) {
+        UI.initialise();
         RoboticArmJNI arm = new RoboticArmJNI(100,100,100,100,100);
         UI.addSlider("Servo 1",500,3000,d->arm.setServo(0,d));
         UI.addSlider("Servo 2",500,3000,d->arm.setServo(1,d));
@@ -38,14 +39,14 @@ public class RoboticArmJNI implements RoboticArm {
         d=absLength(o1X,o2X,o1Y,o2Y);
         l=appendageLength;
         theModel = new RoboticArmModel(o1X,o1Y,o2X,o2Y,l);
-        System.out.print(MxSysInfo.getMxSysInfo());
         init();
-        //calibrate();
+        calibrate();
     }
     public native void init();
     public native double readAngle(int servo);
     public native void setServo(int servo, double pulse);
     public void calibrate() {
+        /*
         for (int mt = 0; mt < 2; mt++) {
             setServo(mt, 1000);
             try {
@@ -66,6 +67,7 @@ public class RoboticArmJNI implements RoboticArm {
 
             }
         }
+        */
     }
     @Override
     public void setAngle(double theta1, double theta2) {
