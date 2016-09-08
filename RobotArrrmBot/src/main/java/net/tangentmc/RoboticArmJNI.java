@@ -14,9 +14,10 @@ public class RoboticArmJNI implements RoboticArm {
     public static void main(String[] args) {
         UI.initialise();
         RoboticArmJNI arm = new RoboticArmJNI(100,100,100,100,100);
-        UI.addSlider("Servo 1",500,3000,d->arm.setServo(0,d));
-        UI.addSlider("Servo 2",500,3000,d->arm.setServo(1,d));
-        UI.addSlider("Pen",500,3000,d->arm.setServo(2,d));
+        UI.addSlider("Servo 1",500,2500,d->arm.setServo(0,d));
+        UI.addSlider("Servo 2",500,2500,d->arm.setServo(1,d));
+        UI.addButton("Pen Down",()->arm.setPenMode(true));
+        UI.addButton("Pen Up",()->arm.setPenMode(false));
     }
     static {
         try {
@@ -85,6 +86,6 @@ public class RoboticArmJNI implements RoboticArm {
 
     @Override
     public void setPenMode(boolean down) {
-
+        setServo(3,down?2000:1000);
     }
 }
