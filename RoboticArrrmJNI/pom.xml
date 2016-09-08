@@ -75,12 +75,12 @@
                 <executions>
                     <execution>
                         <id>copy-resources</id>
-                        <phase>validate</phase>
+                        <phase>test</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${basedir}/target/classes/META-INF/lib</outputDirectory>
+                            <outputDirectory>${basedir}/target/classes/</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>${basedir}/target/nar/RoboticArrrmJNI-1.0-SNAPSHOT-arm-Linux-gpp-jni/lib/arm-Linux-gpp/jni/</directory>
