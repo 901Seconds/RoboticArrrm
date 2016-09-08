@@ -69,7 +69,28 @@
                     </execution>
                 </executions>
             </plugin>
-
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/classes/META-INF/lib/linux_arm/</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/target/nar/RoboticArrrmJNI-1.0-SNAPSHOT-arm-Linux-gpp-jni/lib/arm-Linux-gpp/jni/</directory>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 </project>
