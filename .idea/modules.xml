@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/RobotArrrmBot/RobotArrrmBot.iml" filepath="$PROJECT_DIR$/RobotArrrmBot/RobotArrrmBot.iml" />
       <module fileurl="file://$PROJECT_DIR$/RoboticArmTest/RoboticArmTest.iml" filepath="$PROJECT_DIR$/RoboticArmTest/RoboticArmTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/RoboticArrrm.iml" filepath="$PROJECT_DIR$/RoboticArrrm.iml" />
       <module fileurl="file://$PROJECT_DIR$/RoboticArrrmAPI/RoboticArrrmAPI.iml" filepath="$PROJECT_DIR$/RoboticArrrmAPI/RoboticArrrmAPI.iml" />

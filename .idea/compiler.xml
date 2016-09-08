@@ -22,6 +22,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="RobotArrrmBot" />
         <module name="RoboticArmTest" />
         <module name="RoboticArrrmAPI" />
         <module name="RoboticArrrmJNI" />
@@ -30,6 +31,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="RobotArrrmBot" target="1.8" />
       <module name="RoboticArmTest" target="1.8" />
       <module name="RoboticArrrm" target="1.8" />
       <module name="RoboticArrrmAPI" target="1.8" />

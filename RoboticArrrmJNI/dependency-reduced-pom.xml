@@ -24,7 +24,7 @@
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>net.tangentmc.RoboticArmJNI</mainClass>
+                  <mainClass>tangentmc.RoboticArmJNI</mainClass>
                 </transformer>
               </transformers>
             </configuration>
@@ -60,7 +60,7 @@
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <mainClass>net.tangentmc.RoboticArmJNI</mainClass>
+              <mainClass>tangentmc.RoboticArmJNI</mainClass>
             </manifest>
           </archive>
         </configuration>
