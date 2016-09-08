@@ -14,6 +14,8 @@ public class RoboticArmJNI implements RoboticArm {
         while (true) {
             System.out.println("ARM1"+arm.readAngle(0));
             System.out.println("ARM2"+arm.readAngle(1));
+            arm.setServo(0,1500);
+            arm.setServo(1,1600);
         }
     }
     private final int LEFT_SERVO_PIN_NUMBER = 4;
