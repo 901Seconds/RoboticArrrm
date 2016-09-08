@@ -8,14 +8,12 @@ import static net.tangentmc.Utils.*;
 //TODO: create a model that represents the robot
 public class RoboticArmJNI implements RoboticArm {
     public static void main(String[] args) {
+        NarSystem.loadLibrary();
         RoboticArmJNI arm = new RoboticArmJNI(100,100,100,100,100);
         while (true) {
             System.out.print("ARM1"+arm.readAngle(0));
             System.out.print("ARM2"+arm.readAngle(1));
         }
-    }
-    static {
-        NarSystem.loadLibrary();
     }
     private final int LEFT_SERVO_PIN_NUMBER = 4;
     private final int RIGHT_SERVO_PIN_NUMBER = 17;

@@ -9,7 +9,7 @@ JNIEXPORT void JNICALL Java_net_tangentmc_RoboticArmJNI_setServo
 {
     set_servo((int)servo,(double)pulse);
 }
-JNIEXPORT double JNICALL Java_net_tangentmc_RoboticArmJNI_readAngle
+JNIEXPORT jdouble JNICALL Java_net_tangentmc_RoboticArmJNI_readAngle
   (JNIEnv * env, jobject obj, jint arm)
 {
     return measure_angle(arm);
