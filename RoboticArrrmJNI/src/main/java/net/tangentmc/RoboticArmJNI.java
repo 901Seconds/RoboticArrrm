@@ -32,7 +32,10 @@ public class RoboticArmJNI implements RoboticArm {
         l=appendageLength;
         theModel = new RoboticArmModel(o1X,o1Y,o2X,o2Y,l);
         init();
-        calibrate();
+        //calibrate();
+        UI.addSlider("Servo 1",500,3000,d->setServo(0,d));
+        UI.addSlider("Servo 2",500,3000,d->setServo(1,d));
+        UI.addSlider("Pen",500,3000,d->setServo(2,d));
     }
     public native void init();
     public native double readAngle(int servo);
