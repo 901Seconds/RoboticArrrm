@@ -7,36 +7,127 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>RoboticArrrmJNI</artifactId>
+  <packaging>nar</packaging>
+  <name>Maven Examples :: nar-maven-plugin JNI Project</name>
   <build>
+    <defaultGoal>integration-test</defaultGoal>
     <plugins>
       <plugin>
-        <artifactId>maven-antrun-plugin</artifactId>
-        <version>1.7</version>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>2.4.3</version>
         <executions>
           <execution>
-            <phase>process-classes</phase>
+            <phase>package</phase>
             <goals>
-              <goal>run</goal>
+              <goal>shade</goal>
             </goals>
             <configuration>
-              <target>
-                <echo>Generating JNI headers</echo>
-                <exec>
-                  <arg />
-                  <arg />
-                  <arg />
-                  <arg />
-                  <arg />
-                  <arg />
-                </exec>
-                <exec />
-              </target>
+              <transformers>
+                <transformer>
+                  <mainClass>net.tangentmc.RoboticArmJNI</mainClass>
+                </transformer>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.github.maven-nar</groupId>
+        <artifactId>nar-maven-plugin</artifactId>
+        <version>3.2.3</version>
+        <extensions>true</extensions>
+        <configuration>
+          <libraries>
+            <library>
+              <type>jni</type>
+              <narSystemPackage>net.tangentmc</narSystemPackage>
+            </library>
+          </libraries>
+          <linker>
+            <libs>
+              <lib>
+                <name>E101</name>
+                <type>shared</type>
+                <directory>/usr/lib/</directory>
+              </lib>
+            </libs>
+          </linker>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <mainClass>net.tangentmc.RoboticArmJNI</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>1.10</version>
+        <executions>
+          <execution>
+            <id>add-source</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${project.build.directory}/nar/nar-generated/</source>
+              </sources>
             </configuration>
           </execution>
         </executions>
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>cygwin</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.github.maven-nar</groupId>
+            <artifactId>nar-maven-plugin</artifactId>
+            <configuration>
+              <gnuUseOnWindows>true</gnuUseOnWindows>
+              <c>
+                <name>gcc</name>
+                <includes>
+                  <include>**/*.c</include>
+                </includes>
+                <options>
+                  <option>-D__int64=int64_t</option>
+                  <option>-I${JAVA_HOME}/include</option>
+                  <option>-I${JAVA_HOME}/include/win32</option>
+                  <option>${java.os.include}</option>
+                  <option>${stack.protector.option}</option>
+                  <option>${architecture.option}</option>
+                  <option>${subsystem.option}</option>
+                  <option>${debug.option}</option>
+                  <option>-shared</option>
+                  <option>-fexceptions</option>
+                  <option>-lstdc++</option>
+                </options>
+              </c>
+              <linker>
+                <name>gcc</name>
+                <options>
+                  <option>${architecture.option}</option>
+                  <option>${subsystem.option}</option>
+                </options>
+              </linker>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
   <dependencies>
     <dependency>
       <groupId>org.projectlombok</groupId>
@@ -45,5 +136,8 @@
       <scope>provided</scope>
     </dependency>
   </dependencies>
+  <properties>
+    <skipTests>true</skipTests>
+  </properties>
 </project>
 

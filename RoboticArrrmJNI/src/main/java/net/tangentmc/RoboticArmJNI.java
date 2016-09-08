@@ -1,52 +1,27 @@
 package net.tangentmc;
 
 import ecs100.UI;
+import org.scijava.nativelib.NativeLoader;
 
-import java.util.HashMap;
+import java.io.IOException;
 
-import static net.tangentmc.Utils.*;
+import static net.tangentmc.Utils.absLength;
 
 
 //TODO: create a model that represents the robot
 public class RoboticArmJNI implements RoboticArm {
-    public static void main(String[] args) {
-        NarSystem.loadLibrary();
-        RoboticArmJNI arm = new RoboticArmJNI(100,100,100,100,100);
-        arm.init();
-
-        for (int mt = 0; mt < 2; mt++) {
-            arm.setServo(mt, 1000);
-            try {
-                Thread.sleep(250);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            double last =arm.readAngle(mt);
-            UI.println("MOTOR: "+mt);
-            for (int i = 100; i < 3000; i += 50) {
-                arm.setServo(mt, i);
-                try {
-                    Thread.sleep(250);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                UI.println(arm.readAngle(mt));
-
-            }
+    static {
+        try {
+            NativeLoader.loadLibrary("RoboticArrrmJNI-1.0-SNAPSHOT");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        /*while (true) {
-            System.out.println("ARM1"+arm.readAngle(0));
-            System.out.println("ARM2"+arm.readAngle(1));
-            arm.setServo(0,1500);
-            arm.setServo(1,1600);
-        }*/
     }
     private final int LEFT_SERVO_PIN_NUMBER = 4;
     private final int RIGHT_SERVO_PIN_NUMBER = 17;
 
     double o1X, o1Y, o2X, o2Y;
     double d, l;
-
     RoboticArmModel theModel;
     public RoboticArmJNI(double shoulder1X, double shoulder1Y, double shoulder2X, double shoulder2Y, double appendageLength) {
         o1X=shoulder1X;
@@ -56,10 +31,34 @@ public class RoboticArmJNI implements RoboticArm {
         d=absLength(o1X,o2X,o1Y,o2Y);
         l=appendageLength;
         theModel = new RoboticArmModel(o1X,o1Y,o2X,o2Y,l);
+        init();
+        calibrate();
     }
     public native void init();
     public native double readAngle(int servo);
     public native void setServo(int servo, double pulse);
+    public void calibrate() {
+        for (int mt = 0; mt < 2; mt++) {
+            setServo(mt, 1000);
+            try {
+                Thread.sleep(250);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            double last =readAngle(mt);
+            UI.println("MOTOR: "+mt);
+            for (int i = 100; i < 3000; i += 50) {
+                setServo(mt, i);
+                try {
+                    Thread.sleep(250);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                UI.println(readAngle(mt));
+
+            }
+        }
+    }
     @Override
     public void setAngle(double theta1, double theta2) {
         int leftPulse = (int)(500*theta1) + 500;
