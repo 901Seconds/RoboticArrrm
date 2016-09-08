@@ -29,7 +29,7 @@
                 <libraries>
                     <library>
                         <type>jni</type>
-                        <narSystemPackage>net.tangentmc.NativeLibs</narSystemPackage>
+                        <narSystemPackage>net.tangentmc</narSystemPackage>
                     </library>
                 </libraries>
             </configuration>

@@ -57,6 +57,7 @@
     <orderEntry type="library" name="Maven: batik:batik-parser:1.6-1" level="project" />
     <orderEntry type="library" name="Maven: batik:batik-awt-util:1.6-1" level="project" />
     <orderEntry type="module" module-name="RoboticArrrmJNI" />
+    <orderEntry type="library" name="Maven: org.scijava:native-lib-loader:2.1.3" level="project" />
     <orderEntry type="module" module-name="RoboticArrrmSimulation" />
   </component>
 </module>
