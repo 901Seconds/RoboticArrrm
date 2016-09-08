@@ -13,7 +13,6 @@
         <module>RoboticArrrmJNI</module>
         <module>RoboticArrrmSimulation</module>
         <module>RoboticArmTest</module>
-        <module>RobotArrrmBot</module>
         <module>RoboticArrrmLauncher</module>
     </modules>
 
@@ -33,11 +32,6 @@
             <groupId>nz.ac.victoria.ecs</groupId>
             <artifactId>ecs</artifactId>
             <version>RELEASE</version>
-        </dependency>
-        <dependency>
-            <artifactId>RoboticArrrmBot</artifactId>
-            <groupId>net.tangentmc</groupId>
-            <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <artifactId>RoboticArrrmAPI</artifactId>

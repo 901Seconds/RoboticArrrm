@@ -1,7 +1,6 @@
 package net.tangentmc;
 
 import ecs100.UI;
-import org.scijava.nativelib.MxSysInfo;
 import org.scijava.nativelib.NativeLoader;
 
 import java.io.IOException;
