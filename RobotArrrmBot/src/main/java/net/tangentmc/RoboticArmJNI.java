@@ -1,6 +1,7 @@
 package net.tangentmc;
 
 import ecs100.UI;
+import org.scijava.nativelib.MxSysInfo;
 import org.scijava.nativelib.NativeLoader;
 
 import java.io.IOException;
@@ -37,6 +38,7 @@ public class RoboticArmJNI implements RoboticArm {
         d=absLength(o1X,o2X,o1Y,o2Y);
         l=appendageLength;
         theModel = new RoboticArmModel(o1X,o1Y,o2X,o2Y,l);
+        System.out.print(MxSysInfo.getMxSysInfo());
         init();
         //calibrate();
     }
