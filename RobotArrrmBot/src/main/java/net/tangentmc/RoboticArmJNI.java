@@ -17,7 +17,7 @@ public class RoboticArmJNI implements RoboticArm {
         UI.addSlider("Servo 1",500,2500,d->arm.setServo(0,d));
         UI.addSlider("Servo 2",500,2500,d->arm.setServo(1,d));
         UI.addButton("Read Theta 1",()->UI.println("Theta 1: "+arm.readAngle(0)));
-        UI.addButton("Read Theta 2",()->UI.println("Theta 1: "+arm.readAngle(1)));
+        UI.addButton("Read Theta 2",()->UI.println("Theta 2: "+arm.readAngle(1)));
         UI.addButton("Pen Down",()->arm.setPenMode(true));
         UI.addButton("Pen Up",()->arm.setPenMode(false));
     }
@@ -28,9 +28,6 @@ public class RoboticArmJNI implements RoboticArm {
             e.printStackTrace();
         }
     }
-    private final int LEFT_SERVO_PIN_NUMBER = 4;
-    private final int RIGHT_SERVO_PIN_NUMBER = 17;
-
     double o1X, o1Y, o2X, o2Y;
     double d, l;
     RoboticArmModel theModel;
@@ -76,9 +73,6 @@ public class RoboticArmJNI implements RoboticArm {
     public void setAngle(double theta1, double theta2) {
         int leftPulse = (int)(500*theta1) + 500;
         int rightPulse = (int)(500*theta2) + 500;
-
-        setServo(LEFT_SERVO_PIN_NUMBER, leftPulse);
-        setServo(RIGHT_SERVO_PIN_NUMBER, rightPulse);
     }
 
     @Override
