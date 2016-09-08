@@ -52,6 +52,9 @@
                         <narSystemPackage>net.tangentmc</narSystemPackage>
                     </library>
                 </libraries>
+                <linker>
+                    <libs>E101</libs>
+                </linker>
             </configuration>
         </plugin>
         <plugin>
