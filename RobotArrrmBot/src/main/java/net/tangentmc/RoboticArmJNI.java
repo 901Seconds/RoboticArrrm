@@ -1,8 +1,6 @@
-package tangentmc;
+package net.tangentmc;
 
 import ecs100.UI;
-import net.tangentmc.RoboticArm;
-import net.tangentmc.RoboticArmModel;
 import org.scijava.nativelib.NativeLoader;
 
 import java.io.IOException;
