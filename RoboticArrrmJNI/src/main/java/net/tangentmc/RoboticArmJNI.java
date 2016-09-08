@@ -13,16 +13,24 @@ public class RoboticArmJNI implements RoboticArm {
         NarSystem.loadLibrary();
         RoboticArmJNI arm = new RoboticArmJNI(100,100,100,100,100);
         arm.init();
+
         for (int mt = 0; mt < 2; mt++) {
+            arm.setServo(mt, 1000);
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            double last =arm.readAngle(mt);
             UI.println("MOTOR: "+mt);
-            for (int i = 1000; i < 2000; i += 100) {
+            for (int i = 1100; i < 2000; i += 100) {
                 arm.setServo(mt, i);
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                UI.print(i/arm.readAngle(mt));
+                UI.println((arm.readAngle(mt)-last)/100);
 
             }
         }
