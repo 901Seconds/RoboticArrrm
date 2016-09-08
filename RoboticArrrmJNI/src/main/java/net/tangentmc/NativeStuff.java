@@ -6,7 +6,7 @@ public class NativeStuff
 
     public static void main(String[] args)
     {
-        System.loadLibrary("jniExampleNative");
+        NarSystem.loadLibrary();
         new NativeStuff().helloNative();
     }
 }
