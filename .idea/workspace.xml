@@ -65,12 +65,12 @@
       <file leaf-file-name="RoboticArmJNI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RobotArrrmBot/src/main/java/net/tangentmc/RoboticArmJNI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="59" selection-start-line="19" selection-start-column="59" selection-end-line="19" selection-end-column="59" />
+            <state relative-caret-position="289">
+              <caret line="17" column="81" selection-start-line="17" selection-start-column="81" selection-end-line="17" selection-end-column="81" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2636#2637#0" expanded="true" />
-                <element signature="e#2678#2679#0" expanded="true" />
+                <element signature="e#2706#2707#0" expanded="true" />
+                <element signature="e#2748#2749#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1107,14 +1107,7 @@
       <workItem from="1473049082051" duration="12975000" />
       <workItem from="1473199534321" duration="2765000" />
       <workItem from="1473182449213" duration="21551000" />
-      <workItem from="1473334286204" duration="13060000" />
-    </task>
-    <task id="LOCAL-00053" summary="test">
-      <created>1473305789953</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1473305789954</updated>
+      <workItem from="1473334286204" duration="13409000" />
     </task>
     <task id="LOCAL-00054" summary="Initilize the arm.">
       <created>1473306058851</created>
@@ -1452,11 +1445,18 @@
       <option name="project" value="LOCAL" />
       <updated>1473375453315</updated>
     </task>
-    <option name="localTasksCounter" value="102" />
+    <task id="LOCAL-00102" summary="Should say Theta 2 not 1">
+      <created>1473375858954</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1473375858954</updated>
+    </task>
+    <option name="localTasksCounter" value="103" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="110747000" />
+    <option name="totallyTimeSpent" value="111096000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1502,7 +1502,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Prepare UI for robot." />
     <MESSAGE value="Prepare UI for robot. Begin ability to feed in information from a Socket.IO client" />
     <MESSAGE value="Add a ui mech for checking pulse max,min" />
     <MESSAGE value="update nar plugin." />
@@ -1527,7 +1526,8 @@
     <MESSAGE value="Motor 2 is pen not 3" />
     <MESSAGE value="Add stash to the build script" />
     <MESSAGE value="Add ability to read angles from test gui" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add ability to read angles from test gui" />
+    <MESSAGE value="Should say Theta 2 not 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Should say Theta 2 not 1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1760,7 +1760,7 @@
         <state relative-caret-position="255">
           <caret line="15" column="56" selection-start-line="15" selection-start-column="56" selection-end-line="15" selection-end-column="56" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1849,12 +1849,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/RobotArrrmBot/src/main/java/net/tangentmc/RoboticArmJNI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="59" selection-start-line="19" selection-start-column="59" selection-end-line="19" selection-end-column="59" />
+        <state relative-caret-position="289">
+          <caret line="17" column="81" selection-start-line="17" selection-start-column="81" selection-end-line="17" selection-end-column="81" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2636#2637#0" expanded="true" />
-            <element signature="e#2678#2679#0" expanded="true" />
+            <element signature="e#2706#2707#0" expanded="true" />
+            <element signature="e#2748#2749#0" expanded="true" />
           </folding>
         </state>
       </provider>
