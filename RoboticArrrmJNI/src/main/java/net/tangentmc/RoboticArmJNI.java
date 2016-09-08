@@ -17,7 +17,7 @@ public class RoboticArmJNI implements RoboticArm {
         for (int mt = 0; mt < 2; mt++) {
             arm.setServo(mt, 1000);
             try {
-                Thread.sleep(500);
+                Thread.sleep(250);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -26,11 +26,11 @@ public class RoboticArmJNI implements RoboticArm {
             for (int i = 1050; i < 2000; i += 50) {
                 arm.setServo(mt, i);
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(250);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                UI.println((arm.readAngle(mt)-last)/100);
+                UI.println(arm.readAngle(mt));
 
             }
         }
