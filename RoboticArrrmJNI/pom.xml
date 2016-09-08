@@ -80,7 +80,7 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${basedir}/target/classes/META-INF/lib/linux_arm/</outputDirectory>
+                            <outputDirectory>${basedir}/target/classes/META-INF/lib</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>${basedir}/target/nar/RoboticArrrmJNI-1.0-SNAPSHOT-arm-Linux-gpp-jni/lib/arm-Linux-gpp/jni/</directory>
