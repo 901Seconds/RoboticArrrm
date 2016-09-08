@@ -1,4 +1,3 @@
-//functin prototypes
 void measure_angles(int);
 void draw_motors();
 void pen_up_down(int dir);

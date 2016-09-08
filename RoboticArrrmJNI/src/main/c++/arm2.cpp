@@ -4,7 +4,6 @@
 #include <time.h>
 #include <sys/time.h>
 #include <math.h>
-#include "arm2.h"
 
 extern "C" int init(int);
 
