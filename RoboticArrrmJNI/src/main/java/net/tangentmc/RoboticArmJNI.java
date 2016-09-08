@@ -13,7 +13,7 @@ public class RoboticArmJNI implements RoboticArm {
     private static final int ARM_1_MIN = 1400;
     private static final int ARM_1_MAX = 2200;
     private static final int ARM_2_MIN = 800;
-    private static final int ARM_2_MAX = 1100;
+    private static final int ARM_2_MAX = 1400;
     public static void main(String[] args) {
         UI.initialise();
         RoboticArmJNI arm = new RoboticArmJNI(100,100,100,100,100);
@@ -63,6 +63,7 @@ public class RoboticArmJNI implements RoboticArm {
                 UI.println(readAngle(mt));
 
             }
+            setServo(mt, mt==0?ARM_1_MIN:ARM_2_MIN);
         }
     }
     @Override

@@ -45,8 +45,8 @@
       <file leaf-file-name="RoboticArmJNI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="60" column="17" selection-start-line="60" selection-start-column="17" selection-end-line="60" selection-end-column="17" />
+            <state relative-caret-position="119">
+              <caret line="15" column="43" selection-start-line="15" selection-start-column="43" selection-end-line="15" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -859,14 +859,7 @@
       <workItem from="1473049082051" duration="12975000" />
       <workItem from="1473199534321" duration="2765000" />
       <workItem from="1473182449213" duration="21551000" />
-      <workItem from="1473334286204" duration="15770000" />
-    </task>
-    <task id="LOCAL-00061" summary="Initilize the arm.">
-      <created>1473307615023</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1473307615023</updated>
+      <workItem from="1473334286204" duration="15966000" />
     </task>
     <task id="LOCAL-00062" summary="Initilize the arm.">
       <created>1473307752765</created>
@@ -1204,11 +1197,18 @@
       <option name="project" value="LOCAL" />
       <updated>1473378363093</updated>
     </task>
-    <option name="localTasksCounter" value="110" />
+    <task id="LOCAL-00110" summary="Move arm in an arc to test min and max">
+      <created>1473378701209</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1473378701209</updated>
+    </task>
+    <option name="localTasksCounter" value="111" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="113457000" />
+    <option name="totallyTimeSpent" value="113653000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1254,7 +1254,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Configure POM" />
     <MESSAGE value="Resolve dependancy cycle" />
     <MESSAGE value="Java 1.8" />
     <MESSAGE value="Fix duplicated tags in pom" />
@@ -1279,7 +1278,8 @@
     <MESSAGE value="Merge ArmBot and JNI back together now that i know how it works. It doesnt need to be seperated since we only have one architecture" />
     <MESSAGE value="Change arm 1 min/max" />
     <MESSAGE value="Change arm 2 min/max" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change arm 2 min/max" />
+    <MESSAGE value="Move arm in an arc to test min and max" />
+    <option name="LAST_COMMIT_MESSAGE" value="Move arm in an arc to test min and max" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1601,8 +1601,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="60" column="17" selection-start-line="60" selection-start-column="17" selection-end-line="60" selection-end-column="17" />
+        <state relative-caret-position="119">
+          <caret line="15" column="43" selection-start-line="15" selection-start-column="43" selection-end-line="15" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
