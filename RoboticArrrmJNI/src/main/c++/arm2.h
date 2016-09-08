@@ -4,6 +4,7 @@ void pen_up_down(int dir);
 void set_angles(float in1,float in2);
 double measure_angle(int motor);
 extern "C" int init(int);
+extern "C" int initialize();
 extern "C" int set_motor(int m, int s);
 extern "C" int Sleep(int s,int mu);
 extern "C" int set_PWM(int chan, int value);
