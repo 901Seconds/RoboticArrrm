@@ -9,8 +9,6 @@
     <artifactId>RoboticArrrmJNI</artifactId>
     <packaging>nar</packaging>
 
-    <name>Maven Examples :: nar-maven-plugin JNI Project</name>
-
     <properties>
         <skipTests>true</skipTests>
         <maven.compiler.target>1.8</maven.compiler.target>
