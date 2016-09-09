@@ -27,6 +27,8 @@ public class RoboticArmJNI implements RoboticArm {
         UI.addButton("Read Theta 2",()->UI.println("Theta 2: "+arm.readAngle(1)));
         UI.addButton("Pen Down",()->arm.setPenMode(true));
         UI.addButton("Pen Up",()->arm.setPenMode(false));
+        arm.init();
+        arm.calibrate();
     }
     static {
         try {
@@ -46,8 +48,6 @@ public class RoboticArmJNI implements RoboticArm {
         d=absLength(o1X,o2X,o1Y,o2Y);
         l=appendageLength;
         theModel = new RoboticArmModel(o1X,o1Y,o2X,o2Y,l);
-        init();
-        calibrate();
     }
     public native void init();
     public native double readAngle(int servo);
