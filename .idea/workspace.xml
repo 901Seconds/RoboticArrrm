@@ -87,8 +87,8 @@
       <file leaf-file-name="RoboticArmJNI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="30" column="12" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="12" />
+            <state relative-caret-position="179">
+              <caret line="23" column="42" selection-start-line="23" selection-start-column="42" selection-end-line="23" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -1122,35 +1122,7 @@
       <workItem from="1473049082051" duration="12975000" />
       <workItem from="1473199534321" duration="2765000" />
       <workItem from="1473182449213" duration="21551000" />
-      <workItem from="1473334286204" duration="21994000" />
-    </task>
-    <task id="LOCAL-00074" summary="Prepare UI for robot. Begin ability to feed in information from a Socket.IO client">
-      <created>1473338811831</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1473338811832</updated>
-    </task>
-    <task id="LOCAL-00075" summary="Add a ui mech for checking pulse max,min">
-      <created>1473367446596</created>
-      <option name="number" value="00075" />
-      <option name="presentableId" value="LOCAL-00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1473367446596</updated>
-    </task>
-    <task id="LOCAL-00076" summary="update nar plugin.">
-      <created>1473367697569</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1473367697569</updated>
-    </task>
-    <task id="LOCAL-00077" summary="Test method, should probably switch to launcher soon.">
-      <created>1473367858077</created>
-      <option name="number" value="00077" />
-      <option name="presentableId" value="LOCAL-00077" />
-      <option name="project" value="LOCAL" />
-      <updated>1473367858077</updated>
+      <workItem from="1473334286204" duration="22993000" />
     </task>
     <task id="LOCAL-00078" summary="Split java and c code, so they can be shaded together in post">
       <created>1473368455560</created>
@@ -1467,11 +1439,39 @@
       <option name="project" value="LOCAL" />
       <updated>1473385171273</updated>
     </task>
-    <option name="localTasksCounter" value="123" />
+    <task id="LOCAL-00123" summary="Move code">
+      <created>1473385384604</created>
+      <option name="number" value="00123" />
+      <option name="presentableId" value="LOCAL-00123" />
+      <option name="project" value="LOCAL" />
+      <updated>1473385384604</updated>
+    </task>
+    <task id="LOCAL-00124" summary="Debugging">
+      <created>1473385644191</created>
+      <option name="number" value="00124" />
+      <option name="presentableId" value="LOCAL-00124" />
+      <option name="project" value="LOCAL" />
+      <updated>1473385644191</updated>
+    </task>
+    <task id="LOCAL-00125" summary="Debugging">
+      <created>1473385823120</created>
+      <option name="number" value="00125" />
+      <option name="presentableId" value="LOCAL-00125" />
+      <option name="project" value="LOCAL" />
+      <updated>1473385823120</updated>
+    </task>
+    <task id="LOCAL-00126" summary="Debugging">
+      <created>1473385900183</created>
+      <option name="number" value="00126" />
+      <option name="presentableId" value="LOCAL-00126" />
+      <option name="project" value="LOCAL" />
+      <updated>1473385900183</updated>
+    </task>
+    <option name="localTasksCounter" value="127" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="119681000" />
+    <option name="totallyTimeSpent" value="120680000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1517,8 +1517,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Set the correct main class" />
-    <MESSAGE value="Shade in native libs" />
     <MESSAGE value="Work out what the library type is." />
     <MESSAGE value="Shade to the right folder." />
     <MESSAGE value="Because shading is messy, add clean to the default goal" />
@@ -1542,7 +1540,9 @@
     <MESSAGE value="Exclude some dependancies, remove the example name from JNI" />
     <MESSAGE value="More delay" />
     <MESSAGE value="Less min points" />
-    <option name="LAST_COMMIT_MESSAGE" value="Less min points" />
+    <MESSAGE value="Move code" />
+    <MESSAGE value="Debugging" />
+    <option name="LAST_COMMIT_MESSAGE" value="Debugging" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1872,8 +1872,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="30" column="12" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="12" />
+        <state relative-caret-position="179">
+          <caret line="23" column="42" selection-start-line="23" selection-start-column="42" selection-end-line="23" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
