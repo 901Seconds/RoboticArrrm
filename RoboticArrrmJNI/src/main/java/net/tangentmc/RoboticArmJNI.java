@@ -54,7 +54,7 @@ public class RoboticArmJNI implements RoboticArm {
             setServo(mt==0?1:0, mt==1?ARM_1_MIN:ARM_2_MIN);
             double last =readAngle(mt);
             UI.println("MOTOR: "+mt);
-            for (int i = mt==0?ARM_1_MIN:ARM_2_MIN; i < (mt==0?ARM_1_MAX:ARM_2_MAX); i += 50) {
+            for (int i = mt==0?ARM_1_MIN:ARM_2_MIN; i < (mt==0?ARM_1_MAX:ARM_2_MAX); i += 10) {
                 try {
                     Thread.sleep(250);
                 } catch (InterruptedException e) {
