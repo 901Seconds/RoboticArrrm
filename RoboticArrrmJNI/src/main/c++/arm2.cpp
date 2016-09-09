@@ -100,10 +100,8 @@ void measure_angles()
             int yc = (int)(sarm.ym1+sarm.R*sin((phi+15/2)*3.14152/180));
       
             int j;
-            int circle_edges[8]; // try 8 normals of the circle
             int n_votes=0;
             for (j = 0 ; j < 8; j++){
-                circle_edges[j] = 0 ; 
                 int rt;
                 int max_rad = 0;
                 int min_rad = 255;

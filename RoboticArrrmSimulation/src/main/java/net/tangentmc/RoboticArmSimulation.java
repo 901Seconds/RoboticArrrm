@@ -10,6 +10,10 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
     public RoboticArmSimulation() {
         ProcessingRunner.run(this);
     }
+    public RoboticArmSimulation(RoboticArmModel model) {
+        ProcessingRunner.run(this);
+        theArms = model;
+    }
     //2*lengths ulnar and forearm
     final float l = 180;
     //2*distance between shoulders
@@ -36,6 +40,7 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
         q1Y = yCoOrdCenter;
         q2X = xCoOrdCenter + d / 2;
         q2Y = yCoOrdCenter;
+        if (theArms != null)
         theArms = new RoboticArmModel(q1X, q1Y, q2X, q2Y);
     }
 
