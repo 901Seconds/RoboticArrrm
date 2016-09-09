@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="562fd72b-2674-4bdb-9358-2e62d0a324de" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java" afterPath="$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java" />
     </list>
     <ignored path="RoboticArrrm.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1122,14 +1121,7 @@
       <workItem from="1473049082051" duration="12975000" />
       <workItem from="1473199534321" duration="2765000" />
       <workItem from="1473182449213" duration="21551000" />
-      <workItem from="1473334286204" duration="21698000" />
-    </task>
-    <task id="LOCAL-00072" summary="Test UI debug">
-      <created>1473310153291</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1473310153292</updated>
+      <workItem from="1473334286204" duration="21788000" />
     </task>
     <task id="LOCAL-00073" summary="Test UI debug">
       <created>1473310468157</created>
@@ -1467,11 +1459,18 @@
       <option name="project" value="LOCAL" />
       <updated>1473384953085</updated>
     </task>
-    <option name="localTasksCounter" value="121" />
+    <task id="LOCAL-00121" summary="Less min points">
+      <created>1473385089897</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1473385089897</updated>
+    </task>
+    <option name="localTasksCounter" value="122" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="119385000" />
+    <option name="totallyTimeSpent" value="119475000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1517,7 +1516,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Launcher needs to shade in all the dependancies" />
     <MESSAGE value="Set the correct main class" />
     <MESSAGE value="Shade in native libs" />
     <MESSAGE value="Work out what the library type is." />
@@ -1542,7 +1540,8 @@
     <MESSAGE value="Lets try some delays" />
     <MESSAGE value="Exclude some dependancies, remove the example name from JNI" />
     <MESSAGE value="More delay" />
-    <option name="LAST_COMMIT_MESSAGE" value="More delay" />
+    <MESSAGE value="Less min points" />
+    <option name="LAST_COMMIT_MESSAGE" value="Less min points" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
