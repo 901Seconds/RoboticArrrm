@@ -1,8 +1,8 @@
-void measure_angles(int);
-void draw_motors();
-void pen_up_down(int dir);
-void set_angles(float in1,float in2);
-double measure_angle(int motor);
+void initialize();
+void measure_angles();
+double measure_angle(int);
+void init_arm();
+
 extern "C" int init(int);
 extern "C" void initialize();
 extern "C" int set_motor(int m, int s);
@@ -15,7 +15,6 @@ extern "C" int write_digital(int chan,char level);
 extern "C" int take_picture();
 extern "C" int open_screen_stream();
 extern "C" int close_screen_stream();
-extern "C" int take_picture();
 extern "C" int update_screen();
 extern "C" int save_picture(char fn[5]);
 extern "C" int set_pixel(int x,int y,char r,char g,char b);
