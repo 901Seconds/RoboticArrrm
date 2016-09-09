@@ -15,9 +15,9 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
         theArms = model;
     }
     //2*lengths ulnar and forearm
-    final float l = 180;
+    float l;
     //2*distance between shoulders
-    final float d = 236;
+    float d;
     //centerpoint between shoulders
     float xCoOrdCenter;
     float yCoOrdCenter;
@@ -36,12 +36,14 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
         size(800, 800);
         xCoOrdCenter = width/2;
         yCoOrdCenter = height/2;
-        q1X = xCoOrdCenter - d / 2;
-        q1Y = yCoOrdCenter;
-        q2X = xCoOrdCenter + d / 2;
-        q2Y = yCoOrdCenter;
-        if (theArms != null)
-        theArms = new RoboticArmModel(q1X, q1Y, q2X, q2Y);
+        if (theArms == null)
+            theArms = new RoboticArmModel(q1X, q1Y, q2X, q2Y);
+        q1X = (float) theArms.o1X;
+        q1Y = (float) theArms.o1Y;
+        q2X = (float) theArms.o2X;
+        q2Y = (float) theArms.o2Y;
+        d = (float) theArms.d;
+        l = (float) theArms.l;
     }
 
     public void setup() {

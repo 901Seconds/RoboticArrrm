@@ -8,9 +8,9 @@ import static net.tangentmc.Utils.*;
 public class RoboticArmModel {
 
     //2*lengths ulnar and forearm
-    private double l=180;
+    public double l=180;
     //2*distance between shoulders
-    private double d=236;
+    double d=236;
 
     //o is for shoulder, 1 means left, 2 means right
     double o1X;
