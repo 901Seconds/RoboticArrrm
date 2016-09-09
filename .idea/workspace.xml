@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="562fd72b-2674-4bdb-9358-2e62d0a324de" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmAPI/target/classes/net/tangentmc/RoboticArmModel.class" afterPath="$PROJECT_DIR$/RoboticArrrmAPI/target/classes/net/tangentmc/RoboticArmModel.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmAPI/src/main/java/net/tangentmc/RoboticArmModel.java" afterPath="$PROJECT_DIR$/RoboticArrrmAPI/src/main/java/net/tangentmc/RoboticArmModel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/Launcher.java" afterPath="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/Launcher.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmSimulation/src/main/java/net/tangentmc/RoboticArmPlotter.java" afterPath="$PROJECT_DIR$/RoboticArrrmSimulation/src/main/java/net/tangentmc/RoboticArmPlotter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmSimulation/src/main/java/net/tangentmc/RoboticArmSimulation.java" afterPath="$PROJECT_DIR$/RoboticArrrmSimulation/src/main/java/net/tangentmc/RoboticArmSimulation.java" />
     </list>
     <ignored path="RoboticArrrm.iws" />
@@ -56,11 +57,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Launcher.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Launcher.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/Launcher.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="38" column="43" selection-start-line="38" selection-start-column="43" selection-end-line="38" selection-end-column="43" />
+            <state relative-caret-position="221">
+              <caret line="38" column="66" selection-start-line="38" selection-start-column="63" selection-end-line="38" selection-end-column="66" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -71,8 +72,8 @@
       <file leaf-file-name="RoboticArmPlotter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RoboticArrrmSimulation/src/main/java/net/tangentmc/RoboticArmPlotter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="17" column="19" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
+            <state relative-caret-position="187">
+              <caret line="31" column="32" selection-start-line="31" selection-start-column="32" selection-end-line="31" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -83,16 +84,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="136">
               <caret line="8" column="7" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InterpolatedPathIterator.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RoboticArrrmAPI/src/main/java/net/tangentmc/InterpolatedPathIterator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="223" column="38" selection-start-line="223" selection-start-column="38" selection-end-line="223" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -118,11 +109,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RoboticArmSimulation.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="RoboticArmSimulation.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RoboticArrrmSimulation/src/main/java/net/tangentmc/RoboticArmSimulation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="714">
-              <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+            <state relative-caret-position="99">
+              <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -182,7 +173,6 @@
         <option value="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/TestSketc.java" />
         <option value="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/TestSketch.java" />
         <option value="$PROJECT_DIR$/RoboticArrrmSimulation/src/main/java/RoboticArmSimulation.java" />
-        <option value="$PROJECT_DIR$/RoboticArrrmSimulation/src/main/java/net/tangentmc/RoboticArmPlotter.java" />
         <option value="$PROJECT_DIR$/RoboticArmTest/src/main/native/arm_jni.c" />
         <option value="$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/TestJNI.java" />
         <option value="$PROJECT_DIR$/RoboticArrrmJNI/src/main/native/arm_jni.c" />
@@ -209,8 +199,9 @@
         <option value="$PROJECT_DIR$/RoboticArrrmJNI/src/main/c++/RoboticArmJNI.cpp" />
         <option value="$PROJECT_DIR$/RoboticArrrmJNI/src/main/c++/arm2.cpp" />
         <option value="$PROJECT_DIR$/RoboticArrrmAPI/src/main/java/net/tangentmc/RoboticArmModel.java" />
-        <option value="$PROJECT_DIR$/RoboticArrrmSimulation/src/main/java/net/tangentmc/RoboticArmSimulation.java" />
+        <option value="$PROJECT_DIR$/RoboticArrrmSimulation/src/main/java/net/tangentmc/RoboticArmPlotter.java" />
         <option value="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/Launcher.java" />
+        <option value="$PROJECT_DIR$/RoboticArrrmSimulation/src/main/java/net/tangentmc/RoboticArmSimulation.java" />
       </list>
     </option>
   </component>
@@ -1247,14 +1238,7 @@
       <workItem from="1473049082051" duration="12975000" />
       <workItem from="1473199534321" duration="2765000" />
       <workItem from="1473182449213" duration="21551000" />
-      <workItem from="1473334286204" duration="31418000" />
-    </task>
-    <task id="LOCAL-00096" summary="Move scripts to root, remove unnecessary library declartions in script since thats automated now.">
-      <created>1473373968268</created>
-      <option name="number" value="00096" />
-      <option name="presentableId" value="LOCAL-00096" />
-      <option name="project" value="LOCAL" />
-      <updated>1473373968268</updated>
+      <workItem from="1473334286204" duration="31659000" />
     </task>
     <task id="LOCAL-00097" summary="Move scripts to root, remove unnecessary library declartions in script since thats automated now.">
       <created>1473374311682</created>
@@ -1592,11 +1576,18 @@
       <option name="project" value="LOCAL" />
       <updated>1473393869994</updated>
     </task>
-    <option name="localTasksCounter" value="145" />
+    <task id="LOCAL-00145" summary="SHIT">
+      <created>1473395246904</created>
+      <option name="number" value="00145" />
+      <option name="presentableId" value="LOCAL-00145" />
+      <option name="project" value="LOCAL" />
+      <updated>1473395246904</updated>
+    </task>
+    <option name="localTasksCounter" value="146" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="129105000" />
+    <option name="totallyTimeSpent" value="129346000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1642,7 +1633,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Print out the current pulse" />
     <MESSAGE value="Change pulse limits to avoid breaking things" />
     <MESSAGE value="Merge ArmBot and JNI back together now that i know how it works. It doesnt need to be seperated since we only have one architecture" />
     <MESSAGE value="Change arm 1 min/max" />
@@ -1667,7 +1657,8 @@
     <MESSAGE value="Clean up c v3" />
     <MESSAGE value="Clean up c v5" />
     <MESSAGE value="Share model between simu/robot" />
-    <option name="LAST_COMMIT_MESSAGE" value="Share model between simu/robot" />
+    <MESSAGE value="SHIT" />
+    <option name="LAST_COMMIT_MESSAGE" value="SHIT" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1947,26 +1938,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RoboticArrrmAPI/src/main/java/net/tangentmc/SVGer.java">
+    <entry file="file://$PROJECT_DIR$/RoboticArrrmAPI/src/main/java/net/tangentmc/RoboticArmModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="31" column="18" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RoboticArrrmAPI/src/main/java/net/tangentmc/Utils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="39" column="33" selection-start-line="39" selection-start-column="33" selection-end-line="39" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RoboticArrrmAPI/src/main/java/net/tangentmc/RoboticArm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="7" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
+        <state relative-caret-position="-119">
+          <caret line="10" column="23" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="23" />
           <folding />
         </state>
       </provider>
@@ -1979,37 +1954,53 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RoboticArrrmAPI/src/main/java/net/tangentmc/RoboticArmModel.java">
+    <entry file="file://$PROJECT_DIR$/RoboticArrrmAPI/src/main/java/net/tangentmc/Utils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-119">
-          <caret line="10" column="23" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="23" />
+        <state relative-caret-position="306">
+          <caret line="39" column="33" selection-start-line="39" selection-start-column="33" selection-end-line="39" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RoboticArrrmSimulation/src/main/java/net/tangentmc/RoboticArmSimulation.java">
+    <entry file="file://$PROJECT_DIR$/RoboticArrrmAPI/src/main/java/net/tangentmc/SVGer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+        <state relative-caret-position="119">
+          <caret line="31" column="18" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RoboticArrrmAPI/src/main/java/net/tangentmc/RoboticArm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="7" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/RoboticArrrmSimulation/src/main/java/net/tangentmc/RoboticArmPlotter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="17" column="19" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
+        <state relative-caret-position="187">
+          <caret line="31" column="32" selection-start-line="31" selection-start-column="32" selection-end-line="31" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/Launcher.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="38" column="43" selection-start-line="38" selection-start-column="43" selection-end-line="38" selection-end-column="43" />
+        <state relative-caret-position="221">
+          <caret line="38" column="66" selection-start-line="38" selection-start-column="63" selection-end-line="38" selection-end-column="66" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RoboticArrrmSimulation/src/main/java/net/tangentmc/RoboticArmSimulation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="99">
+          <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+          <folding />
         </state>
       </provider>
     </entry>

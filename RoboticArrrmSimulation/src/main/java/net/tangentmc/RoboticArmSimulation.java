@@ -7,37 +7,24 @@ import static net.tangentmc.Utils.*;
 
 public class RoboticArmSimulation extends PApplet implements RoboticArm {
 
-    public RoboticArmSimulation() {
-        ProcessingRunner.run(this);
-    }
     public RoboticArmSimulation(RoboticArmModel model) {
-        ProcessingRunner.run(this);
         theArms = model;
+        ProcessingRunner.run(this);
     }
     //2*lengths ulnar and forearm
     float l;
     //2*distance between shoulders
     float d;
-    //centerpoint between shoulders
-    float xCoOrdCenter;
-    float yCoOrdCenter;
 
     float q1X;
     float q1Y;
     float q2X;
     float q2Y;
-    public static volatile double kP = 0;
-    public static volatile double kI = 0;
-    public static volatile double kD = 0;
 
     RoboticArmModel theArms;
     RoboticArmPlotter plotter = new RoboticArmPlotter();
     public void settings() {
         size(800, 800);
-        xCoOrdCenter = width/2;
-        yCoOrdCenter = height/2;
-        if (theArms == null)
-            theArms = new RoboticArmModel(q1X, q1Y, q2X, q2Y);
         q1X = (float) theArms.o1X;
         q1Y = (float) theArms.o1Y;
         q2X = (float) theArms.o2X;
