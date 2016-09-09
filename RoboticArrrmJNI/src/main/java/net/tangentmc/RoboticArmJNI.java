@@ -92,8 +92,8 @@ public class RoboticArmJNI implements RoboticArm {
     public void setAngle(double theta1, double theta2) {
         lastTheta1 = theta1;
         lastTheta2 = theta2;
-        double tOut1 = (ARM_1_MAX-ARM_1_MIN)*((theta1-arm1MinAngle)/(arm1MaxAngle-arm1MinAngle));
-        double tOut2 = (ARM_2_MAX-ARM_2_MIN)*((theta2-arm2MinAngle)/(arm2MaxAngle-arm2MinAngle));
+        double tOut1 = ARM_1_MIN+((ARM_1_MAX-ARM_1_MIN)*((theta1-arm1MinAngle)/(arm1MaxAngle-arm1MinAngle)));
+        double tOut2 = ARM_2_MIN+((ARM_2_MAX-ARM_2_MIN)*((theta2-arm2MinAngle)/(arm2MaxAngle-arm2MinAngle)));
         setServo(0,tOut1);
         setServo(1,tOut2);
         System.out.println("Set angles to: "+theta1+","+theta2);
