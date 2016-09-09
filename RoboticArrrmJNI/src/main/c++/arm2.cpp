@@ -187,7 +187,6 @@ void measure_angles()
     sarm.yj1 = sarm.ym1 + sarm.R*sin(sarm.theta1*3.14129/180.0);
     sarm.xj2 = sarm.xm2 + sarm.R*cos(sarm.theta2*3.14129/180.0);
     sarm.yj2 = sarm.ym2 + sarm.R*sin(sarm.theta2*3.14129/180.0);
-    draw_joints();
 }
 
 
