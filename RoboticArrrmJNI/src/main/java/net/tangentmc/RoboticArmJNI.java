@@ -11,7 +11,7 @@ import static net.tangentmc.Utils.absLength;
 //TODO: create a model that represents the robot
 public class RoboticArmJNI implements RoboticArm {
     private static final int ARM_1_MIN = 1400;
-    private static final int ARM_1_MAX = 2200;
+    private static final int ARM_1_MAX = 2100;
     private static final int ARM_2_MIN = 800;
     private static final int ARM_2_MAX = 1400;
     public static void main(String[] args) {
