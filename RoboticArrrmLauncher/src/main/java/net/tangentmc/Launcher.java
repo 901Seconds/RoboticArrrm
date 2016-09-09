@@ -36,7 +36,7 @@ public class Launcher {
     }
     public Launcher() {
         armSimu = new RoboticArmSimulation();
-        //robot = new RoboticArmJNI(100,100,100,100,100);
+        //robot = new RoboticArmJNI(287,374,377,374,154);
 
         UI.addButton("Pick SVG", this::load);
         UI.addButton("Clear", ()->{shapes.clear();current=null;draw();});

@@ -15,9 +15,10 @@ public class RoboticArmJNI implements RoboticArm {
     private static final int ARM_2_MIN = 900;
     private static final int ARM_2_MAX = 1400;
     double arm1MinAngle, arm1MaxAngle,arm2MinAngle, arm2MaxAngle;
-    public static void main(String[] args) {
+   /*public static void main(String[] args) {
         UI.initialise();
-        RoboticArmJNI arm = new RoboticArmJNI(100,100,100,100,100);
+
+        RoboticArmJNI arm = new RoboticArmJNI(287,374,377,374,154);
         UI.addSlider("Servo 1",ARM_1_MIN,ARM_1_MAX,d->{arm.setServo(0,d);UI.println("Servo 1 pulse: "+d);});
         UI.addSlider("Servo 2",ARM_2_MIN,ARM_2_MAX,d->{arm.setServo(1,d);UI.println("Servo 2 pulse: "+d);});
         UI.addSlider("Servo 1 Angle",-180,0,d->arm.setAngle(d,arm.lastTheta2));
@@ -28,7 +29,7 @@ public class RoboticArmJNI implements RoboticArm {
         UI.addButton("Pen Up",()->arm.setPenMode(false));
         arm.init();
         arm.calibrate();
-    }
+    }*/
     static {
         try {
             NativeLoader.loadLibrary("RoboticArrrmJNI-1.0-SNAPSHOT");
@@ -97,6 +98,9 @@ public class RoboticArmJNI implements RoboticArm {
     public void setAngle(double theta1, double theta2) {
         lastTheta1 = theta1;
         lastTheta2 = theta2;
+        theta1 = -Math.toDegrees(theta1);
+        theta2 = -Math.toDegrees(theta2);
+
         double pulse1 = mArm1*theta1+cArm1;
         double pulse2 = mArm2*theta2+cArm2;
         setServo(0,Math.max(Math.min(ARM_1_MAX,pulse1),ARM_1_MIN));

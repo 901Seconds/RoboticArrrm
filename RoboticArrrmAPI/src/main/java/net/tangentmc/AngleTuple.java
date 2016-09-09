@@ -14,4 +14,12 @@ public class AngleTuple {
     public double getTheta2() {
         return theta2;
     }
+
+    @Override
+    public String toString() {
+        return "AngleTuple{" +
+                "theta1=" + theta1 +
+                ", theta2=" + theta2 +
+                '}';
+    }
 }
