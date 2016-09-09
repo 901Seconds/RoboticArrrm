@@ -15,5 +15,6 @@ public class WebSocketServer {
         server = new SocketIOServer(config);
         //TODO: create some sort of client to test this.
         server.addEventListener("drawShape",DrawShape.class,(socketIOClient, drawShape, ackRequest) -> launcher.addShape(new Launcher.ShapeObject(drawShape)));
+        server.start();
     }
 }

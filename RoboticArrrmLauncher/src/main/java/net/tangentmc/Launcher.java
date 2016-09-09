@@ -52,6 +52,7 @@ public class Launcher {
                 left = e.getButton() == MouseEvent.BUTTON1;
             }
         });
+        new WebSocketServer(this);
     }
 
     private void clearSim() {
