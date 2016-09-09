@@ -80,6 +80,7 @@ public class RoboticArmJNI implements RoboticArm {
             cArm1 = ARM_1_MIN - mArm1 * arm1MinAngle;
             cArm2 = ARM_2_MIN - mArm2 * arm2MinAngle;
         }).start();
+
     }
     double lastTheta1 = -90;
     double lastTheta2 = -90;

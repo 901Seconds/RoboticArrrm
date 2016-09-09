@@ -4,6 +4,7 @@
     <list default="true" id="562fd72b-2674-4bdb-9358-2e62d0a324de" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java" afterPath="$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/Launcher.java" afterPath="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/Launcher.java" />
     </list>
     <ignored path="RoboticArrrm.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -94,11 +95,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RoboticArmJNI.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RoboticArmJNI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="81" column="19" selection-start-line="81" selection-start-column="19" selection-end-line="81" selection-end-column="19" />
+            <state relative-caret-position="221">
+              <caret line="43" column="8" selection-start-line="43" selection-start-column="8" selection-end-line="43" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -106,11 +107,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Launcher.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Launcher.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/Launcher.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="38" column="8" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="8" />
+            <state relative-caret-position="-255">
+              <caret line="100" column="11" selection-start-line="100" selection-start-column="11" selection-end-line="100" selection-end-column="11" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -209,8 +210,8 @@
         <option value="$PROJECT_DIR$/RoboticArrrmJNI/pom.xml" />
         <option value="$PROJECT_DIR$/RoboticArrrmAPI/src/main/java/net/tangentmc/AngleTuple.java" />
         <option value="$PROJECT_DIR$/RoboticArrrmLauncher/pom.xml" />
-        <option value="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/Launcher.java" />
         <option value="$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java" />
+        <option value="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/Launcher.java" />
       </list>
     </option>
   </component>
@@ -1203,14 +1204,7 @@
       <workItem from="1473049082051" duration="12975000" />
       <workItem from="1473199534321" duration="2765000" />
       <workItem from="1473182449213" duration="21551000" />
-      <workItem from="1473334286204" duration="28311000" />
-    </task>
-    <task id="LOCAL-00086" summary="Build the launcher">
-      <created>1473369687684</created>
-      <option name="number" value="00086" />
-      <option name="presentableId" value="LOCAL-00086" />
-      <option name="project" value="LOCAL" />
-      <updated>1473369687684</updated>
+      <workItem from="1473334286204" duration="28530000" />
     </task>
     <task id="LOCAL-00087" summary="Launcher needs to shade in all the dependancies">
       <created>1473369940648</created>
@@ -1548,11 +1542,18 @@
       <option name="project" value="LOCAL" />
       <updated>1473391799527</updated>
     </task>
-    <option name="localTasksCounter" value="135" />
+    <task id="LOCAL-00135" summary="Oh.">
+      <created>1473392115986</created>
+      <option name="number" value="00135" />
+      <option name="presentableId" value="LOCAL-00135" />
+      <option name="project" value="LOCAL" />
+      <updated>1473392115986</updated>
+    </task>
+    <option name="localTasksCounter" value="136" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="125998000" />
+    <option name="totallyTimeSpent" value="126217000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1948,20 +1949,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/Launcher.java">
+    <entry file="file://$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="38" column="8" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="8" />
+        <state relative-caret-position="221">
+          <caret line="43" column="8" selection-start-line="43" selection-start-column="8" selection-end-line="43" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java">
+    <entry file="file://$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/Launcher.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="81" column="19" selection-start-line="81" selection-start-column="19" selection-end-line="81" selection-end-column="19" />
+        <state relative-caret-position="-255">
+          <caret line="100" column="11" selection-start-line="100" selection-start-column="11" selection-end-line="100" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

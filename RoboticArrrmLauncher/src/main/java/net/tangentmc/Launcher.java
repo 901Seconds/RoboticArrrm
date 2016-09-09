@@ -62,41 +62,43 @@ public class Launcher {
     RoboticArmSimulation armSimu;
     AtomicBoolean running = new AtomicBoolean(false);
     private void simulate() {
-        if (running.get()) return;
-        running.set(true);
-        AngleTuple last;
-        ArrayList<AngleTuple[]> anglesFromShapesSimu;
-        ArrayList<AngleTuple[]> anglesFromShapesBot = null;
-        Iterator<ShapeObject> shapeObjectIterator = shapes.iterator();
-        ShapeObject shapeObject;
-        while (shapeObjectIterator.hasNext()) {
-            shapeObject=shapeObjectIterator.next();
-            current.applyTransformation(transform);
-            for (int i = 0; i < shapeObject.getShapes().length; i++) {
-                ArrayList<Point.Double[]> points = Utils.getAllPoints(shapeObject.getShapes()[i]);
-                anglesFromShapesSimu = Utils.getAllAngles(armSimu.getModel(), points);
-                if (robot != null && drawTorobot)
-                    anglesFromShapesBot = Utils.getAllAngles(robot.getModel(), points);
-                draw();
-                last = anglesFromShapesSimu.get(0)[0];
-                for (int i1 = 0; i1 < anglesFromShapesSimu.size(); i1++) {
-                    armSimu.setPenMode(false);
-                    interpBetween(last,anglesFromShapesSimu.get(i1)[0]);
-                    last = anglesFromShapesSimu.get(i1)[0];
-                    armSimu.setPenMode(true);
-                    for (int i2 = 0; i2 < anglesFromShapesSimu.get(i1).length; i2++) {
-                        if (anglesFromShapesBot != null)
-                            robot.setAngle(anglesFromShapesBot.get(i1)[i2].theta1,anglesFromShapesBot.get(i1)[i2].theta2);
-                        interpBetween(last,anglesFromShapesSimu.get(i1)[i2]);
-                        last = anglesFromShapesSimu.get(i1)[i2];
+        new Thread(()-> {
+            if (running.get()) return;
+            running.set(true);
+            AngleTuple last;
+            ArrayList<AngleTuple[]> anglesFromShapesSimu;
+            ArrayList<AngleTuple[]> anglesFromShapesBot = null;
+            Iterator<ShapeObject> shapeObjectIterator = shapes.iterator();
+            ShapeObject shapeObject;
+            while (shapeObjectIterator.hasNext()) {
+                shapeObject = shapeObjectIterator.next();
+                current.applyTransformation(transform);
+                for (int i = 0; i < shapeObject.getShapes().length; i++) {
+                    ArrayList<Point.Double[]> points = Utils.getAllPoints(shapeObject.getShapes()[i]);
+                    anglesFromShapesSimu = Utils.getAllAngles(armSimu.getModel(), points);
+                    if (robot != null && drawTorobot)
+                        anglesFromShapesBot = Utils.getAllAngles(robot.getModel(), points);
+                    draw();
+                    last = anglesFromShapesSimu.get(0)[0];
+                    for (int i1 = 0; i1 < anglesFromShapesSimu.size(); i1++) {
+                        armSimu.setPenMode(false);
+                        interpBetween(last, anglesFromShapesSimu.get(i1)[0]);
+                        last = anglesFromShapesSimu.get(i1)[0];
+                        armSimu.setPenMode(true);
+                        for (int i2 = 0; i2 < anglesFromShapesSimu.get(i1).length; i2++) {
+                            if (anglesFromShapesBot != null)
+                                robot.setAngle(anglesFromShapesBot.get(i1)[i2].theta1, anglesFromShapesBot.get(i1)[i2].theta2);
+                            interpBetween(last, anglesFromShapesSimu.get(i1)[i2]);
+                            last = anglesFromShapesSimu.get(i1)[i2];
+                        }
                     }
+                    shapeObject.getShapes()[i] = null;
                 }
-                shapeObject.getShapes()[i] = null;
+                shapeObjectIterator.remove();
+                draw();
             }
-            shapeObjectIterator.remove();
-            draw();
-        }
-        running.set(false);
+            running.set(false);
+        });
     }
 
     private void interpBetween(AngleTuple last, AngleTuple angle) {
