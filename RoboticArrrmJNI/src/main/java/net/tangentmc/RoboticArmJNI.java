@@ -14,10 +14,14 @@ public class RoboticArmJNI implements RoboticArm {
     private static final int ARM_1_MAX = 2000;
     private static final int ARM_2_MIN = 800;
     private static final int ARM_2_MAX = 1400;
+    double arm1MinAngle, arm1MaxAngle,arm2MinAngle, arm2MaxAngle;
     public static void main(String[] args) {
         UI.initialise();
         RoboticArmJNI arm = new RoboticArmJNI(100,100,100,100,100);
         UI.addSlider("Servo 1",ARM_1_MIN,ARM_1_MAX,d->{arm.setServo(0,d);UI.println("Servo 1 pulse: "+d);});
+        UI.addSlider("Servo 2",ARM_2_MIN,ARM_2_MAX,d->{arm.setServo(1,d);UI.println("Servo 2 pulse: "+d);});
+        UI.addSlider("Servo 1",ARM_1_MIN,ARM_1_MAX,d->arm.setAngle(d,arm.lastTheta1));
+        UI.addSlider("Servo 1",ARM_1_MIN,ARM_1_MAX,d->arm.setAngle(arm.lastTheta1,d));
         UI.addSlider("Servo 2",ARM_2_MIN,ARM_2_MAX,d->{arm.setServo(1,d);UI.println("Servo 2 pulse: "+d);});
         UI.addButton("Read Theta 1",()->UI.println("Theta 1: "+arm.readAngle(0)));
         UI.addButton("Read Theta 2",()->UI.println("Theta 2: "+arm.readAngle(1)));
@@ -49,33 +53,45 @@ public class RoboticArmJNI implements RoboticArm {
     public native double readAngle(int servo);
     public native void setServo(int servo, double pulse);
     public void calibrate() {
-        /*for (int mt = 0; mt < 2; mt++) {
-            setServo(mt, mt==0?ARM_1_MIN:ARM_2_MIN);
-            setServo(mt==0?1:0, mt==1?ARM_1_MIN:ARM_2_MIN);
-            double last =readAngle(mt);
-            UI.println("MOTOR: "+mt);
-            try {
-                Thread.sleep(250);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            for (int i = mt==0?ARM_1_MIN:ARM_2_MIN; i < (mt==0?ARM_1_MAX:ARM_2_MAX); i += 10) {
-                setServo(mt, i);
-                try {
-                    Thread.sleep(250);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                UI.println(readAngle(mt));
-
-            }
-            setServo(mt, mt==0?ARM_1_MIN:ARM_2_MIN);
-        }*/
+        setServo(0,ARM_1_MIN);
+        try {
+            Thread.sleep(250);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        arm1MinAngle = readAngle(0);
+        setServo(0,ARM_1_MAX);
+        try {
+            Thread.sleep(250);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        arm1MaxAngle = readAngle(0);
+        setServo(1,ARM_2_MIN);
+        try {
+            Thread.sleep(250);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        arm2MinAngle = readAngle(1);
+        setServo(1,ARM_2_MAX);
+        try {
+            Thread.sleep(250);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        arm2MaxAngle = readAngle(1);
     }
+    double lastTheta1 = 0;
+    double lastTheta2 = 0;
     @Override
     public void setAngle(double theta1, double theta2) {
-        int leftPulse = (int)(500*theta1) + 500;
-        int rightPulse = (int)(500*theta2) + 500;
+        lastTheta1 = theta1;
+        lastTheta2 = theta2;
+        double tOut1 = (ARM_1_MAX-ARM_1_MIN)*((theta1-arm1MinAngle)/arm1MaxAngle-arm1MinAngle);
+        double tOut2 = (ARM_2_MAX-ARM_2_MIN)*((theta2-arm2MinAngle)/arm2MaxAngle-arm2MinAngle);
+        setServo(0,tOut1);
+        setServo(1,tOut2);
     }
 
     @Override

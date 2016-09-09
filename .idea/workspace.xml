@@ -67,8 +67,8 @@
       <file leaf-file-name="RoboticArmJNI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
-              <caret line="72" column="11" selection-start-line="72" selection-start-column="11" selection-end-line="72" selection-end-column="11" />
+            <state relative-caret-position="196">
+              <caret line="91" column="79" selection-start-line="91" selection-start-column="79" selection-end-line="91" selection-end-column="79" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -1102,14 +1102,7 @@
       <workItem from="1473049082051" duration="12975000" />
       <workItem from="1473199534321" duration="2765000" />
       <workItem from="1473182449213" duration="21551000" />
-      <workItem from="1473334286204" duration="20012000" />
-    </task>
-    <task id="LOCAL-00066" summary="Test UI debug">
-      <created>1473308585877</created>
-      <option name="number" value="00066" />
-      <option name="presentableId" value="LOCAL-00066" />
-      <option name="project" value="LOCAL" />
-      <updated>1473308585877</updated>
+      <workItem from="1473334286204" duration="20793000" />
     </task>
     <task id="LOCAL-00067" summary="Test UI debug">
       <created>1473308777819</created>
@@ -1447,11 +1440,18 @@
       <option name="project" value="LOCAL" />
       <updated>1473382994709</updated>
     </task>
-    <option name="localTasksCounter" value="115" />
+    <task id="LOCAL-00115" summary="Skip calibration for the moment">
+      <created>1473383393437</created>
+      <option name="number" value="00115" />
+      <option name="presentableId" value="LOCAL-00115" />
+      <option name="project" value="LOCAL" />
+      <updated>1473383393437</updated>
+    </task>
+    <option name="localTasksCounter" value="116" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="117699000" />
+    <option name="totallyTimeSpent" value="118480000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1497,7 +1497,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Java 1.8" />
     <MESSAGE value="Fix duplicated tags in pom" />
     <MESSAGE value="Missing dependancies in POM" />
     <MESSAGE value="We probably dont want Bot depending on itself tbh" />
@@ -1522,7 +1521,8 @@
     <MESSAGE value="Change arm 2 min/max" />
     <MESSAGE value="Move arm in an arc to test min and max" />
     <MESSAGE value="Reset arm before calibrating" />
-    <option name="LAST_COMMIT_MESSAGE" value="Reset arm before calibrating" />
+    <MESSAGE value="Skip calibration for the moment" />
+    <option name="LAST_COMMIT_MESSAGE" value="Skip calibration for the moment" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1852,8 +1852,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="72" column="11" selection-start-line="72" selection-start-column="11" selection-end-line="72" selection-end-column="11" />
+        <state relative-caret-position="196">
+          <caret line="91" column="79" selection-start-line="91" selection-start-column="79" selection-end-line="91" selection-end-column="79" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
