@@ -11,7 +11,7 @@ JNIEXPORT void JNICALL Java_net_tangentmc_RoboticArmJNI_setServo
 JNIEXPORT void JNICALL Java_net_tangentmc_RoboticArmJNI_init
   (JNIEnv * env, jobject obj)
 {
-    initialize();
+    init_bot();
 }
 JNIEXPORT jdouble JNICALL Java_net_tangentmc_RoboticArmJNI_readAngle
   (JNIEnv * env, jobject obj, jint arm)
