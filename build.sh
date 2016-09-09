@@ -1,4 +1,4 @@
 #!/bin/bash
 git stash
 git pull
-mvn
+mvn -T 1C
