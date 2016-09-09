@@ -90,8 +90,8 @@ public class RoboticArmJNI implements RoboticArm {
         cArm1 = ARM_1_MIN - mArm1*arm1MinAngle;
         cArm2 = ARM_2_MIN - mArm2*arm2MinAngle;
     }
-    double lastTheta1 = 0;
-    double lastTheta2 = 0;
+    double lastTheta1 = -90;
+    double lastTheta2 = -90;
     double mArm1,mArm2,cArm1,cArm2;
     @Override
     public void setAngle(double theta1, double theta2) {
@@ -99,8 +99,8 @@ public class RoboticArmJNI implements RoboticArm {
         lastTheta2 = theta2;
         double pulse1 = mArm1*theta1+cArm1;
         double pulse2 = mArm2*theta2+cArm2;
-        setServo(0,pulse1);
-        setServo(1,pulse2);
+        setServo(0,Math.max(Math.min(ARM_1_MAX,pulse1),ARM_1_MIN));
+        setServo(1,Math.max(Math.min(ARM_2_MAX,pulse2),ARM_2_MIN));
         UI.println("Set angles to: "+theta1+","+theta2);
         UI.println("Measured: "+readAngle(0)+","+readAngle(1));
 
