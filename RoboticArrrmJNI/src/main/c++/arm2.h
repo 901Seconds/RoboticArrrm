@@ -1,4 +1,4 @@
-void initialize();
+void init_bot();
 void measure_angles();
 double measure_angle(int);
 void init_arm();

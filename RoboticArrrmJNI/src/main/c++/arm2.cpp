@@ -190,7 +190,7 @@ void measure_angles()
 }
 
 
-void initialize() {
+void init_bot() {
  init(0);  // initialize GPIO
    init_arm();
    open_screen_stream();
