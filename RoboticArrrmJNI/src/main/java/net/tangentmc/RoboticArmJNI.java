@@ -11,7 +11,7 @@ import static net.tangentmc.Utils.absLength;
 //TODO: create a model that represents the robot
 public class RoboticArmJNI implements RoboticArm {
     private static final int ARM_1_MIN = 1400;
-    private static final int ARM_1_MAX = 2100;
+    private static final int ARM_1_MAX = 2000;
     private static final int ARM_2_MIN = 800;
     private static final int ARM_2_MAX = 1400;
     public static void main(String[] args) {
@@ -49,23 +49,28 @@ public class RoboticArmJNI implements RoboticArm {
     public native double readAngle(int servo);
     public native void setServo(int servo, double pulse);
     public void calibrate() {
-        for (int mt = 0; mt < 2; mt++) {
+        /*for (int mt = 0; mt < 2; mt++) {
             setServo(mt, mt==0?ARM_1_MIN:ARM_2_MIN);
             setServo(mt==0?1:0, mt==1?ARM_1_MIN:ARM_2_MIN);
             double last =readAngle(mt);
             UI.println("MOTOR: "+mt);
+            try {
+                Thread.sleep(250);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             for (int i = mt==0?ARM_1_MIN:ARM_2_MIN; i < (mt==0?ARM_1_MAX:ARM_2_MAX); i += 10) {
+                setServo(mt, i);
                 try {
                     Thread.sleep(250);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                setServo(mt, i);
                 UI.println(readAngle(mt));
 
             }
             setServo(mt, mt==0?ARM_1_MIN:ARM_2_MIN);
-        }
+        }*/
     }
     @Override
     public void setAngle(double theta1, double theta2) {
