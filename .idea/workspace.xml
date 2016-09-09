@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="562fd72b-2674-4bdb-9358-2e62d0a324de" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java" afterPath="$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/Launcher.java" afterPath="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/Launcher.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmJNI/src/main/c++/arm2.cpp" afterPath="$PROJECT_DIR$/RoboticArrrmJNI/src/main/c++/arm2.cpp" />
     </list>
     <ignored path="RoboticArrrm.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -85,11 +84,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="arm2.cpp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="arm2.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RoboticArrrmJNI/src/main/c++/arm2.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="53" column="17" selection-start-line="53" selection-start-column="14" selection-end-line="53" selection-end-column="17" />
+            <state relative-caret-position="-374">
+              <caret line="67" column="19" selection-start-line="67" selection-start-column="19" selection-end-line="67" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -107,7 +106,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Launcher.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Launcher.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/Launcher.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-255">
@@ -194,7 +193,6 @@
         <option value="$PROJECT_DIR$/RoboticArrrmJNI/src/main/c++/NativeStuff.c" />
         <option value="$PROJECT_DIR$/RoboticArrrmJNI/src/main/c++/RoboticArmJNI.cpp" />
         <option value="$PROJECT_DIR$/RoboticArrrmJNI/src/main/c++/arm2.h" />
-        <option value="$PROJECT_DIR$/RoboticArrrmJNI/src/main/c++/arm2.cpp" />
         <option value="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/DrawShape.java" />
         <option value="$PROJECT_DIR$/RoboticArmTest/pom.xml" />
         <option value="$PROJECT_DIR$/RobotArrrmBot/pom.xml" />
@@ -212,6 +210,7 @@
         <option value="$PROJECT_DIR$/RoboticArrrmLauncher/pom.xml" />
         <option value="$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java" />
         <option value="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/Launcher.java" />
+        <option value="$PROJECT_DIR$/RoboticArrrmJNI/src/main/c++/arm2.cpp" />
       </list>
     </option>
   </component>
@@ -1204,14 +1203,7 @@
       <workItem from="1473049082051" duration="12975000" />
       <workItem from="1473199534321" duration="2765000" />
       <workItem from="1473182449213" duration="21551000" />
-      <workItem from="1473334286204" duration="28530000" />
-    </task>
-    <task id="LOCAL-00087" summary="Launcher needs to shade in all the dependancies">
-      <created>1473369940648</created>
-      <option name="number" value="00087" />
-      <option name="presentableId" value="LOCAL-00087" />
-      <option name="project" value="LOCAL" />
-      <updated>1473369940648</updated>
+      <workItem from="1473334286204" duration="28790000" />
     </task>
     <task id="LOCAL-00088" summary="Set the correct main class">
       <created>1473370184150</created>
@@ -1549,11 +1541,18 @@
       <option name="project" value="LOCAL" />
       <updated>1473392115986</updated>
     </task>
-    <option name="localTasksCounter" value="136" />
+    <task id="LOCAL-00136" summary="Oh.">
+      <created>1473392333311</created>
+      <option name="number" value="00136" />
+      <option name="presentableId" value="LOCAL-00136" />
+      <option name="project" value="LOCAL" />
+      <updated>1473392333311</updated>
+    </task>
+    <option name="localTasksCounter" value="137" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="126217000" />
+    <option name="totallyTimeSpent" value="126477000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1899,14 +1898,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RoboticArrrmJNI/src/main/c++/arm2.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="53" column="17" selection-start-line="53" selection-start-column="14" selection-end-line="53" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RoboticArrrmAPI/src/main/java/net/tangentmc/AngleTuple.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="213">
@@ -1966,6 +1957,14 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RoboticArrrmJNI/src/main/c++/arm2.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-374">
+          <caret line="67" column="19" selection-start-line="67" selection-start-column="19" selection-end-line="67" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
