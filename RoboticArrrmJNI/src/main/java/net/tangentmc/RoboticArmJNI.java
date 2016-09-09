@@ -81,6 +81,11 @@ public class RoboticArmJNI implements RoboticArm {
             e.printStackTrace();
         }
         arm2MaxAngle = readAngle(1);
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
     double lastTheta1 = 0;
     double lastTheta2 = 0;
