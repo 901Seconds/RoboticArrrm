@@ -55,34 +55,34 @@ public class RoboticArmJNI implements RoboticArm {
     public void calibrate() {
         setServo(0,ARM_1_MIN);
         try {
-            Thread.sleep(2000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         arm1MinAngle = readAngle(0);
         setServo(0,ARM_1_MAX);
         try {
-            Thread.sleep(2000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         arm1MaxAngle = readAngle(0);
         setServo(1,ARM_2_MIN);
         try {
-            Thread.sleep(2000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         arm2MinAngle = readAngle(1);
         setServo(1,ARM_2_MAX);
         try {
-            Thread.sleep(2000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         arm2MaxAngle = readAngle(1);
         try {
-            Thread.sleep(2000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
