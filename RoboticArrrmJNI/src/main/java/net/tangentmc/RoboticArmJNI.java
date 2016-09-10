@@ -110,6 +110,8 @@ public class RoboticArmJNI implements RoboticArm {
     double mArm1,mArm2,cArm1,cArm2;
     @Override
     public void setAngle(double theta1, double theta2) {
+		out.println("m");
+		out.flush();
         lastTheta1 = theta1;
         lastTheta2 = theta2;
         theta1 = -Math.toDegrees(theta1);

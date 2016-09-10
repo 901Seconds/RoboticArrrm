@@ -1,0 +1,4 @@
+#!/bin/bash
+cd  RoboticArmLauncher/src/main/resources
+sudo java -jar ../../../target/RoboticArrrmLauncher-1.0-SNAPSHOT.jar
+

@@ -1,4 +1,5 @@
 #!/bin/bash
-cd  RoboticArmLauncher/src/main/resources/
+sudo ifconfig lo 127.0.0.1 netmask 255.0.0.0 up
+cd  RoboticArrrmLauncher/src/main/resources
 sudo java -jar ../../../target/RoboticArrrmLauncher-1.0-SNAPSHOT.jar
 
