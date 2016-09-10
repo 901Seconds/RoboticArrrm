@@ -49,6 +49,7 @@ public class RoboticArmJNI implements RoboticArm {
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
+
         socket.on("setAngle",args->{
             JSONObject obj = (JSONObject)args[0];
             movementQueue.add(obj);
@@ -66,7 +67,7 @@ public class RoboticArmJNI implements RoboticArm {
         theModel = new RoboticArmModel(o1X,o1Y,o2X,o2Y,l);
         init();
         calibrate();
-        new Thread(socket::open).start();
+        new Thread(socket::connect).start();
         while (true) {
             JSONObject obj = movementQueue.take();
             try {
@@ -76,11 +77,6 @@ public class RoboticArmJNI implements RoboticArm {
                     setPenMode(obj.getBoolean("penMode"));
                 }
             } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
