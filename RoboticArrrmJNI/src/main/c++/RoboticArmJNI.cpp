@@ -6,7 +6,7 @@ extern "C" {
 JNIEXPORT void JNICALL Java_net_tangentmc_RoboticArmJNI_setServo
   (JNIEnv * env, jobject obj, jint servo, jdouble pulse)
 {
-    set_servo((int)servo,(double)pulse);
+    set_PWM((int)servo,(double)pulse);
 }
 JNIEXPORT void JNICALL Java_net_tangentmc_RoboticArmJNI_init
   (JNIEnv * env, jobject obj)
