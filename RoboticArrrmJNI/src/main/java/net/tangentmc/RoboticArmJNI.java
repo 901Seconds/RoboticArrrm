@@ -132,7 +132,6 @@ public class RoboticArmJNI implements RoboticArm {
         process = builder.start();
         out = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()));
         in = new BufferedReader(new InputStreamReader(process.getInputStream()));
-        calibrate();
         new Thread(()->{
             try {
                 while (true) {
@@ -153,5 +152,6 @@ public class RoboticArmJNI implements RoboticArm {
                 e.printStackTrace();
             }
         }).start();
+        calibrate();
     }
 }
