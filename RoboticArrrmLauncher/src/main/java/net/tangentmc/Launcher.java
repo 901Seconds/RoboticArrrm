@@ -38,6 +38,7 @@ public class Launcher {
     public Launcher() {
         try {
             robot = new RoboticArmJNI(287,374,377,374,154);
+            robot.init();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -101,7 +102,11 @@ public class Launcher {
             shapeObjectIterator.remove();
             draw();
         }
-        System.out.print("TEST");
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         running.set(false);
     }
 

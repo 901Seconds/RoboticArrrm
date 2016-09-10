@@ -26,7 +26,7 @@ public class RoboticArmJNI implements RoboticArm {
     double d, l;
     RoboticArmModel theModel;
     Process process;
-    public RoboticArmJNI(double shoulder1X, double shoulder1Y, double shoulder2X, double shoulder2Y, double appendageLength) throws IOException {
+    public RoboticArmJNI(double shoulder1X, double shoulder1Y, double shoulder2X, double shoulder2Y, double appendageLength) {
 
         o1X=shoulder1X;
         o1Y=shoulder1Y;
@@ -35,12 +35,6 @@ public class RoboticArmJNI implements RoboticArm {
         d=absLength(o1X,o2X,o1Y,o2Y);
         l=appendageLength;
         theModel = new RoboticArmModel(o1X,o1Y,o2X,o2Y,l);
-
-        ProcessBuilder builder = new ProcessBuilder("sudo ~/Arm/arm2");
-        process = builder.start();
-        out = new PrintStream(process.getOutputStream());
-        in = new DataInputStream(process.getInputStream());
-        calibrate();
     }
     public double readAngle(int servo) {
         if (process == null) return -1;
@@ -137,5 +131,13 @@ public class RoboticArmJNI implements RoboticArm {
     @Override
     public void setPenMode(boolean down) {
         setServo(2,down?2000:1000);
+    }
+
+    public void init() throws Exception{
+        ProcessBuilder builder = new ProcessBuilder("sudo ~/Arm/arm2");
+        process = builder.start();
+        out = new PrintStream(process.getOutputStream());
+        in = new DataInputStream(process.getInputStream());
+        calibrate();
     }
 }
