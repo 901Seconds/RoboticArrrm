@@ -1,6 +1,6 @@
 *.class
-typescript
-debug.txt
+*typescript
+*debug.txt
 # Mac
 .DS_Store
 

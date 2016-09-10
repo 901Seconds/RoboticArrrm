@@ -19,7 +19,6 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.NoninvertibleTransformException;
 import java.awt.geom.Path2D;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.stream.Collectors;
@@ -34,7 +33,6 @@ public class Launcher {
     private double sliderTime = 1;
     private AffineTransform transform = new AffineTransform();
     private ArrayList<RoboticArm> arms = new ArrayList<>();
-    private Thread plotter;
 
     public static void main(String[] args) {
         new Launcher();
@@ -66,10 +64,10 @@ public class Launcher {
             robot.init();
         } catch (Exception e) {
             e.printStackTrace();
+            UI.printMessage(e.getLocalizedMessage());
         }
         new WebServer(this);
-        plotter = new Thread(this::plotThread);
-        plotter.start();
+        new Thread(this::plotThread).start();
     }
     public void plotThread() {
         while (true) {

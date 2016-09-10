@@ -29,7 +29,14 @@ public class WebServer {
             String request = t.getRequestURI().getPath().substring(1);
             if (request.isEmpty()) request = "index.html";
             if (!new File(request).exists()) request +=".html";
-            if (!new File(request).exists()) request = "404.html";
+            if (!new File(request).exists()) {
+                String response = "404 (Not Found)\n";
+                t.sendResponseHeaders(404, response.length());
+                OutputStream os = t.getResponseBody();
+                os.write(response.getBytes());
+                os.close();
+                return;
+            }
             File file = new File(request);
             t.sendResponseHeaders(200, file.length());
             OutputStream outputStream = t.getResponseBody();
