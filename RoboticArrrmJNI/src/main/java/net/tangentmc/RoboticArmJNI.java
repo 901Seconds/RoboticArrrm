@@ -27,7 +27,11 @@ public class RoboticArmJNI implements RoboticArm {
 
     public static void main(String[] args) {
         if (args.length == 0) args = new String[]{"10.140.108.96:"};
-        RoboticArmJNI robot = new RoboticArmJNI(287,374,377,374,154, args[0]);
+        try {
+            RoboticArmJNI robot = new RoboticArmJNI(287,374,377,374,154, args[0]);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
     static {
         try {
@@ -39,7 +43,7 @@ public class RoboticArmJNI implements RoboticArm {
     double o1X, o1Y, o2X, o2Y;
     double d, l;
     RoboticArmModel theModel;
-    public RoboticArmJNI(double shoulder1X, double shoulder1Y, double shoulder2X, double shoulder2Y, double appendageLength, String ip) {
+    public RoboticArmJNI(double shoulder1X, double shoulder1Y, double shoulder2X, double shoulder2Y, double appendageLength, String ip) throws InterruptedException {
         try {
             socket = IO.socket("http://"+ip+":9092");
         } catch (URISyntaxException e) {
@@ -64,7 +68,7 @@ public class RoboticArmJNI implements RoboticArm {
         calibrate();
         new Thread(socket::open).start();
         while (true) {
-            JSONObject obj = movementQueue.poll();
+            JSONObject obj = movementQueue.take();
             try {
                 if (obj.has("theta1")) {
                     setAngle(obj.getDouble("theta1"), obj.getDouble("theta2"));
