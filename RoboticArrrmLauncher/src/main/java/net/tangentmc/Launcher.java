@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import net.tangentmc.svg.SVGParser;
 import net.tangentmc.util.AngleTuple;
-import net.tangentmc.util.DrawShape;
+import net.tangentmc.util.WebShape;
 import net.tangentmc.util.Utils;
 import net.tangentmc.web.WebServer;
 
@@ -212,12 +212,14 @@ public class Launcher {
     @Getter
     @Setter
     public static class ShapeObject {
+        //Scale web objects down
+        private static int scale = 11;
         Shape[] shapes;
-        public ShapeObject(DrawShape shape) {
+        public ShapeObject(WebShape shape) {
             Path2D path = new Path2D.Double();
-            path.moveTo(shape.xpoints[0],shape.ypoints[0]);
+            path.moveTo(shape.xpoints[0]/ scale,shape.ypoints[0]/ scale);
             for (int i = 1; i < shape.xpoints.length; i++) {
-                path.lineTo(shape.xpoints[i],shape.ypoints[i]);
+                path.lineTo(shape.xpoints[i]/ scale,shape.ypoints[i]/ scale);
             }
             shapes = new Shape[]{path};
         }

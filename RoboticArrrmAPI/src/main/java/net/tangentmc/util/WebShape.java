@@ -7,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class DrawShape {
+public class WebShape {
     public double[] xpoints;
     public double[] ypoints;
 }

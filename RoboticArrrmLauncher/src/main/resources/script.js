@@ -23,8 +23,8 @@ var drawingApp = (function () {
 
     var canvas,
         context,
-        canvasWidth = screen.width,
-        canvasHeight = screen.height,
+        canvasWidth = screen.width*2,
+        canvasHeight = screen.height*2,
         clickX = [],
         clickY = [],
         clickDrag = [],
