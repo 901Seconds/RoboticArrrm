@@ -7,7 +7,6 @@
 
 
     <artifactId>RoboticArrrmJNI</artifactId>
-    <packaging>nar</packaging>
 
     <properties>
         <skipTests>true</skipTests>
