@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="562fd72b-2674-4bdb-9358-2e62d0a324de" name="Default" comment="Flush dat stream">
+    <list default="true" id="562fd72b-2674-4bdb-9358-2e62d0a324de" name="Default" comment="Fix webserver">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/WebServer.java" afterPath="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/WebServer.java" />
     </list>
     <ignored path="RoboticArrrm.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -369,7 +368,7 @@
       <option name="MAIN_CLASS_NAME" value="net.tangentmc.Launcher" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/RoboticArrrmLauncher/src/main/resources" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="ENABLE_SWING_INSPECTOR" value="false" />
@@ -892,14 +891,7 @@
       <workItem from="1473182449213" duration="21551000" />
       <workItem from="1473334286204" duration="31804000" />
       <workItem from="1473474551900" duration="981000" />
-      <workItem from="1473476337484" duration="12412000" />
-    </task>
-    <task id="LOCAL-00121" summary="Less min points">
-      <created>1473385089897</created>
-      <option name="number" value="00121" />
-      <option name="presentableId" value="LOCAL-00121" />
-      <option name="project" value="LOCAL" />
-      <updated>1473385089897</updated>
+      <workItem from="1473476337484" duration="12479000" />
     </task>
     <task id="LOCAL-00122" summary="Less min points">
       <created>1473385171272</created>
@@ -1237,11 +1229,18 @@
       <option name="project" value="LOCAL" />
       <updated>1473489277637</updated>
     </task>
-    <option name="localTasksCounter" value="170" />
+    <task id="LOCAL-00170" summary="Fix webserver">
+      <created>1473489915994</created>
+      <option name="number" value="00170" />
+      <option name="presentableId" value="LOCAL-00170" />
+      <option name="project" value="LOCAL" />
+      <updated>1473489915994</updated>
+    </task>
+    <option name="localTasksCounter" value="171" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="142884000" />
+    <option name="totallyTimeSpent" value="142951000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1315,7 +1314,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Clean up c, dont draw anything that breaks everything" />
     <MESSAGE value="Clean up c v2" />
     <MESSAGE value="Clean up c v3" />
     <MESSAGE value="Clean up c v5" />
@@ -1340,7 +1338,8 @@
     <MESSAGE value="Redirect io" />
     <MESSAGE value="Set home explicitly" />
     <MESSAGE value="Flush dat stream" />
-    <option name="LAST_COMMIT_MESSAGE" value="Flush dat stream" />
+    <MESSAGE value="Fix webserver" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix webserver" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
