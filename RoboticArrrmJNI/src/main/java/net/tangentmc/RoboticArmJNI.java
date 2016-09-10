@@ -7,6 +7,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import static net.tangentmc.Utils.absLength;
@@ -48,8 +49,8 @@ public class RoboticArmJNI implements RoboticArm {
                 while (s.hasNextLine()) {
                     String next = s.nextLine();
                     if (next.startsWith("measured")) {
-                        Trace.println(next);
                         String[] args = next.replace("measured angles: ","").split(" ");
+                        Trace.println(Arrays.toString(args));
                         return Double.parseDouble(args[servo].split("=")[1]);
                     }
                 }
