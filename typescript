@@ -1,0 +1,28 @@
+Script started on Sat 10 Sep 2016 09:11:08 UTC
+2016-09-10 09:11:08 initInitialise: Can't lock /var/run/pigpio.pid
+GPIO initialization failed 
+ init()
+ init()
+2016-09-10 09:11:08 gpioSetMode: pigpio uninitialised, call gpioInitialise()
+2016-09-10 09:11:08 gpioSetPullUpDown: pigpio uninitialised, call gpioInitialise()
+2016-09-10 09:11:08 gpioSetMode: pigpio uninitialised, call gpioInitialise()
+2016-09-10 09:11:08 gpioSetPullUpDown: pigpio uninitialised, call gpioInitialise()
+2016-09-10 09:11:08 gpioSetMode: pigpio uninitialised, call gpioInitialise()
+2016-09-10 09:11:08 gpioSetPullUpDown: pigpio uninitialised, call gpioInitialise()
+2016-09-10 09:11:08 gpioWrite: pigpio uninitialised, call gpioInitialise()
+2016-09-10 09:11:08 gpioWrite: pigpio uninitialised, call gpioInitialise()
+2016-09-10 09:11:08 gpioWrite: pigpio uninitialised, call gpioInitialise()
+2016-09-10 09:11:08 gpioSleep: pigpio uninitialised, call gpioInitialise()
+ init()
+Input:
+ s-set motors 
+ m-measure angles 
+ f-read file 
+ e-execute job 
+ p-take and save picture 
+ i-print arm configuration 
+ o-edit arm parameters 
+ q-out?
+q
+
+Script done on Sat 10 Sep 2016 09:11:09 UTC

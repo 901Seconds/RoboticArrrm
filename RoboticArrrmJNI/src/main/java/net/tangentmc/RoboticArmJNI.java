@@ -128,7 +128,7 @@ public class RoboticArmJNI implements RoboticArm {
 
     public void init() throws Exception{
         Trace.setVisible(true);
-        ProcessBuilder builder = new ProcessBuilder("sudo","/home/pi/Arm/arm2");
+        ProcessBuilder builder = new ProcessBuilder("script","-c","/bin/bash","-c","/home/pi/Arm/arm2");
         builder.redirectErrorStream(true);
         process = builder.start();
         out = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()));
