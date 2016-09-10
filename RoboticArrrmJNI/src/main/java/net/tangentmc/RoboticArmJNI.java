@@ -50,7 +50,7 @@ public class RoboticArmJNI implements RoboticArm {
                     String next = s.nextLine();
                     if (next.startsWith("measured")) {
                         String[] args = next.replace("measured angles: ","").split(" ");
-                        Trace.println(Arrays.toString(args));
+                        Trace.println(Arrays.stream(args).map(s2 -> s2.split("=")[1]).toArray());
                         return Double.parseDouble(args[servo].split("=")[1]);
                     }
                 }
