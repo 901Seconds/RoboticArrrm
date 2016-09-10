@@ -37,57 +37,30 @@ public class RoboticArmJNI implements RoboticArm {
     }
     public double readAngle(int servo) {
         if (process == null) return -1;
-        new Thread(()->{
-            try {
-                Thread.sleep(1);
-                out.write("m");
-                out.flush();
-            } catch (InterruptedException | IOException e) {
-                e.printStackTrace();
-            }
-        }).start();
-        Trace.print("Attempting read angle.");
-        while (true) {
-            Scanner s = new Scanner(in);
-            while (s.hasNextLine()) {
-                String next = s.nextLine();
-                if (next.startsWith("measured")) {
-                    String[] args = next.replace("measured angles: ","").split(" ");
-                    Trace.println(Arrays.toString(Arrays.stream(args).map(s2 -> s2.split("=")[1]).toArray()));
-                    return Double.parseDouble(args[servo].split("=")[1]);
-                }
-            }
+        try {
+            out.write("m");
+            out.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        Trace.print("Attempting read angle.");
+        return -1;
     }
     int[] lastPoints = new int[]{1500,1500,1500};
     public void setServo(int servo, int pulse) {
         if (process == null) return;
-        new Thread(()->{
-            try {
-                Thread.sleep(100);
-                lastPoints[servo] = pulse;
-                out.write("s\n");
-                out.write(lastPoints[0]+"\n");
-                out.write(lastPoints[1]+"\n");
-                out.write(lastPoints[2]+"\n");
-                out.flush();
-            } catch (InterruptedException | IOException e) {
-                e.printStackTrace();
-            }
-        }).start();
-        Trace.print("Attempting set servo pulse.");
         try {
-            while (in.ready()) {
-                String next = in.readLine();
-                Trace.println(next);
-                if (next.startsWith("p1")) {
-                    Trace.println("FUCK YEASHDIRAFHASFHASFHASOFHFAOSFAOSHFS"+next);
-                    return;
-                }
-            }
-        } catch (IOException e) {
+            Thread.sleep(100);
+            lastPoints[servo] = pulse;
+            out.write("s\n");
+            out.write(lastPoints[0]+"\n");
+            out.write(lastPoints[1]+"\n");
+            out.write(lastPoints[2]+"\n");
+            out.flush();
+        } catch (InterruptedException | IOException e) {
             e.printStackTrace();
         }
+        Trace.print("Attempting set servo pulse.");
 
     }
     public void calibrate() {
@@ -160,5 +133,26 @@ public class RoboticArmJNI implements RoboticArm {
         out = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()));
         in = new BufferedReader(new InputStreamReader(process.getInputStream()));
         calibrate();
+        new Thread(()->{
+            try {
+                while (true) {
+                    while (in.ready()) {
+                        String next = in.readLine();
+                        Trace.println(next);
+                        if (next.startsWith("p1")) {
+                            Trace.println("FUCK YEASHDIRAFHASFHASFHASOFHFAOSFAOSHFS"+next);
+                            //return;
+                        }
+                        if (next.startsWith("measured")) {
+                            String[] args = next.replace("measured angles: ","").split(" ");
+                            Trace.println(Arrays.toString(Arrays.stream(args).map(s2 -> s2.split("=")[1]).toArray()));
+                            //return Double.parseDouble(args[servo].split("=")[1]);
+                        }
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 }
