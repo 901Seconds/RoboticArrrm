@@ -16,8 +16,8 @@ public class RoboticArmJNI implements RoboticArm {
     private static final int ARM_1_MAX = 2000;
     private static final int ARM_2_MIN = 1000;
     private static final int ARM_2_MAX = 1400;
-    InputStream in;
-    PrintStream out;
+    BufferedReader in;
+    BufferedWriter out;
 
     double arm1MinAngle, arm1MaxAngle,arm2MinAngle, arm2MaxAngle;
 
@@ -40,9 +40,9 @@ public class RoboticArmJNI implements RoboticArm {
         new Thread(()->{
             try {
                 Thread.sleep(1);
-                out.println("m");
+                out.write("m");
                 out.flush();
-            } catch (InterruptedException e) {
+            } catch (InterruptedException | IOException e) {
                 e.printStackTrace();
             }
         }).start();
@@ -66,26 +66,27 @@ public class RoboticArmJNI implements RoboticArm {
             try {
                 Thread.sleep(100);
                 lastPoints[servo] = pulse;
-                out.println("s");
-                out.println(lastPoints[0]);
-                out.println(lastPoints[1]);
-                out.println(lastPoints[2]);
+                out.write("s\n");
+                out.write(lastPoints[0]+"\n");
+                out.write(lastPoints[1]+"\n");
+                out.write(lastPoints[2]+"\n");
                 out.flush();
-            } catch (InterruptedException e) {
+            } catch (InterruptedException | IOException e) {
                 e.printStackTrace();
             }
         }).start();
         Trace.print("Attempting set servo pulse.");
-        while (true) {
-            Scanner s = new Scanner(in);
-            if (s.hasNextLine()) {
-                String next = s.nextLine();
+        try {
+            while (in.ready()) {
+                String next = in.readLine();
                 Trace.println(next);
                 if (next.startsWith("p1")) {
                     Trace.println("FUCK YEASHDIRAFHASFHASFHASOFHFAOSFAOSHFS"+next);
                     return;
                 }
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }
@@ -156,8 +157,8 @@ public class RoboticArmJNI implements RoboticArm {
         Trace.setVisible(true);
         ProcessBuilder builder = new ProcessBuilder("sudo","/home/pi/Arm/arm2");
         process = builder.start();
-        out = new PrintStream(process.getOutputStream());
-        in = new BufferedInputStream(process.getInputStream());
+        out = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()));
+        in = new BufferedReader(new InputStreamReader(process.getInputStream()));
         calibrate();
     }
 }
