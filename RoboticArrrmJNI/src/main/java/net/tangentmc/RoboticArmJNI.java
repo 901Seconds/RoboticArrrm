@@ -57,6 +57,8 @@ public class RoboticArmJNI implements RoboticArm {
         }).on("setPenMode",args->{
             JSONObject obj = (JSONObject)args[0];
             movementQueue.add(obj);
+        }).on(Socket.EVENT_CONNECT, args-> {
+            System.out.print("CONNETED.");
         });
         o1X=shoulder1X;
         o1Y=shoulder1Y;
