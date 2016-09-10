@@ -47,7 +47,7 @@ public class RoboticArmJNI implements RoboticArm {
                     String next = s.nextLine();
                     if (next.startsWith("measured")) {
                         String[] args = next.replace("measured angles: ","").split(" ");
-                        Trace.println(Arrays.stream(args).map(s2 -> s2.split("=")[1]).toArray());
+                        Trace.println(Arrays.toString(Arrays.stream(args).map(s2 -> s2.split("=")[1]).toArray()));
                         return Double.parseDouble(args[servo].split("=")[1]);
                     }
                 }
@@ -66,6 +66,20 @@ public class RoboticArmJNI implements RoboticArm {
         out.println(lastPoints[1]);
         out.println(lastPoints[2]);
         out.flush();
+         try {
+            while (in.available() > 0) {
+                Scanner s = new Scanner(in);
+                while (s.hasNextLine()) {
+                    String next = s.nextLine();
+                    if (next.startsWith("p1")) {
+                        Trace.println(next);
+                        return;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
     public void calibrate() {
