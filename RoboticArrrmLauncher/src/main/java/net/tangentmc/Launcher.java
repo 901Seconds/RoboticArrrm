@@ -36,12 +36,8 @@ public class Launcher {
         new Launcher();
     }
     public Launcher() {
-        try {
-            robot = new RoboticArmJNI(287,374,377,374,154);
-            robot.init();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+        robot = new RoboticArmJNI(287,374,377,374,154);
         armSimu = new RoboticArmSimulation(robot.getModel());
         UI.addButton("Pick SVG", this::load);
         UI.addButton("Clear", ()->{shapes.clear();current=null;draw();});
@@ -57,6 +53,11 @@ public class Launcher {
                 left = e.getButton() == MouseEvent.BUTTON1;
             }
         });
+        try {
+            robot.init();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         server = new WebSocketServer(this);
         new Thread(WebServer::new).start();
     }
