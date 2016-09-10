@@ -47,8 +47,8 @@ public class RoboticArmJNI implements RoboticArm {
                 Scanner s = new Scanner(in);
                 while (s.hasNextLine()) {
                     String next = s.nextLine();
-					Trace.println(next);
                     if (next.startsWith("measured")) {
+                        Trace.println(next);
                         String[] args = next.replace("measured angles: ","").split(" ");
                         return Double.parseDouble(args[servo].split("=")[1]);
                     }
@@ -100,11 +100,6 @@ public class RoboticArmJNI implements RoboticArm {
             e.printStackTrace();
         }
         arm2MaxAngle = readAngle(1);
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         mArm1 = ((ARM_1_MAX - ARM_1_MIN) / (arm1MaxAngle - arm1MinAngle));
         mArm2 = ((ARM_2_MAX - ARM_2_MIN) / (arm2MaxAngle - arm2MinAngle));
         cArm1 = ARM_1_MIN - mArm1 * arm1MinAngle;
