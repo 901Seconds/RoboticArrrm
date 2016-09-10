@@ -28,7 +28,7 @@ public class RoboticArmJNI implements RoboticArm {
     }
     private double readAngle(int servo) {
         if (process == null) return -1;
-        out.println("m");
+        out.println(MEASURE_ANGLE_COMMAND);
         out.flush();
         try {
             while (in.available() > 0) {
@@ -36,7 +36,9 @@ public class RoboticArmJNI implements RoboticArm {
                 while (s.hasNextLine()) {
                     String next = s.nextLine();
                     if (next.startsWith("measured")) {
+                        //The angles are separated by space
                         String[] args = next.replace("measured angles: ","").split(" ");
+                        //The doubles are stored as theta=double so we want whats after the equals sign
                         Trace.println(Arrays.toString(Arrays.stream(args).map(s2 -> s2.split("=")[1]).toArray()));
                         return Double.parseDouble(args[servo].split("=")[1]);
                     }
@@ -52,17 +54,17 @@ public class RoboticArmJNI implements RoboticArm {
     private void setServo(int servo, int pulse) {
         if (process == null) return;
         lastPoints[servo] = pulse;
-        out.println("s");
+        out.println(SET_MOTOR_COMMAND);
         out.println(lastPoints[0]);
         out.println(lastPoints[1]);
         out.println(lastPoints[2]);
         out.flush();
-         try {
+        try {
             while (in.available() > 0) {
                 Scanner s = new Scanner(in);
                 while (s.hasNextLine()) {
                     String next = s.nextLine();
-                    if (next.startsWith("p1")) {
+                    if (next.startsWith(MOTOR_PREFIX)) {
                         Trace.println(next);
                         return;
                     }
@@ -78,6 +80,7 @@ public class RoboticArmJNI implements RoboticArm {
         readAngle(0);
         readAngle(0);
         UI.sleep(1000);
+
         Trace.println("Starting Calibration:");
         Trace.println("Arm 1 Min:");
         setServo(0, ARM_1_MIN);
@@ -138,4 +141,7 @@ public class RoboticArmJNI implements RoboticArm {
         in = new BufferedInputStream(process.getInputStream());
         calibrate();
     }
+    private static final String SET_MOTOR_COMMAND = "s";
+    private static final String MEASURE_ANGLE_COMMAND = "m";
+    private static final String MOTOR_PREFIX = "p1";
 }

@@ -1,4 +1,6 @@
-package net.tangentmc;
+package net.tangentmc.util;
+
+import net.tangentmc.util.Utils;
 
 import java.awt.*;
 import java.awt.geom.CubicCurve2D;

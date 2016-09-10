@@ -1,4 +1,4 @@
-package net.tangentmc;
+package net.tangentmc.web;
 
 import java.io.File;
 import java.io.IOException;

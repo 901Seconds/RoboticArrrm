@@ -5,6 +5,12 @@ import ecs100.UIFileChooser;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import net.tangentmc.svg.SVGer;
+import net.tangentmc.util.AngleTuple;
+import net.tangentmc.util.DrawShape;
+import net.tangentmc.util.Utils;
+import net.tangentmc.web.WebServer;
+import net.tangentmc.web.WebSocketServer;
 import processing.core.PApplet;
 
 import javax.swing.*;
@@ -93,7 +99,7 @@ public class Launcher {
                     armSimu.setPenMode(true);
                     for (int i2 = 0; i2 < anglesFromShapesSimu.get(i1).length; i2++) {
                         if (anglesFromShapesBot != null)
-                            robot.setAngle(anglesFromShapesBot.get(i1)[i2].theta1, anglesFromShapesBot.get(i1)[i2].theta2);
+                            robot.setAngle(anglesFromShapesBot.get(i1)[i2].getTheta1(), anglesFromShapesBot.get(i1)[i2].getTheta2());
                         interpBetween(last, anglesFromShapesSimu.get(i1)[i2]);
                         last = anglesFromShapesSimu.get(i1)[i2];
                     }
@@ -221,9 +227,9 @@ public class Launcher {
     @AllArgsConstructor
     @Getter
     @Setter
-    static class ShapeObject {
+    public static class ShapeObject {
         Shape[] shapes;
-        ShapeObject(DrawShape shape) {
+       public ShapeObject(DrawShape shape) {
             Path2D path = new Path2D.Double();
             path.moveTo(shape.xpoints[0],shape.ypoints[0]);
             for (int i = 1; i < shape.xpoints.length; i++) {

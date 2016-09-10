@@ -1,7 +1,9 @@
-package net.tangentmc;
+package net.tangentmc.web;
 
 import com.corundumstudio.socketio.Configuration;
 import com.corundumstudio.socketio.SocketIOServer;
+import net.tangentmc.Launcher;
+import net.tangentmc.util.DrawShape;
 
 /**
  * Created by sanjay on 9/09/2016.

@@ -1,4 +1,4 @@
-package net.tangentmc;
+package net.tangentmc.svg;
 
 import org.apache.batik.parser.AWTPathProducer;
 import org.apache.batik.parser.ParseException;
@@ -210,6 +210,7 @@ public class SVGer {
         return shapes.toArray(new Shape[0]);
 
     }
+
     private Shape getTextShape(String str, Font font, double x, double y) {
         BufferedImage bufferImage = new BufferedImage(2,2, BufferedImage.TYPE_INT_RGB);
         Graphics2D g2d = bufferImage.createGraphics();

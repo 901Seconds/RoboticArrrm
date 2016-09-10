@@ -3,7 +3,7 @@ package net.tangentmc;
 import com.sanjay900.ProcessingRunner;
 import processing.core.PApplet;
 
-import static net.tangentmc.Utils.*;
+import static net.tangentmc.util.Utils.*;
 
 public class RoboticArmSimulation extends PApplet implements RoboticArm {
 

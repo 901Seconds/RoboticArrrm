@@ -1,9 +1,8 @@
 package net.tangentmc;
 
 
-import org.apache.batik.dom.svg.SVGOMPoint;
-
-import static net.tangentmc.Utils.*;
+import static net.tangentmc.util.Utils.absLength;
+import static net.tangentmc.util.Utils.findOp;
 
 public class RoboticArmModel {
 
@@ -70,7 +69,7 @@ public class RoboticArmModel {
         return angle;
     }
 
-    double findTheta(int shoulderNum, int leftRight, double x, double y) {
+    public double findTheta(int shoulderNum, int leftRight, double x, double y) {
         return findTheta(findElbowPosition(x,y),shoulderNum,leftRight);
     }
     public double[] findTCPPos(double theta1, double theta2) {

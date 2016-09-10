@@ -1,19 +1,13 @@
-package net.tangentmc;
+package net.tangentmc.util;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.ToString;
+import net.tangentmc.RoboticArmModel;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.FlatteningPathIterator;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-/**
- * Created by surface on 18/07/2016.
- */
+
 public class Utils {
     public static double absLength(double X1, double X2, double Y1, double Y2) {
         return Math.sqrt(Math.pow(X1 - X2, 2) + Math.pow(Y1 - Y2, 2));
@@ -55,8 +49,7 @@ public class Utils {
         return pointcol;
     }
 
-    public static double interPolate(double proportion, double Co1, double Co2) {
+    static double interPolate(double proportion, double Co1, double Co2) {
         return Co1+proportion*(Co2-Co1);
-
     }
 }
