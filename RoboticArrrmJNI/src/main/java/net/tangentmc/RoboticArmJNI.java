@@ -136,18 +136,17 @@ public class RoboticArmJNI implements RoboticArm {
         new Thread(()->{
             try {
                 while (true) {
-                    while (in.ready()) {
-                        String next = in.readLine();
-                        Trace.println(next);
-                        if (next.startsWith("p1")) {
-                            Trace.println("FUCK YEASHDIRAFHASFHASFHASOFHFAOSFAOSHFS"+next);
-                            //return;
-                        }
-                        if (next.startsWith("measured")) {
-                            String[] args = next.replace("measured angles: ","").split(" ");
-                            Trace.println(Arrays.toString(Arrays.stream(args).map(s2 -> s2.split("=")[1]).toArray()));
-                            //return Double.parseDouble(args[servo].split("=")[1]);
-                        }
+                    String next = in.readLine();
+                    if (next == null) continue;
+                    Trace.println(next);
+                    if (next.startsWith("p1")) {
+                        Trace.println("FUCK YES"+next);
+                        //return;
+                    }
+                    if (next.startsWith("measured")) {
+                        String[] args = next.replace("measured angles: ","").split(" ");
+                        Trace.println(Arrays.toString(Arrays.stream(args).map(s2 -> s2.split("=")[1]).toArray()));
+                        //return Double.parseDouble(args[servo].split("=")[1]);
                     }
                 }
             } catch (IOException e) {
