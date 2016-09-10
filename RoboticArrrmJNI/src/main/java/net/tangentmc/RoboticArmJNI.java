@@ -1,43 +1,33 @@
 package net.tangentmc;
 
-import ecs100.UI;
 import ecs100.Trace;
+import ecs100.UI;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import static net.tangentmc.Utils.absLength;
-
-
-//TODO: create a model that represents the robot
 public class RoboticArmJNI implements RoboticArm {
     private static final int ARM_1_MIN = 1500;
     private static final int ARM_1_MAX = 2000;
     private static final int ARM_2_MIN = 1000;
     private static final int ARM_2_MAX = 1400;
-    InputStream in;
-    PrintStream out;
+    private double mArm1,mArm2,cArm1,cArm2;
+    private RoboticArmModel theModel;
 
-    double arm1MinAngle, arm1MaxAngle,arm2MinAngle, arm2MaxAngle;
+    //IO from the running arm2 process
+    private InputStream in;
+    private PrintStream out;
+    private Process process;
 
-    double o1X, o1Y, o2X, o2Y;
-    double d, l;
-    RoboticArmModel theModel;
-    Process process;
     public RoboticArmJNI(double shoulder1X, double shoulder1Y, double shoulder2X, double shoulder2Y, double appendageLength) {
-
-        o1X=shoulder1X;
-        o1Y=shoulder1Y;
-        o2X=shoulder2X;
-        o2Y=shoulder2Y;
-        d=absLength(o1X,o2X,o1Y,o2Y);
-        l=appendageLength;
-        theModel = new RoboticArmModel(o1X,o1Y,o2X,o2Y,l);
+        theModel = new RoboticArmModel(shoulder1X, shoulder1Y, shoulder2X, shoulder2Y, appendageLength);
     }
-    public double readAngle(int servo) {
+    private double readAngle(int servo) {
         if (process == null) return -1;
-        Trace.setVisible(true);
         out.println("m");
         out.flush();
         try {
@@ -57,8 +47,9 @@ public class RoboticArmJNI implements RoboticArm {
         }
         return -1;
     }
-    int[] lastPoints = new int[]{1500,1500,1500};
-    public void setServo(int servo, int pulse) {
+    //Keep track of the last set servo positions since we have to set all three at once
+    private int[] lastPoints = new int[]{1500,1500,1500};
+    private void setServo(int servo, int pulse) {
         if (process == null) return;
         lastPoints[servo] = pulse;
         out.println("s");
@@ -82,51 +73,43 @@ public class RoboticArmJNI implements RoboticArm {
         }
 
     }
-    public void calibrate() {
+    private void calibrate() {
+        Trace.println("Initialization:");
+        readAngle(0);
+        readAngle(0);
+        UI.sleep(1000);
+        Trace.println("Starting Calibration:");
+        Trace.println("Arm 1 Min:");
         setServo(0, ARM_1_MIN);
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        arm1MinAngle = readAngle(0);
+        UI.sleep(3000);
+        double arm1MinAngle = readAngle(0);
 
+        Trace.println("Arm 1 Max:");
         setServo(0, ARM_1_MAX);
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        arm1MaxAngle = readAngle(0);
+        UI.sleep(3000);
+        double arm1MaxAngle = readAngle(0);
+
+
+        Trace.println("Arm 2 Min:");
         setServo(1, ARM_2_MIN);
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        arm2MinAngle = readAngle(1);
+        UI.sleep(3000);
+        double arm2MinAngle = readAngle(1);
+
+        Trace.println("Arm 2 Max:");
         setServo(1, ARM_2_MAX);
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        arm2MaxAngle = readAngle(1);
+        UI.sleep(3000);
+        double arm2MaxAngle = readAngle(1);
+
+        Trace.println("Calculating Constants:");
         mArm1 = ((ARM_1_MAX - ARM_1_MIN) / (arm1MaxAngle - arm1MinAngle));
         mArm2 = ((ARM_2_MAX - ARM_2_MIN) / (arm2MaxAngle - arm2MinAngle));
         cArm1 = ARM_1_MIN - mArm1 * arm1MinAngle;
         cArm2 = ARM_2_MIN - mArm2 * arm2MinAngle;
     }
-    double lastTheta1 = -90;
-    double lastTheta2 = -90;
-    double mArm1,mArm2,cArm1,cArm2;
     @Override
     public void setAngle(double theta1, double theta2) {
-        lastTheta1 = theta1;
-        lastTheta2 = theta2;
         theta1 = -Math.toDegrees(theta1);
         theta2 = -Math.toDegrees(theta2);
-
         int pulse1 = (int) (mArm1*theta1+cArm1);
         int pulse2 = (int) (mArm2*theta2+cArm2);
         setServo(0, Math.max(Math.min(ARM_1_MAX,pulse1),ARM_1_MIN));
@@ -145,7 +128,10 @@ public class RoboticArmJNI implements RoboticArm {
         setServo(2,down?2000:1000);
     }
 
-    public void init() throws Exception{
+    void init() throws Exception {
+        Trace.setVisible(true);
+        //Script is required here, as there is a bug with java/c where the input stream
+        //is not correctly flushed otherwise, and we recieve no input.
         ProcessBuilder builder = new ProcessBuilder("script","-c","/home/pi/Arm/arm2");
         process = builder.start();
         out = new PrintStream(process.getOutputStream());
