@@ -78,10 +78,11 @@ public class RoboticArmJNI implements RoboticArm {
         Trace.print("Attempting set servo pulse.");
         while (true) {
             Scanner s = new Scanner(in);
-            while (s.hasNextLine()) {
+            if (s.hasNextLine()) {
                 String next = s.nextLine();
+                Trace.println(next);
                 if (next.startsWith("p1")) {
-                    Trace.println(next);
+                    Trace.println("FUCK YEASHDIRAFHASFHASFHASOFHFAOSFAOSHFS"+next);
                     return;
                 }
             }
