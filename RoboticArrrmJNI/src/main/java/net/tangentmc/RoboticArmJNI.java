@@ -23,8 +23,8 @@ public class RoboticArmJNI implements RoboticArm {
     private PrintStream out;
     private Process process;
 
-    public RoboticArmJNI(double shoulder1X, double shoulder1Y, double shoulder2X, double shoulder2Y, double appendageLength) {
-        theModel = new RoboticArmModel(shoulder1X, shoulder1Y, shoulder2X, shoulder2Y, appendageLength);
+    public RoboticArmJNI(RoboticArmModel model) {
+        theModel = model;
     }
     private double readAngle(int servo) {
         if (process == null) return -1;

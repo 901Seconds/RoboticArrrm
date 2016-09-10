@@ -38,8 +38,7 @@ public class Launcher {
         new Launcher();
     }
     private Launcher() {
-
-        RoboticArmJNI robot = new RoboticArmJNI(287,374,377,374,154);
+        RoboticArmJNI robot = new RoboticArmJNI(new RoboticArmModel(287,374,377,374,154));
         RoboticArmSimulation armSimu = new RoboticArmSimulation(robot.getModel());
         arms.add(robot);
         arms.add(armSimu);
@@ -69,7 +68,8 @@ public class Launcher {
         new WebServer(this);
         new Thread(this::plotThread).start();
     }
-    public void plotThread() {
+    private void plotThread() {
+        //noinspection InfiniteLoopStatement
         while (true) {
             if (current != null)
                 current.applyTransformation(transform);
