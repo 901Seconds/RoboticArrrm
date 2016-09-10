@@ -62,6 +62,6 @@
         <maven.compiler.source>1.8</maven.compiler.source>
     </properties>
     <build>
-        <defaultGoal>clean integration-test</defaultGoal>
+        <defaultGoal>clean install</defaultGoal>
     </build>
 </project>
