@@ -61,6 +61,16 @@ public class RoboticArmJNI implements RoboticArm {
         out.println(lastPoints[1]);
         out.println(lastPoints[2]);
         out.flush();
+        while (true) {
+            Scanner s = new Scanner(in);
+            while (s.hasNextLine()) {
+                String next = s.nextLine();
+                if (next.startsWith("p1")) {
+                    Trace.println(next);
+                    return;
+                }
+            }
+        }
 
     }
     public void calibrate() {
