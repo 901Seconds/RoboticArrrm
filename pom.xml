@@ -51,6 +51,6 @@
         <maven.compiler.source>1.8</maven.compiler.source>
     </properties>
     <build>
-        <defaultGoal>clean install</defaultGoal>
+        <defaultGoal>install</defaultGoal>
     </build>
 </project>
