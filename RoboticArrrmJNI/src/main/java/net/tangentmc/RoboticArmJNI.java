@@ -37,9 +37,16 @@ public class RoboticArmJNI implements RoboticArm {
     }
     public double readAngle(int servo) {
         if (process == null) return -1;
-        Trace.setVisible(true);
-		out.println("m");
-		out.flush();
+        new Thread(()->{
+            try {
+                Thread.sleep(1);
+                out.println("m");
+                out.flush();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+        Trace.print("Attempting read angle.");
         while (true) {
             Scanner s = new Scanner(in);
             while (s.hasNextLine()) {
@@ -55,12 +62,20 @@ public class RoboticArmJNI implements RoboticArm {
     int[] lastPoints = new int[]{1500,1500,1500};
     public void setServo(int servo, int pulse) {
         if (process == null) return;
-        lastPoints[servo] = pulse;
-        out.println("s");
-        out.println(lastPoints[0]);
-        out.println(lastPoints[1]);
-        out.println(lastPoints[2]);
-        out.flush();
+        new Thread(()->{
+            try {
+                Thread.sleep(1);
+                lastPoints[servo] = pulse;
+                out.println("s");
+                out.println(lastPoints[0]);
+                out.println(lastPoints[1]);
+                out.println(lastPoints[2]);
+                out.flush();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+        Trace.print("Attempting set servo pulse.");
         while (true) {
             Scanner s = new Scanner(in);
             while (s.hasNextLine()) {
@@ -137,6 +152,7 @@ public class RoboticArmJNI implements RoboticArm {
     }
 
     public void init() throws Exception{
+        Trace.setVisible(true);
         ProcessBuilder builder = new ProcessBuilder("sudo","/home/pi/Arm/arm2");
         process = builder.start();
         out = new PrintStream(process.getOutputStream());
