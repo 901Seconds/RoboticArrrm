@@ -134,7 +134,7 @@ public class RoboticArmJNI implements RoboticArm {
     }
 
     public void init() throws Exception{
-        ProcessBuilder builder = new ProcessBuilder("sudo","~/Arm/arm2");
+        ProcessBuilder builder = new ProcessBuilder("sudo","/home/pi/Arm/arm2");
         builder.redirectOutput(ProcessBuilder.Redirect.INHERIT);
         builder.redirectError(ProcessBuilder.Redirect.INHERIT);
         process = builder.start();
