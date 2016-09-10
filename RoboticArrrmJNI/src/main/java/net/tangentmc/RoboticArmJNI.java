@@ -156,6 +156,7 @@ public class RoboticArmJNI implements RoboticArm {
         Trace.setVisible(true);
         ProcessBuilder builder = new ProcessBuilder("sudo","/home/pi/Arm/arm2");
         builder.redirectOutput(ProcessBuilder.Redirect.INHERIT);
+        builder.redirectInput(ProcessBuilder.Redirect.INHERIT);
         process = builder.start();
         out = new PrintStream(process.getOutputStream());
         in = new BufferedInputStream(process.getInputStream());
