@@ -194,6 +194,8 @@ void init_bot() {
    open_screen_stream();
 }
 
-
+int main() {
+    init_bot();
+}
 
 

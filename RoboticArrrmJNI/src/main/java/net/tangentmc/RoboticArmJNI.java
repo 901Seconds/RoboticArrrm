@@ -9,6 +9,7 @@ import org.scijava.nativelib.NativeLoader;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Scanner;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -61,16 +62,31 @@ public class RoboticArmJNI implements RoboticArm {
             System.out.print("CONNETED.");
         });
         new Thread(socket::connect).start();
+        o1X=shoulder1X;
+        o1Y=shoulder1Y;
+        o2X=shoulder2X;
+        o2Y=shoulder2Y;
+        d=absLength(o1X,o2X,o1Y,o2Y);
+        l=appendageLength;
+        theModel = new RoboticArmModel(o1X,o1Y,o2X,o2Y,l);
+        init();
+        calibrate();
         while (true) {
-            JSONObject obj = movementQueue.take();
+            int inChar;
+            System.out.println("Enter a Character:");
             try {
-                if (obj.has("theta1")) {
-                    setAngle(obj.getDouble("theta1"), obj.getDouble("theta2"));
-                } else if (obj.has("penMode")){
-                    setPenMode(obj.getBoolean("penMode"));
+                inChar = System.in.read();
+                if (inChar == 'm') {
+                    System.out.println("Theta 1: " + readAngle(0));
+                    System.out.println("Theta 2: " + readAngle(1));
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
+                if (inChar == 'w') {
+                    Scanner scan = new Scanner(System.in);
+                    setServo(scan.nextInt(),scan.nextInt());
+                }
+                System.out.println(inChar);
+            } catch (IOException e) {
+                System.out.println("Error reading from user");
             }
         }
     }

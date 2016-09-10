@@ -26,14 +26,7 @@ public class RoboticArmJNIServer implements RoboticArm {
     }
     @Override
     public void setAngle(double theta1, double theta2) {
-        try {
-            JSONObject obj = new JSONObject();
-            obj.put("theta1",theta1);
-            obj.put("theta2",theta2);
-            server.server.getBroadcastOperations().sendEvent("setAngle",obj);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+
     }
 
     @Override
@@ -43,12 +36,6 @@ public class RoboticArmJNIServer implements RoboticArm {
 
     @Override
     public void setPenMode(boolean down) {
-        try {
-            JSONObject obj = new JSONObject();
-            obj.put("penMode",down);
-            server.server.getBroadcastOperations().sendEvent("setPenMode",obj);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+
     }
 }
