@@ -1,6 +1,7 @@
 package net.tangentmc;
 
 import ecs100.UI;
+import ecs100.Trace;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -38,13 +39,15 @@ public class RoboticArmJNI implements RoboticArm {
     }
     public double readAngle(int servo) {
         if (process == null) return -1;
+        Trace.setVisible(true);
 		out.println("m");
 		out.flush();
         try {
-            while (in.available() != 0) {
+            while (in.available() > 0) {
                 Scanner s = new Scanner(in);
                 while (s.hasNextLine()) {
                     String next = s.nextLine();
+					Trace.println(next);
                     if (next.startsWith("measured")) {
                         String[] args = next.replace("measured angles: ","").split(" ");
                         return Double.parseDouble(args[servo].split("=")[1]);
