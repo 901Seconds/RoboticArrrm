@@ -46,11 +46,11 @@
         <entry file="file://$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="55">
-              <caret line="136" column="68" selection-start-line="136" selection-start-column="68" selection-end-line="136" selection-end-column="68" />
+              <caret line="122" column="63" selection-start-line="122" selection-start-column="63" selection-end-line="122" selection-end-column="63" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4082#4083#0" expanded="true" />
-                <element signature="e#4124#4125#0" expanded="true" />
+                <element signature="e#4102#4103#0" expanded="true" />
+                <element signature="e#4144#4145#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -948,14 +948,7 @@
       <workItem from="1473182449213" duration="21551000" />
       <workItem from="1473334286204" duration="31804000" />
       <workItem from="1473474551900" duration="981000" />
-      <workItem from="1473476337484" duration="11544000" />
-    </task>
-    <task id="LOCAL-00119" summary="Exclude some dependancies, remove the example name from JNI">
-      <created>1473384760816</created>
-      <option name="number" value="00119" />
-      <option name="presentableId" value="LOCAL-00119" />
-      <option name="project" value="LOCAL" />
-      <updated>1473384760816</updated>
+      <workItem from="1473476337484" duration="11779000" />
     </task>
     <task id="LOCAL-00120" summary="More delay">
       <created>1473384953085</created>
@@ -1293,11 +1286,18 @@
       <option name="project" value="LOCAL" />
       <updated>1473488891677</updated>
     </task>
-    <option name="localTasksCounter" value="168" />
+    <task id="LOCAL-00168" summary="Set home explicitly">
+      <created>1473489041479</created>
+      <option name="number" value="00168" />
+      <option name="presentableId" value="LOCAL-00168" />
+      <option name="project" value="LOCAL" />
+      <updated>1473489041479</updated>
+    </task>
+    <option name="localTasksCounter" value="169" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="142016000" />
+    <option name="totallyTimeSpent" value="142251000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1371,7 +1371,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Probably a good idea to init the robot" />
     <MESSAGE value="Oh." />
     <MESSAGE value="Clean up c, dont draw anything that breaks everything" />
     <MESSAGE value="Clean up c v2" />
@@ -1396,7 +1395,8 @@
     <MESSAGE value="run inside bash" />
     <MESSAGE value="Actually pass commands" />
     <MESSAGE value="Redirect io" />
-    <option name="LAST_COMMIT_MESSAGE" value="Redirect io" />
+    <MESSAGE value="Set home explicitly" />
+    <option name="LAST_COMMIT_MESSAGE" value="Set home explicitly" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1719,11 +1719,11 @@
     <entry file="file://$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="55">
-          <caret line="136" column="68" selection-start-line="136" selection-start-column="68" selection-end-line="136" selection-end-column="68" />
+          <caret line="122" column="63" selection-start-line="122" selection-start-column="63" selection-end-line="122" selection-end-column="63" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4082#4083#0" expanded="true" />
-            <element signature="e#4124#4125#0" expanded="true" />
+            <element signature="e#4102#4103#0" expanded="true" />
+            <element signature="e#4144#4145#0" expanded="true" />
           </folding>
         </state>
       </provider>

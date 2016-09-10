@@ -62,6 +62,7 @@ public class RoboticArmJNI implements RoboticArm {
         out.println(lastPoints[0]);
         out.println(lastPoints[1]);
         out.println(lastPoints[2]);
+        out.flush();
 
     }
     public void calibrate() {
@@ -120,7 +121,6 @@ public class RoboticArmJNI implements RoboticArm {
         setServo(1, Math.max(Math.min(ARM_2_MAX,pulse2),ARM_2_MIN));
         UI.println("Set angles to: "+theta1+","+theta2);
         UI.println("Measured: "+readAngle(0)+","+readAngle(1));
-
     }
 
     @Override
