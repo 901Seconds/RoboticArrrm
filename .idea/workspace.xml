@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="562fd72b-2674-4bdb-9358-2e62d0a324de" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/resources/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/resources/debug.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/resources/index2.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/resources/test.html" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/resources/typescript" afterPath="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/resources/typescript" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/resources/typescript" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/Launcher.java" afterPath="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/Launcher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/web/WebSocketServer.java" afterPath="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/web/WebSocketServer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/resources/html5-canvas-drawing-app.js" afterPath="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/resources/html5-canvas-drawing-app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/resources/index.html" afterPath="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/resources/index.html" />
     </list>
     <ignored path="RoboticArrrm.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -40,11 +33,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Launcher.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Launcher.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/Launcher.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-1913">
-              <caret line="86" column="20" selection-start-line="86" selection-start-column="20" selection-end-line="86" selection-end-column="20" />
+              <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1223#1224#0" expanded="true" />
@@ -52,6 +45,16 @@
                 <element signature="e#1923#2141#0" expanded="true" />
                 <element signature="e#2140#2141#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="9" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="9" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -144,13 +147,13 @@
         <option value="$PROJECT_DIR$/RoboticArrrmAPI/src/main/java/net/tangentmc/RoboticArmModel.java" />
         <option value="$PROJECT_DIR$/RoboticArrrmAPI/src/main/java/net/tangentmc/util/Utils.java" />
         <option value="$PROJECT_DIR$/RoboticArrrmAPI/src/main/java/net/tangentmc/util/InterpolatedPathIterator.java" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/build.sh" />
         <option value="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/resources/index.html" />
         <option value="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/resources/html5-canvas-drawing-app.js" />
         <option value="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/web/WebSocketServer.java" />
         <option value="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/Launcher.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -1021,14 +1024,7 @@
       <workItem from="1473334286204" duration="31804000" />
       <workItem from="1473474551900" duration="981000" />
       <workItem from="1473476337484" duration="12479000" />
-      <workItem from="1473492919817" duration="16395000" />
-    </task>
-    <task id="LOCAL-00150" summary="Should probably sleep in the busy loop">
-      <created>1473477111180</created>
-      <option name="number" value="00150" />
-      <option name="presentableId" value="LOCAL-00150" />
-      <option name="project" value="LOCAL" />
-      <updated>1473477111180</updated>
+      <workItem from="1473492919817" duration="16449000" />
     </task>
     <task id="LOCAL-00151" summary="take not poll">
       <created>1473477314521</created>
@@ -1366,11 +1362,18 @@
       <option name="project" value="LOCAL" />
       <updated>1473509145259</updated>
     </task>
-    <option name="localTasksCounter" value="199" />
+    <task id="LOCAL-00199" summary="Use a single thread for drawing the launcher ui, fix bugs with website, remove old files">
+      <created>1473513109194</created>
+      <option name="number" value="00199" />
+      <option name="presentableId" value="LOCAL-00199" />
+      <option name="project" value="LOCAL" />
+      <updated>1473513109194</updated>
+    </task>
+    <option name="localTasksCounter" value="200" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="159346000" />
+    <option name="totallyTimeSpent" value="159400000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1444,7 +1447,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Actually pass commands" />
     <MESSAGE value="Redirect io" />
     <MESSAGE value="Set home explicitly" />
     <MESSAGE value="Flush dat stream" />
@@ -1469,7 +1471,8 @@
     <MESSAGE value="General Code Cleanup, Launcher works from a list of RoboticArms, moved point interpolation to the simulation itself," />
     <MESSAGE value="Add files to gitignore" />
     <MESSAGE value="there is really no gain to making this parallel at this point." />
-    <option name="LAST_COMMIT_MESSAGE" value="there is really no gain to making this parallel at this point." />
+    <MESSAGE value="Use a single thread for drawing the launcher ui, fix bugs with website, remove old files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Use a single thread for drawing the launcher ui, fix bugs with website, remove old files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1706,14 +1709,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="10" selection-start-line="1" selection-start-column="10" selection-end-line="1" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/debug.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1791,7 +1786,7 @@
     <entry file="file://$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/Launcher.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1913">
-          <caret line="86" column="20" selection-start-line="86" selection-start-column="20" selection-end-line="86" selection-end-column="20" />
+          <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1223#1224#0" expanded="true" />
@@ -1799,6 +1794,14 @@
             <element signature="e#1923#2141#0" expanded="true" />
             <element signature="e#2140#2141#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="9" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
