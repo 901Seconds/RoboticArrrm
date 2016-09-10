@@ -30,14 +30,18 @@ public class Launcher {
     double sliderTime = 10;
     AffineTransform transform = new AffineTransform();
     boolean drawTorobot;
-    RoboticArmJNIServer robot;
+    RoboticArmJNI robot;
     WebSocketServer server;
     public static void main(String[] args) {
         new Launcher();
     }
     public Launcher() {
-        server = new WebSocketServer(this);
-        robot = new RoboticArmJNIServer(server, 287,374,377,374,154);
+        try {
+            robot = new RoboticArmJNI(287,374,377,374,154);
+            robot.init();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         armSimu = new RoboticArmSimulation(robot.getModel());
         UI.addButton("Pick SVG", this::load);
         UI.addButton("Clear", ()->{shapes.clear();current=null;draw();});
@@ -53,6 +57,8 @@ public class Launcher {
                 left = e.getButton() == MouseEvent.BUTTON1;
             }
         });
+        server = new WebSocketServer(this);
+        new Thread(WebServer::new).start();
     }
 
     private void clearSim() {
@@ -96,6 +102,7 @@ public class Launcher {
             shapeObjectIterator.remove();
             draw();
         }
+        System.out.print("TEST");
         running.set(false);
     }
 
@@ -173,6 +180,7 @@ public class Launcher {
         width = ux-lx;
         height = uy-ly;
         draw();
+        simulate();
     }
     private void load() {
         if (running.get()) {

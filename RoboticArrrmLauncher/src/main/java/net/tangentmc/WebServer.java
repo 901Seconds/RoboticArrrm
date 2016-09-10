@@ -26,11 +26,11 @@ public class WebServer {
             if (request.isEmpty()) request = "index.html";
             if (!new File(request).exists()) request +=".html";
             if (!new File(request).exists()) request = "404.html";
-            String response = new String(Files.readAllBytes(new File(request).toPath()));
-            t.sendResponseHeaders(200, response.length());
-            OutputStream os = t.getResponseBody();
-            os.write(response.getBytes());
-            os.close();
+            File file = new File(request);
+            t.sendResponseHeaders(200, file.length());
+            OutputStream outputStream=t.getResponseBody();
+            Files.copy(file.toPath(), outputStream);
+            outputStream.close();
         }
     }
 

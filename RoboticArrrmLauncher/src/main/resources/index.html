@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Test website</title>
-</head>
-<body>
+<html>
+  <head>
+    <title>Create HTML5 Canvas JavaScript Drawing App Example</title>
+  </head>
+  <body>
+    <div id="canvasDiv"></div>
 
-<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-<script>
-    var host = window.location.hostname;
-    var socket = io(host+":9092");
-    //socket.emit("drawShape",{"xpoints":[10,20,30,40,50,60,100,102],"ypoints":[40,40,80,90,100,110,200,300]});
-</script>
-</body>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+    <!--[if IE]><script type="text/javascript" src="excanvas.js"></script><![endif]-->
+    <script type="text/javascript" src="html5-canvas-drawing-app.js"></script>
+    <script type="text/javascript">
+    	 drawingApp.init();
+	</script>
+  </body>
 </html>

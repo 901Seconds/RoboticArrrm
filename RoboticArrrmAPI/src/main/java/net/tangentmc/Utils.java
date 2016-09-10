@@ -28,7 +28,7 @@ public class Utils {
         for (Point.Double[] points: pointcol) {
             AngleTuple[] angles = new AngleTuple[points.length];
             for (int i = 0; i < points.length; i++) {
-                angles[i] = new AngleTuple(m.findTheta(1, 1, points[i].getX(), points[i].getY()), m.findTheta(2, 1, points[i].getX(), points[i].getY()));
+                angles[i] = new AngleTuple(m.findTheta(1, -1, points[i].getX(), points[i].getY()), m.findTheta(2, 1, points[i].getX(), points[i].getY()));
             }
             anglecol.add(angles);
         }
