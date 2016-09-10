@@ -60,6 +60,7 @@ public class RoboticArmJNI implements RoboticArm {
         }).on(Socket.EVENT_CONNECT, args-> {
             System.out.print("CONNETED.");
         });
+        new Thread(socket::connect).start();
         o1X=shoulder1X;
         o1Y=shoulder1Y;
         o2X=shoulder2X;
@@ -69,7 +70,6 @@ public class RoboticArmJNI implements RoboticArm {
         theModel = new RoboticArmModel(o1X,o1Y,o2X,o2Y,l);
         init();
         calibrate();
-        new Thread(socket::connect).start();
         while (true) {
             JSONObject obj = movementQueue.take();
             try {
