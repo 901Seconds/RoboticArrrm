@@ -134,7 +134,7 @@ public class RoboticArmJNI implements RoboticArm {
     }
 
     public void init() throws Exception{
-        ProcessBuilder builder = new ProcessBuilder("sudo ~/Arm/arm2");
+        ProcessBuilder builder = new ProcessBuilder("/bin/bash sudo ~/Arm/arm2");
         process = builder.start();
         out = new PrintStream(process.getOutputStream());
         in = new DataInputStream(process.getInputStream());
