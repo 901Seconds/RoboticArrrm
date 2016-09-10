@@ -14,17 +14,21 @@
             <version>1.16.10</version>
             <scope>provided</scope>
         </dependency>
-
+        <dependency>
+            <groupId>io.socket</groupId>
+            <artifactId>socket.io-client</artifactId>
+            <version>0.7.0</version>
+        </dependency>
         <dependency>
             <groupId>com.sanjay900</groupId>
             <artifactId>ProcessingWrapper</artifactId>
             <version>1.2</version>
         </dependency>
         <dependency>
-        <groupId>nz.ac.victoria.ecs</groupId>
-        <artifactId>ecs</artifactId>
-        <version>100</version>
-    </dependency>
+            <groupId>nz.ac.victoria.ecs</groupId>
+            <artifactId>ecs</artifactId>
+            <version>100</version>
+        </dependency>
         <dependency>
             <groupId>net.tangentmc</groupId>
             <artifactId>RoboticArrrmAPI</artifactId>
@@ -96,7 +100,7 @@
                         <configuration>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>net.tangentmc.Launcher</mainClass>
+                                    <mainClass>net.tangentmc.RoboticArmJNI</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

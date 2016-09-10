@@ -30,12 +30,12 @@ public class Launcher {
     double sliderTime = 10;
     AffineTransform transform = new AffineTransform();
     boolean drawTorobot;
-    RoboticArmJNI robot;
+    RoboticArmJNIServer robot;
     public static void main(String[] args) {
         new Launcher();
     }
     public Launcher() {
-        robot = new RoboticArmJNI(287,374,377,374,154);
+        robot = new RoboticArmJNIServer(287,374,377,374,154);
         armSimu = new RoboticArmSimulation(new RoboticArmModel(287,374,377,374,154));
         UI.addButton("Pick SVG", this::load);
         UI.addButton("Clear", ()->{shapes.clear();current=null;draw();});

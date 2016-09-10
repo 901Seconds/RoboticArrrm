@@ -1,9 +1,14 @@
 package net.tangentmc;
 
 import ecs100.UI;
+import io.socket.client.IO;
+import io.socket.client.Socket;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.scijava.nativelib.NativeLoader;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import static net.tangentmc.Utils.absLength;
 
@@ -15,6 +20,13 @@ public class RoboticArmJNI implements RoboticArm {
     private static final int ARM_2_MIN = 1000;
     private static final int ARM_2_MAX = 1400;
     double arm1MinAngle, arm1MaxAngle,arm2MinAngle, arm2MaxAngle;
+    Socket socket;
+
+    public static void main(String[] args) {
+        if (args.length == 0) args = new String[]{"10.140.108.96:"};
+        RoboticArmJNI robot = new RoboticArmJNI(287,374,377,374,154, args[0]);
+
+    }
     static {
         try {
             NativeLoader.loadLibrary("RoboticArrrmJNI-1.0-SNAPSHOT");
@@ -25,7 +37,27 @@ public class RoboticArmJNI implements RoboticArm {
     double o1X, o1Y, o2X, o2Y;
     double d, l;
     RoboticArmModel theModel;
-    public RoboticArmJNI(double shoulder1X, double shoulder1Y, double shoulder2X, double shoulder2Y, double appendageLength) {
+    public RoboticArmJNI(double shoulder1X, double shoulder1Y, double shoulder2X, double shoulder2Y, double appendageLength, String ip) {
+        try {
+            socket = IO.socket("http://"+ip+":9092");
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        socket.on("setAngle",args->{
+            JSONObject obj = (JSONObject)args[0];
+            try {
+                setAngle(obj.getDouble("theta1"),obj.getDouble("theta2"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }).on("setPenMode",args->{
+            JSONObject obj = (JSONObject)args[0];
+            try {
+                setPenMode(obj.getBoolean("penMode"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        });
         o1X=shoulder1X;
         o1Y=shoulder1Y;
         o2X=shoulder2X;
@@ -33,8 +65,7 @@ public class RoboticArmJNI implements RoboticArm {
         d=absLength(o1X,o2X,o1Y,o2Y);
         l=appendageLength;
         theModel = new RoboticArmModel(o1X,o1Y,o2X,o2Y,l);
-
-        new Thread(this::init).run();
+        init();
         calibrate();
     }
     public native void init();

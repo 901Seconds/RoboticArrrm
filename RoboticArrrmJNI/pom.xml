@@ -37,6 +37,11 @@
             <version>1.16.10</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>io.socket</groupId>
+            <artifactId>socket.io-client</artifactId>
+            <version>RELEASE</version>
+        </dependency>
     </dependencies>
     <build>
         <defaultGoal>integration-test</defaultGoal>

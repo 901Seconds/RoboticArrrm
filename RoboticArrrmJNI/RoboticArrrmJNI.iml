@@ -35,5 +35,11 @@
     <orderEntry type="library" name="Maven: batik:batik-parser:1.6-1" level="project" />
     <orderEntry type="library" name="Maven: batik:batik-awt-util:1.6-1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.projectlombok:lombok:1.16.10" level="project" />
+    <orderEntry type="library" name="Maven: io.socket:socket.io-client:0.7.0" level="project" />
+    <orderEntry type="library" name="Maven: io.socket:engine.io-client:0.7.0" level="project" />
+    <orderEntry type="library" name="Maven: com.squareup.okhttp3:okhttp-ws:3.0.1" level="project" />
+    <orderEntry type="library" name="Maven: com.squareup.okhttp3:okhttp:3.0.1" level="project" />
+    <orderEntry type="library" name="Maven: com.squareup.okio:okio:1.6.0" level="project" />
+    <orderEntry type="library" name="Maven: org.json:json:20090211" level="project" />
   </component>
 </module>
