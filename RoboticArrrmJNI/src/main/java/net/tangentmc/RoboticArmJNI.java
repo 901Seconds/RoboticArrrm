@@ -1,9 +1,11 @@
 package net.tangentmc;
 
 import ecs100.UI;
-import jdk.internal.util.xml.impl.Input;
 
-import java.io.*;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.Scanner;
 
 import static net.tangentmc.Utils.absLength;
