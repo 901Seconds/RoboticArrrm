@@ -1,6 +1,6 @@
 package net.tangentmc;
 
-public interface RoboticArm {
+interface RoboticArm {
 
     void setAngle(double theta1, double theta2);
 

@@ -26,11 +26,8 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by surface on 18/07/2016.
- */
-public class SVGer {
-    public static Shape parsePathShape(String svgPathShape) {
+public class SVGParser {
+    private static Shape parsePathShape(String svgPathShape) {
         try {
             AWTPathProducer pathProducer = new AWTPathProducer();
             PathParser pathParser = new PathParser();
@@ -44,6 +41,7 @@ public class SVGer {
     }
 
 
+    @SuppressWarnings("Duplicates")
     public Shape[] shapesFromXML(String fileName) {
         ArrayList<Shape> shapes = new ArrayList<>();
         File opened = new File(fileName);

@@ -4,9 +4,9 @@ import com.sanjay900.ProcessingRunner;
 import processing.core.PApplet;
 
 public class RoboticArmPlotter extends PApplet {
-    public boolean willClear = false;
+    boolean willClear = false;
 
-    public RoboticArmPlotter() {
+    RoboticArmPlotter() {
         ProcessingRunner.run(this);
     }
     public void settings() {
@@ -15,10 +15,9 @@ public class RoboticArmPlotter extends PApplet {
 
     public void setup() {
         noLoop();
-        noSmooth();
         background(30, 35, 40);
     }
-    double[] tCPs;
+    private double[] tCPs;
     public void draw() {
         if (willClear) {
             background(30, 35, 40);
@@ -49,10 +48,6 @@ public class RoboticArmPlotter extends PApplet {
         ellipse((float)X1,(float)Y1,(float)width,(float)height);
     }
 
-    private void line(double X1, double Y1, double X2, double Y2) {
-        line((float)X1,(float)Y1,(float)X2,(float)Y2);
-    }
-
     private void drawAngleGraph(double theta1, double theta2) {
         stroke(255, 0, 0);
         fill(200, 0, 0);
@@ -72,8 +67,8 @@ public class RoboticArmPlotter extends PApplet {
         fill(30, 35, 40);
         rect(0, 0, width, 100);
     }
-    double theta1,theta2;
-    public void drawPoints(double[] tCPs, double theta1, double theta2) {
+    private double theta1,theta2;
+    void drawPoints(double[] tCPs, double theta1, double theta2) {
         this.tCPs = tCPs;
         this.theta1 = theta1;
         this.theta2 = theta2;

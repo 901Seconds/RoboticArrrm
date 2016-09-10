@@ -132,11 +132,18 @@ public class RoboticArmJNI implements RoboticArm {
     }
 
     void init() throws Exception {
-        Trace.setVisible(true);
         //Script is required here, as there is a bug with java/c where the input stream
         //is not correctly flushed otherwise, and we recieve no input.
+        //If a computer has the script command, and the script isnt found,
+        //Or we forget sudo or the arm crashes, throw an exception
         ProcessBuilder builder = new ProcessBuilder("script","-c","/home/pi/Arm/arm2");
         process = builder.start();
+        Thread.sleep(1000);
+        if (!process.isAlive()) {
+            process = null;
+            throw new IOException("The arm failed to start!");
+        }
+        Trace.setVisible(true);
         out = new PrintStream(process.getOutputStream());
         in = new BufferedInputStream(process.getInputStream());
         calibrate();

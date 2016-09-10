@@ -36,7 +36,7 @@ public class Utils {
             for (InterpolatedPathIterator it = new InterpolatedPathIterator(shape.getPathIterator(new AffineTransform()),0.01); !it.isDone(); it.next()) {
                 it.currentSegment(coords);
                 //If a path is 10 pixels away, its likely a path that has been moved
-                //So we seperate it out into its own path.
+                //So we separate it out into its own path.
                 if (points.size() > 0 && points.get(points.size()-1).distanceSq(coords[0],coords[1]) > 10 ){
                     pointcol.add(points.toArray(new Point2D.Double[0]));
                     points.clear();

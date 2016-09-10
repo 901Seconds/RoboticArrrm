@@ -1,6 +1,7 @@
 package net.tangentmc;
 
 import com.sanjay900.ProcessingRunner;
+import ecs100.UI;
 import processing.core.PApplet;
 
 import static net.tangentmc.util.Utils.*;
@@ -35,11 +36,10 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
 
     public void setup() {
         noLoop();
-
         textSize(20);
         background(30, 35, 40);
     }
-    double theta1, theta2;
+    private double theta1, theta2;
     public void draw() {
         //Shift the bot towards the center of the screen
         //translate(200,200);
@@ -99,23 +99,38 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
         rect(0, 0, width, height);
     }
     @Override
-    public void setAngle(double theta1, double theta2) {
-        this.theta1 = theta1;
-        this.theta2 = theta2;
-        loop();
+    public void setAngle(double newTheta1, double newTheta2) {
+        float oldTheta1 = (float) this.theta1;
+        float oldTheta2 = (float) this.theta2;
+        if (penDown) {
+            float t = 0;
+            while (t < 1) {
+                t += 0.08;
+                this.theta1 = PApplet.lerp(oldTheta1, (float) newTheta1, t);
+                this.theta2 = PApplet.lerp(oldTheta2, (float) newTheta2, t);
+                loop();
+                try {
+                    Thread.sleep(0, 100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        this.theta1 = newTheta1;
+        this.theta2 = newTheta2;
     }
 
     @Override
     public RoboticArmModel getModel() {
         return theArms;
     }
-    public boolean penDown = false;
-    //@Override
+    private boolean penDown = false;
+
     public void setPenMode(boolean down) {
         penDown = down;
     }
 
-    public void flagClear() {
+    void flagClear() {
         plotter.willClear = true;
     }
 }

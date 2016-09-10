@@ -5,53 +5,58 @@ import ecs100.UIFileChooser;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import net.tangentmc.svg.SVGer;
+import net.tangentmc.svg.SVGParser;
 import net.tangentmc.util.AngleTuple;
 import net.tangentmc.util.DrawShape;
 import net.tangentmc.util.Utils;
 import net.tangentmc.web.WebServer;
-import net.tangentmc.web.WebSocketServer;
-import processing.core.PApplet;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.NoninvertibleTransformException;
 import java.awt.geom.Path2D;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
 
-/**
- * Created by sanjay on 5/09/2016.
- */
 public class Launcher {
-    ArrayList<ShapeObject> shapes = new ArrayList<>();
-    double xSpc;
-    double ySpc;
-    double scaleX = 1;
-    double scaleY = 1;
-    boolean left = false;
-    double sliderTime = 10;
-    AffineTransform transform = new AffineTransform();
-    boolean drawTorobot;
-    RoboticArmJNI robot;
-    WebSocketServer server;
+    private ArrayList<ShapeObject> shapes = new ArrayList<>();
+    private double xSpc;
+    private double ySpc;
+    private double scaleX = 1;
+    private double scaleY = 1;
+    private boolean left = false;
+    private double sliderTime = 1;
+    private AffineTransform transform = new AffineTransform();
+    private ArrayList<RoboticArm> arms = new ArrayList<>();
+
+    //Are we currently drawing something?
+    private AtomicBoolean running = new AtomicBoolean(false);
+
     public static void main(String[] args) {
         new Launcher();
     }
-    public Launcher() {
+    private Launcher() {
 
-        robot = new RoboticArmJNI(287,374,377,374,154);
-        armSimu = new RoboticArmSimulation(robot.getModel());
+        RoboticArmJNI robot = new RoboticArmJNI(287,374,377,374,154);
+        RoboticArmSimulation armSimu = new RoboticArmSimulation(robot.getModel());
+        arms.add(robot);
+        arms.add(armSimu);
         UI.addButton("Pick SVG", this::load);
-        UI.addButton("Clear", ()->{shapes.clear();current=null;draw();});
-        UI.addButton("Simulate", ()->{drawTorobot=false;simulate();});
-        UI.addButton("Robot", ()->{drawTorobot=true;simulate();});
+        UI.addButton("Clear", ()->{
+            shapes.clear();
+            current=null;
+            armSimu.flagClear();
+            draw();
+        });
+        UI.addButton("Simulate / Plot", this::plot);
         UI.setMouseMotionListener(this::mouseMove);
-        UI.addSlider("Wait",0,10,s->sliderTime=s);
-        UI.addButton("Clear Simulation",this::clearSim);
+        UI.addSlider("Wait",0,10,sliderTime,s->sliderTime=s);
         ((JComponent) UI.theUI.canvas).addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -64,76 +69,57 @@ public class Launcher {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        server = new WebSocketServer(this);
-        new Thread(WebServer::new).start();
+        new WebServer(this);
     }
-
-    private void clearSim() {
-        armSimu.flagClear();
-    }
-
-    RoboticArmSimulation armSimu;
-    AtomicBoolean running = new AtomicBoolean(false);
-    private void simulate() {
+    public void plot() {
         if (running.get()) return;
         running.set(true);
-        AngleTuple last;
-        ArrayList<AngleTuple[]> anglesFromShapesSimu;
-        ArrayList<AngleTuple[]> anglesFromShapesBot = null;
+        ArrayList<ArrayList<AngleTuple[]>> angleTuples = new ArrayList<>();
         Iterator<ShapeObject> shapeObjectIterator = shapes.iterator();
         ShapeObject shapeObject;
+        AngleTuple temp;
         while (shapeObjectIterator.hasNext()) {
             shapeObject = shapeObjectIterator.next();
             current.applyTransformation(transform);
+            current = null;
             for (int i = 0; i < shapeObject.getShapes().length; i++) {
                 ArrayList<Point.Double[]> points = Utils.getAllPoints(shapeObject.getShapes()[i]);
-                anglesFromShapesSimu = Utils.getAllAngles(armSimu.getModel(), points);
-                if (robot != null && drawTorobot)
-                    anglesFromShapesBot = Utils.getAllAngles(robot.getModel(), points);
+                angleTuples.addAll(arms.stream().map(arm -> Utils.getAllAngles(arm.getModel(), points)).collect(Collectors.toList()));
                 draw();
-                last = anglesFromShapesSimu.get(0)[0];
-                for (int i1 = 0; i1 < anglesFromShapesSimu.size(); i1++) {
-                    armSimu.setPenMode(false);
-                    interpBetween(last, anglesFromShapesSimu.get(i1)[0]);
-                    last = anglesFromShapesSimu.get(i1)[0];
-                    armSimu.setPenMode(true);
-                    for (int i2 = 0; i2 < anglesFromShapesSimu.get(i1).length; i2++) {
-                        if (anglesFromShapesBot != null)
-                            robot.setAngle(anglesFromShapesBot.get(i1)[i2].getTheta1(), anglesFromShapesBot.get(i1)[i2].getTheta2());
-                        interpBetween(last, anglesFromShapesSimu.get(i1)[i2]);
-                        last = anglesFromShapesSimu.get(i1)[i2];
+                int maxShapes = angleTuples.stream().mapToInt(ArrayList::size).max().orElseGet(()->0);
+                int maxTuples = angleTuples.stream().mapToInt(tuple -> tuple.stream().mapToInt(t -> t.length).max().orElseGet(()->0)).max().orElseGet(()->0);
+                for (int i1 = 0; i1 < maxShapes; i1++) {
+                    for (RoboticArm arm : arms) {
+                        arm.setPenMode(false);
+                        if (i1 > angleTuples.get(arms.indexOf(arm)).size()) {
+                            continue;
+                        }
+                        temp = angleTuples.get(arms.indexOf(arm)).get(i1)[0];
+                        arm.setAngle(temp.getTheta1(),temp.getTheta2());
                     }
+                    for (RoboticArm arm : arms) {
+                        arm.setPenMode(true);
+                    }
+                    for (int i2 = 0; i2 < maxTuples; i2++) {
+                        for (RoboticArm arm : arms) {
+                            if (i1 > angleTuples.get(arms.indexOf(arm)).size() || i2 > angleTuples.get(arms.indexOf(arm)).get(i1).length) {
+                                continue;
+                            }
+                            temp = angleTuples.get(arms.indexOf(arm)).get(i1)[i2];
+                            arm.setAngle(temp.getTheta1(),temp.getTheta2());
+                        }
+                    }
+                    shapeObject.getShapes()[i] = null;
                 }
-                shapeObject.getShapes()[i] = null;
             }
             shapeObjectIterator.remove();
             draw();
         }
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        UI.sleep(100);
         running.set(false);
     }
 
-    private void interpBetween(AngleTuple last, AngleTuple angle) {
-        float t = 0;
-        while (t < 1) {
-            float theta1 = PApplet.lerp((float)last.getTheta1(),(float)angle.getTheta1(),t);
-            float theta2 = PApplet.lerp((float)last.getTheta2(),(float)angle.getTheta2(),t);
-            armSimu.setAngle(theta1, theta2);
-            t+=0.5;
-            try {
-                Thread.sleep((long) sliderTime);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    double lastX = -1,lastY = -1;
-    double width,height;
+    private double lastX = -1,lastY = -1, width,height;
     private void mouseMove(String s, double x, double y) {
         if (s.equals("pressed")) {
             lastX = x;
@@ -159,7 +145,7 @@ public class Launcher {
         }
 
     }
-    ShapeObject current;
+    private ShapeObject current;
     public void addShape(ShapeObject shapeObject) {
         if (current != null) {
             current.applyTransformation(transform);
@@ -191,7 +177,6 @@ public class Launcher {
         width = ux-lx;
         height = uy-ly;
         draw();
-        simulate();
     }
     private void load() {
         if (running.get()) {
@@ -199,11 +184,12 @@ public class Launcher {
             return;
         }
         String file = UIFileChooser.open("Pick an SVG file");
-        addShape(new ShapeObject(new SVGer().shapesFromXML(file)));
+        if (file == null) return;
+        addShape(new ShapeObject(new SVGParser().shapesFromXML(file)));
     }
 
     private void draw() {
-        UI.getGraphics().setTransform(new AffineTransform());
+        transform = new AffineTransform();
         UI.clearGraphics();
         for (ShapeObject s: shapes) {
             if (s == current) continue;
@@ -212,14 +198,17 @@ public class Launcher {
                 UI.getGraphics().draw(s2);
             }
         }
-        UI.getGraphics().translate(xSpc,ySpc);
-        UI.getGraphics().scale(scaleX,scaleY);
-        transform = new AffineTransform(UI.getGraphics().getTransform());
+        transform.translate(xSpc,ySpc);
+        transform.scale(scaleX,scaleY);
         if (current != null) {
+            current.applyTransformation(transform);
             for (Shape s2 : current.getShapes()) {
                 if (s2 == null) continue;
                 UI.getGraphics().draw(s2);
             }
+            try {
+                current.applyTransformation(transform.createInverse());
+            } catch (NoninvertibleTransformException ignored) {}
         }
         UI.repaintAllGraphics();
     }
@@ -229,7 +218,7 @@ public class Launcher {
     @Setter
     public static class ShapeObject {
         Shape[] shapes;
-       public ShapeObject(DrawShape shape) {
+        public ShapeObject(DrawShape shape) {
             Path2D path = new Path2D.Double();
             path.moveTo(shape.xpoints[0],shape.ypoints[0]);
             for (int i = 1; i < shape.xpoints.length; i++) {
@@ -238,7 +227,7 @@ public class Launcher {
             shapes = new Shape[]{path};
         }
 
-        public void applyTransformation(AffineTransform transform) {
+        void applyTransformation(AffineTransform transform) {
             for (int i = 0; i < shapes.length; i++) {
                 shapes[i] = transform.createTransformedShape(shapes[i]);
             }

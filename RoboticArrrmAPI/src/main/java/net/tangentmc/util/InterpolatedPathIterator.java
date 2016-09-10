@@ -36,7 +36,7 @@ import java.util.NoSuchElementException;
 /**
  * A Modified FlatteningPathIterator that also Interpolates straight lines.
  */
-public class InterpolatedPathIterator implements PathIterator {
+class InterpolatedPathIterator implements PathIterator {
     private static final int GROW_SIZE = 24;    // Multiple of cubic & quad curve size
 
     private PathIterator src;                   // The source iterator
@@ -57,8 +57,6 @@ public class InterpolatedPathIterator implements PathIterator {
     // and 2 relative quad segments.
 
     private double curx, cury;                  // The ending x,y of the last segment
-
-    private double movy;                  // The x,y of the last move segment
 
     private int holdType;                       // The type of the curve being held
     // for interpolation
@@ -94,7 +92,7 @@ public class InterpolatedPathIterator implements PathIterator {
      * @param flatness the maximum allowable distance between the
      * control points and the flattened curve
      */
-    public InterpolatedPathIterator(PathIterator src, double flatness) {
+    InterpolatedPathIterator(PathIterator src, double flatness) {
         this(src, flatness, 10);
     }
 

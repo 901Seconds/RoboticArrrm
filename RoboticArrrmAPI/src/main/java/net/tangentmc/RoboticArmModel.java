@@ -7,9 +7,9 @@ import static net.tangentmc.util.Utils.findOp;
 public class RoboticArmModel {
 
     //2*lengths ulnar and forearm
-    public double l=180;
+    double l;
     //2*distance between shoulders
-    double d=236;
+    double d;
 
     //o is for shoulder, 1 means left, 2 means right
     double o1X;
@@ -17,15 +17,7 @@ public class RoboticArmModel {
     double o2X;
     double o2Y;
 
-    public RoboticArmModel(double shoulder1X, double shoulder1Y, double shoulder2X, double shoulder2Y) {
-        o1X=shoulder1X;
-        o1Y=shoulder1Y;
-        o2X=shoulder2X;
-        o2Y=shoulder2Y;
-        d=o2X-o1X;
-    }
-
-    public RoboticArmModel(double shoulder1X, double shoulder1Y, double shoulder2X, double shoulder2Y, double armLength) {
+    RoboticArmModel(double shoulder1X, double shoulder1Y, double shoulder2X, double shoulder2Y, double armLength) {
         o1X=shoulder1X;
         o1Y=shoulder1Y;
         o2X=shoulder2X;
@@ -55,7 +47,6 @@ public class RoboticArmModel {
             if(leftRight<=0) {
                 X2=elbows[4];
                 Y2=elbows[5];
-                //System.out.println("X1= " + X1 + ", Y1= " + Y1 + ", X2= " + X2 + ", Y2= " + Y2);
             }
             if(leftRight>0) {
                 X2=elbows[6];
@@ -65,14 +56,14 @@ public class RoboticArmModel {
         else {
             System.out.println("shoulder number must be 1 or 2");
         }
-        angle= Math.atan2(Y1-Y2,-X1+X2);
+        angle = Math.atan2(Y1-Y2,-X1+X2);
         return angle;
     }
 
     public double findTheta(int shoulderNum, int leftRight, double x, double y) {
         return findTheta(findElbowPosition(x,y),shoulderNum,leftRight);
     }
-    public double[] findTCPPos(double theta1, double theta2) {
+    double[] findTCPPos(double theta1, double theta2) {
 
         //e is for elbow, 1 is for left, 2 is for right
         double e1X, e1Y, e2X, e2Y;
@@ -99,14 +90,6 @@ public class RoboticArmModel {
         return points;
     }
 
-    public double getWorkSpaceWidth() {
-        return 4*l-d;
-    }
-
-    public double getWorkSpaceHeight() {
-        return 2*findOp(2*l,d);
-    }
-
 
     private double[] findElbowPosition(double targetX, double targetY) {
         //co-ordinates of the center point of a line drawn from the shoulders to the mouse
@@ -131,7 +114,7 @@ public class RoboticArmModel {
 
         //uses the length of the line as determined by the radius of the circle
         //and the slope of the line as determined by the inverse reciprocal of the angle
-        //to determine the co-ordinates where the normal intersetcs the reach of the ulnar
+        //to determine the co-ordinates where the normal intersects the reach of the ulnar
         double o1NormalX1 = o1XC + o1R* Math.cos(o1NormalAngle);
         double o1NormalY1 = o1YC + o1R* Math.sin(o1NormalAngle);
         double o1NormalX2 = o1XC - o1R* Math.cos(o1NormalAngle);
