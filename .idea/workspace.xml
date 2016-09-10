@@ -45,8 +45,8 @@
       <file leaf-file-name="RoboticArmJNI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="339">
-              <caret line="158" column="29" selection-start-line="158" selection-start-column="29" selection-end-line="158" selection-end-column="29" />
+            <state relative-caret-position="322">
+              <caret line="156" column="80" selection-start-line="156" selection-start-column="80" selection-end-line="156" selection-end-column="80" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -991,14 +991,7 @@
       <workItem from="1473334286204" duration="31804000" />
       <workItem from="1473474551900" duration="981000" />
       <workItem from="1473476337484" duration="12479000" />
-      <workItem from="1473492919817" duration="3372000" />
-    </task>
-    <task id="LOCAL-00137" summary="Clean up c, dont draw anything that breaks everything">
-      <created>1473392602768</created>
-      <option name="number" value="00137" />
-      <option name="presentableId" value="LOCAL-00137" />
-      <option name="project" value="LOCAL" />
-      <updated>1473392602768</updated>
+      <workItem from="1473492919817" duration="3533000" />
     </task>
     <task id="LOCAL-00138" summary="Clean up c, dont draw anything that breaks everything">
       <created>1473392808893</created>
@@ -1336,11 +1329,18 @@
       <option name="project" value="LOCAL" />
       <updated>1473496131174</updated>
     </task>
-    <option name="localTasksCounter" value="186" />
+    <task id="LOCAL-00186" summary="asjpodfa">
+      <created>1473496308160</created>
+      <option name="number" value="00186" />
+      <option name="presentableId" value="LOCAL-00186" />
+      <option name="project" value="LOCAL" />
+      <updated>1473496308160</updated>
+    </task>
+    <option name="localTasksCounter" value="187" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="146323000" />
+    <option name="totallyTimeSpent" value="146484000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1414,7 +1414,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="take not poll" />
     <MESSAGE value="connect not start" />
     <MESSAGE value="some debug for testing sockets" />
     <MESSAGE value="Simple java term" />
@@ -1439,7 +1438,8 @@
     <MESSAGE value="init after UI" />
     <MESSAGE value="Multi threading! YAY" />
     <MESSAGE value="." />
-    <option name="LAST_COMMIT_MESSAGE" value="." />
+    <MESSAGE value="asjpodfa" />
+    <option name="LAST_COMMIT_MESSAGE" value="asjpodfa" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1731,8 +1731,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="158" column="29" selection-start-line="158" selection-start-column="29" selection-end-line="158" selection-end-column="29" />
+        <state relative-caret-position="322">
+          <caret line="156" column="80" selection-start-line="156" selection-start-column="80" selection-end-line="156" selection-end-column="80" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
