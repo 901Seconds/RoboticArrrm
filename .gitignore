@@ -1,5 +1,5 @@
-.class
-
+*.class
+typescript
 # Mac
 .DS_Store
 
