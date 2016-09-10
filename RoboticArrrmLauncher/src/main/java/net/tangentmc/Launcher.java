@@ -38,7 +38,7 @@ public class Launcher {
     public Launcher() {
         server = new WebSocketServer(this);
         robot = new RoboticArmJNIServer(server, 287,374,377,374,154);
-        armSimu = new RoboticArmSimulation(new RoboticArmModel(287,374,377,374,154));
+        armSimu = new RoboticArmSimulation(robot.getModel());
         UI.addButton("Pick SVG", this::load);
         UI.addButton("Clear", ()->{shapes.clear();current=null;draw();});
         UI.addButton("Simulate", ()->{drawTorobot=false;simulate();});

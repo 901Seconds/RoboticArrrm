@@ -67,12 +67,14 @@ public class RoboticArmJNI implements RoboticArm {
         theModel = new RoboticArmModel(o1X,o1Y,o2X,o2Y,l);
         init();
         calibrate();
+        socket.open();
+        while (true) {
+        }
     }
     public native void init();
     public native double readAngle(int servo);
     public native void setServo(int servo, double pulse);
     public void calibrate() {
-        new Thread(()-> {
             setServo(0, ARM_1_MIN);
             try {
                 Thread.sleep(3000);
@@ -110,8 +112,6 @@ public class RoboticArmJNI implements RoboticArm {
             mArm2 = ((ARM_2_MAX - ARM_2_MIN) / (arm2MaxAngle - arm2MinAngle));
             cArm1 = ARM_1_MIN - mArm1 * arm1MinAngle;
             cArm2 = ARM_2_MIN - mArm2 * arm2MinAngle;
-        }).start();
-
     }
     double lastTheta1 = -90;
     double lastTheta2 = -90;
