@@ -40,27 +40,17 @@ public class RoboticArmJNI implements RoboticArm {
         Trace.setVisible(true);
 		out.println("m");
 		out.flush();
-        try {
-            Thread.sleep(10);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        try {
-            while (in.available() > 0) {
-                Scanner s = new Scanner(in);
-                while (s.hasNextLine()) {
-                    String next = s.nextLine();
-                    if (next.startsWith("measured")) {
-                        String[] args = next.replace("measured angles: ","").split(" ");
-                        Trace.println(Arrays.toString(Arrays.stream(args).map(s2 -> s2.split("=")[1]).toArray()));
-                        return Double.parseDouble(args[servo].split("=")[1]);
-                    }
+        while (true) {
+            Scanner s = new Scanner(in);
+            while (s.hasNextLine()) {
+                String next = s.nextLine();
+                if (next.startsWith("measured")) {
+                    String[] args = next.replace("measured angles: ","").split(" ");
+                    Trace.println(Arrays.toString(Arrays.stream(args).map(s2 -> s2.split("=")[1]).toArray()));
+                    return Double.parseDouble(args[servo].split("=")[1]);
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-        return -1;
     }
     int[] lastPoints = new int[]{1500,1500,1500};
     public void setServo(int servo, int pulse) {
