@@ -11,14 +11,16 @@ import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
 public class WebServer {
-
-    public static void main(String[] args) throws Exception {
-        HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
-        server.createContext("/", new MyHandler());
-        server.setExecutor(null); // creates a default executor
-        server.start();
+    public WebServer() {
+        try {
+            HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
+            server.createContext("/", new MyHandler());
+            server.setExecutor(null); // creates a default executor
+            server.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-
     private static class MyHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange t) throws IOException {
