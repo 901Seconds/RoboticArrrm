@@ -45,10 +45,14 @@
       <file leaf-file-name="RoboticArmJNI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
-              <caret line="131" column="42" selection-start-line="131" selection-start-column="42" selection-end-line="131" selection-end-column="42" />
+            <state relative-caret-position="353">
+              <caret line="134" column="64" selection-start-line="134" selection-start-column="64" selection-end-line="134" selection-end-column="64" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#4005#4006#0" expanded="true" />
+                <element signature="e#4036#4037#0" expanded="true" />
+                <element signature="e#4094#4095#0" expanded="true" />
+                <element signature="e#4136#4137#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -991,14 +995,7 @@
       <workItem from="1473334286204" duration="31804000" />
       <workItem from="1473474551900" duration="981000" />
       <workItem from="1473476337484" duration="12479000" />
-      <workItem from="1473492919817" duration="4773000" />
-    </task>
-    <task id="LOCAL-00143" summary="Share model between simu/robot">
-      <created>1473393830104</created>
-      <option name="number" value="00143" />
-      <option name="presentableId" value="LOCAL-00143" />
-      <option name="project" value="LOCAL" />
-      <updated>1473393830104</updated>
+      <workItem from="1473492919817" duration="5606000" />
     </task>
     <task id="LOCAL-00144" summary="Share model between simu/robot">
       <created>1473393869994</created>
@@ -1336,11 +1333,18 @@
       <option name="project" value="LOCAL" />
       <updated>1473497411701</updated>
     </task>
-    <option name="localTasksCounter" value="192" />
+    <task id="LOCAL-00192" summary="C Is Stupid">
+      <created>1473497724460</created>
+      <option name="number" value="00192" />
+      <option name="presentableId" value="LOCAL-00192" />
+      <option name="project" value="LOCAL" />
+      <updated>1473497724460</updated>
+    </task>
+    <option name="localTasksCounter" value="193" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="147724000" />
+    <option name="totallyTimeSpent" value="148557000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1414,7 +1418,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="No longer care about jni" />
     <MESSAGE value="random import" />
     <MESSAGE value="Including jni twice" />
     <MESSAGE value="Rejig POM" />
@@ -1439,7 +1442,8 @@
     <MESSAGE value="Reader thread." />
     <MESSAGE value="..." />
     <MESSAGE value="You know..." />
-    <option name="LAST_COMMIT_MESSAGE" value="You know..." />
+    <MESSAGE value="C Is Stupid" />
+    <option name="LAST_COMMIT_MESSAGE" value="C Is Stupid" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1640,7 +1644,7 @@
         <state relative-caret-position="-2205">
           <caret line="25" column="37" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1731,10 +1735,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="131" column="42" selection-start-line="131" selection-start-column="42" selection-end-line="131" selection-end-column="42" />
+        <state relative-caret-position="353">
+          <caret line="134" column="64" selection-start-line="134" selection-start-column="64" selection-end-line="134" selection-end-column="64" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#4005#4006#0" expanded="true" />
+            <element signature="e#4036#4037#0" expanded="true" />
+            <element signature="e#4094#4095#0" expanded="true" />
+            <element signature="e#4136#4137#0" expanded="true" />
           </folding>
         </state>
       </provider>

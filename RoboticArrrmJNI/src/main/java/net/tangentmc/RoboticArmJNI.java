@@ -16,8 +16,8 @@ public class RoboticArmJNI implements RoboticArm {
     private static final int ARM_1_MAX = 2000;
     private static final int ARM_2_MIN = 1000;
     private static final int ARM_2_MAX = 1400;
-    BufferedReader in;
-    BufferedWriter out;
+    InputStream in;
+    PrintStream out;
 
     double arm1MinAngle, arm1MaxAngle,arm2MinAngle, arm2MaxAngle;
 
@@ -37,30 +37,35 @@ public class RoboticArmJNI implements RoboticArm {
     }
     public double readAngle(int servo) {
         if (process == null) return -1;
+        Trace.setVisible(true);
+        out.println("m");
+        out.flush();
         try {
-            out.write("m");
-            out.flush();
+            while (in.available() > 0) {
+                Scanner s = new Scanner(in);
+                while (s.hasNextLine()) {
+                    String next = s.nextLine();
+                    if (next.startsWith("measured")) {
+                        String[] args = next.replace("measured angles: ","").split(" ");
+                        Trace.println(Arrays.stream(args).map(s2 -> s2.split("=")[1]).toArray());
+                        return Double.parseDouble(args[servo].split("=")[1]);
+                    }
+                }
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Trace.print("Attempting read angle.");
         return -1;
     }
     int[] lastPoints = new int[]{1500,1500,1500};
     public void setServo(int servo, int pulse) {
         if (process == null) return;
-        try {
-            Thread.sleep(100);
-            lastPoints[servo] = pulse;
-            out.write("s\n");
-            out.write(lastPoints[0]+"\n");
-            out.write(lastPoints[1]+"\n");
-            out.write(lastPoints[2]+"\n");
-            out.flush();
-        } catch (InterruptedException | IOException e) {
-            e.printStackTrace();
-        }
-        Trace.print("Attempting set servo pulse.");
+        lastPoints[servo] = pulse;
+        out.println("s");
+        out.println(lastPoints[0]);
+        out.println(lastPoints[1]);
+        out.println(lastPoints[2]);
+        out.flush();
 
     }
     public void calibrate() {
@@ -127,33 +132,10 @@ public class RoboticArmJNI implements RoboticArm {
     }
 
     public void init() throws Exception{
-        Trace.setVisible(true);
-        ProcessBuilder builder = new ProcessBuilder("sudo","/home/pi/Arm/arm2");
-        builder.redirectErrorStream(true);
+        ProcessBuilder builder = new ProcessBuilder("script","-c","/home/pi/Arm/arm2");
         process = builder.start();
-        out = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()));
-        in = new BufferedReader(new InputStreamReader(process.getInputStream()));
-
-        new Thread(()->{
-            try {
-                while (true) {
-                    String next = in.readLine();
-                    if (next == null) continue;
-                    Trace.println(next);
-                    if (next.startsWith("p1")) {
-                        Trace.println("FUCK YES"+next);
-                        //return;
-                    }
-                    if (next.startsWith("measured")) {
-                        String[] args = next.replace("measured angles: ","").split(" ");
-                        Trace.println(Arrays.toString(Arrays.stream(args).map(s2 -> s2.split("=")[1]).toArray()));
-                        //return Double.parseDouble(args[servo].split("=")[1]);
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }).start();
+        out = new PrintStream(process.getOutputStream());
+        in = new BufferedInputStream(process.getInputStream());
         calibrate();
     }
 }
