@@ -9,6 +9,8 @@ import org.scijava.nativelib.NativeLoader;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import static net.tangentmc.Utils.absLength;
 
@@ -21,11 +23,11 @@ public class RoboticArmJNI implements RoboticArm {
     private static final int ARM_2_MAX = 1400;
     double arm1MinAngle, arm1MaxAngle,arm2MinAngle, arm2MaxAngle;
     Socket socket;
+    BlockingQueue<JSONObject> movementQueue = new LinkedBlockingQueue<>();
 
     public static void main(String[] args) {
         if (args.length == 0) args = new String[]{"10.140.108.96:"};
         RoboticArmJNI robot = new RoboticArmJNI(287,374,377,374,154, args[0]);
-
     }
     static {
         try {
@@ -45,18 +47,11 @@ public class RoboticArmJNI implements RoboticArm {
         }
         socket.on("setAngle",args->{
             JSONObject obj = (JSONObject)args[0];
-            try {
-                setAngle(obj.getDouble("theta1"),obj.getDouble("theta2"));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            movementQueue.add(obj);
+
         }).on("setPenMode",args->{
             JSONObject obj = (JSONObject)args[0];
-            try {
-                setPenMode(obj.getBoolean("penMode"));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            movementQueue.add(obj);
         });
         o1X=shoulder1X;
         o1Y=shoulder1Y;
@@ -67,8 +62,18 @@ public class RoboticArmJNI implements RoboticArm {
         theModel = new RoboticArmModel(o1X,o1Y,o2X,o2Y,l);
         init();
         calibrate();
-        socket.open();
+        new Thread(socket::open).start();
         while (true) {
+            JSONObject obj = movementQueue.poll();
+            try {
+                if (obj.has("theta1")) {
+                    setAngle(obj.getDouble("theta1"), obj.getDouble("theta2"));
+                } else if (obj.has("penMode")){
+                    setPenMode(obj.getBoolean("penMode"));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
