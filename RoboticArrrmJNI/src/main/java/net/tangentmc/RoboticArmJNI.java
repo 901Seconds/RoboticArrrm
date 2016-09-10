@@ -61,15 +61,6 @@ public class RoboticArmJNI implements RoboticArm {
             System.out.print("CONNETED.");
         });
         new Thread(socket::connect).start();
-        o1X=shoulder1X;
-        o1Y=shoulder1Y;
-        o2X=shoulder2X;
-        o2Y=shoulder2Y;
-        d=absLength(o1X,o2X,o1Y,o2Y);
-        l=appendageLength;
-        theModel = new RoboticArmModel(o1X,o1Y,o2X,o2Y,l);
-        init();
-        calibrate();
         while (true) {
             JSONObject obj = movementQueue.take();
             try {
