@@ -64,7 +64,7 @@ public class RoboticArmJNI implements RoboticArm {
         if (process == null) return;
         new Thread(()->{
             try {
-                Thread.sleep(10);
+                Thread.sleep(100);
                 lastPoints[servo] = pulse;
                 out.println("s");
                 out.println(lastPoints[0]);
