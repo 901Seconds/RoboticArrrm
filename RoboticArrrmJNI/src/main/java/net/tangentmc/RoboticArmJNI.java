@@ -3,10 +3,7 @@ package net.tangentmc;
 import ecs100.UI;
 import ecs100.Trace;
 
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintStream;
+import java.io.*;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -138,7 +135,7 @@ public class RoboticArmJNI implements RoboticArm {
         ProcessBuilder builder = new ProcessBuilder("sudo","/home/pi/Arm/arm2");
         process = builder.start();
         out = new PrintStream(process.getOutputStream());
-        in = new DataInputStream(process.getInputStream());
+        in = new BufferedInputStream(process.getInputStream());
         calibrate();
     }
 }
