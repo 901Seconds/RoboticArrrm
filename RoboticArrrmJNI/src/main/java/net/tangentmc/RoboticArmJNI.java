@@ -69,6 +69,11 @@ public class RoboticArmJNI implements RoboticArm {
         calibrate();
         socket.open();
         while (true) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
     public native void init();
