@@ -127,18 +127,10 @@ public class Launcher {
         double ux = 0;
         double uy = 0;
         for (Shape s : current.shapes) {
-            if (s.getBounds().getX() < lx) {
-                lx = s.getBounds().getX();
-            }
-            if (s.getBounds().getY() < ly) {
-                ly = s.getBounds().getY();
-            }
-            if (s.getBounds().getMaxX() > ux) {
-                ux = s.getBounds().getMaxX();
-            }
-            if (s.getBounds().getMaxY() > uy) {
-                uy = s.getBounds().getMaxY();
-            }
+            lx=Math.min(lx,s.getBounds().getX());
+            ly=Math.min(ly,s.getBounds().getY());
+            ux=Math.max(ux,s.getBounds().getMaxX());
+            uy=Math.max(uy,s.getBounds().getMaxY());
         }
         lx = 10;
         ly = 10;
