@@ -30,28 +30,27 @@ public class Launcher {
     private double scaleX = 1;
     private double scaleY = 1;
     private boolean left = false;
-    private double sliderTime = 1;
     private AffineTransform transform = new AffineTransform();
     private ArrayList<RoboticArm> arms = new ArrayList<>();
 
     public static void main(String[] args) {
         new Launcher();
     }
+
     private Launcher() {
-        RoboticArmJNI robot = new RoboticArmJNI(new RoboticArmModel(287,374,377,374,154));
+        RoboticArmJNI robot = new RoboticArmJNI(new RoboticArmModel(287, 374, 377, 374, 154));
         RoboticArmSimulation armSimu = new RoboticArmSimulation(robot.getModel());
         arms.add(robot);
         arms.add(armSimu);
         UI.addButton("Pick SVG", this::load);
-        UI.addButton("Clear", ()->{
+        UI.addButton("Clear", () -> {
             shapes.clear();
-            current=null;
+            current = null;
             armSimu.flagClear();
             draw();
         });
-        UI.addButton("Simulate / Plot", ()->shapes.add(current));
+        UI.addButton("Simulate / Plot", () -> shapes.add(current));
         UI.setMouseMotionListener(this::mouseMove);
-        UI.addSlider("Wait",0,10,sliderTime,s->sliderTime=s);
         ((JComponent) UI.theUI.canvas).addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -68,21 +67,21 @@ public class Launcher {
         new WebServer(this);
         new Thread(this::plotThread).start();
     }
+
     private void plotThread() {
         //noinspection InfiniteLoopStatement
         while (true) {
-            if (current != null)
-                current.applyTransformation(transform);
-            current = null;
             ArrayList<ArrayList<AngleTuple[]>> angleTuples = new ArrayList<>();
-            ShapeObject shapeObject;
             AngleTuple temp;
             try {
-                shapeObject = shapes.take();
-                for (int i = 0; i < shapeObject.getShapes().length; i++) {
-                    ArrayList<Point.Double[]> points = Utils.getAllPoints(shapeObject.getShapes()[i]);
+                currentDrawing = shapes.take();
+                if (current == currentDrawing)
+                    current.applyTransformation(transform);
+                current = null;
+                draw();
+                for (int i = 0; i < currentDrawing.getShapes().length; i++) {
+                    ArrayList<Point.Double[]> points = Utils.getAllPoints(currentDrawing.getShapes()[i]);
                     angleTuples.addAll(arms.stream().map(arm -> Utils.getAllAngles(arm.getModel(), points)).collect(Collectors.toList()));
-
                     int maxShapes = angleTuples.stream().mapToInt(ArrayList::size).max().orElseGet(() -> 0);
                     int maxTuples = angleTuples.stream().mapToInt(tuple -> tuple.stream().mapToInt(t -> t.length).max().orElseGet(() -> 0)).max().orElseGet(() -> 0);
                     for (int i1 = 0; i1 < maxShapes; i1++) {
@@ -106,9 +105,11 @@ public class Launcher {
                                 arm.setAngle(temp.getTheta1(), temp.getTheta2());
                             }
                         }
-                        shapeObject.getShapes()[i] = null;
                     }
+                    currentDrawing.getShapes()[i] = null;
+                    draw();
                 }
+                currentDrawing = null;
                 draw();
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -116,7 +117,8 @@ public class Launcher {
         }
     }
 
-    private double lastX = -1,lastY = -1, width,height;
+    private double lastX = -1, lastY = -1, width, height;
+
     private void mouseMove(String s, double x, double y) {
         if (s.equals("pressed")) {
             lastX = x;
@@ -128,11 +130,11 @@ public class Launcher {
         }
         if (lastX != -1) {
             if (left) {
-                xSpc += x-lastX;
-                ySpc += y-lastY;
+                xSpc += x - lastX;
+                ySpc += y - lastY;
             } else {
-                scaleX += (x-lastX)/width;
-                scaleY += (y-lastY)/height;
+                scaleX += (x - lastX) / width;
+                scaleY += (y - lastY) / height;
             }
             if (shapes != null) {
                 draw();
@@ -142,13 +144,17 @@ public class Launcher {
         }
 
     }
+
     private ShapeObject current;
+    private ShapeObject currentDrawing;
+
     public void addShape(ShapeObject shapeObject) {
         if (current != null) {
             current.applyTransformation(transform);
         }
         shapes.add(shapeObject);
     }
+
     private void load() {
         String file = UIFileChooser.open("Pick an SVG file");
         if (file == null) return;
@@ -158,12 +164,12 @@ public class Launcher {
         if (current != null) {
             current.applyTransformation(transform);
         }
-        current=new ShapeObject(new SVGParser().shapesFromXML(file));
+        current = new ShapeObject(new SVGParser().shapesFromXML(file));
         double lx = Double.MAX_VALUE;
         double ly = Double.MAX_VALUE;
         double ux = 0;
         double uy = 0;
-        for (Shape s: current.shapes) {
+        for (Shape s : current.shapes) {
             if (s.getBounds().getX() < lx) {
                 lx = s.getBounds().getX();
             }
@@ -179,34 +185,38 @@ public class Launcher {
         }
         lx = 10;
         ly = 10;
-        width = ux-lx;
-        height = uy-ly;
+        width = ux - lx;
+        height = uy - ly;
         draw();
     }
 
     private void draw() {
-        transform = new AffineTransform();
         UI.clearGraphics();
-        for (ShapeObject s: shapes) {
-            for (Shape s2 : s.getShapes()) {
-                if (s2 == null) continue;
-                UI.getGraphics().draw(s2);
-            }
-        }
-        transform.translate(xSpc,ySpc);
-        transform.scale(scaleX,scaleY);
+        shapes.forEach(this::drawShape);
+        transform = new AffineTransform();
+        transform.translate(xSpc, ySpc);
+        transform.scale(scaleX, scaleY);
         if (current != null) {
             current.applyTransformation(transform);
-            for (Shape s2 : current.getShapes()) {
-                if (s2 == null) continue;
-                UI.getGraphics().draw(s2);
-            }
+            drawShape(current);
             try {
                 current.applyTransformation(transform.createInverse());
-            } catch (NoninvertibleTransformException ignored) {}
+            } catch (NoninvertibleTransformException ignored) {
+            }
+        }
+        if (currentDrawing != null) {
+            drawShape(currentDrawing);
         }
         UI.repaintAllGraphics();
     }
+
+    private void drawShape(ShapeObject shape) {
+        for (Shape s2 : shape.getShapes()) {
+            if (s2 == null) continue;
+            UI.getGraphics().draw(s2);
+        }
+    }
+
 
     @AllArgsConstructor
     @Getter
@@ -215,11 +225,12 @@ public class Launcher {
         //Scale web objects down
         private static int scale = 11;
         Shape[] shapes;
+
         public ShapeObject(WebShape shape) {
             Path2D path = new Path2D.Double();
-            path.moveTo(shape.xpoints[0]/ scale,shape.ypoints[0]/ scale);
+            path.moveTo(shape.xpoints[0] / scale, shape.ypoints[0] / scale);
             for (int i = 1; i < shape.xpoints.length; i++) {
-                path.lineTo(shape.xpoints[i]/ scale,shape.ypoints[i]/ scale);
+                path.lineTo(shape.xpoints[i] / scale, shape.ypoints[i] / scale);
             }
             shapes = new Shape[]{path};
         }
