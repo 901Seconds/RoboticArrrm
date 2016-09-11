@@ -100,7 +100,7 @@ public class Launcher {
                         for (RoboticArm arm : arms) {
                            // arm.setPenMode(true);
                         }
-                        for (int i2 = 0; i2 < maxTuples; i2++) {
+                        for (int i2 = 0; i2 < maxTuples; i2+=10) {
                             for (RoboticArm arm : arms) {
                                 if (i1 > angleTuples.get(arms.indexOf(arm)).size() || i2 > angleTuples.get(arms.indexOf(arm)).get(i1).length) {
                                     continue;

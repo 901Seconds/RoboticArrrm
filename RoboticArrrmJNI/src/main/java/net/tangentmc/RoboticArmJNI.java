@@ -28,8 +28,10 @@ public class RoboticArmJNI implements RoboticArm {
     }
     private void flushInput() {
         try {
-            long i = in.skip(in.available());
-            System.out.println("Skipped "+i);
+            while (in.available() > 0) {
+                //noinspection ResultOfMethodCallIgnored
+                in.read();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
