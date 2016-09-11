@@ -31,19 +31,19 @@ public class RoboticArmJNI implements RoboticArm {
         out.println(MEASURE_ANGLE_COMMAND);
         out.flush();
         try {
+            double d = -1;
+            Scanner s = new Scanner(in);
             while (in.available() > 0) {
-                Scanner s = new Scanner(in);
-                while (s.hasNextLine()) {
-                    String next = s.nextLine();
-                    if (next.startsWith("measured")) {
-                        //The angles are separated by space
-                        String[] args = next.replace("measured angles: ","").split(" ");
-                        //The doubles are stored as theta=double so we want whats after the equals sign
-                        Trace.println(Arrays.toString(Arrays.stream(args).map(s2 -> s2.split("=")[1]).toArray()));
-                        return Double.parseDouble(args[servo].split("=")[1]);
-                    }
+                String next = s.nextLine();
+                if (next.startsWith("measured")) {
+                    //The angles are separated by space
+                    String[] args = next.replace("measured angles: ","").split(" ");
+                    //The doubles are stored as theta=double so we want whats after the equals sign
+                    Trace.println(Arrays.toString(Arrays.stream(args).map(s2 -> s2.split("=")[1]).toArray()));
+                    d = Double.parseDouble(args[servo].split("=")[1]);
                 }
             }
+            return d;
         } catch (IOException e) {
             e.printStackTrace();
         }

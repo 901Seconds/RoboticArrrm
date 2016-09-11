@@ -4,7 +4,6 @@
     <list default="true" id="562fd72b-2674-4bdb-9358-2e62d0a324de" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java" afterPath="$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/web/WebSocketServer.java" afterPath="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/web/WebSocketServer.java" />
     </list>
     <ignored path="RoboticArrrm.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -52,8 +51,8 @@
       <file leaf-file-name="RoboticArmJNI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="105" column="8" selection-start-line="105" selection-start-column="8" selection-end-line="105" selection-end-column="8" />
+            <state relative-caret-position="357">
+              <caret line="45" column="21" selection-start-line="45" selection-start-column="21" selection-end-line="45" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -994,14 +993,7 @@
       <workItem from="1473334286204" duration="31804000" />
       <workItem from="1473474551900" duration="981000" />
       <workItem from="1473476337484" duration="12479000" />
-      <workItem from="1473492919817" duration="27886000" />
-    </task>
-    <task id="LOCAL-00177" summary="While true?">
-      <created>1473494638488</created>
-      <option name="number" value="00177" />
-      <option name="presentableId" value="LOCAL-00177" />
-      <option name="project" value="LOCAL" />
-      <updated>1473494638488</updated>
+      <workItem from="1473492919817" duration="28141000" />
     </task>
     <task id="LOCAL-00178" summary="test">
       <created>1473494871762</created>
@@ -1339,11 +1331,18 @@
       <option name="project" value="LOCAL" />
       <updated>1473565915902</updated>
     </task>
-    <option name="localTasksCounter" value="226" />
+    <task id="LOCAL-00226" summary="Change delays">
+      <created>1473566218580</created>
+      <option name="number" value="00226" />
+      <option name="presentableId" value="LOCAL-00226" />
+      <option name="project" value="LOCAL" />
+      <updated>1473566218580</updated>
+    </task>
+    <option name="localTasksCounter" value="227" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="170837000" />
+    <option name="totallyTimeSpent" value="171092000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1417,7 +1416,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add files to gitignore" />
     <MESSAGE value="there is really no gain to making this parallel at this point." />
     <MESSAGE value="Use a single thread for drawing the launcher ui, fix bugs with website, remove old files" />
     <MESSAGE value="remove debug.txt" />
@@ -1442,7 +1440,8 @@
     <MESSAGE value="Dont remove points" />
     <MESSAGE value="Remove interp simu" />
     <MESSAGE value="t" />
-    <option name="LAST_COMMIT_MESSAGE" value="t" />
+    <MESSAGE value="Change delays" />
+    <option name="LAST_COMMIT_MESSAGE" value="Change delays" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1780,8 +1779,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="105" column="8" selection-start-line="105" selection-start-column="8" selection-end-line="105" selection-end-column="8" />
+        <state relative-caret-position="357">
+          <caret line="45" column="21" selection-start-line="45" selection-start-column="21" selection-end-line="45" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
