@@ -115,9 +115,9 @@ public class RoboticArmJNI implements RoboticArm {
         int pulse1 = (int) (mArm1*theta1+cArm1);
         int pulse2 = (int) (mArm2*theta2+cArm2);
         setServo(0, Math.max(Math.min(ARM_1_MAX,pulse1),ARM_1_MIN));
-        UI.sleep(20);
+        UI.sleep(1);
         setServo(1, Math.max(Math.min(ARM_2_MAX,pulse2),ARM_2_MIN));
-        UI.sleep(20);
+        UI.sleep(1);
         Trace.println("Servo 1:"+pulse1);
         Trace.println("Servo 2:"+pulse2);
     }
