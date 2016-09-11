@@ -25,7 +25,9 @@ public class RoboticArmJNI implements RoboticArm {
     }
     private void flushInput() {
         try {
-            while (in.readLine() != null) {
+            String next;
+            while ((next = in.readLine())!= null) {
+                System.out.print(next);
             }
         } catch (IOException e) {
             e.printStackTrace();
