@@ -27,14 +27,9 @@ public class RoboticArmJNI implements RoboticArm {
         theModel = model;
     }
     private double readAngle(int servo) {
-        return readAngle(servo,true);
-    }
-    private double readAngle(int servo, boolean send) {
         if (process == null) return -1;
-        if (send)  {
-            out.println(MEASURE_ANGLE_COMMAND);
-            out.flush();
-        }
+        out.println(MEASURE_ANGLE_COMMAND);
+        out.flush();
         try {
             while (in.available() > 0) {
                 Scanner s = new Scanner(in);
@@ -92,23 +87,23 @@ public class RoboticArmJNI implements RoboticArm {
         Trace.println("Arm 1 Min:");
         setServo(0, ARM_1_MIN);
         UI.sleep(3000);
-        double arm1MinAngle = readAngle(0,false);
+        double arm1MinAngle = readAngle(0);
 
         Trace.println("Arm 1 Max:");
         setServo(0, ARM_1_MAX);
         UI.sleep(3000);
-        double arm1MaxAngle = readAngle(0,false);
+        double arm1MaxAngle = readAngle(0);
 
 
         Trace.println("Arm 2 Min:");
         setServo(1, ARM_2_MIN);
         UI.sleep(3000);
-        double arm2MinAngle = readAngle(1,false);
+        double arm2MinAngle = readAngle(1);
 
         Trace.println("Arm 2 Max:");
         setServo(1, ARM_2_MAX);
         UI.sleep(3000);
-        double arm2MaxAngle = readAngle(1,false);
+        double arm2MaxAngle = readAngle(1);
 
         Trace.println("Calculating Constants:");
         mArm1 = ((ARM_1_MAX - ARM_1_MIN) / (arm1MaxAngle - arm1MinAngle));
@@ -118,15 +113,15 @@ public class RoboticArmJNI implements RoboticArm {
         setAngle(45,45);
         Trace.println("Setting Angles:");
         Trace.println("Set angles to: "+45+","+45);
-        readAngle(0,false);
+        Trace.println("Measured: "+readAngle(0)+","+readAngle(1));
         setAngle(60,60);
         Trace.println("Setting Angles:");
         Trace.println("Set angles to: "+45+","+45);
-        readAngle(0,false);
+        Trace.println("Measured: "+readAngle(0)+","+readAngle(1));
         setAngle(20,20);
         Trace.println("Setting Angles:");
         Trace.println("Set angles to: "+45+","+45);
-        readAngle(0,false);
+        Trace.println("Measured: "+readAngle(0)+","+readAngle(1));
 
     }
     @Override
