@@ -82,7 +82,6 @@ public class Launcher {
         while (true) {
             ArrayList<ArrayList<AngleTuple[]>> angleTuples = new ArrayList<>();
             AngleTuple temp;
-            AngleTuple last = null;
             try {
                 currentDrawing = shapes.take();
                 if (current == currentDrawing)
@@ -90,7 +89,6 @@ public class Launcher {
                 current = null;
                 draw();
                 for (int i = 0; i < currentDrawing.getShapes().length; i++) {
-                    if (currentDrawing.getShapes()[i] == null) continue;
                     ArrayList<Point.Double[]> points = Utils.getAllPoints(currentDrawing.getShapes()[i]);
                     angleTuples.addAll(arms.stream().map(arm -> Utils.getAllAngles(arm.getModel(), points)).collect(Collectors.toList()));
                     int maxShapes = angleTuples.stream().mapToInt(ArrayList::size).max().orElseGet(() -> 0);
@@ -113,7 +111,6 @@ public class Launcher {
                                 }
                                 temp = angleTuples.get(arms.indexOf(arm)).get(i1)[i2];
                                 arm.setAngle(temp.getTheta1(), temp.getTheta2());
-                                last = temp;
                             }
                         }
                     }
@@ -255,8 +252,9 @@ public class Launcher {
         }
 
         public void addPoints(ShapeObject shapeObject) {
+            int oldShapeLen = shapes.length;
             shapes = Arrays.copyOf(shapes,shapes.length+shapeObject.shapes.length);
-            System.arraycopy(shapeObject.shapes,0,shapes,shapes.length,shapeObject.shapes.length);
+            System.arraycopy(shapeObject.shapes,0,shapes,oldShapeLen,shapeObject.shapes.length);
         }
     }
 }
