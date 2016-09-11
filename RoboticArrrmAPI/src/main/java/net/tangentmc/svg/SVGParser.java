@@ -35,7 +35,6 @@ public class SVGParser {
     }
 
 
-    @SuppressWarnings("Duplicates")
     public Shape[] shapesFromXML(String fileName) {
         ArrayList<Shape> shapes = new ArrayList<>();
         File opened = new File(fileName);
@@ -57,17 +56,13 @@ public class SVGParser {
                 org.w3c.dom.Node p = pathList.item(i);
                 if (p.getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
                     Element path = (Element) p;
-                    double width = Double.parseDouble(path.getAttribute("width"));
-                    double height = Double.parseDouble(path.getAttribute("height"));
-                    double x=0,y=0;
-                    if (path.hasAttribute("x"))
-                        x = Double.parseDouble(path.getAttribute("x"));
-                    if (path.hasAttribute("y"))
-                        y = Double.parseDouble(path.getAttribute("y"));
-
+                    double width = getAttrib("width",path);
+                    double height = getAttrib("height",path);
+                    double x = getAttrib("x",path);
+                    double y = getAttrib("y",path);
                     if (path.hasAttribute("rx")) {
-                        double rx = Double.parseDouble(path.getAttribute("rx"));
-                        double ry = Double.parseDouble(path.getAttribute("ry"));
+                        double rx = getAttrib("rx",path);
+                        double ry = getAttrib("ry",path);
                         shapes.add(new RoundRectangle2D.Double(x,y,width,height,rx,ry));
                     } else {
                         shapes.add(new Rectangle2D.Double(x,y,width,height));
@@ -79,13 +74,10 @@ public class SVGParser {
                 org.w3c.dom.Node p = pathList.item(i);
                 if (p.getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
                     Element path = (Element) p;
-                    double r = Double.parseDouble(path.getAttribute("r"));
-                    double x=0,y=0;
-                    if (path.hasAttribute("cx"))
-                        x = Double.parseDouble(path.getAttribute("cx"));
-                    if (path.hasAttribute("cy"))
-                        y = Double.parseDouble(path.getAttribute("cy"));
-                        shapes.add(new Ellipse2D.Double(x,y,r,r));
+                    double r = getAttrib("r",path);
+                    double x = getAttrib("cx",path);
+                    double y = getAttrib("cy",path);
+                    shapes.add(new Ellipse2D.Double(x,y,r,r));
 
                 }
             }
@@ -94,13 +86,10 @@ public class SVGParser {
                 org.w3c.dom.Node p = pathList.item(i);
                 if (p.getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
                     Element path = (Element) p;
-                    double rx = Double.parseDouble(path.getAttribute("rx"));
-                    double ry = Double.parseDouble(path.getAttribute("ry"));
-                    double x=0,y=0;
-                    if (path.hasAttribute("cx"))
-                        x = Double.parseDouble(path.getAttribute("cx"));
-                    if (path.hasAttribute("cy"))
-                        y = Double.parseDouble(path.getAttribute("cy"));
+                    double rx = getAttrib("rx",path);
+                    double ry = getAttrib("ry",path);
+                    double x = getAttrib("cx",path);
+                    double y = getAttrib("cy",path);
                     shapes.add(new Ellipse2D.Double(x,y,rx,ry));
 
                 }
@@ -110,10 +99,10 @@ public class SVGParser {
                 org.w3c.dom.Node p = pathList.item(i);
                 if (p.getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
                     Element path = (Element) p;
-                    double x1 = Double.parseDouble(path.getAttribute("x1"));
-                    double y1 = Double.parseDouble(path.getAttribute("y1"));
-                    double x2 = Double.parseDouble(path.getAttribute("x2"));
-                    double y2 = Double.parseDouble(path.getAttribute("y2"));
+                    double x1 = getAttrib("x1",path);
+                    double y1 = getAttrib("y1",path);
+                    double x2 = getAttrib("x2",path);
+                    double y2 = getAttrib("y2",path);
                     shapes.add(new Line2D.Double(x1,y1,x2,y2));
 
                 }
@@ -150,59 +139,50 @@ public class SVGParser {
             pathList = doc.getElementsByTagName("text");
             for (int i = 0; i < pathList.getLength(); i++) {
                 org.w3c.dom.Node p = pathList.item(i);
-
-                double size = 10;
-                String fontFamily = null;
                 if (p.getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
                     Element path = (Element) p;
-                    if (path.hasAttribute("style")) {
-                        String styleAttribs = path.getAttribute("style");
-                        for (String s : styleAttribs.split(";")) {
-                            if (s.contains("font-size")) {
-                                size = Double.parseDouble(s.replace("font-size:", "").replace("px", ""));
-                            }
-                            if (s.contains("font-family")) {
-                                fontFamily = s.replace("font-family:","").replace("\'","");
-                            }
-                        }
-                    }
-                    double x = 0, y = 0;
-                    if (path.hasAttribute("x"))
-                        x = Double.parseDouble(path.getAttribute("x"));
-                    if (path.hasAttribute("y"))
-                        y = Double.parseDouble(path.getAttribute("y"));
+                    double x = getAttrib("x",path);
+                    double y = getAttrib("y",path);
+                    Font parentfont = parseStyle(path,null);
+                    Font font;
                     if (path.hasChildNodes()) {
                         Element tPath = path;
                         for (int i1 = 0; i1 < tPath.getChildNodes().getLength(); i1++) {
                             path = (Element) tPath.getChildNodes().item(i1);
-                            if (path.hasAttribute("style")) {
-                                String styleAttribs = path.getAttribute("style");
-                                for (String s : styleAttribs.split(";")) {
-                                    if (s.contains("font-size")) {
-                                        size = Double.parseDouble(s.replace("font-size:", "").replace("px", ""));
-                                    }
-                                    if (s.contains("font-family")) {
-                                        fontFamily = s.replace("font-family:","").replace("\'","");
-                                    }
-                                }
-                            }
                             if (path.getTextContent().isEmpty()) continue;
-                            Font font = new Font(fontFamily, Font.PLAIN, (int)size);
+                            font = parseStyle(path,parentfont);
                             shapes.add(getTextShape(path.getTextContent(), font, x, y));
                         }
-
                     }
                 }
             }
-
-
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }
         return shapes.toArray(new Shape[0]);
 
     }
-
+    private Font parseStyle(Element path, Font font) {
+        double size = font==null?10:font.getSize();
+        String fontFamily = font==null?null:font.getFamily();
+        if (path.hasAttribute("style")) {
+            String styleAttribs = path.getAttribute("style");
+            for (String s : styleAttribs.split(";")) {
+                if (s.contains("font-size")) {
+                    size = Double.parseDouble(s.replace("font-size:", "").replace("px", ""));
+                }
+                if (s.contains("font-family")) {
+                    fontFamily = s.replace("font-family:", "").replace("\'", "");
+                }
+            }
+        }
+        return new Font(fontFamily, Font.PLAIN, (int)size);
+    }
+    private double getAttrib(String attrib, Element path) {
+        if (path.hasAttribute(attrib))
+            return Double.parseDouble(path.getAttribute(attrib));
+        return 0;
+    }
     private Shape getTextShape(String str, Font font, double x, double y) {
         BufferedImage bufferImage = new BufferedImage(2,2, BufferedImage.TYPE_INT_RGB);
         Graphics2D g2d = bufferImage.createGraphics();
@@ -214,5 +194,4 @@ public class SVGParser {
         String[] split = point.split(",");
         return new Point2D.Double(Double.parseDouble(split[0]),Double.parseDouble(split[1]));
     }
-
 }
