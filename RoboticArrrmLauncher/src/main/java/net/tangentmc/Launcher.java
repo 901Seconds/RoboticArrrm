@@ -95,13 +95,12 @@ public class Launcher {
                     int maxTuples = angleTuples.stream().mapToInt(tuple -> tuple.stream().mapToInt(t -> t.length).max().orElseGet(() -> 0)).max().orElseGet(() -> 0);
                     for (int i1 = 0; i1 < maxShapes; i1++) {
                         for (RoboticArm arm : arms) {
-                            arm.setPenMode(false);
+                            arm.setPenMode(true);
                             if (i1 > angleTuples.get(arms.indexOf(arm)).size()) {
                                 continue;
                             }
                             temp = angleTuples.get(arms.indexOf(arm)).get(i1)[0];
                             arm.setAngle(temp.getTheta1(), temp.getTheta2());
-                            arm.setPenMode(true);
                         }
 
                         for (int i2 = 0; i2 < maxTuples; i2+=skipAmt) {
@@ -157,14 +156,19 @@ public class Launcher {
     private ShapeObject currentDrawing;
 
     public void addShape(ShapeObject shapeObject, boolean penDown) {
-        if(penDown) {
-            if (current != null) shapes.add(current);
-            current = shapeObject;
+        /*if(!penDown) {
+            if (current != null) {
+                shapes.add(current);
+                current = null;
+            }
         } else if (current == null) {
             current = shapeObject;
+            draw();
         } else {
             current.addPoints(shapeObject);
-        }
+            draw();
+        }*/
+        shapes.add(shapeObject);
     }
 
     private void load() {
@@ -251,7 +255,7 @@ public class Launcher {
             }
         }
 
-        public void addPoints(ShapeObject shapeObject) {
+        void addPoints(ShapeObject shapeObject) {
             int oldShapeLen = shapes.length;
             shapes = Arrays.copyOf(shapes,shapes.length+shapeObject.shapes.length);
             System.arraycopy(shapeObject.shapes,0,shapes,oldShapeLen,shapeObject.shapes.length);
