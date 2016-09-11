@@ -52,7 +52,7 @@
         <entry file="file://$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
-              <caret line="133" column="39" selection-start-line="133" selection-start-column="39" selection-end-line="133" selection-end-column="39" />
+              <caret line="133" column="21" selection-start-line="133" selection-start-column="21" selection-end-line="133" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -1003,14 +1003,7 @@
       <workItem from="1473334286204" duration="31804000" />
       <workItem from="1473474551900" duration="981000" />
       <workItem from="1473476337484" duration="12479000" />
-      <workItem from="1473492919817" duration="24001000" />
-    </task>
-    <task id="LOCAL-00167" summary="Redirect io">
-      <created>1473488891677</created>
-      <option name="number" value="00167" />
-      <option name="presentableId" value="LOCAL-00167" />
-      <option name="project" value="LOCAL" />
-      <updated>1473488891677</updated>
+      <workItem from="1473492919817" duration="24065000" />
     </task>
     <task id="LOCAL-00168" summary="Set home explicitly">
       <created>1473489041479</created>
@@ -1348,11 +1341,18 @@
       <option name="project" value="LOCAL" />
       <updated>1473561695207</updated>
     </task>
-    <option name="localTasksCounter" value="216" />
+    <task id="LOCAL-00216" summary="fghdd:/">
+      <created>1473561992677</created>
+      <option name="number" value="00216" />
+      <option name="presentableId" value="LOCAL-00216" />
+      <option name="project" value="LOCAL" />
+      <updated>1473561992677</updated>
+    </task>
+    <option name="localTasksCounter" value="217" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="166952000" />
+    <option name="totallyTimeSpent" value="167016000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1426,7 +1426,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="asjpodfa" />
     <MESSAGE value="apsdfaopsfjops" />
     <MESSAGE value="Reader thread." />
     <MESSAGE value="..." />
@@ -1451,7 +1450,8 @@
     <MESSAGE value="Use m instead of hoping for a angle to be measured." />
     <MESSAGE value="do a delay" />
     <MESSAGE value="fghddty" />
-    <option name="LAST_COMMIT_MESSAGE" value="fghddty" />
+    <MESSAGE value="fghdd:/" />
+    <option name="LAST_COMMIT_MESSAGE" value="fghdd:/" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1792,7 +1792,7 @@
     <entry file="file://$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
-          <caret line="133" column="39" selection-start-line="133" selection-start-column="39" selection-end-line="133" selection-end-column="39" />
+          <caret line="133" column="21" selection-start-line="133" selection-start-column="21" selection-end-line="133" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
