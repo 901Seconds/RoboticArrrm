@@ -57,11 +57,6 @@ public class RoboticArmPlotter extends PApplet {
         rect(width/2, 50, (float)theta2 * 150, 20);
     }
 
-
-    private void ellipse(double X1, double Y1, double width, double height) {
-        ellipse((float)X1,(float)Y1,(float)width,(float)height);
-    }
-
     private void drawAngleGraph(double theta1, double theta2) {
         stroke(255, 0, 0);
         fill(200, 0, 0);
@@ -82,7 +77,7 @@ public class RoboticArmPlotter extends PApplet {
         rect(0, 0, width, 100);
     }
     private double theta1,theta2;
-    double[] lasttCPs = null;
+    private double[] lasttCPs = null;
     void drawPoints(double[] tCPs, double theta1, double theta2, boolean penDown) {
         this.penDown = penDown;
         this.tCPs = tCPs;

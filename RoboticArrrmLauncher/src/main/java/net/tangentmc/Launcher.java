@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import net.tangentmc.svg.SVGParser;
-import net.tangentmc.util.AngleTuple;
+import net.tangentmc.util.Angle;
 import net.tangentmc.util.DrawPoint;
 import net.tangentmc.util.Utils;
 import net.tangentmc.web.WebServer;
@@ -16,7 +16,6 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.NoninvertibleTransformException;
 import java.awt.geom.Path2D;
 import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
@@ -24,6 +23,8 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 public class Launcher {
     private static final double WEB_SCALE_FACTOR = 0.5;
+    //Min distance between two points
+    private static final double LINE_MIN_DIST = 0.5;
 
     private BlockingQueue<DrawPoint> pointsToDraw = new LinkedBlockingQueue<>();
     private boolean left = false;
@@ -67,17 +68,36 @@ public class Launcher {
         new WebServer(this);
         new Thread(this::plotThread).start();
     }
+    private DrawPoint last;
     private void plotThread() {
         //noinspection InfiniteLoopStatement
         while (true) {
             try {
-                DrawPoint pt = pointsToDraw.take();
-                draw();
-                for (RoboticArm arm: arms) {
-                    AngleTuple tuple = Utils.convertPoint(arm.getModel(),pt);
-                    arm.setPenMode(tuple.isPenDown());
-                    arm.setAngle(tuple.getTheta1(),tuple.getTheta2());
+                DrawPoint cpt = pointsToDraw.take();
+                DrawPoint tmpPoint;
+                if(last == null) last = cpt.cpy();
+                double dist = last.dist(cpt);
+                if (dist > LINE_MIN_DIST) {
+                    for (double t = 0; t < 1; t+=LINE_MIN_DIST/dist) {
+                        draw();
+                        for (RoboticArm arm : arms) {
+                            tmpPoint = new DrawPoint(Utils.lerp(t,last.getX(),cpt.getX()),
+                                    Utils.lerp(t,last.getY(),cpt.getY()),
+                                    cpt.isPenDown());
+                            Angle tuple = Utils.convertPoint(arm.getModel(),tmpPoint);
+                            arm.setPenMode(tuple.isPenDown());
+                            arm.setAngle(tuple.getTheta1(), tuple.getTheta2());
+                        }
+                    }
+                } else {
+                    draw();
+                    for (RoboticArm arm : arms) {
+                        Angle tuple = Utils.convertPoint(arm.getModel(), cpt.cpy());
+                        arm.setPenMode(tuple.isPenDown());
+                        arm.setAngle(tuple.getTheta1(), tuple.getTheta2());
+                    }
                 }
+                last = cpt.cpy();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -170,7 +190,7 @@ public class Launcher {
     private void addShape(ShapeObject shape) {
         for (Shape shapes: shape.getShapes()) {
             if (shape == current) shapes = transform.createTransformedShape(shapes);
-            pointsToDraw.addAll(Utils.getAllPoints(shapes));
+            pointsToDraw.addAll(Utils.getAllPoints(shapes,LINE_MIN_DIST));
         }
         current = null;
     }

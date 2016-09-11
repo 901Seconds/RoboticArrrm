@@ -192,6 +192,7 @@ public class SVGParser {
                                     }
                                 }
                             }
+                            System.out.print(fontFamily);
                             if (path.getTextContent().isEmpty()) continue;
                             Font font = new Font(fontFamily, Font.PLAIN, (int)size);
                             shapes.add(getTextShape(path.getTextContent(), font, x, y));

@@ -11,7 +11,7 @@ import java.awt.*;
 @Setter
 @ToString
 @AllArgsConstructor
-public class AngleTuple {
+public class Angle {
     double theta1,theta2;
     boolean penDown;
 }
