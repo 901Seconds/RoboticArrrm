@@ -105,7 +105,7 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
         if (penDown) {
             float t = 0;
             while (t < 1) {
-                t += 0.08;
+                t += 1;
                 this.theta1 = PApplet.lerp(oldTheta1, (float) newTheta1, t);
                 this.theta2 = PApplet.lerp(oldTheta2, (float) newTheta2, t);
                 loop();
