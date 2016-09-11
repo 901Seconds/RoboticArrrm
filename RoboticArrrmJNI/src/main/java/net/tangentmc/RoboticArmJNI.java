@@ -51,7 +51,7 @@ public class RoboticArmJNI implements RoboticArm {
     }
     //Keep track of the last set servo positions since we have to set all three at once
     private int[] lastPoints = new int[]{1500,1500,1500};
-    private void setServo(int servo, int pulse) {
+    void setServo(int servo, int pulse) {
         if (process == null) return;
         lastPoints[servo] = pulse;
         out.println(SET_MOTOR_COMMAND);
