@@ -106,20 +106,6 @@ public class RoboticArmJNI implements RoboticArm {
         mArm2 = ((ARM_2_MAX - ARM_2_MIN) / (arm2MaxAngle - arm2MinAngle));
         cArm1 = ARM_1_MIN - (mArm1 * arm1MinAngle);
         cArm2 = ARM_2_MIN - (mArm2 * arm2MinAngle);
-        Trace.println("Setting Angles:");
-        setAngle(Math.toRadians(45),Math.toRadians(45));
-        Trace.println("Set angles to: "+45+","+45);
-        Trace.println("Measured: "+readAngle(0)+","+readAngle(1));
-        UI.askInt("WAIT");
-        Trace.println("Setting Angles:");
-        setAngle(Math.toRadians(60),Math.toRadians(60));
-        Trace.println("Set angles to: "+60+","+60);
-        Trace.println("Measured: "+readAngle(0)+","+readAngle(1));
-        UI.askInt("WAIT");
-        Trace.println("Setting Angles:");
-        setAngle(Math.toRadians(130),Math.toRadians(130));
-        Trace.println("Set angles to: "+130+","+130);
-        Trace.println("Measured: "+readAngle(0)+","+readAngle(1));
 
     }
     @Override
