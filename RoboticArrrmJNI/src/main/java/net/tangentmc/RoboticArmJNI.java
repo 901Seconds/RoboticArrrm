@@ -77,9 +77,11 @@ public class RoboticArmJNI implements RoboticArm {
     }
     private void calibrate() {
         Trace.println("Initialization:");
+        //Wait for arm2 to start
+        UI.sleep(5000);
+        //Read a few angles as the first few inputs get eaten by arm2
         readAngle(0);
         readAngle(0);
-        UI.sleep(1000);
 
         Trace.println("Starting Calibration:");
         Trace.println("Arm 1 Min:");
