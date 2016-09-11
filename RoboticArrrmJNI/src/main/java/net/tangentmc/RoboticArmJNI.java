@@ -14,7 +14,7 @@ public class RoboticArmJNI implements RoboticArm {
     private static final int ARM_1_MIN = 1500;
     private static final int ARM_1_MAX = 2000;
     private static final int ARM_2_MIN = 1000;
-    private static final int ARM_2_MAX = 1400;
+    private static final int ARM_2_MAX = 1500;
     private double mArm1,mArm2,cArm1,cArm2;
     private RoboticArmModel theModel;
 
@@ -49,15 +49,11 @@ public class RoboticArmJNI implements RoboticArm {
         }
         return -1;
     }
-    //Keep track of the last set servo positions since we have to set all three at once
-    private int[] lastPoints = new int[]{1500,1500,1500};
     void setServo(int servo, int pulse) {
         if (process == null) return;
-        lastPoints[servo] = pulse;
         out.println(SET_MOTOR_COMMAND);
-        out.println(lastPoints[0]);
-        out.println(lastPoints[1]);
-        out.println(lastPoints[2]);
+        out.println(servo);
+        out.println(pulse);
         out.flush();
         try {
             while (in.available() > 0) {
@@ -108,8 +104,8 @@ public class RoboticArmJNI implements RoboticArm {
         Trace.println("Calculating Constants:");
         mArm1 = ((ARM_1_MAX - ARM_1_MIN) / (arm1MaxAngle - arm1MinAngle));
         mArm2 = ((ARM_2_MAX - ARM_2_MIN) / (arm2MaxAngle - arm2MinAngle));
-        cArm1 = ARM_1_MIN - mArm1 * arm1MinAngle;
-        cArm2 = ARM_2_MIN - mArm2 * arm2MinAngle;
+        cArm1 = ARM_1_MIN - (mArm1 * arm1MinAngle);
+        cArm2 = ARM_2_MIN - (mArm2 * arm2MinAngle);
         Trace.println("Setting Angles:");
         setAngle(45,45);
         Trace.println("Set angles to: "+45+","+45);
@@ -164,7 +160,7 @@ public class RoboticArmJNI implements RoboticArm {
         in = new BufferedInputStream(process.getInputStream());
         calibrate();
     }
-    private static final String SET_MOTOR_COMMAND = "s";
+    private static final String SET_MOTOR_COMMAND = "w";
     private static final String MEASURE_ANGLE_COMMAND = "m";
-    private static final String MOTOR_PREFIX = "p1";
+    private static final String MOTOR_PREFIX = "Servo okay";
 }
