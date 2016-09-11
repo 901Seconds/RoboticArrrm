@@ -49,6 +49,24 @@ public class RoboticArmJNI implements RoboticArm {
         }
         return -1;
     }
+    void printAngles() {
+        try {
+            while (in.available() > 0) {
+                Scanner s = new Scanner(in);
+                while (s.hasNextLine()) {
+                    String next = s.nextLine();
+                    if (next.startsWith("measured")) {
+                        //The angles are separated by space
+                        String[] args = next.replace("measured angles: ","").split(" ");
+                        //The doubles are stored as theta=double so we want whats after the equals sign
+                        Trace.println(Arrays.toString(Arrays.stream(args).map(s2 -> s2.split("=")[1]).toArray()));
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     //Keep track of the last set servo positions since we have to set all three at once
     private int[] lastPoints = new int[]{1500,1500,1500};
     void setServo(int servo, int pulse) {
@@ -113,15 +131,15 @@ public class RoboticArmJNI implements RoboticArm {
         setAngle(45,45);
         Trace.println("Setting Angles:");
         Trace.println("Set angles to: "+45+","+45);
-        Trace.println("Measured: "+readAngle(0)+","+readAngle(1));
+        printAngles();
         setAngle(60,60);
         Trace.println("Setting Angles:");
         Trace.println("Set angles to: "+45+","+45);
-        Trace.println("Measured: "+readAngle(0)+","+readAngle(1));
+        printAngles();
         setAngle(20,20);
         Trace.println("Setting Angles:");
         Trace.println("Set angles to: "+45+","+45);
-        Trace.println("Measured: "+readAngle(0)+","+readAngle(1));
+        printAngles();
 
     }
     @Override
