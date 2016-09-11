@@ -82,24 +82,27 @@ public class RoboticArmJNI implements RoboticArm {
         Trace.println("Starting Calibration:");
         Trace.println("Arm 1 Min:");
         setServo(0, ARM_1_MIN);
-        UI.sleep(3000);
+        UI.sleep(1000);
         double arm1MinAngle = readAngle(0);
+        UI.sleep(1000);
 
         Trace.println("Arm 1 Max:");
         setServo(0, ARM_1_MAX);
-        UI.sleep(3000);
+        UI.sleep(1000);
         double arm1MaxAngle = readAngle(0);
-
+        UI.sleep(1000);
 
         Trace.println("Arm 2 Min:");
         setServo(1, ARM_2_MIN);
-        UI.sleep(3000);
+        UI.sleep(1000);
         double arm2MinAngle = readAngle(1);
+        UI.sleep(1000);
 
         Trace.println("Arm 2 Max:");
         setServo(1, ARM_2_MAX);
-        UI.sleep(3000);
+        UI.sleep(1000);
         double arm2MaxAngle = readAngle(1);
+        UI.sleep(1000);
 
         Trace.println("Calculating Constants:");
         mArm1 = ((ARM_1_MAX - ARM_1_MIN) / (arm1MaxAngle - arm1MinAngle));

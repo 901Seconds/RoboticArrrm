@@ -12,11 +12,7 @@ public class WebSocketServer {
         config.setPort(9092);
         SocketIOServer server = new SocketIOServer(config);
         server.addEventListener("drawShape",WebShape.class,(socketIOClient, drawShape, ackRequest) -> {
-            if (test % 2 == 0) {
-                System.out.print("TEST");
-                launcher.addShape(new Launcher.ShapeObject(drawShape));
-            }
-            test++;
+            launcher.addShape(new Launcher.ShapeObject(drawShape));
         });
         server.start();
     }
