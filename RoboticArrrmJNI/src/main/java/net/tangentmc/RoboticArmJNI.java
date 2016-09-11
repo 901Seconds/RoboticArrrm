@@ -110,6 +110,19 @@ public class RoboticArmJNI implements RoboticArm {
         mArm2 = ((ARM_2_MAX - ARM_2_MIN) / (arm2MaxAngle - arm2MinAngle));
         cArm1 = ARM_1_MIN - mArm1 * arm1MinAngle;
         cArm2 = ARM_2_MIN - mArm2 * arm2MinAngle;
+        setAngle(45,45);
+        Trace.println("Setting Angles:");
+        Trace.println("Set angles to: "+45+","+45);
+        Trace.println("Measured: "+readAngle(0)+","+readAngle(1));
+        setAngle(60,60);
+        Trace.println("Setting Angles:");
+        Trace.println("Set angles to: "+45+","+45);
+        Trace.println("Measured: "+readAngle(0)+","+readAngle(1));
+        setAngle(20,20);
+        Trace.println("Setting Angles:");
+        Trace.println("Set angles to: "+45+","+45);
+        Trace.println("Measured: "+readAngle(0)+","+readAngle(1));
+
     }
     @Override
     public void setAngle(double theta1, double theta2) {
@@ -120,9 +133,6 @@ public class RoboticArmJNI implements RoboticArm {
         setServo(0, Math.max(Math.min(ARM_1_MAX,pulse1),ARM_1_MIN));
         setServo(1, Math.max(Math.min(ARM_2_MAX,pulse2),ARM_2_MIN));
         UI.sleep(20);
-        Trace.println("Setting Angles:");
-        Trace.println("Set angles to: "+theta1+","+theta2);
-        Trace.println("Measured: "+readAngle(0)+","+readAngle(1));
     }
 
     @Override
