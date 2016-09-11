@@ -106,12 +106,16 @@ public class RoboticArmJNI implements RoboticArm {
         mArm2 = ((ARM_2_MAX - ARM_2_MIN) / (arm2MaxAngle - arm2MinAngle));
         cArm1 = ARM_1_MIN - (mArm1 * arm1MinAngle);
         cArm2 = ARM_2_MIN - (mArm2 * arm2MinAngle);
-
+        System.out.println(mArm1);
+        System.out.println(mArm2);
+        System.out.println(cArm1);
+        System.out.println(cArm2);
     }
     @Override
     public void setAngle(double theta1, double theta2) {
         theta1 = -Math.toDegrees(theta1);
         theta2 = -Math.toDegrees(theta2);
+
         int pulse1 = (int) (mArm1*theta1+cArm1);
         int pulse2 = (int) (mArm2*theta2+cArm2);
         setServo(0, Math.max(Math.min(ARM_1_MAX,pulse1),ARM_1_MIN));
