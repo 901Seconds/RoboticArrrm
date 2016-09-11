@@ -43,8 +43,8 @@ public class Utils {
                     points.clear();
                 }
                 //TODO: is this really the best place to do this?
-                coords[0] = coords[0]+200;
-                coords[1] = coords[1]+150;
+                coords[0] = coords[0];
+                coords[1] = coords[1];
                 points.add(new Point2D.Double(coords[0],coords[1]));
             }
             pointcol.add(points.toArray(new Point2D.Double[0]));
