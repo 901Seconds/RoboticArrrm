@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import net.tangentmc.svg.SVGParser;
 import net.tangentmc.util.AngleTuple;
-import net.tangentmc.util.WebShape;
+import net.tangentmc.util.DrawPoint;
 import net.tangentmc.util.Utils;
 import net.tangentmc.web.WebServer;
 
@@ -19,25 +19,16 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.NoninvertibleTransformException;
 import java.awt.geom.Path2D;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.stream.Collectors;
 
 public class Launcher {
-    private BlockingQueue<ShapeObject> shapes = new LinkedBlockingQueue<>();
-    private double xSpc;
-    private double ySpc;
-    private double scaleX = 1;
-    private double scaleY = 1;
+    private static final double WEB_SCALE_FACTOR = 0.5;
+
+    private BlockingQueue<DrawPoint> pointsToDraw = new LinkedBlockingQueue<>();
     private boolean left = false;
-
-    //Scale web objects down
-    private static final int scale = 5;
-    private static final int skipAmt = 20;
-    private AffineTransform transform = new AffineTransform();
     private ArrayList<RoboticArm> arms = new ArrayList<>();
-
+    private ShapeObject current;
     public static void main(String[] args) {
         new Launcher();
     }
@@ -49,14 +40,14 @@ public class Launcher {
         arms.add(armSimu);
         UI.addButton("Pick SVG", this::load);
         UI.addButton("Clear", () -> {
-            shapes.clear();
+            pointsToDraw.clear();
             current = null;
             armSimu.flagClear();
             draw();
         });
         UI.addSlider("Servo 0",1000,2000,1500,d -> robot.setServo(0,(int)d));
         UI.addSlider("Servo 1",1000,2000,1500,d -> robot.setServo(1,(int)d));
-        UI.addButton("Simulate / Plot", () -> shapes.add(current));
+        UI.addButton("Simulate / Plot", () -> addShape(current));
         UI.setMouseMotionListener(this::mouseMove);
         ((JComponent) UI.theUI.canvas).addMouseListener(new MouseAdapter() {
             @Override
@@ -76,56 +67,25 @@ public class Launcher {
         new WebServer(this);
         new Thread(this::plotThread).start();
     }
-
     private void plotThread() {
         //noinspection InfiniteLoopStatement
         while (true) {
-            ArrayList<ArrayList<AngleTuple[]>> angleTuples = new ArrayList<>();
-            AngleTuple temp;
             try {
-                currentDrawing = shapes.take();
-                if (current == currentDrawing)
-                    current.applyTransformation(transform);
-                current = null;
+                DrawPoint pt = pointsToDraw.take();
                 draw();
-                for (int i = 0; i < currentDrawing.getShapes().length; i++) {
-                    ArrayList<Point.Double[]> points = Utils.getAllPoints(currentDrawing.getShapes()[i]);
-                    angleTuples.addAll(arms.stream().map(arm -> Utils.getAllAngles(arm.getModel(), points)).collect(Collectors.toList()));
-                    int maxShapes = angleTuples.stream().mapToInt(ArrayList::size).max().orElseGet(() -> 0);
-                    int maxTuples = angleTuples.stream().mapToInt(tuple -> tuple.stream().mapToInt(t -> t.length).max().orElseGet(() -> 0)).max().orElseGet(() -> 0);
-                    for (int i1 = 0; i1 < maxShapes; i1++) {
-                        for (RoboticArm arm : arms) {
-                            arm.setPenMode(true);
-                            if (i1 > angleTuples.get(arms.indexOf(arm)).size()) {
-                                continue;
-                            }
-                            temp = angleTuples.get(arms.indexOf(arm)).get(i1)[0];
-                            arm.setAngle(temp.getTheta1(), temp.getTheta2());
-                        }
-
-                        for (int i2 = 0; i2 < maxTuples; i2+=skipAmt) {
-                            for (RoboticArm arm : arms) {
-                                if (i1 > angleTuples.get(arms.indexOf(arm)).size() || i2 > angleTuples.get(arms.indexOf(arm)).get(i1).length) {
-                                    continue;
-                                }
-                                temp = angleTuples.get(arms.indexOf(arm)).get(i1)[i2];
-                                arm.setAngle(temp.getTheta1(), temp.getTheta2());
-                            }
-                        }
-                    }
-                    currentDrawing.getShapes()[i] = null;
-                    draw();
+                for (RoboticArm arm: arms) {
+                    AngleTuple tuple = Utils.convertPoint(arm.getModel(),pt);
+                    arm.setPenMode(tuple.isPenDown());
+                    arm.setAngle(tuple.getTheta1(),tuple.getTheta2());
                 }
-                currentDrawing = null;
-                draw();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
     }
-
-    private double lastX = -1, lastY = -1, width, height;
-
+    //variables used for mouse manipulation
+    private double lastX = -1, lastY = -1, scaleX = 1, scaleY = 1, width, height, xSpc, ySpc;
+    private AffineTransform transform = new AffineTransform();
     private void mouseMove(String s, double x, double y) {
         if (s.equals("pressed")) {
             lastX = x;
@@ -143,32 +103,13 @@ public class Launcher {
                 scaleX += (x - lastX) / width;
                 scaleY += (y - lastY) / height;
             }
-            if (shapes != null) {
+            if (current != null) {
                 draw();
             }
             lastX = x;
             lastY = y;
         }
 
-    }
-
-    private ShapeObject current;
-    private ShapeObject currentDrawing;
-
-    public void addShape(ShapeObject shapeObject, boolean penDown) {
-        /*if(!penDown) {
-            if (current != null) {
-                shapes.add(current);
-                current = null;
-            }
-        } else if (current == null) {
-            current = shapeObject;
-            draw();
-        } else {
-            current.addPoints(shapeObject);
-            draw();
-        }*/
-        shapes.add(shapeObject);
     }
 
     private void load() {
@@ -178,7 +119,7 @@ public class Launcher {
         xSpc = ySpc = 0;
         scaleX = scaleY = 1;
         if (current != null) {
-            current.applyTransformation(transform);
+            addShape(current);
         }
         current = new ShapeObject(new SVGParser().shapesFromXML(file));
         double lx = Double.MAX_VALUE;
@@ -208,57 +149,44 @@ public class Launcher {
 
     private void draw() {
         UI.clearGraphics();
-        shapes.forEach(this::drawShape);
+        if (!pointsToDraw.isEmpty()) {
+            Path2D path = new Path2D.Float();
+            path.moveTo(pointsToDraw.peek().getX(), pointsToDraw.peek().getY());
+            for (DrawPoint point : pointsToDraw) {
+                if (point.isPenDown()) path.lineTo(point.getX(), point.getY());
+                else path.moveTo(point.getX(), point.getY());
+            }
+            UI.getGraphics().draw(path);
+        }
         transform = new AffineTransform();
         transform.translate(xSpc, ySpc);
         transform.scale(scaleX, scaleY);
         if (current != null) {
-            current.applyTransformation(transform);
-            drawShape(current);
-            try {
-                current.applyTransformation(transform.createInverse());
-            } catch (NoninvertibleTransformException ignored) {
+            for (Shape s2 : current.getShapes()) {
+                if (s2 == null) continue;
+                UI.getGraphics().draw(transform.createTransformedShape(s2));
             }
-        }
-        if (currentDrawing != null) {
-            drawShape(currentDrawing);
         }
         UI.repaintAllGraphics();
     }
 
-    private void drawShape(ShapeObject shape) {
-        for (Shape s2 : shape.getShapes()) {
-            if (s2 == null) continue;
-            UI.getGraphics().draw(s2);
-        }
+    public void addPoint(DrawPoint drawPoint) {
+        drawPoint.scale(WEB_SCALE_FACTOR);
+        pointsToDraw.add(drawPoint);
     }
 
+    private void addShape(ShapeObject shape) {
+        for (Shape shapes: shape.getShapes()) {
+            if (shape == current) shapes = transform.createTransformedShape(shapes);
+            pointsToDraw.addAll(Utils.getAllPoints(shapes));
+        }
+        current = null;
+    }
 
     @AllArgsConstructor
     @Getter
     @Setter
-    public static class ShapeObject {
+    private static class ShapeObject {
         Shape[] shapes;
-
-        public ShapeObject(WebShape shape) {
-            Path2D path = new Path2D.Double();
-            path.moveTo(shape.xpoints[0] / scale, shape.ypoints[0] / scale);
-            for (int i = 1; i < shape.xpoints.length; i++) {
-                path.lineTo(shape.xpoints[i] / scale, shape.ypoints[i] / scale);
-            }
-            shapes = new Shape[]{path};
-        }
-
-        void applyTransformation(AffineTransform transform) {
-            for (int i = 0; i < shapes.length; i++) {
-                shapes[i] = transform.createTransformedShape(shapes[i]);
-            }
-        }
-
-        void addPoints(ShapeObject shapeObject) {
-            int oldShapeLen = shapes.length;
-            shapes = Arrays.copyOf(shapes,shapes.length+shapeObject.shapes.length);
-            System.arraycopy(shapeObject.shapes,0,shapes,oldShapeLen,shapeObject.shapes.length);
-        }
     }
 }

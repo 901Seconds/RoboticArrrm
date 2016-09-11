@@ -21,7 +21,6 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
     float q1Y;
     float q2X;
     float q2Y;
-
     RoboticArmModel theArms;
     RoboticArmPlotter plotter = new RoboticArmPlotter();
     public void settings() {
@@ -82,7 +81,7 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
         fill(255, 0, 0);
         ellipse(tCPs[2], tCPs[3], 10, 10);
 
-        plotter.drawPoints(tCPs,theta1,theta2);
+        plotter.drawPoints(tCPs,theta1,theta2,penDown);
     }
 
     private void ellipse(double X1, double Y1, double width, double height) {
@@ -102,10 +101,9 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
     public void setAngle(double newTheta1, double newTheta2) {
         float oldTheta1 = (float) this.theta1;
         float oldTheta2 = (float) this.theta2;
-        if (penDown) {
             float t = 0;
             while (t < 1) {
-                t += 1;
+                t += 0.08;
                 this.theta1 = PApplet.lerp(oldTheta1, (float) newTheta1, t);
                 this.theta2 = PApplet.lerp(oldTheta2, (float) newTheta2, t);
                 loop();
@@ -115,7 +113,6 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
                     e.printStackTrace();
                 }
             }
-        }
         this.theta1 = newTheta1;
         this.theta2 = newTheta2;
     }

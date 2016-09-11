@@ -179,7 +179,7 @@ class InterpolatedPathIterator implements PathIterator {
     private double prevx,prevy;
     private void next(boolean doNext) {
         int level;
-        if (holdIndex >= holdEnd && iter >= iterlength) {
+        if (holdIndex >= holdEnd) {
             if (doNext) {
                 src.next();
             }
@@ -195,43 +195,27 @@ class InterpolatedPathIterator implements PathIterator {
         switch (holdType) {
             case SEG_MOVETO:
             case SEG_LINETO:
-                if (iter >= iterlength) {
-                    iter = 0;
-                    prevx = curx;
-                    prevy = cury;
-                    curx = hold[0];
-                    cury = hold[1];
-                    if (!started) {
-                        startX = curx;
-                        startY = cury;
-                        started = true;
-                    }
-                    holdIndex = 0;
-                    holdEnd = 0;
+                iter = 0;
+                prevx = curx;
+                prevy = cury;
+                curx = hold[0];
+                cury = hold[1];
+                if (!started) {
+                    startX = curx;
+                    startY = cury;
+                    started = true;
                 }
-                if (holdType == SEG_LINETO) {
-                    iterlength = Point.distance(prevx,prevy,curx,cury);
-                    hold[0] = Utils.interPolate(iter / iterlength, prevx, curx);
-                    hold[1] = Utils.interPolate(iter / iterlength, prevy, cury);
-                    iter++;
-                } else {
-                    iter = (int) Math.ceil(iterlength);
-                }
+                holdIndex = 0;
+                holdEnd = 0;
                 break;
 
             case SEG_CLOSE:
                 if (isCurved) break;
-                if (iter >= iterlength) {
-                    iter = 0;
-                    curx = hold[0];
-                    cury = hold[1];
-                    holdIndex = 0;
-                    holdEnd = 0;
-                }
-                iterlength = Point.distance(startX,startY,curx,cury);
-                hold[0] = Utils.interPolate(iter / iterlength, curx, startX);
-                hold[1] = Utils.interPolate(iter / iterlength, cury, startY);
-                iter++;
+                iter = 0;
+                curx = hold[0];
+                cury = hold[1];
+                holdIndex = 0;
+                holdEnd = 0;
                 break;
             case SEG_QUADTO:
                 isCurved = true;

@@ -70,16 +70,10 @@ var drawingApp = (function () {
         // @param y
         // @param dragging
         addClick = function (x, y, dragging) {
-            var lastClickX = clickX[clickX.length-1];
-            var lastClickY = clickY[clickY.length-1];
-            if (!dragging) {
-                lastClickX = x;
-                lastClickY = y;
-            }
-            socket.emit("drawShape",{
-                "xpoints":[lastClickX,x],
-                "ypoints":[lastClickY,y],
-                "penDown":!dragging
+            socket.emit("drawPoint",{
+                "x":x,
+                "y":y,
+                "penDown":paint
             });
             clickX.push(x);
             clickY.push(y);
@@ -92,8 +86,8 @@ var drawingApp = (function () {
                     // Mouse down location
                     var mouseX = (e.changedTouches ? e.changedTouches[0].pageX : e.pageX) - this.offsetLeft,
                         mouseY = (e.changedTouches ? e.changedTouches[0].pageY : e.pageY) - this.offsetTop;
-                    paint = true;
                     addClick(mouseX, mouseY, false);
+                    paint = true;
                     redraw();
                 },
 

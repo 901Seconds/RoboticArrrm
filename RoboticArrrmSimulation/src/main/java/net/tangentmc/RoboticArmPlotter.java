@@ -5,7 +5,8 @@ import processing.core.PApplet;
 
 public class RoboticArmPlotter extends PApplet {
     boolean willClear = false;
-
+    boolean penDown;
+    boolean lastPenDown = false;
     RoboticArmPlotter() {
         ProcessingRunner.run(this);
     }
@@ -19,18 +20,31 @@ public class RoboticArmPlotter extends PApplet {
     }
     private double[] tCPs;
     public void draw() {
+        if (lasttCPs == null) lasttCPs = tCPs;
         if (willClear) {
             background(30, 35, 40);
             willClear = false;
         }
         if (tCPs == null) return;
         erasePrevFrame();
-        fill(200);
-        ellipse(tCPs[0], tCPs[1], 1, 1);
-        fill(255, 0, 0);
-        ellipse(tCPs[2], tCPs[3], 1, 1);
+        if (penDown && lastPenDown) {
+            stroke(200);
+            line(lasttCPs[0], lasttCPs[1], tCPs[0], tCPs[1]);
+            stroke(255, 0, 0);
+            line(lasttCPs[2], lasttCPs[3], tCPs[2], tCPs[3]);
+        } else {
+            stroke(0, 255, 0);
+            line(lasttCPs[0], lasttCPs[1], tCPs[0], tCPs[1]);
+            line(lasttCPs[2], lasttCPs[3], tCPs[2], tCPs[3]);
+        }
         drawAngleGraph(theta1,theta2);
         drawAngleVis(theta1,theta2);
+        lasttCPs = tCPs;
+        lastPenDown = penDown;
+    }
+
+    private void line(double X1, double Y1, double X2, double Y2) {
+        line((float)X1,(float)Y1,(float)X2,(float)Y2);
     }
 
     private void drawAngleVis(double theta1, double theta2) {
@@ -68,7 +82,9 @@ public class RoboticArmPlotter extends PApplet {
         rect(0, 0, width, 100);
     }
     private double theta1,theta2;
-    void drawPoints(double[] tCPs, double theta1, double theta2) {
+    double[] lasttCPs = null;
+    void drawPoints(double[] tCPs, double theta1, double theta2, boolean penDown) {
+        this.penDown = penDown;
         this.tCPs = tCPs;
         this.theta1 = theta1;
         this.theta2 = theta2;
