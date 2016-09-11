@@ -3,9 +3,11 @@ package net.tangentmc;
 import ecs100.Trace;
 import ecs100.UI;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class RoboticArmJNI implements RoboticArm {
     private static final int ARM_1_MIN = 1500;
@@ -23,16 +25,7 @@ public class RoboticArmJNI implements RoboticArm {
     public RoboticArmJNI(RoboticArmModel model) {
         theModel = model;
     }
-    private void flushInput() {
-        try {
-            String next;
-            while ((next = in.readLine())!= null) {
-                System.out.print(next);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
     private double readAngle(int servo) {
         if (process == null) return -1;
         out.println(MEASURE_ANGLE_COMMAND);
@@ -45,7 +38,6 @@ public class RoboticArmJNI implements RoboticArm {
                     String[] args = next.replace("measured angles: ","").split(" ");
                     //The doubles are stored as theta=double so we want whats after the equals sign
                     Trace.println(Arrays.toString(Arrays.stream(args).map(s2 -> s2.split("=")[1]).toArray()));
-                    flushInput();
                     return Double.parseDouble(args[servo].split("=")[1]);
                 }
             }
@@ -127,7 +119,6 @@ public class RoboticArmJNI implements RoboticArm {
         int pulse2 = (int) (mArm2*theta2+cArm2);
         setServo(0, pulse1);
         setServo(1, pulse2);
-        flushInput();
         UI.sleep(1);
         Trace.println("Servo 1:"+theta1);
         Trace.println("Servo 2:"+theta2);
