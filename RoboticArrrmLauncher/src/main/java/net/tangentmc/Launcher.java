@@ -77,6 +77,7 @@ public class Launcher {
         while (true) {
             ArrayList<ArrayList<AngleTuple[]>> angleTuples = new ArrayList<>();
             AngleTuple temp;
+            AngleTuple last = null;
             try {
                 currentDrawing = shapes.take();
                 if (current == currentDrawing)
@@ -90,23 +91,27 @@ public class Launcher {
                     int maxTuples = angleTuples.stream().mapToInt(tuple -> tuple.stream().mapToInt(t -> t.length).max().orElseGet(() -> 0)).max().orElseGet(() -> 0);
                     for (int i1 = 0; i1 < maxShapes; i1++) {
                         for (RoboticArm arm : arms) {
-                           // arm.setPenMode(false);
+                            arm.setPenMode(true);
                             if (i1 > angleTuples.get(arms.indexOf(arm)).size()) {
                                 continue;
                             }
                             temp = angleTuples.get(arms.indexOf(arm)).get(i1)[0];
                             arm.setAngle(temp.getTheta1(), temp.getTheta2());
                         }
-                        for (RoboticArm arm : arms) {
-                           // arm.setPenMode(true);
-                        }
-                        for (int i2 = 0; i2 < maxTuples; i2+=10) {
+                        for (int i2 = 0; i2 < maxTuples; i2+=15) {
                             for (RoboticArm arm : arms) {
                                 if (i1 > angleTuples.get(arms.indexOf(arm)).size() || i2 > angleTuples.get(arms.indexOf(arm)).get(i1).length) {
                                     continue;
                                 }
                                 temp = angleTuples.get(arms.indexOf(arm)).get(i1)[i2];
+                                if (temp.dist(last) > 10) {
+                                    arm.setPenMode(false);
+                                }
                                 arm.setAngle(temp.getTheta1(), temp.getTheta2());
+                                if (temp.dist(last) > 10) {
+                                    arm.setPenMode(true);
+                                }
+                                last = temp;
                             }
                         }
                     }
