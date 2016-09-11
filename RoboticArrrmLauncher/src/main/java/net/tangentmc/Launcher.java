@@ -30,6 +30,10 @@ public class Launcher {
     private double scaleX = 1;
     private double scaleY = 1;
     private boolean left = false;
+
+    //Scale web objects down
+    private static final int scale = 5;
+    private static final int skipAmt = 20;
     private AffineTransform transform = new AffineTransform();
     private ArrayList<RoboticArm> arms = new ArrayList<>();
 
@@ -98,7 +102,7 @@ public class Launcher {
                             temp = angleTuples.get(arms.indexOf(arm)).get(i1)[0];
                             arm.setAngle(temp.getTheta1(), temp.getTheta2());
                         }
-                        for (int i2 = 0; i2 < maxTuples; i2+=15) {
+                        for (int i2 = 0; i2 < maxTuples; i2+=skipAmt) {
                             for (RoboticArm arm : arms) {
                                 if (i1 > angleTuples.get(arms.indexOf(arm)).size() || i2 > angleTuples.get(arms.indexOf(arm)).get(i1).length) {
                                     continue;
@@ -231,8 +235,6 @@ public class Launcher {
     @Getter
     @Setter
     public static class ShapeObject {
-        //Scale web objects down
-        private static int scale = 5;
         Shape[] shapes;
 
         public ShapeObject(WebShape shape) {
