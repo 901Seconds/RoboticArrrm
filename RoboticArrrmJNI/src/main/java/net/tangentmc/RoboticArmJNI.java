@@ -27,9 +27,14 @@ public class RoboticArmJNI implements RoboticArm {
         theModel = model;
     }
     private double readAngle(int servo) {
+        return readAngle(servo,true);
+    }
+    private double readAngle(int servo, boolean send) {
         if (process == null) return -1;
-        out.println(MEASURE_ANGLE_COMMAND);
-        out.flush();
+        if (send)  {
+            out.println(MEASURE_ANGLE_COMMAND);
+            out.flush();
+        }
         try {
             while (in.available() > 0) {
                 Scanner s = new Scanner(in);
@@ -48,24 +53,6 @@ public class RoboticArmJNI implements RoboticArm {
             e.printStackTrace();
         }
         return -1;
-    }
-    void printAngles() {
-        try {
-            while (in.available() > 0) {
-                Scanner s = new Scanner(in);
-                while (s.hasNextLine()) {
-                    String next = s.nextLine();
-                    if (next.startsWith("measured")) {
-                        //The angles are separated by space
-                        String[] args = next.replace("measured angles: ","").split(" ");
-                        //The doubles are stored as theta=double so we want whats after the equals sign
-                        Trace.println(Arrays.toString(Arrays.stream(args).map(s2 -> s2.split("=")[1]).toArray()));
-                    }
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
     //Keep track of the last set servo positions since we have to set all three at once
     private int[] lastPoints = new int[]{1500,1500,1500};
@@ -105,23 +92,23 @@ public class RoboticArmJNI implements RoboticArm {
         Trace.println("Arm 1 Min:");
         setServo(0, ARM_1_MIN);
         UI.sleep(3000);
-        double arm1MinAngle = readAngle(0);
+        double arm1MinAngle = readAngle(0,false);
 
         Trace.println("Arm 1 Max:");
         setServo(0, ARM_1_MAX);
         UI.sleep(3000);
-        double arm1MaxAngle = readAngle(0);
+        double arm1MaxAngle = readAngle(0,false);
 
 
         Trace.println("Arm 2 Min:");
         setServo(1, ARM_2_MIN);
         UI.sleep(3000);
-        double arm2MinAngle = readAngle(1);
+        double arm2MinAngle = readAngle(1,false);
 
         Trace.println("Arm 2 Max:");
         setServo(1, ARM_2_MAX);
         UI.sleep(3000);
-        double arm2MaxAngle = readAngle(1);
+        double arm2MaxAngle = readAngle(1,false);
 
         Trace.println("Calculating Constants:");
         mArm1 = ((ARM_1_MAX - ARM_1_MIN) / (arm1MaxAngle - arm1MinAngle));
@@ -131,15 +118,15 @@ public class RoboticArmJNI implements RoboticArm {
         setAngle(45,45);
         Trace.println("Setting Angles:");
         Trace.println("Set angles to: "+45+","+45);
-        printAngles();
+        readAngle(0,false);
         setAngle(60,60);
         Trace.println("Setting Angles:");
         Trace.println("Set angles to: "+45+","+45);
-        printAngles();
+        readAngle(0,false);
         setAngle(20,20);
         Trace.println("Setting Angles:");
         Trace.println("Set angles to: "+45+","+45);
-        printAngles();
+        readAngle(0,false);
 
     }
     @Override
