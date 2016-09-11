@@ -95,12 +95,17 @@ public class Launcher {
                     int maxTuples = angleTuples.stream().mapToInt(tuple -> tuple.stream().mapToInt(t -> t.length).max().orElseGet(() -> 0)).max().orElseGet(() -> 0);
                     for (int i1 = 0; i1 < maxShapes; i1++) {
                         for (RoboticArm arm : arms) {
-                            arm.setPenMode(true);
                             if (i1 > angleTuples.get(arms.indexOf(arm)).size()) {
                                 continue;
                             }
                             temp = angleTuples.get(arms.indexOf(arm)).get(i1)[0];
+                            if (temp.dist(last) > 1.14) {
+                                arm.setPenMode(false);
+                            }
                             arm.setAngle(temp.getTheta1(), temp.getTheta2());
+                            if (temp.dist(last) > 1.14) {
+                                arm.setPenMode(true);
+                            }
                         }
                         for (int i2 = 0; i2 < maxTuples; i2+=skipAmt) {
                             for (RoboticArm arm : arms) {
@@ -108,12 +113,11 @@ public class Launcher {
                                     continue;
                                 }
                                 temp = angleTuples.get(arms.indexOf(arm)).get(i1)[i2];
-                                System.out.println(temp.dist(last));
-                                if (temp.dist(last) > 10) {
+                                if (temp.dist(last) > 1.14) {
                                     arm.setPenMode(false);
                                 }
                                 arm.setAngle(temp.getTheta1(), temp.getTheta2());
-                                if (temp.dist(last) > 10) {
+                                if (temp.dist(last) > 1.14) {
                                     arm.setPenMode(true);
                                 }
                                 last = temp;
