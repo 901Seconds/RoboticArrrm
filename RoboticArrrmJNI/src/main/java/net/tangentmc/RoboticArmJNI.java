@@ -71,6 +71,7 @@ public class RoboticArmJNI implements RoboticArm {
         Trace.println("Initialization:");
         //Wait for arm2 to start
         UI.sleep(5000);
+        setPenMode(false);
         //Read a few angles as the first few inputs get eaten by arm2
         readAngle(0);
         readAngle(0);
