@@ -9,9 +9,9 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.Arrays;
 
-public class RoboticArmJNI implements RoboticArm {
+class RoboticArmJNI implements RoboticArm {
     //These are calibration points, not real min/max.
-    //Thats handled by c.
+    //That's handled by c.
     private static final int ARM_1_MIN = 1500;
     private static final int ARM_1_MAX = 2000;
     private static final int ARM_2_MIN = 1000;

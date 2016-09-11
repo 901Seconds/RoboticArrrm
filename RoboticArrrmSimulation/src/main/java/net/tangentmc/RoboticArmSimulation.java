@@ -8,28 +8,24 @@ import static net.tangentmc.util.Utils.*;
 
 public class RoboticArmSimulation extends PApplet implements RoboticArm {
 
-    public RoboticArmSimulation(RoboticArmModel model) {
+    RoboticArmSimulation(RoboticArmModel model) {
         theArms = model;
         ProcessingRunner.run(this);
     }
     //2*lengths ulnar and forearm
-    float l;
-    //2*distance between shoulders
-    float d;
-
-    float q1X;
-    float q1Y;
-    float q2X;
-    float q2Y;
-    RoboticArmModel theArms;
-    RoboticArmPlotter plotter = new RoboticArmPlotter();
+    private float l;
+    private float q1X;
+    private float q1Y;
+    private float q2X;
+    private float q2Y;
+    private RoboticArmModel theArms;
+    private RoboticArmPlotter plotter = new RoboticArmPlotter();
     public void settings() {
         size(800, 800);
         q1X = (float) theArms.o1X;
         q1Y = (float) theArms.o1Y;
         q2X = (float) theArms.o2X;
         q2Y = (float) theArms.o2Y;
-        d = (float) theArms.d;
         l = (float) theArms.l;
     }
 
