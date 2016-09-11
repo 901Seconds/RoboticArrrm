@@ -233,7 +233,7 @@ public class Launcher {
         public ShapeObject(WebShape shape) {
             Path2D path = new Path2D.Double();
             path.moveTo(shape.xpoints[0] / scale, shape.ypoints[0] / scale);
-            for (int i = 1; i < shape.xpoints.length; i+=10) {
+            for (int i = 1; i < shape.xpoints.length; i++) {
                 path.lineTo(shape.xpoints[i] / scale, shape.ypoints[i] / scale);
             }
             shapes = new Shape[]{path};
