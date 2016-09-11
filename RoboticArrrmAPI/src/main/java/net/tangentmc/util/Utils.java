@@ -30,6 +30,7 @@ public class Utils {
         double[] coords = new double[6];
         for (FlatteningPathIterator it = new FlatteningPathIterator(shape.getPathIterator(new AffineTransform()),minDist); !it.isDone(); it.next()) {
             int type = it.currentSegment(coords);
+            //MOVE_TO is pen up, since you want to move without drawing
             points.add(new DrawPoint(coords[0],coords[1],type!=PathIterator.SEG_MOVETO));
         }
         return points;
