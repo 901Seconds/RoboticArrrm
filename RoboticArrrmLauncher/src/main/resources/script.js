@@ -78,7 +78,8 @@ var drawingApp = (function () {
             }
             socket.emit("drawShape",{
                 "xpoints":[lastClickX,x],
-                "ypoints":[lastClickY,y]
+                "ypoints":[lastClickY,y],
+                "penDown":!dragging
             });
             clickX.push(x);
             clickY.push(y);

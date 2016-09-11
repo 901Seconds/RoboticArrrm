@@ -19,6 +19,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.NoninvertibleTransformException;
 import java.awt.geom.Path2D;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.stream.Collectors;
@@ -99,13 +100,7 @@ public class Launcher {
                                 continue;
                             }
                             temp = angleTuples.get(arms.indexOf(arm)).get(i1)[0];
-                            if (temp.dist(last) > 1.14) {
-                                arm.setPenMode(false);
-                            }
                             arm.setAngle(temp.getTheta1(), temp.getTheta2());
-                            if (temp.dist(last) > 1.14) {
-                                arm.setPenMode(true);
-                            }
                         }
                         for (int i2 = 0; i2 < maxTuples; i2+=skipAmt) {
                             for (RoboticArm arm : arms) {
@@ -166,11 +161,15 @@ public class Launcher {
     private ShapeObject current;
     private ShapeObject currentDrawing;
 
-    public void addShape(ShapeObject shapeObject) {
-        if (current != null) {
-            current.applyTransformation(transform);
+    public void addShape(ShapeObject shapeObject, boolean penDown) {
+        if(penDown) {
+            if (current != null) shapes.add(current);
+            current = shapeObject;
+        } else if (current == null) {
+            current = shapeObject;
+        } else {
+            current.addPoints(shapeObject);
         }
-        shapes.add(shapeObject);
     }
 
     private void load() {
@@ -255,6 +254,11 @@ public class Launcher {
             for (int i = 0; i < shapes.length; i++) {
                 shapes[i] = transform.createTransformedShape(shapes[i]);
             }
+        }
+
+        public void addPoints(ShapeObject shapeObject) {
+            shapes = Arrays.copyOf(shapes,shapes.length+shapeObject.shapes.length);
+            System.arraycopy(shapeObject.shapes,0,shapes,shapes.length,shapeObject.shapes.length);
         }
     }
 }

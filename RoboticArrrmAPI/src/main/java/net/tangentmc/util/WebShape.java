@@ -10,4 +10,5 @@ import lombok.*;
 public class WebShape {
     public double[] xpoints;
     public double[] ypoints;
+    boolean penDown;
 }
