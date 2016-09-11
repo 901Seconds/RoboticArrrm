@@ -26,24 +26,33 @@ public class RoboticArmJNI implements RoboticArm {
     public RoboticArmJNI(RoboticArmModel model) {
         theModel = model;
     }
+    private void flushInput() {
+        try {
+            long i = in.skip(in.available());
+            System.out.println("Skipped "+i);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     private double readAngle(int servo) {
         if (process == null) return -1;
         out.println(MEASURE_ANGLE_COMMAND);
         out.flush();
         try {
-            double d = -1;
-            Scanner s = new Scanner(in);
             while (in.available() > 0) {
-                String next = s.nextLine();
-                if (next.startsWith("measured")) {
-                    //The angles are separated by space
-                    String[] args = next.replace("measured angles: ","").split(" ");
-                    //The doubles are stored as theta=double so we want whats after the equals sign
-                    Trace.println(Arrays.toString(Arrays.stream(args).map(s2 -> s2.split("=")[1]).toArray()));
-                    d = Double.parseDouble(args[servo].split("=")[1]);
+                Scanner s = new Scanner(in);
+                while (s.hasNextLine()) {
+                    String next = s.nextLine();
+                    if (next.startsWith("measured")) {
+                        //The angles are separated by space
+                        String[] args = next.replace("measured angles: ","").split(" ");
+                        //The doubles are stored as theta=double so we want whats after the equals sign
+                        Trace.println(Arrays.toString(Arrays.stream(args).map(s2 -> s2.split("=")[1]).toArray()));
+                        flushInput();
+                        return Double.parseDouble(args[servo].split("=")[1]);
+                    }
                 }
             }
-            return d;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -123,6 +132,7 @@ public class RoboticArmJNI implements RoboticArm {
         int pulse2 = (int) (mArm2*theta2+cArm2);
         setServo(0, Math.max(Math.min(ARM_1_MAX,pulse1),ARM_1_MIN));
         setServo(1, Math.max(Math.min(ARM_2_MAX,pulse2),ARM_2_MIN));
+        flushInput();
         UI.sleep(1);
         Trace.println("Servo 1:"+theta1);
         Trace.println("Servo 2:"+theta2);
