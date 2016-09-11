@@ -232,7 +232,7 @@ public class Launcher {
     @Setter
     public static class ShapeObject {
         //Scale web objects down
-        private static int scale = 11;
+        private static int scale = 5;
         Shape[] shapes;
 
         public ShapeObject(WebShape shape) {
