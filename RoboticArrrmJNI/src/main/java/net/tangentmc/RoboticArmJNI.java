@@ -119,6 +119,7 @@ public class RoboticArmJNI implements RoboticArm {
         int pulse2 = (int) (mArm2*theta2+cArm2);
         setServo(0, Math.max(Math.min(ARM_1_MAX,pulse1),ARM_1_MIN));
         setServo(1, Math.max(Math.min(ARM_2_MAX,pulse2),ARM_2_MIN));
+        UI.sleep(20);
         Trace.println("Setting Angles:");
         Trace.println("Set angles to: "+theta1+","+theta2);
         Trace.println("Measured: "+readAngle(0)+","+readAngle(1));
