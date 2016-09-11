@@ -60,6 +60,8 @@ public class Launcher {
         });
         try {
             robot.init();
+            robot.setPenMode(true);
+            armSimu.setPenMode(true);
         } catch (Exception e) {
             e.printStackTrace();
             UI.printMessage(e.getLocalizedMessage());
@@ -86,7 +88,7 @@ public class Launcher {
                     int maxTuples = angleTuples.stream().mapToInt(tuple -> tuple.stream().mapToInt(t -> t.length).max().orElseGet(() -> 0)).max().orElseGet(() -> 0);
                     for (int i1 = 0; i1 < maxShapes; i1++) {
                         for (RoboticArm arm : arms) {
-                            arm.setPenMode(false);
+                           // arm.setPenMode(false);
                             if (i1 > angleTuples.get(arms.indexOf(arm)).size()) {
                                 continue;
                             }
@@ -94,7 +96,7 @@ public class Launcher {
                             arm.setAngle(temp.getTheta1(), temp.getTheta2());
                         }
                         for (RoboticArm arm : arms) {
-                            arm.setPenMode(true);
+                           // arm.setPenMode(true);
                         }
                         for (int i2 = 0; i2 < maxTuples; i2++) {
                             for (RoboticArm arm : arms) {
