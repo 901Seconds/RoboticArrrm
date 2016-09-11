@@ -98,23 +98,11 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
         rect(0, 0, width, height);
     }
     @Override
-    public void setAngle(double newTheta1, double newTheta2) {
-        float oldTheta1 = (float) this.theta1;
-        float oldTheta2 = (float) this.theta2;
-            float t = 0;
-            while (t < 1) {
-                t += 0.08;
-                this.theta1 = PApplet.lerp(oldTheta1, (float) newTheta1, t);
-                this.theta2 = PApplet.lerp(oldTheta2, (float) newTheta2, t);
-                loop();
-                try {
-                    Thread.sleep(0, 100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        this.theta1 = newTheta1;
-        this.theta2 = newTheta2;
+    public void setAngle(double theta1, double theta2) {
+        this.theta1 = theta1;
+        this.theta2 = theta2;
+        loop();
+        UI.sleep(10);
     }
 
     @Override

@@ -5,8 +5,8 @@ import processing.core.PApplet;
 
 public class RoboticArmPlotter extends PApplet {
     boolean willClear = false;
-    boolean penDown;
-    boolean lastPenDown = false;
+    private boolean penDown;
+    private boolean lastPenDown = false;
     RoboticArmPlotter() {
         ProcessingRunner.run(this);
     }
