@@ -41,7 +41,8 @@ public class Utils {
                 if (points.size() > 0 && points.get(points.size()-1).distanceSq(coords[0],coords[1]) > 100 ){
                     pointcol.add(points.toArray(new Point2D.Double[points.size()]));
                     points.clear();
-                }//TODO: is this really the best place to do this?
+                }
+                //TODO: is this really the best place to do this?
                 coords[0] = coords[0]+200;
                 coords[1] = coords[1]+150;
                 points.add(new Point2D.Double(coords[0],coords[1]));

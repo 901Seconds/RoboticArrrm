@@ -90,31 +90,29 @@ public class Launcher {
                 current = null;
                 draw();
                 for (int i = 0; i < currentDrawing.getShapes().length; i++) {
+                    if (currentDrawing.getShapes()[i] == null) continue;
                     ArrayList<Point.Double[]> points = Utils.getAllPoints(currentDrawing.getShapes()[i]);
                     angleTuples.addAll(arms.stream().map(arm -> Utils.getAllAngles(arm.getModel(), points)).collect(Collectors.toList()));
                     int maxShapes = angleTuples.stream().mapToInt(ArrayList::size).max().orElseGet(() -> 0);
                     int maxTuples = angleTuples.stream().mapToInt(tuple -> tuple.stream().mapToInt(t -> t.length).max().orElseGet(() -> 0)).max().orElseGet(() -> 0);
                     for (int i1 = 0; i1 < maxShapes; i1++) {
                         for (RoboticArm arm : arms) {
+                            arm.setPenMode(false);
                             if (i1 > angleTuples.get(arms.indexOf(arm)).size()) {
                                 continue;
                             }
                             temp = angleTuples.get(arms.indexOf(arm)).get(i1)[0];
                             arm.setAngle(temp.getTheta1(), temp.getTheta2());
+                            arm.setPenMode(true);
                         }
+
                         for (int i2 = 0; i2 < maxTuples; i2+=skipAmt) {
                             for (RoboticArm arm : arms) {
                                 if (i1 > angleTuples.get(arms.indexOf(arm)).size() || i2 > angleTuples.get(arms.indexOf(arm)).get(i1).length) {
                                     continue;
                                 }
                                 temp = angleTuples.get(arms.indexOf(arm)).get(i1)[i2];
-                                if (temp.dist(last) > 1.14) {
-                                    arm.setPenMode(false);
-                                }
                                 arm.setAngle(temp.getTheta1(), temp.getTheta2());
-                                if (temp.dist(last) > 1.14) {
-                                    arm.setPenMode(true);
-                                }
                                 last = temp;
                             }
                         }
