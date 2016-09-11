@@ -108,6 +108,7 @@ public class Launcher {
                                     continue;
                                 }
                                 temp = angleTuples.get(arms.indexOf(arm)).get(i1)[i2];
+                                System.out.println(temp.dist(last));
                                 if (temp.dist(last) > 10) {
                                     arm.setPenMode(false);
                                 }
