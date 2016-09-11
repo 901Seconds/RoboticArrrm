@@ -3,10 +3,7 @@ package net.tangentmc;
 import ecs100.Trace;
 import ecs100.UI;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintStream;
+import java.io.*;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -19,7 +16,7 @@ public class RoboticArmJNI implements RoboticArm {
     private RoboticArmModel theModel;
 
     //IO from the running arm2 process
-    private InputStream in;
+    private BufferedReader in;
     private PrintStream out;
     private Process process;
 
@@ -28,9 +25,7 @@ public class RoboticArmJNI implements RoboticArm {
     }
     private void flushInput() {
         try {
-            while (in.available() > 0) {
-                //noinspection ResultOfMethodCallIgnored
-                in.read();
+            while (in.readLine() != null) {
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -41,20 +36,18 @@ public class RoboticArmJNI implements RoboticArm {
         out.println(MEASURE_ANGLE_COMMAND);
         out.flush();
         try {
-            while (in.available() > 0) {
-                Scanner s = new Scanner(in);
-                while (s.hasNextLine()) {
-                    String next = s.nextLine();
-                    if (next.startsWith("measured")) {
-                        //The angles are separated by space
-                        String[] args = next.replace("measured angles: ","").split(" ");
-                        //The doubles are stored as theta=double so we want whats after the equals sign
-                        Trace.println(Arrays.toString(Arrays.stream(args).map(s2 -> s2.split("=")[1]).toArray()));
-                        flushInput();
-                        return Double.parseDouble(args[servo].split("=")[1]);
-                    }
+            String next;
+            while ((next = in.readLine())!= null) {
+                if (next.startsWith("measured")) {
+                    //The angles are separated by space
+                    String[] args = next.replace("measured angles: ","").split(" ");
+                    //The doubles are stored as theta=double so we want whats after the equals sign
+                    Trace.println(Arrays.toString(Arrays.stream(args).map(s2 -> s2.split("=")[1]).toArray()));
+                    flushInput();
+                    return Double.parseDouble(args[servo].split("=")[1]);
                 }
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -67,16 +60,14 @@ public class RoboticArmJNI implements RoboticArm {
         out.println(pulse);
         out.flush();
         try {
-            while (in.available() > 0) {
-                Scanner s = new Scanner(in);
-                while (s.hasNextLine()) {
-                    String next = s.nextLine();
-                    if (next.startsWith(MOTOR_PREFIX)) {
-                        Trace.println(next);
-                        return;
-                    }
+            String next;
+            while ((next = in.readLine())!= null) {
+                if (next.startsWith(MOTOR_PREFIX)) {
+                    Trace.println(next);
+                    return;
                 }
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -166,7 +157,8 @@ public class RoboticArmJNI implements RoboticArm {
         }
         Trace.setVisible(true);
         out = new PrintStream(process.getOutputStream());
-        in = new BufferedInputStream(process.getInputStream());
+        in  = new BufferedReader(
+                new InputStreamReader((process.getInputStream())));
         calibrate();
     }
     private static final String SET_MOTOR_COMMAND = "w";
