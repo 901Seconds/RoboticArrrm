@@ -55,8 +55,8 @@
       <file leaf-file-name="RoboticArmJNI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="116" column="19" selection-start-line="116" selection-start-column="19" selection-end-line="116" selection-end-column="19" />
+            <state relative-caret-position="-391">
+              <caret line="53" column="23" selection-start-line="53" selection-start-column="23" selection-end-line="54" selection-end-column="26" />
               <folding>
                 <element signature="e#780#781#0" expanded="true" />
                 <element signature="e#812#813#0" expanded="true" />
@@ -79,7 +79,7 @@
         <entry file="file://$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/Launcher.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
-              <caret line="26" column="50" selection-start-line="26" selection-start-column="50" selection-end-line="26" selection-end-column="50" />
+              <caret line="26" column="49" selection-start-line="26" selection-start-column="49" selection-end-line="26" selection-end-column="49" />
               <folding />
             </state>
           </provider>
@@ -1185,14 +1185,7 @@
       <workItem from="1473492919817" duration="49557000" />
       <workItem from="1473633750930" duration="44000" />
       <workItem from="1473633883298" duration="2669000" />
-      <workItem from="1473638683827" duration="11624000" />
-    </task>
-    <task id="LOCAL-00223" summary="Remove interp simu">
-      <created>1473564757169</created>
-      <option name="number" value="00223" />
-      <option name="presentableId" value="LOCAL-00223" />
-      <option name="project" value="LOCAL" />
-      <updated>1473564757169</updated>
+      <workItem from="1473638683827" duration="12349000" />
     </task>
     <task id="LOCAL-00224" summary="t">
       <created>1473565667386</created>
@@ -1530,11 +1523,18 @@
       <option name="project" value="LOCAL" />
       <updated>1473655796877</updated>
     </task>
-    <option name="localTasksCounter" value="272" />
+    <task id="LOCAL-00272" summary="Change line min dist">
+      <created>1473656077302</created>
+      <option name="number" value="00272" />
+      <option name="presentableId" value="LOCAL-00272" />
+      <option name="project" value="LOCAL" />
+      <updated>1473656077302</updated>
+    </task>
+    <option name="localTasksCounter" value="273" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="206845000" />
+    <option name="totallyTimeSpent" value="207570000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1891,8 +1891,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="116" column="19" selection-start-line="116" selection-start-column="19" selection-end-line="116" selection-end-column="19" />
+        <state relative-caret-position="-391">
+          <caret line="53" column="23" selection-start-line="53" selection-start-column="23" selection-end-line="54" selection-end-column="26" />
           <folding>
             <element signature="e#780#781#0" expanded="true" />
             <element signature="e#812#813#0" expanded="true" />
@@ -1903,7 +1903,7 @@
     <entry file="file://$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/Launcher.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
-          <caret line="26" column="50" selection-start-line="26" selection-start-column="50" selection-end-line="26" selection-end-column="50" />
+          <caret line="26" column="49" selection-start-line="26" selection-start-column="49" selection-end-line="26" selection-end-column="49" />
           <folding />
         </state>
       </provider>

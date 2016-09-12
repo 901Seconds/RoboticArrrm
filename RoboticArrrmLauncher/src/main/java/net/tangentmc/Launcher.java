@@ -24,7 +24,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class Launcher {
     private static final double WEB_SCALE_FACTOR = 0.5;
     //Min distance between two points
-    private static final double LINE_MIN_DIST = 10;
+    private static final double LINE_MIN_DIST = 3;
 
     private BlockingQueue<DrawPoint> pointsToDraw = new LinkedBlockingQueue<>();
     private boolean left = false;
@@ -59,8 +59,6 @@ public class Launcher {
         });
         try {
             robot.init();
-            robot.setPenMode(true);
-            armSimu.setPenMode(true);
         } catch (Exception e) {
             e.printStackTrace();
             UI.printMessage(e.getLocalizedMessage());
