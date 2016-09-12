@@ -114,6 +114,7 @@ class RoboticArmJNI implements RoboticArm {
     @Override
     public void setPenMode(boolean down) {
         setServo(2,down?2000:1000);
+        UI.sleep(10);
     }
 
     void init() throws Exception {
