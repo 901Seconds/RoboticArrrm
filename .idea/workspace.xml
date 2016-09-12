@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="562fd72b-2674-4bdb-9358-2e62d0a324de" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmAPI/src/main/java/net/tangentmc/util/Utils.java" afterPath="$PROJECT_DIR$/RoboticArrrmAPI/src/main/java/net/tangentmc/util/Utils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java" afterPath="$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/Launcher.java" afterPath="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/Launcher.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/website/file.svg" afterPath="$PROJECT_DIR$/website/file.svg" />
     </list>
     <ignored path="RoboticArrrm.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1187,14 +1185,7 @@
       <workItem from="1473492919817" duration="49557000" />
       <workItem from="1473633750930" duration="44000" />
       <workItem from="1473633883298" duration="2669000" />
-      <workItem from="1473638683827" duration="5728000" />
-    </task>
-    <task id="LOCAL-00215" summary="fghddty">
-      <created>1473561695207</created>
-      <option name="number" value="00215" />
-      <option name="presentableId" value="LOCAL-00215" />
-      <option name="project" value="LOCAL" />
-      <updated>1473561695207</updated>
+      <workItem from="1473638683827" duration="6943000" />
     </task>
     <task id="LOCAL-00216" summary="fghdd:/">
       <created>1473561992677</created>
@@ -1532,11 +1523,18 @@
       <option name="project" value="LOCAL" />
       <updated>1473646430694</updated>
     </task>
-    <option name="localTasksCounter" value="264" />
+    <task id="LOCAL-00264" summary="Try moving the drawing area a little">
+      <created>1473647592952</created>
+      <option name="number" value="00264" />
+      <option name="presentableId" value="LOCAL-00264" />
+      <option name="project" value="LOCAL" />
+      <updated>1473647592952</updated>
+    </task>
+    <option name="localTasksCounter" value="265" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="200949000" />
+    <option name="totallyTimeSpent" value="202164000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1611,7 +1609,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Clean maven" />
     <MESSAGE value="Remove duplicated dependancy" />
     <MESSAGE value="Debug" />
     <MESSAGE value="Lets test something," />
@@ -1636,7 +1633,8 @@
     <MESSAGE value="Remove simulation wait time" />
     <MESSAGE value="Cleaning is important." />
     <MESSAGE value="We do need some sort of wait though." />
-    <option name="LAST_COMMIT_MESSAGE" value="We do need some sort of wait though." />
+    <MESSAGE value="Try moving the drawing area a little" />
+    <option name="LAST_COMMIT_MESSAGE" value="Try moving the drawing area a little" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
