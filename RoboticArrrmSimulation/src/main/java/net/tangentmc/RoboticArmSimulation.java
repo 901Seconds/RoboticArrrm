@@ -98,7 +98,6 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
         this.theta1 = theta1;
         this.theta2 = theta2;
         loop();
-        UI.sleep(10);
     }
 
     @Override

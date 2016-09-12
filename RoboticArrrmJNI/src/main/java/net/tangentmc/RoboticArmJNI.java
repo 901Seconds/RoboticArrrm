@@ -60,7 +60,7 @@ class RoboticArmJNI implements RoboticArm {
         Trace.println("Starting Calibration:");
         Trace.println("Arm 1 Min:");
         setServo(0, ARM_1_MIN);
-        UI.sleep(2000);
+        UI.sleep(3000);
         double arm1MinAngle = readAngle(0);
         UI.sleep(1000);
 
