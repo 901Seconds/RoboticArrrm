@@ -98,6 +98,7 @@ public class Launcher {
                     }
                 }
                 last = cpt.cpy();
+                UI.sleep(5);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
