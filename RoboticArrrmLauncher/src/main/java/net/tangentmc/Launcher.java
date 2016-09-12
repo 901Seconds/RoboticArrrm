@@ -186,6 +186,7 @@ public class Launcher {
     public void addPoint(DrawPoint drawPoint) {
         drawPoint.scale(WEB_SCALE_FACTOR);
         pointsToDraw.add(drawPoint);
+        draw();
     }
 
     private void addShape(ShapeObject shape) {

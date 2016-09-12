@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class Utils {
     private static final int X_DISP = 200;
-    private static final int Y_DISP = 100;
+    private static final int Y_DISP = 75;
     public static double absLength(double X1, double X2, double Y1, double Y2) {
         return Math.sqrt(Math.pow(X1 - X2, 2) + Math.pow(Y1 - Y2, 2));
     }

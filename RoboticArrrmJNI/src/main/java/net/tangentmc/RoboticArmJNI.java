@@ -56,7 +56,9 @@ class RoboticArmJNI implements RoboticArm {
         //Read a few angles as the first few inputs may get eaten by arm2
         readAngle(0);
         readAngle(0);
-
+        setServo(0, ARM_1_MIN);
+        setServo(1, ARM_2_MAX);
+        UI.sleep(2000);
         Trace.println("Starting Calibration:");
         Trace.println("Arm 1 Min:");
         setServo(0, ARM_1_MIN);
