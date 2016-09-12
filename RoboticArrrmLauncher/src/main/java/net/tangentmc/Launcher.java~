@@ -24,7 +24,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class Launcher {
     private static final double WEB_SCALE_FACTOR = 0.5;
     //Min distance between two points
-    private static final double LINE_MIN_DIST = 2;
+    private static final double LINE_MIN_DIST = 0.5;
 
     private BlockingQueue<DrawPoint> pointsToDraw = new LinkedBlockingQueue<>();
     private boolean left = false;

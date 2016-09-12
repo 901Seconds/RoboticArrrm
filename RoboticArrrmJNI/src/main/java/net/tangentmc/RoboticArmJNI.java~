@@ -71,6 +71,8 @@ public class RoboticArmJNI implements RoboticArm {
         UI.sleep(1000);
 
         Trace.println("Arm 2 Min:");
+        setServo(0, ARM_1_MIN);
+        UI.sleep(3000);
         setServo(1, ARM_2_MIN);
         UI.sleep(3000);
         double arm2MinAngle = readAngle(1);
