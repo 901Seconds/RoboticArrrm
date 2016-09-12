@@ -77,7 +77,7 @@ public class Launcher {
                 DrawPoint tmpPoint;
                 if(last == null) last = cpt.cpy();
                 double dist = last.dist(cpt);
-                if (dist > LINE_MIN_DIST) {
+                if (dist > LINE_MIN_DIST && cpt.isPenDown()) {
                     for (double t = 0; t < 1; t+=LINE_MIN_DIST/dist) {
                         draw();
                         for (RoboticArm arm : arms) {
