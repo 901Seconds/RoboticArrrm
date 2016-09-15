@@ -30,10 +30,15 @@ public class PDFWatcher {
             e.printStackTrace();
         }
     }
-    WatchService watcher;
+    private WatchService watcher;
     public PDFWatcher() throws IOException {
         watcher = FileSystems.getDefault().newWatchService();
-
+        Path dir = new File("c:/print/").toPath();
+        if(!dir.toFile().exists()) {
+            System.out.print("Printer not set up.");
+            return;
+        }
+        dir.register(watcher, ENTRY_MODIFY);
         new Thread(this::loop).start();
         try {
             client = IO.socket("http://localhost:9092");
@@ -42,14 +47,9 @@ public class PDFWatcher {
             e.printStackTrace();
         }
     }
-    long lastmill = 0;
+    private long lastmill = 0;
     private void loop() {
         Path dir = new File("c:/print/").toPath();
-        try {
-            dir.register(watcher, ENTRY_MODIFY);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         for (;;) {
 
             // wait for key to be signaled
