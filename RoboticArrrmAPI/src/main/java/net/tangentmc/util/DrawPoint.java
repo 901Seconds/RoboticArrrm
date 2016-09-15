@@ -26,4 +26,5 @@ public class DrawPoint {
     public DrawPoint cpy() {
         return new DrawPoint(x,y,penDown);
     }
+
 }

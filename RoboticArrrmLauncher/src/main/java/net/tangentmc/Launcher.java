@@ -17,6 +17,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -65,6 +66,11 @@ public class Launcher {
         }
         new WebServer(this);
         new Thread(this::plotThread).start();
+        try {
+            new PDFWatcher();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     private DrawPoint last;
     private void plotThread() {
