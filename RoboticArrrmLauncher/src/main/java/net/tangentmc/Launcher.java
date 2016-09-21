@@ -55,6 +55,7 @@ public class Launcher {
         UI.addSlider("Servo 0",1000,2000,1500,d -> robot.setServo(0,(int)d));
         UI.addSlider("Servo 1",1000,2000,1500,d -> robot.setServo(1,(int)d));
         UI.addButton("Simulate / Plot", () -> addShape(current));
+        UI.addButton("Pen Up", () -> robot.setPenMode(false));
         UI.setMouseMotionListener(this::mouseMove);
         ((JComponent) UI.theUI.canvas).addMouseListener(new MouseAdapter() {
             @Override
