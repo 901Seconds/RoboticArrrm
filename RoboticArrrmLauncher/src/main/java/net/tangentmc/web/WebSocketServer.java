@@ -21,9 +21,7 @@ public class WebSocketServer {
         config.setSocketConfig(socketConfig);
         SocketIOServer server = new SocketIOServer(config);
         server.addEventListener("drawPoint",DrawPoint.class,(socketIOClient, drawPoint, ackRequest) -> {
-            System.out.println(drawPoint);
             if (drawPoint.getIndex() == END) {
-                System.out.println(drawPoint.getCurrentShape());
                 launcher.addPoints(userPoints.get(socketIOClient.getSessionId()).get(UUID.fromString(drawPoint.getCurrentShape())));
                 return;
             }
