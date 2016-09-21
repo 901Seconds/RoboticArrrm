@@ -97,6 +97,7 @@ public class Launcher {
                             Angle tuple = Utils.convertPoint(arm.getModel(),tmpPoint);
                             arm.setPenMode(tuple.isPenDown());
                             arm.setAngle(tuple.getTheta1(), tuple.getTheta2());
+                            UI.sleep(5);
                         }
                     }
                 } else {
