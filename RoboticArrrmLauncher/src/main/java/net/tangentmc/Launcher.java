@@ -19,8 +19,12 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Launcher {
     private static final double WEB_SCALE_FACTOR = 0.5;
@@ -36,6 +40,7 @@ public class Launcher {
     }
 
     private Launcher() {
+        UI.setImmediateRepaint(false);
         RoboticArmJNI robot = new RoboticArmJNI(new RoboticArmModel(287, 374, 377, 374, 154));
         RoboticArmSimulation armSimu = new RoboticArmSimulation(robot.getModel());
         arms.add(robot);
@@ -87,7 +92,7 @@ public class Launcher {
                         for (RoboticArm arm : arms) {
                             tmpPoint = new DrawPoint(Utils.lerp(t,last.getX(),cpt.getX()),
                                     Utils.lerp(t,last.getY(),cpt.getY()),
-                                    cpt.isPenDown());
+                                    cpt.isPenDown(),0,null);
                             Angle tuple = Utils.convertPoint(arm.getModel(),tmpPoint);
                             arm.setPenMode(tuple.isPenDown());
                             arm.setAngle(tuple.getTheta1(), tuple.getTheta2());
@@ -163,28 +168,36 @@ public class Launcher {
         height = uy - ly;
         draw();
     }
-
+    AtomicBoolean stopDraw = new AtomicBoolean(false);
     private void draw() {
-        UI.clearGraphics();
-        if (!pointsToDraw.isEmpty()) {
-            Path2D path = new Path2D.Float();
-            path.moveTo(pointsToDraw.peek().getX(), pointsToDraw.peek().getY());
-            for (DrawPoint point : pointsToDraw) {
-                if (point.isPenDown()) path.lineTo(point.getX(), point.getY());
-                else path.moveTo(point.getX(), point.getY());
+        stopDraw.set(true);
+        SwingUtilities.invokeLater(()-> {
+            stopDraw.set(false);
+            if (!pointsToDraw.isEmpty()) {
+                Path2D path = new Path2D.Float();
+                path.moveTo(pointsToDraw.iterator().next().getX(), pointsToDraw.iterator().next().getY());
+                for (DrawPoint point : pointsToDraw) {
+                    if (stopDraw.get()) return;
+                    if (point.isPenDown()) path.lineTo(point.getX(), point.getY());
+                    else path.moveTo(point.getX(), point.getY());
+                }
+
+                UI.clearGraphics();
+                UI.getGraphics().draw(path);
             }
-            UI.getGraphics().draw(path);
-        }
-        transform = new AffineTransform();
-        transform.translate(xSpc, ySpc);
-        transform.scale(scaleX, scaleY);
-        if (current != null) {
-            for (Shape s2 : current.getShapes()) {
-                if (s2 == null) continue;
-                UI.getGraphics().draw(transform.createTransformedShape(s2));
+            if (current != null) {
+                UI.clearGraphics();
+                transform = new AffineTransform();
+                transform.translate(xSpc, ySpc);
+                transform.scale(scaleX, scaleY);
+                for (Shape s2 : current.getShapes()) {
+                    if (stopDraw.get()) return;
+                    if (s2 == null) continue;
+                    UI.getGraphics().draw(transform.createTransformedShape(s2));
+                }
             }
-        }
-        UI.repaintAllGraphics();
+            UI.repaintAllGraphics();
+        });
     }
 
     public void addPoint(DrawPoint drawPoint) {
@@ -199,6 +212,11 @@ public class Launcher {
             pointsToDraw.addAll(Utils.getAllPoints(shapes,LINE_MIN_DIST));
         }
         current = null;
+    }
+
+    public void addPoints(ArrayList<DrawPoint> drawPoints) {
+        Collections.sort(drawPoints, (o1, o2) -> o1.getIndex()-o2.getIndex());
+        drawPoints.forEach(this::addPoint);
     }
 
     @AllArgsConstructor

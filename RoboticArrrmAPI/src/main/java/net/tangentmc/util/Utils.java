@@ -28,11 +28,13 @@ public class Utils {
     public static ArrayList<DrawPoint> getAllPoints(Shape shape, double minDist) {
         ArrayList<DrawPoint> points = new ArrayList<>();
         double[] coords = new double[6];
-        for (FlatteningPathIterator it = new FlatteningPathIterator(shape.getPathIterator(new AffineTransform()),minDist); !it.isDone(); it.next()) {
+        FlatteningPathIterator it = new FlatteningPathIterator(shape.getPathIterator(new AffineTransform()),minDist);
+        for (; !it.isDone(); it.next()) {
             int type = it.currentSegment(coords);
             //MOVE_TO is pen up, since you want to move without drawing
-            points.add(new DrawPoint(coords[0],coords[1],type!=PathIterator.SEG_MOVETO));
+            points.add(new DrawPoint(coords[0],coords[1],type!=PathIterator.SEG_MOVETO,1,null));
         }
+
         return points;
     }
     public static double lerp(double proportion, double Co1, double Co2) {

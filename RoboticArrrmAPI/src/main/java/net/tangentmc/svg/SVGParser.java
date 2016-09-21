@@ -1,5 +1,6 @@
 package net.tangentmc.svg;
 
+import ecs100.UI;
 import org.apache.batik.parser.AWTPathProducer;
 import org.apache.batik.parser.ParseException;
 import org.apache.batik.parser.PathParser;
@@ -18,7 +19,10 @@ import java.awt.geom.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
+import static java.awt.geom.PathIterator.*;
 
 public class SVGParser {
     private static Shape parsePathShape(String svgPathShape) {
@@ -37,18 +41,20 @@ public class SVGParser {
 
     public Shape[] shapesFromXML(String fileName) {
         ArrayList<Shape> shapes = new ArrayList<>();
+        HashMap<String,ArrayList<Shape>> symbols = new HashMap<>();
         File opened = new File(fileName);
         try {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document doc = builder.parse(opened);
-
+            //Parse and store symbols
             NodeList pathList = doc.getElementsByTagName("path");
             for (int i = 0; i < pathList.getLength(); i++) {
                 org.w3c.dom.Node p = pathList.item(i);
                 if (p.getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
                     Element path = (Element) p;
+                    if (checkStroke(path)) continue;
                     String d = path.getAttribute("d");
-                    shapes.add(parsePathShape(d));
+                    addToArr(path,parsePathShape(d),symbols,shapes);
                 }
             }
             pathList = doc.getElementsByTagName("rect");
@@ -63,9 +69,9 @@ public class SVGParser {
                     if (path.hasAttribute("rx")) {
                         double rx = getAttrib("rx",path);
                         double ry = getAttrib("ry",path);
-                        shapes.add(new RoundRectangle2D.Double(x,y,width,height,rx,ry));
+                        addToArr(path,new RoundRectangle2D.Double(x,y,width,height,rx,ry),symbols,shapes);
                     } else {
-                        shapes.add(new Rectangle2D.Double(x,y,width,height));
+                        addToArr(path,new Rectangle2D.Double(x,y,width,height),symbols,shapes);
                     }
                 }
             }
@@ -77,7 +83,7 @@ public class SVGParser {
                     double r = getAttrib("r",path);
                     double x = getAttrib("cx",path);
                     double y = getAttrib("cy",path);
-                    shapes.add(new Ellipse2D.Double(x,y,r,r));
+                    addToArr(path,new Ellipse2D.Double(x,y,r,r),symbols,shapes);
 
                 }
             }
@@ -90,7 +96,7 @@ public class SVGParser {
                     double ry = getAttrib("ry",path);
                     double x = getAttrib("cx",path);
                     double y = getAttrib("cy",path);
-                    shapes.add(new Ellipse2D.Double(x,y,rx,ry));
+                    addToArr(path,new Ellipse2D.Double(x,y,rx,ry),symbols,shapes);
 
                 }
             }
@@ -103,7 +109,7 @@ public class SVGParser {
                     double y1 = getAttrib("y1",path);
                     double x2 = getAttrib("x2",path);
                     double y2 = getAttrib("y2",path);
-                    shapes.add(new Line2D.Double(x1,y1,x2,y2));
+                    addToArr(path,new Line2D.Double(x1,y1,x2,y2),symbols,shapes);
 
                 }
             }
@@ -119,7 +125,7 @@ public class SVGParser {
                         path2d.lineTo(getPoints(points[i]).getX(),getPoints(points[i]).getY());
                     }
                     path2d.closePath();
-                    shapes.add(path2d);
+                    addToArr(path,path2d,symbols,shapes);
                 }
             }
             pathList = doc.getElementsByTagName("polyline");
@@ -133,7 +139,7 @@ public class SVGParser {
                     for (int i1 = 1; i1 < points.length; i1++) {
                         path2d.lineTo(getPoints(points[i]).getX(),getPoints(points[i]).getY());
                     }
-                    shapes.add(path2d);
+                    addToArr(path,path2d,symbols,shapes);
                 }
             }
             pathList = doc.getElementsByTagName("text");
@@ -147,12 +153,28 @@ public class SVGParser {
                     Font font;
                     if (path.hasChildNodes()) {
                         Element tPath = path;
+                        x = getAttrib("x",path,x);
+                        y = getAttrib("y",path,y);
                         for (int i1 = 0; i1 < tPath.getChildNodes().getLength(); i1++) {
                             path = (Element) tPath.getChildNodes().item(i1);
                             if (path.getTextContent().isEmpty()) continue;
                             font = parseStyle(path,parentfont);
-                            shapes.add(getTextShape(path.getTextContent(), font, x, y));
+                            addToArr(path,getTextShape(path.getTextContent(), font, x, y),symbols,shapes);
                         }
+                    }
+                }
+            }
+            pathList = doc.getElementsByTagName("use");
+            for (int i = 0; i < pathList.getLength(); i++) {
+                org.w3c.dom.Node p = pathList.item(i);
+                if (p.getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
+                    Element path = (Element) p;
+                    String symbolid=path.getAttribute("xlink:href").substring(1);
+                    //We don't parse images, so some symbols wont exist.
+                    if (!symbols.containsKey(symbolid)) continue;
+                    AffineTransform transform = AffineTransform.getTranslateInstance(getAttrib("x", path),getAttrib("y", path));
+                    for (int i1 = 0; i1 < symbols.get(symbolid).size(); i1++) {
+                        shapes.add(transform.createTransformedShape(symbols.get(symbolid).get(i1)));
                     }
                 }
             }
@@ -162,34 +184,85 @@ public class SVGParser {
         return shapes.toArray(new Shape[0]);
 
     }
+
+    private boolean checkStroke(Element path) {
+        return path.hasAttribute("style") && path.getAttribute("style").contains("fill-rule:nonzero");
+    }
+    private static Font plotFriendly;
+    static {
+        try {
+            plotFriendly = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/1CamBam_Stick_7.ttf"));
+            GraphicsEnvironment ge =
+                    GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(plotFriendly);
+        } catch (FontFormatException | IOException e) {
+            e.printStackTrace();
+        }
+    }
     private Font parseStyle(Element path, Font font) {
-        double size = font==null?10:font.getSize();
-        String fontFamily = font==null?null:font.getFamily();
+        float size = font==null?10:font.getSize();
         if (path.hasAttribute("style")) {
             String styleAttribs = path.getAttribute("style");
             for (String s : styleAttribs.split(";")) {
                 if (s.contains("font-size")) {
-                    size = Double.parseDouble(s.replace("font-size:", "").replace("px", ""));
-                }
-                if (s.contains("font-family")) {
-                    fontFamily = s.replace("font-family:", "").replace("\'", "");
+                    size = Float.parseFloat(s.replace("font-size:", "").replace("px", ""));
                 }
             }
         }
-        return new Font(fontFamily, Font.PLAIN, (int)size);
+
+        return plotFriendly.deriveFont(size);
     }
-    private double getAttrib(String attrib, Element path) {
+    private void addToArr(Element p, Shape shape, HashMap<String,ArrayList<Shape>> symbols, ArrayList<Shape> shapes) {
+        if (p.getParentNode().getNodeName().equals("symbol")) {
+            String glyphid = ((Element) p.getParentNode()).getAttribute("id");
+            symbols.putIfAbsent(glyphid,new ArrayList<>());
+            symbols.get(glyphid).add(stripClose(shape.getPathIterator(null)));
+        } else {
+            shapes.add(shape);
+        }
+    }
+    private double getAttrib(String attrib, Element path, double def) {
         if (path.hasAttribute(attrib))
             return Double.parseDouble(path.getAttribute(attrib));
-        return 0;
+        return def;
+    }
+    private double getAttrib(String attrib, Element path) {
+        return getAttrib(attrib,path,0);
     }
     private Shape getTextShape(String str, Font font, double x, double y) {
         BufferedImage bufferImage = new BufferedImage(2,2, BufferedImage.TYPE_INT_RGB);
         Graphics2D g2d = bufferImage.createGraphics();
         FontRenderContext frc = g2d.getFontRenderContext();
         TextLayout tl = new TextLayout(str, font, frc);
-        return tl.getOutline(AffineTransform.getTranslateInstance(x,y));
+        return stripClose(tl.getOutline(AffineTransform.getTranslateInstance(x,y)).getPathIterator(null));
     }
+
+    private Shape stripClose(PathIterator outline) {
+        Path2D textPath = new Path2D.Double();
+        //Single line fonts are forced to join paths with SEG_CLOSE. However, this actually results
+        //in extra lines we don't want drawn, so we can safely skip them.
+        double[] points = new double[6];
+        for (;!outline.isDone();outline.next()) {
+            int type = outline.currentSegment(points);
+            switch (type) {
+                case SEG_CLOSE:
+                    continue;
+                case SEG_CUBICTO:
+                    textPath.curveTo(points[0],points[1],points[2],points[3],points[4],points[5]);
+                    continue;
+                case SEG_LINETO:
+                    textPath.lineTo(points[0],points[1]);
+                    continue;
+                case SEG_MOVETO:
+                    textPath.moveTo(points[0],points[1]);
+                    continue;
+                case SEG_QUADTO:
+                    textPath.quadTo(points[0],points[1],points[2],points[3]);
+            }
+        }
+        return textPath;
+    }
+
     private Point2D.Double getPoints(String point) {
         String[] split = point.split(",");
         return new Point2D.Double(Double.parseDouble(split[0]),Double.parseDouble(split[1]));

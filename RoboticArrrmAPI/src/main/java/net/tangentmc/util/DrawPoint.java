@@ -3,6 +3,7 @@ package net.tangentmc.util;
 import lombok.*;
 
 import java.awt.*;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -13,6 +14,9 @@ import java.awt.*;
 public class DrawPoint {
     double x,y;
     boolean penDown;
+    int index;
+    //When you upload different shapes, they will share a UUID
+    String currentShape;
 
     public void scale(double scale) {
         x*=scale;
@@ -24,7 +28,7 @@ public class DrawPoint {
     }
 
     public DrawPoint cpy() {
-        return new DrawPoint(x,y,penDown);
+        return new DrawPoint(x,y,penDown,index,currentShape);
     }
 
 }
