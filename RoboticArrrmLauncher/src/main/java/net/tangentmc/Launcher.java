@@ -167,7 +167,7 @@ public class Launcher {
         height = uy - ly;
         draw();
     }
-    AtomicBoolean stopDraw = new AtomicBoolean(false);
+    private AtomicBoolean stopDraw = new AtomicBoolean(false);
     private void draw() {
         stopDraw.set(true);
         SwingUtilities.invokeLater(()-> {
@@ -215,6 +215,9 @@ public class Launcher {
 
     public void addPoints(ArrayList<DrawPoint> drawPoints) {
         Collections.sort(drawPoints, (o1, o2) -> o1.getIndex()-o2.getIndex());
+        DrawPoint pt = drawPoints.get(0).cpy();
+        pt.setPenDown(false);
+        addPoint(pt);
         drawPoints.forEach(this::addPoint);
     }
 

@@ -21,6 +21,7 @@ public class Utils {
     }
 
     public static Angle convertPoint(RoboticArmModel m, DrawPoint point) {
+        point = point.cpy();
         point.x += X_DISP;
         point.y += Y_DISP;
         return new Angle(m.findTheta(1, -1, point.getX(), point.getY()), m.findTheta(2, 1, point.getX(), point.getY()),point.isPenDown());
