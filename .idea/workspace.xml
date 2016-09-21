@@ -4,8 +4,6 @@
     <list default="true" id="562fd72b-2674-4bdb-9358-2e62d0a324de" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java" afterPath="$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/PDFWatcher.java" afterPath="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/PDFWatcher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/website/out.svg" afterPath="$PROJECT_DIR$/website/out.svg" />
     </list>
     <ignored path="RoboticArrrm.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -68,7 +66,7 @@
         <entry file="file://$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="134">
-              <caret line="115" column="28" selection-start-line="115" selection-start-column="28" selection-end-line="115" selection-end-column="28" />
+              <caret line="115" column="26" selection-start-line="115" selection-start-column="26" selection-end-line="115" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -1170,14 +1168,7 @@
       <workItem from="1473814723898" duration="2712000" />
       <workItem from="1473903066598" duration="13990000" />
       <workItem from="1473993799180" duration="1249000" />
-      <workItem from="1474368250759" duration="17498000" />
-    </task>
-    <task id="LOCAL-00236" summary="Constant that shit">
-      <created>1473568867475</created>
-      <option name="number" value="00236" />
-      <option name="presentableId" value="LOCAL-00236" />
-      <option name="project" value="LOCAL" />
-      <updated>1473568867475</updated>
+      <workItem from="1474368250759" duration="17748000" />
     </task>
     <task id="LOCAL-00237" summary="Clean maven">
       <created>1473569515826</created>
@@ -1515,11 +1506,18 @@
       <option name="project" value="LOCAL" />
       <updated>1474428372124</updated>
     </task>
-    <option name="localTasksCounter" value="285" />
+    <task id="LOCAL-00285" summary="Have pen not be so far down">
+      <created>1474428766709</created>
+      <option name="number" value="00285" />
+      <option name="presentableId" value="LOCAL-00285" />
+      <option name="project" value="LOCAL" />
+      <updated>1474428766709</updated>
+    </task>
+    <option name="localTasksCounter" value="286" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="248920000" />
+    <option name="totallyTimeSpent" value="249170000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1595,7 +1593,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Skip maven tests outright to save a few seconds." />
     <MESSAGE value="We dont need xmlgraphics anymore, so lets get rid of it so its not shaded in" />
     <MESSAGE value="We are also using the socket io web client now, so the java client can also be removed." />
     <MESSAGE value="Remove some debug thats no longer required" />
@@ -1620,7 +1617,8 @@
     <MESSAGE value="These fonts are important" />
     <MESSAGE value="I AM AN IDIOT" />
     <MESSAGE value="Add a pen up button" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add a pen up button" />
+    <MESSAGE value="Have pen not be so far down" />
+    <option name="LAST_COMMIT_MESSAGE" value="Have pen not be so far down" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1936,7 +1934,7 @@
     <entry file="file://$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="134">
-          <caret line="115" column="28" selection-start-line="115" selection-start-column="28" selection-end-line="115" selection-end-column="28" />
+          <caret line="115" column="26" selection-start-line="115" selection-start-column="26" selection-end-line="115" selection-end-column="26" />
           <folding />
         </state>
       </provider>
