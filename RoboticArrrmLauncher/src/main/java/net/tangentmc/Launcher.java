@@ -88,9 +88,6 @@ public class Launcher {
                 if(last == null) last = cpt.cpy();
                 double dist = last.dist(cpt);
                 if (dist > LINE_MIN_DIST && cpt.isPenDown()) {
-                    for (RoboticArm arm:arms) {
-                        arm.setPenMode(true);
-                    }
                     for (double t = 0; t < 1; t+=LINE_MIN_DIST/dist) {
                         draw();
                         for (RoboticArm arm : arms) {
@@ -98,6 +95,7 @@ public class Launcher {
                                     Utils.lerp(t,last.getY(),cpt.getY()),
                                     cpt.isPenDown(),0,null);
                             Angle tuple = Utils.convertPoint(arm.getModel(),tmpPoint);
+                            arm.setPenMode(tuple.isPenDown());
                             arm.setAngle(tuple.getTheta1(), tuple.getTheta2());
                         }
                     }
@@ -106,7 +104,6 @@ public class Launcher {
                     for (RoboticArm arm : arms) {
                         Angle tuple = Utils.convertPoint(arm.getModel(), cpt);
                         arm.setPenMode(tuple.isPenDown());
-                        UI.sleep(5);
                         arm.setAngle(tuple.getTheta1(), tuple.getTheta2());
                     }
                 }

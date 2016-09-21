@@ -103,7 +103,7 @@ class RoboticArmJNI implements RoboticArm {
         int pulse2 = (int) (mArm2*theta2+cArm2);
         setServo(0, pulse1);
         setServo(1, pulse2);
-        UI.sleep(50);
+        UI.sleep(100);
     }
 
     @Override
