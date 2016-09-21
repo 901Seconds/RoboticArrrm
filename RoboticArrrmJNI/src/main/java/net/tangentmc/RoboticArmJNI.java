@@ -103,7 +103,7 @@ class RoboticArmJNI implements RoboticArm {
         int pulse2 = (int) (mArm2*theta2+cArm2);
         setServo(0, pulse1);
         setServo(1, pulse2);
-        UI.sleep(1);
+        UI.sleep(50);
     }
 
     @Override
@@ -114,7 +114,7 @@ class RoboticArmJNI implements RoboticArm {
     @Override
     public void setPenMode(boolean down) {
         setServo(2,down?1400:1000);
-        UI.sleep(200);
+        UI.sleep(300);
     }
 
     void init() throws Exception {
