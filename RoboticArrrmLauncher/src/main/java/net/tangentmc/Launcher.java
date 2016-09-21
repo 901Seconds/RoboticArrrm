@@ -29,7 +29,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class Launcher {
     private static final double WEB_SCALE_FACTOR = 0.5;
     //Min distance between two points
-    private static final double LINE_MIN_DIST = 1;
+    private static final double LINE_MIN_DIST = 3;
 
     private BlockingQueue<DrawPoint> pointsToDraw = new LinkedBlockingQueue<>();
     private boolean left = false;
