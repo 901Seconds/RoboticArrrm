@@ -29,7 +29,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class Launcher {
     private static final double WEB_SCALE_FACTOR = 0.5;
     //Min distance between two points
-    private static final double LINE_MIN_DIST = 3;
+    private static final double LINE_MIN_DIST = 1;
 
     private BlockingQueue<DrawPoint> pointsToDraw = new LinkedBlockingQueue<>();
     private boolean left = false;
@@ -101,7 +101,7 @@ public class Launcher {
                 } else {
                     draw();
                     for (RoboticArm arm : arms) {
-                        Angle tuple = Utils.convertPoint(arm.getModel(), cpt.cpy());
+                        Angle tuple = Utils.convertPoint(arm.getModel(), cpt);
                         arm.setPenMode(tuple.isPenDown());
                         arm.setAngle(tuple.getTheta1(), tuple.getTheta2());
                     }
@@ -145,7 +145,6 @@ public class Launcher {
     private void load() {
         String file = UIFileChooser.open("Pick an SVG file");
         if (file == null) return;
-
         xSpc = ySpc = 0;
         scaleX = scaleY = 1;
         if (current != null) {
