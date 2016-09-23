@@ -191,7 +191,7 @@ public class SVGParser {
     private static Font plotFriendly;
     static {
         try {
-            plotFriendly = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/1CamBam_Stick_7.ttf"));
+            plotFriendly = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/MecSoft_Font-1.ttf"));
             GraphicsEnvironment ge =
                     GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(plotFriendly);
