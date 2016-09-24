@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.xml-cml:html:0.2-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/xml-cml/html/0.2-SNAPSHOT/html-0.2-20160729.173446-163.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/xml-cml/html/0.2-SNAPSHOT/html-0.2-20160729.173446-163-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/xml-cml/html/0.2-SNAPSHOT/html-0.2-20160729.173446-163-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

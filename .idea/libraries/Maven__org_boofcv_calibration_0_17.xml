@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.boofcv:calibration:0.17">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/boofcv/calibration/0.17/calibration-0.17.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/boofcv/calibration/0.17/calibration-0.17-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/boofcv/calibration/0.17/calibration-0.17-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

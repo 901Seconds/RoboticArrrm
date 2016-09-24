@@ -1,15 +1,19 @@
 package net.tangentmc;
 
 import com.sanjay900.ProcessingRunner;
+import ecs100.UI;
 import io.socket.client.IO;
 import io.socket.client.Socket;
 import net.tangentmc.svg.SVGParser;
 import net.tangentmc.util.DrawPoint;
 import net.tangentmc.util.Utils;
 import net.tangentmc.web.WebSocketServer;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.xmlcml.pdf2svg.PDF2SVGConverter;
 
+import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -19,6 +23,7 @@ import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.function.Consumer;
 
 import static java.nio.file.StandardWatchEventKinds.*;
 /**
@@ -44,17 +49,17 @@ public class PDFWatcher {
         dir.register(watcher, ENTRY_MODIFY);
         new Thread(this::loop).start();
         try {
-            client = IO.socket("http://10.140.63.68:9092");
+            client = IO.socket(/*"http://10.140.63.68:9092"*/"http://localhost:9092");
             client.connect();
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
     }
     private long lastmill = 0;
+    @SuppressWarnings("Duplicates")
     private void loop() {
         Path dir = new File("c:/print/").toPath();
         for (;;) {
-
             // wait for key to be signaled
             WatchKey key;
             try {
@@ -65,7 +70,10 @@ public class PDFWatcher {
 
             for (WatchEvent<?> event: key.pollEvents()) {
                 WatchEvent.Kind<?> kind = event.kind();
-                if (System.currentTimeMillis()-lastmill < 3000) return;
+                if (System.currentTimeMillis()-lastmill > 1000) {
+                    lastmill = System.currentTimeMillis();
+                    continue;
+                }
                 lastmill = System.currentTimeMillis();
                 if (kind == OVERFLOW) {
                     continue;
@@ -73,49 +81,74 @@ public class PDFWatcher {
                 Path filename = (Path) event.context();
                 System.out.println("Client recieved print job");
                 Path child = dir.resolve(filename);
-                try {
-                    Thread.sleep(1000);
-                    Process p = Runtime.getRuntime().exec(exec+" "+child+" out.svg");
-                    System.out.println(exec+" "+child+" out.svg");
-                    p.waitFor();
-                    //Wait for file to save
-                    Thread.sleep(1000);
-                } catch (IOException | InterruptedException e) {
-                    e.printStackTrace();
+                PDF2SVGConverter converter = new PDF2SVGConverter();
+                while (true) {
+                    try {
+                        Thread.sleep(100);
+                        converter.run(child.toString());
+                    } catch (Exception e) {
+                       continue;
+                    }
+                    break;
                 }
-                JSONObject obj = new JSONObject();
-                Shape[] shapes = new SVGParser().shapesFromXML("out.svg");
+                JSONObject obj;
+                JSONArray points = new JSONArray();
+                Shape[] shapes = new SVGParser().shapesFromXML("test.prn-page1.svg");
                 UUID shapeId;
+                int emitCount = 0;
                 for (Shape shape: shapes) {
                     int idx = 0;
                     shapeId = UUID.randomUUID();
-                    for (DrawPoint pt: Utils.getAllPoints(shape,1)) {
+                    for (DrawPoint pt: Utils.getAllPoints(shape,Launcher.LINE_MIN_DIST)) {
                         try {
+                            obj = new JSONObject();
                             obj.put("penDown",pt.isPenDown());
                             obj.put("x",pt.getX());
                             obj.put("y",pt.getY());
                             obj.put("index",idx);
                             obj.put("currentShape",shapeId.toString());
-                            client.emit("drawPoint",obj);
-                            Thread.sleep(10);
-                        } catch (JSONException | InterruptedException e) {
+                            points.put(obj);
+                        } catch (JSONException e) {
                             e.printStackTrace();
+                        }
+                        emitCount++;
+                        if (emitCount > 100) {
+                            client.emit("drawPoints",points);
+                            points = new JSONArray();
+                            emitCount = 0;
+                            try {
+                                Thread.sleep(100);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                         }
                         idx++;
                     }
 
                     try {
+                        obj = new JSONObject();
                         obj.put("penDown",false);
                         obj.put("x",0d);
                         obj.put("y",0d);
                         obj.put("index", WebSocketServer.END);
                         obj.put("currentShape",shapeId.toString());
-                        client.emit("drawPoint",obj);
-                        Thread.sleep(10);
-                    } catch (InterruptedException | JSONException e) {
+                        points.put(obj);
+                    } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                    emitCount++;
+                    if (emitCount > 100) {
+                        client.emit("drawPoints",points);
+                        points = new JSONArray();
+                        emitCount = 0;
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
+                client.emit("drawPoints",points);
 
             }
             boolean valid = key.reset();
@@ -124,5 +157,4 @@ public class PDFWatcher {
             }
         }
     }
-    private String exec = "pdf2svg-windows-master"+File.separator+"dist-32bits"+File.separator+"pdf2svg.exe";
 }

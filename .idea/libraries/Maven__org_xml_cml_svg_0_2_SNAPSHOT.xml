@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.xml-cml:svg:0.2-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/xml-cml/svg/0.2-SNAPSHOT/svg-0.2-20160408.053837-140.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/xml-cml/svg/0.2-SNAPSHOT/svg-0.2-20160408.053837-140-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/xml-cml/svg/0.2-SNAPSHOT/svg-0.2-20160408.053837-140-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -103,7 +103,6 @@ class RoboticArmJNI implements RoboticArm {
         int pulse2 = (int) (mArm2*theta2+cArm2);
         setServo(0, pulse1);
         setServo(1, pulse2);
-        UI.sleep(150);
     }
 
     @Override
@@ -114,11 +113,9 @@ class RoboticArmJNI implements RoboticArm {
     @Override
     public void setPenMode(boolean down) {
         setServo(2,down?2000:1000);
-        UI.sleep(300);
     }
 
     void init() throws Exception {
-        Trace.setVisible(true);
         //Script is required here, as there is a bug with java/c where the input stream
         //is not correctly flushed otherwise, and we receive no input.
         //If a computer has the script command, and the script inst found,
@@ -131,6 +128,7 @@ class RoboticArmJNI implements RoboticArm {
             process = null;
             throw new IOException("The arm failed to start!");
         }
+        Trace.setVisible(true);
         out = new PrintStream(process.getOutputStream());
         in  = new BufferedReader(new InputStreamReader((process.getInputStream())));
         calibrate();

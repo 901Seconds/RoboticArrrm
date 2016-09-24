@@ -27,10 +27,8 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Launcher {
-    private static final double WEB_SCALE_FACTOR = 0.5;
     //Min distance between two points
-    private static final double LINE_MIN_DIST = 1;
-
+    public static final double LINE_MIN_DIST = 1;
     private BlockingQueue<DrawPoint> pointsToDraw = new LinkedBlockingQueue<>();
     private boolean left = false;
     private ArrayList<RoboticArm> arms = new ArrayList<>();
@@ -85,33 +83,43 @@ public class Launcher {
             try {
                 DrawPoint cpt = pointsToDraw.take();
                 DrawPoint tmpPoint;
-                if(last == null) last = cpt.cpy();
+                if(last == null) {
+                    last = cpt.cpy();
+                    //Make sure to trigger pen down events.
+                    last.setPenDown(!cpt.isPenDown());
+                }
                 double dist = last.dist(cpt);
+                if (last.isPenDown() != cpt.isPenDown()) {
+                    arms.forEach(arm -> {
+                        arm.setPenMode(cpt.isPenDown());
+                        //UI.sleep(300);
+                        UI.sleep(20);
+                    });
+                }
+                draw();
                 if (dist > LINE_MIN_DIST && cpt.isPenDown()) {
                     for (double t = 0; t < 1; t+=LINE_MIN_DIST/dist) {
-                        draw();
-                        for (RoboticArm arm : arms) {
-                            tmpPoint = new DrawPoint(Utils.lerp(t,last.getX(),cpt.getX()),
-                                    Utils.lerp(t,last.getY(),cpt.getY()),
-                                    cpt.isPenDown(),0,null);
-                            Angle tuple = Utils.convertPoint(arm.getModel(),tmpPoint);
-                            arm.setPenMode(tuple.isPenDown());
-                            arm.setAngle(tuple.getTheta1(), tuple.getTheta2());
-                        }
+                        tmpPoint = new DrawPoint(Utils.lerp(t,last.getX(),cpt.getX()),
+                                Utils.lerp(t,last.getY(),cpt.getY()),
+                                cpt.isPenDown(),0,null);
+                        setAngles(tmpPoint);
                     }
                 } else {
-                    draw();
-                    for (RoboticArm arm : arms) {
-                        Angle tuple = Utils.convertPoint(arm.getModel(), cpt);
-                        arm.setPenMode(tuple.isPenDown());
-                        arm.setAngle(tuple.getTheta1(), tuple.getTheta2());
-                    }
+                    setAngles(cpt);
                 }
                 last = cpt.cpy();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+    }
+    private void setAngles(DrawPoint point) {
+        for (RoboticArm arm : arms) {
+            Angle tuple = Utils.convertPoint(arm.getModel(),point);
+            arm.setAngle(tuple.getTheta1(), tuple.getTheta2());
+        }
+        //UI.sleep(200);
+        UI.sleep(30);
     }
     //variables used for mouse manipulation
     private double lastX = -1, lastY = -1, scaleX = 1, scaleY = 1, width, height, xSpc, ySpc;
@@ -200,7 +208,6 @@ public class Launcher {
     }
 
     public void addPoint(DrawPoint drawPoint) {
-        drawPoint.scale(WEB_SCALE_FACTOR);
         pointsToDraw.add(drawPoint);
         draw();
     }
@@ -218,7 +225,8 @@ public class Launcher {
         DrawPoint pt = drawPoints.get(0).cpy();
         pt.setPenDown(false);
         addPoint(pt);
-        drawPoints.forEach(this::addPoint);
+        drawPoints.forEach(pointsToDraw::add);
+        draw();
     }
 
     @AllArgsConstructor

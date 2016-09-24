@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.xml-cml:imageanalysis:0.1-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/xml-cml/imageanalysis/0.1-SNAPSHOT/imageanalysis-0.1-20160805.174859-244.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/xml-cml/imageanalysis/0.1-SNAPSHOT/imageanalysis-0.1-20160805.174859-244-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/xml-cml/imageanalysis/0.1-SNAPSHOT/imageanalysis-0.1-20160805.174859-244-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

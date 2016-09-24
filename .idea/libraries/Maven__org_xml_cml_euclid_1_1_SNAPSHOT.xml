@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.xml-cml:euclid:1.1-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/xml-cml/euclid/1.1-SNAPSHOT/euclid-1.1-20160408.053711-246.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/xml-cml/euclid/1.1-SNAPSHOT/euclid-1.1-20160408.053711-246-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/xml-cml/euclid/1.1-SNAPSHOT/euclid-1.1-20160408.053711-246-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
