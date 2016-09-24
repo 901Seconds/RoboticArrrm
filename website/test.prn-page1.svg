@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="600.0" height="800.0" stroke="none" stroke-width="0.0" xmlns="http://www.w3.org/2000/svg" xmlns:svgx="http://www.xml-cml.org/schema/svgx">
  <defs id="defs1"/>
- <image transform="matrix(2.6576787229334684,-0.0,-0.0,2.6571427579436886,123.24000549316406,-0.75)" xlink:href="test.prn.p1.i1.png" x="0.0" y="0.0" width="224.0" height="224.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+ <image transform="matrix(1.2832001043140906,-0.0,-0.0,1.2829940268781002,36.0,35.67999267578125)" xlink:href="test.prn.p1.i1.png" x="0.0" y="0.0" width="600.0" height="334.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
 </svg>

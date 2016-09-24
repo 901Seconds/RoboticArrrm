@@ -15,6 +15,7 @@ import java.util.UUID;
 public class WebSocketServer {
 
     HashMap<UUID,HashMap<UUID,ArrayList<DrawPoint>>> userPoints = new HashMap<>();
+    HashMap<UUID,HashMap<UUID,Integer>> sizes = new HashMap<>();
     public WebSocketServer(Launcher launcher) {
         Configuration config = new Configuration();
         config.setPort(9092);
@@ -29,14 +30,30 @@ public class WebSocketServer {
         server.start();
     }
     private void drawPoint(DrawPoint drawPoint, Launcher launcher, SocketIOClient socketIOClient) {
-        if (drawPoint.getIndex() == END) {
-            launcher.addPoints(userPoints.get(socketIOClient.getSessionId()).get(UUID.fromString(drawPoint.getCurrentShape())));
+        if (drawPoint.getIndex() < 0) {
+            sizes.putIfAbsent(socketIOClient.getSessionId(),new HashMap<>());
+            sizes.get(socketIOClient.getSessionId()).put(UUID.fromString(drawPoint.getCurrentShape()),-drawPoint.getIndex());
+            checkPoints(launcher);
             return;
         }
         userPoints.putIfAbsent(socketIOClient.getSessionId(),new HashMap<>());
         userPoints.get(socketIOClient.getSessionId()).putIfAbsent(UUID.fromString(drawPoint.getCurrentShape()),new ArrayList<>());
         userPoints.get(socketIOClient.getSessionId()).get(UUID.fromString(drawPoint.getCurrentShape())).add(drawPoint);
+        checkPoints(launcher);
 
     }
+
+    private void checkPoints(Launcher launcher) {
+        for (UUID uuid:sizes.keySet()) {
+            for (UUID shape:sizes.get(uuid).keySet()) {
+                if (userPoints.get(uuid).get(shape).size()>=sizes.get(uuid).get(shape)-1) {
+                    launcher.addPoints(userPoints.get(uuid).get(shape));
+                    sizes.get(uuid).remove(shape);
+                    userPoints.get(uuid).remove(shape);
+                }
+            }
+        }
+    }
+
     public static final int END = -1;
 }

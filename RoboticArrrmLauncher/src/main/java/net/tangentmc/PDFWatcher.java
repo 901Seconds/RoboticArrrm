@@ -70,7 +70,7 @@ public class PDFWatcher {
 
             for (WatchEvent<?> event: key.pollEvents()) {
                 WatchEvent.Kind<?> kind = event.kind();
-                if (System.currentTimeMillis()-lastmill > 1000) {
+                if (System.currentTimeMillis()-lastmill > 5000) {
                     lastmill = System.currentTimeMillis();
                     continue;
                 }
@@ -82,14 +82,11 @@ public class PDFWatcher {
                 System.out.println("Client recieved print job");
                 Path child = dir.resolve(filename);
                 PDF2SVGConverter converter = new PDF2SVGConverter();
-                while (true) {
-                    try {
-                        Thread.sleep(100);
-                        converter.run(child.toString());
-                    } catch (Exception e) {
-                       continue;
-                    }
-                    break;
+                try {
+                    Thread.sleep(100);
+                    converter.run(child.toString());
+                } catch (Exception e) {
+                    continue;
                 }
                 JSONObject obj;
                 JSONArray points = new JSONArray();
@@ -97,6 +94,11 @@ public class PDFWatcher {
                 UUID shapeId;
                 int emitCount = 0;
                 for (Shape shape: shapes) {
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     int idx = 0;
                     shapeId = UUID.randomUUID();
                     for (DrawPoint pt: Utils.getAllPoints(shape,Launcher.LINE_MIN_DIST)) {
@@ -130,7 +132,7 @@ public class PDFWatcher {
                         obj.put("penDown",false);
                         obj.put("x",0d);
                         obj.put("y",0d);
-                        obj.put("index", WebSocketServer.END);
+                        obj.put("index", -idx);
                         obj.put("currentShape",shapeId.toString());
                         points.put(obj);
                     } catch (JSONException e) {

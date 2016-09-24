@@ -10,6 +10,9 @@ import net.tangentmc.util.Angle;
 import net.tangentmc.util.DrawPoint;
 import net.tangentmc.util.Utils;
 import net.tangentmc.web.WebServer;
+import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import java.awt.*;
@@ -38,6 +41,7 @@ public class Launcher {
     }
 
     private Launcher() {
+        disableLogger();
         UI.setImmediateRepaint(false);
         RoboticArmJNI robot = new RoboticArmJNI(new RoboticArmModel(287, 374, 377, 374, 154));
         RoboticArmSimulation armSimu = new RoboticArmSimulation(robot.getModel());
@@ -76,6 +80,15 @@ public class Launcher {
             e.printStackTrace();
         }
     }
+
+    private void disableLogger() {
+        java.util.List<Logger> loggers = Collections.<Logger>list(LogManager.getCurrentLoggers());
+        loggers.add(LogManager.getRootLogger());
+        for ( Logger logger : loggers ) {
+            logger.setLevel(Level.INFO);
+        }
+    }
+
     private DrawPoint last;
     private void plotThread() {
         //noinspection InfiniteLoopStatement
