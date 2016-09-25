@@ -130,7 +130,6 @@ public class PDFWatcher {
                 //File cleanup
                 for (File file : new File(".").listFiles()) {
                     if (file.getName().contains("test.prn")) {
-                        System.out.print(file);
                         file.delete();
                     }
                 }
