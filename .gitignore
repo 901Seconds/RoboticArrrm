@@ -6,3 +6,5 @@
 
 # Maven
 log/
+/website/test.prn*
+typescript
