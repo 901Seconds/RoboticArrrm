@@ -1,6 +1,5 @@
 package net.tangentmc.svg;
 
-import ecs100.UI;
 import org.apache.batik.parser.AWTPathProducer;
 import org.apache.batik.parser.ParseException;
 import org.apache.batik.parser.PathParser;
@@ -11,7 +10,6 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -45,6 +43,7 @@ public class SVGParser {
             return new Shape[]{new Rectangle2D.Float(0, 0, 1, 1)};
         }
     }
+    
     public Shape[] shapesFromXML(String fileName) {
         ArrayList<Shape> shapes = new ArrayList<>();
         File opened = new File(fileName);
@@ -105,6 +104,7 @@ public class SVGParser {
                     path2d.moveTo(tx,ty);
                     for (int y = 0; y < img.getHeight(); y++) {
                         path2d.moveTo((dir==1?0:img.getWidth())+tx,y+ty);
+                        //Alternate direction so that the pen doesnt cross the page
                         for (int x = dir==1?0:img.getWidth()-1; x >= 0 && x < img.getWidth();x+=dir) {
                             cur = pixels[(y * img.getWidth()) + x] >= 0;
                             if (cur != last) {
@@ -112,14 +112,18 @@ public class SVGParser {
                                     path2d.moveTo(x+tx,y+ty);
                                 } else {
                                     //Remember, if your going from black to white, you want to draw the line to the prev
-                                    //pixel, not current
+                                    //pixel, not current, so take dir
                                     path2d.lineTo(x-dir+tx,y+ty);
                                 }
                             }
                             last = cur;
                         }
+                        //If your at the end of the page, and the pen was down, we should finish that stroke
                         if (cur && dir == 1) {
                             path2d.lineTo(img.getWidth()+ tx, y + ty);
+                        }
+                        if (cur && dir == -1) {
+                            path2d.lineTo(tx, y + ty);
                         }
                         dir = -dir;
                     }
@@ -239,7 +243,10 @@ public class SVGParser {
         newWidth = Math.min(newWidth,MAX_X-MIN_X);
         newHeight = proportion*newWidth;
         AffineTransform transform = new AffineTransform();
-        transform.translate(MIN_X,Math.max(minY,MIN_Y));
+        double tx=Math.max(minX,MIN_X),ty=Math.max(minY,MIN_Y);
+        tx = Math.min(tx,MAX_X-newWidth);
+        ty = Math.min(ty,MAX_Y-newHeight);
+        transform.translate(tx,ty);
         transform.scale(newWidth/width,newHeight/height);
         for (int i = 0; i < shapes.size(); i++) {
             shapes.set(i,transform.createTransformedShape(shapes.get(i)));
