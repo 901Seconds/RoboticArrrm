@@ -23,19 +23,22 @@ public class WebSocketServer {
         socketConfig.setReuseAddress(true);
         config.setSocketConfig(socketConfig);
         SocketIOServer server = new SocketIOServer(config);
-        server.addEventListener("drawPoint", DrawPoint.class, (socketIOClient, drawPoint, ackRequest) -> launcher.addPoint(drawPoint));
-        server.addEventListener("drawPoints", DrawPoint[].class, (socketIOClient, drawPoints, ackRequest) ->
-                Arrays.stream(drawPoints).forEach(drawPoint -> drawPoint(drawPoint, launcher, socketIOClient)));
-
+        server.addEventListener("drawPoint",DrawPoint.class,(socketIOClient, drawPoint, ackRequest) ->{
+            launcher.addPoint(drawPoint);
+        });
+        server.addEventListener("drawPoints",DrawPoint[].class,(socketIOClient, drawPoints, ackRequest) -> {
+            Arrays.stream(drawPoints).forEach(drawPoint -> drawPoint(drawPoint,launcher,socketIOClient));
+        });
         server.start();
     }
     private void drawPoint(DrawPoint drawPoint, Launcher launcher, SocketIOClient socketIOClient) {
-        sizes.putIfAbsent(socketIOClient.getSessionId(),new HashMap<>());
         if (drawPoint.getIndex() < 0) {
+            sizes.putIfAbsent(socketIOClient.getSessionId(),new HashMap<>());
             sizes.get(socketIOClient.getSessionId()).put(UUID.fromString(drawPoint.getCurrentShape()),-drawPoint.getIndex());
             checkPoints(launcher);
             return;
         }
+        userPoints.putIfAbsent(socketIOClient.getSessionId(),new HashMap<>());
         userPoints.get(socketIOClient.getSessionId()).putIfAbsent(UUID.fromString(drawPoint.getCurrentShape()),new ArrayList<>());
         userPoints.get(socketIOClient.getSessionId()).get(UUID.fromString(drawPoint.getCurrentShape())).add(drawPoint);
         checkPoints(launcher);
@@ -51,6 +54,5 @@ public class WebSocketServer {
             });
         }
     }
-
     public static final int END = -1;
 }

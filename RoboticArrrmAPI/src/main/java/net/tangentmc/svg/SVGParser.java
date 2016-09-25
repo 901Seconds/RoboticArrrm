@@ -97,7 +97,9 @@ public class SVGParser {
                     if (png.startsWith("data")) {
                         String base64Image = png.split(",")[1];
                         byte[] imageBytes = javax.xml.bind.DatatypeConverter.parseBase64Binary(base64Image);
-                        img = ImageIO.read(new ByteArrayInputStream(imageBytes));
+                        ByteArrayInputStream bs = new ByteArrayInputStream(imageBytes);
+                        img = ImageIO.read(bs);
+                        bs.close();
                     } else {
                         img = ImageIO.read(new File(png));
                     }

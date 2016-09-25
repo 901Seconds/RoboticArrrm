@@ -132,7 +132,7 @@ public class Launcher {
             Angle tuple = Utils.convertPoint(arm.getModel(),point);
             arm.setAngle(tuple.getTheta1(), tuple.getTheta2());
         }
-        UI.sleep(robotAlive?200:10);
+        UI.sleep(robotAlive?200:50);
     }
     //variables used for mouse manipulation
     private double lastX = -1, lastY = -1, scaleX = 1, scaleY = 1, width, height, xSpc, ySpc;

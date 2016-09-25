@@ -79,26 +79,16 @@ public class PDFWatcher {
                     continue;
                 }
                 Path filename = (Path) event.context();
-                System.out.println("Client recieved print job");
+                System.out.println("Client received print job");
                 Path child = dir.resolve(filename);
                 PDF2SVGConverter converter = new PDF2SVGConverter();
-                try {
-                    Thread.sleep(100);
-                    converter.run(child.toString());
-                } catch (Exception e) {
-                    continue;
-                }
+                converter.run(child.toString());
                 JSONObject obj;
                 JSONArray points = new JSONArray();
                 Shape[] shapes = new SVGParser().shapesFromXML("test.prn-page1.svg");
                 UUID shapeId;
                 int emitCount = 0;
                 for (Shape shape: shapes) {
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
                     int idx = 0;
                     shapeId = UUID.randomUUID();
                     for (DrawPoint pt: Utils.getAllPoints(shape,Launcher.LINE_MIN_DIST)) {
@@ -114,15 +104,10 @@ public class PDFWatcher {
                             e.printStackTrace();
                         }
                         emitCount++;
-                        if (emitCount > 100) {
+                        if (emitCount > 500) {
                             client.emit("drawPoints",points);
                             points = new JSONArray();
                             emitCount = 0;
-                            try {
-                                Thread.sleep(100);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
                         }
                         idx++;
                     }
@@ -138,20 +123,17 @@ public class PDFWatcher {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    emitCount++;
-                    if (emitCount > 100) {
-                        client.emit("drawPoints",points);
-                        points = new JSONArray();
-                        emitCount = 0;
-                        try {
-                            Thread.sleep(100);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                    client.emit("drawPoints",points);
+                    points = new JSONArray();
+                    emitCount = 0;
+                }
+                //File cleanup
+                for (File file : new File(".").listFiles()) {
+                    if (file.getName().contains("test.prn")) {
+                        System.out.print(file);
+                        file.delete();
                     }
                 }
-                client.emit("drawPoints",points);
-
             }
             boolean valid = key.reset();
             if (!valid) {
