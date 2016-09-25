@@ -155,6 +155,7 @@ class RoboticArmJNI implements RoboticArm {
         }
         return -1;
     }
+
     private static final String SET_MOTOR_COMMAND = "w";
     private static final String MEASURE_ANGLE_COMMAND = "m";
     private static final String MOTOR_PREFIX = "Servo okay";

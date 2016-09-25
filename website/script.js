@@ -17,6 +17,13 @@
 
 var host = window.location.hostname;
 var socket = io(host+":9092");
+function guid() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+        return v.toString(16);
+    });
+
+}
 var drawingApp = (function () {
 
     "use strict";
@@ -70,10 +77,13 @@ var drawingApp = (function () {
         // @param y
         // @param dragging
         addClick = function (x, y, dragging) {
+            var uuid = guid();
             socket.emit("drawPoint",{
                 "x":x,
                 "y":y,
-                "penDown":paint
+                "penDown":paint,
+                "currentShape":uuid,
+                "index":1,
             });
             clickX.push(x);
             clickY.push(y);

@@ -36,6 +36,7 @@ public class Launcher {
     private boolean left = false;
     private ArrayList<RoboticArm> arms = new ArrayList<>();
     private ShapeObject current;
+    boolean robotAlive = true;
     public static void main(String[] args) {
         new Launcher();
     }
@@ -71,6 +72,7 @@ public class Launcher {
         } catch (Exception e) {
             e.printStackTrace();
             UI.printMessage(e.getLocalizedMessage());
+            robotAlive = false;
         }
         new WebServer(this);
         new Thread(this::plotThread).start();
@@ -105,7 +107,7 @@ public class Launcher {
                 if (last.isPenDown() != cpt.isPenDown()) {
                     arms.forEach(arm -> {
                         arm.setPenMode(cpt.isPenDown());
-                        UI.sleep(100);
+                        UI.sleep(robotAlive?150:10);
                     });
                 }
                 draw();
@@ -130,7 +132,7 @@ public class Launcher {
             Angle tuple = Utils.convertPoint(arm.getModel(),point);
             arm.setAngle(tuple.getTheta1(), tuple.getTheta2());
         }
-        UI.sleep(200);
+        UI.sleep(robotAlive?200:10);
     }
     //variables used for mouse manipulation
     private double lastX = -1, lastY = -1, scaleX = 1, scaleY = 1, width, height, xSpc, ySpc;
