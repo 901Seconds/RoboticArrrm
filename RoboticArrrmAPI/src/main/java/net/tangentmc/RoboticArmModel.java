@@ -8,8 +8,6 @@ public class RoboticArmModel {
 
     //2*lengths ulnar and forearm
     double l;
-    //2*distance between shoulders
-    double d;
 
     //o is for shoulder, 1 means left, 2 means right
     double o1X;
@@ -23,7 +21,6 @@ public class RoboticArmModel {
         o2X=shoulder2X;
         o2Y=shoulder2Y;
         l=armLength;
-        d=o2X-o1X;
     }
 
     private double findTheta(double[] elbows, int shoulderNum, int leftRight) {

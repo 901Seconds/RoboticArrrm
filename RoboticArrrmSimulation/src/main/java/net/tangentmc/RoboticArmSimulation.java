@@ -1,10 +1,9 @@
 package net.tangentmc;
 
 import com.sanjay900.ProcessingRunner;
-import ecs100.UI;
 import processing.core.PApplet;
 
-import static net.tangentmc.util.Utils.*;
+import static net.tangentmc.util.Utils.absLength;
 
 public class RoboticArmSimulation extends PApplet implements RoboticArm {
 
@@ -36,8 +35,6 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
     }
     private double theta1, theta2;
     public void draw() {
-        //Shift the bot towards the center of the screen
-        //translate(200,200);
         erasePrevFrame();
         drawOtherArms(theta1, theta2);
     }

@@ -22,21 +22,19 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Launcher {
     //Min distance between two points
-    public static final double LINE_MIN_DIST = 100;
+    static final double LINE_MIN_DIST = 100;
     private BlockingQueue<DrawPoint> pointsToDraw = new LinkedBlockingQueue<>();
     private boolean left = false;
     private ArrayList<RoboticArm> arms = new ArrayList<>();
     private ShapeObject current;
-    boolean robotAlive = true;
+    private boolean robotAlive = true;
     public static void main(String[] args) {
         new Launcher();
     }
@@ -83,8 +81,9 @@ public class Launcher {
         }
     }
 
+    @SuppressWarnings("unchecked")
     private void disableLogger() {
-        java.util.List<Logger> loggers = Collections.<Logger>list(LogManager.getCurrentLoggers());
+        ArrayList<Logger> loggers = Collections.<Logger>list(LogManager.getCurrentLoggers());
         loggers.add(LogManager.getRootLogger());
         for ( Logger logger : loggers ) {
             logger.setLevel(Level.INFO);

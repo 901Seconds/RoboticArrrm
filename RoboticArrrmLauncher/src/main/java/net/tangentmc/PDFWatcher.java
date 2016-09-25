@@ -1,36 +1,28 @@
 package net.tangentmc;
 
-import com.sanjay900.ProcessingRunner;
-import ecs100.UI;
 import io.socket.client.IO;
 import io.socket.client.Socket;
 import net.tangentmc.svg.SVGParser;
 import net.tangentmc.util.DrawPoint;
 import net.tangentmc.util.Utils;
-import net.tangentmc.web.WebSocketServer;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.xmlcml.pdf2svg.PDF2SVGConverter;
 
-import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.nio.ByteBuffer;
 import java.nio.file.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 import java.util.UUID;
-import java.util.function.Consumer;
 
-import static java.nio.file.StandardWatchEventKinds.*;
-/**
- * Created by sanjay on 16/09/2016.
- */
+import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
+import static java.nio.file.StandardWatchEventKinds.OVERFLOW;
+
 public class PDFWatcher {
-    Socket client;
+    private Socket client;
     public static void main(String[] args) {
         try {
             new PDFWatcher();
@@ -39,7 +31,7 @@ public class PDFWatcher {
         }
     }
     private WatchService watcher;
-    public PDFWatcher() throws IOException {
+    PDFWatcher() throws IOException {
         watcher = FileSystems.getDefault().newWatchService();
         Path dir = new File("c:/print/").toPath();
         if(!dir.toFile().exists()) {
@@ -128,10 +120,9 @@ public class PDFWatcher {
                     emitCount = 0;
                 }
                 //File cleanup
-                for (File file : new File(".").listFiles()) {
-                    if (file.getName().contains("test.prn")) {
-                        file.delete();
-                    }
+                File[] files = new File(".").listFiles();
+                if (files != null) {
+                    Arrays.stream(files).filter(file -> file.getName().contains("test.prn")).forEach(File::delete);
                 }
             }
             boolean valid = key.reset();

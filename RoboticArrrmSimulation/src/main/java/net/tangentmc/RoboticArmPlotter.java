@@ -32,11 +32,12 @@ public class RoboticArmPlotter extends PApplet {
             line(lasttCPs[0], lasttCPs[1], tCPs[0], tCPs[1]);
             stroke(255, 0, 0);
             line(lasttCPs[2], lasttCPs[3], tCPs[2], tCPs[3]);
-        } else {
-           /* stroke(0, 255, 0);
+        }/* else {
+            //pen up
+            stroke(0, 255, 0);
             line(lasttCPs[0], lasttCPs[1], tCPs[0], tCPs[1]);
-            line(lasttCPs[2], lasttCPs[3], tCPs[2], tCPs[3]);*/
-        }
+            line(lasttCPs[2], lasttCPs[3], tCPs[2], tCPs[3]);
+        }*/
         drawAngleGraph(theta1,theta2);
         drawAngleVis(theta1,theta2);
         lasttCPs = tCPs;
