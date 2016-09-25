@@ -13,22 +13,19 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class WebSocketServer {
-
-    HashMap<UUID,HashMap<UUID,ArrayList<DrawPoint>>> userPoints = new HashMap<>();
-    HashMap<UUID,HashMap<UUID,Integer>> sizes = new HashMap<>();
-    public WebSocketServer(Launcher launcher) {
+    private HashMap<UUID,HashMap<UUID,ArrayList<DrawPoint>>> userPoints = new HashMap<>();
+    private HashMap<UUID,HashMap<UUID,Integer>> sizes = new HashMap<>();
+    WebSocketServer(Launcher launcher) {
         Configuration config = new Configuration();
         config.setPort(9092);
         SocketConfig socketConfig = new SocketConfig();
         socketConfig.setReuseAddress(true);
         config.setSocketConfig(socketConfig);
         SocketIOServer server = new SocketIOServer(config);
-        server.addEventListener("drawPoint",DrawPoint.class,(socketIOClient, drawPoint, ackRequest) ->{
-            launcher.addPoint(drawPoint);
-        });
-        server.addEventListener("drawPoints",DrawPoint[].class,(socketIOClient, drawPoints, ackRequest) -> {
-            Arrays.stream(drawPoints).forEach(drawPoint -> drawPoint(drawPoint,launcher,socketIOClient));
-        });
+        server.addEventListener("drawPoint",DrawPoint.class,(socketIOClient, drawPoint, ackRequest) ->
+                launcher.addPoint(drawPoint));
+        server.addEventListener("drawPoints",DrawPoint[].class,(socketIOClient, drawPoints, ackRequest) ->
+                Arrays.stream(drawPoints).forEach(drawPoint -> drawPoint(drawPoint,launcher,socketIOClient)));
         server.start();
     }
     private void drawPoint(DrawPoint drawPoint, Launcher launcher, SocketIOClient socketIOClient) {
@@ -47,12 +44,12 @@ public class WebSocketServer {
 
     private void checkPoints(Launcher launcher) {
         for (UUID uuid:sizes.keySet()) {
-            sizes.get(uuid).keySet().stream().filter(shape -> userPoints.get(uuid).get(shape).size() >= sizes.get(uuid).get(shape) - 1).forEach(shape -> {
+            sizes.get(uuid).keySet().stream().filter(shape ->
+                    userPoints.get(uuid).get(shape).size() >= sizes.get(uuid).get(shape) - 1).forEach(shape -> {
                 launcher.addPoints(userPoints.get(uuid).get(shape));
                 sizes.get(uuid).remove(shape);
                 userPoints.get(uuid).remove(shape);
             });
         }
     }
-    public static final int END = -1;
 }

@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="562fd72b-2674-4bdb-9358-2e62d0a324de" name="Default" comment="">
+    <list default="true" id="562fd72b-2674-4bdb-9358-2e62d0a324de" name="Default" comment="PDFWatcher now cleans up previous print jobs. It also doesnt wait to send packets, and sends much much larger packets.&#10;Close up inputstreams">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmAPI/src/main/java/net/tangentmc/svg/SVGParser.java" afterPath="$PROJECT_DIR$/RoboticArrrmAPI/src/main/java/net/tangentmc/svg/SVGParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/Launcher.java" afterPath="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/Launcher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/PDFWatcher.java" afterPath="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/PDFWatcher.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/web/WebSocketServer.java" afterPath="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/web/WebSocketServer.java" />
     </list>
     <ignored path="RoboticArrrm.iws" />
@@ -76,11 +73,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WebSocketServer.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="WebSocketServer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/web/WebSocketServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="760">
-              <caret line="49" column="47" selection-start-line="49" selection-start-column="47" selection-end-line="49" selection-end-column="47" />
+            <state relative-caret-position="279">
+              <caret line="47" column="93" selection-start-line="47" selection-start-column="93" selection-end-line="47" selection-end-column="93" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -88,7 +85,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PDFWatcher.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PDFWatcher.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/PDFWatcher.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="245">
@@ -180,9 +177,9 @@
         <option value="$PROJECT_DIR$/RoboticArrrmAPI/src/main/java/net/tangentmc/util/DrawPointArray.java" />
         <option value="$PROJECT_DIR$/website/script.js" />
         <option value="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/Launcher.java" />
-        <option value="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/web/WebSocketServer.java" />
         <option value="$PROJECT_DIR$/RoboticArrrmAPI/src/main/java/net/tangentmc/svg/SVGParser.java" />
         <option value="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/PDFWatcher.java" />
+        <option value="$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/web/WebSocketServer.java" />
       </list>
     </option>
   </component>
@@ -1123,14 +1120,7 @@
       <workItem from="1473993799180" duration="1249000" />
       <workItem from="1474368250759" duration="27113000" />
       <workItem from="1474598402622" duration="11996000" />
-      <workItem from="1474631549920" duration="56376000" />
-    </task>
-    <task id="LOCAL-00251" summary="Add an interpolation constant, and interpolate everything bigger than it. Pass this to all pathiterators.">
-      <created>1473595855991</created>
-      <option name="number" value="00251" />
-      <option name="presentableId" value="LOCAL-00251" />
-      <option name="project" value="LOCAL" />
-      <updated>1473595855991</updated>
+      <workItem from="1474631549920" duration="56506000" />
     </task>
     <task id="LOCAL-00252" summary="We don't really gain anything at all from interpolating twice.&#10;Remove interpolation from ArmSimulation, replace with some sleep time">
       <created>1473599515902</created>
@@ -1468,11 +1458,18 @@
       <option name="project" value="LOCAL" />
       <updated>1474802306362</updated>
     </task>
-    <option name="localTasksCounter" value="300" />
+    <task id="LOCAL-00300" summary="PDFWatcher now cleans up previous print jobs. It also doesnt wait to send packets, and sends much much larger packets.&#10;Close up inputstreams">
+      <created>1474805040663</created>
+      <option name="number" value="00300" />
+      <option name="presentableId" value="LOCAL-00300" />
+      <option name="project" value="LOCAL" />
+      <updated>1474805040663</updated>
+    </task>
+    <option name="localTasksCounter" value="301" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="326907000" />
+    <option name="totallyTimeSpent" value="327037000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
@@ -1548,7 +1545,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Push weird picture of elf" />
     <MESSAGE value="Move fast if move up" />
     <MESSAGE value="Wait when doing shit with the pen" />
     <MESSAGE value="Change line min dist" />
@@ -1573,7 +1569,8 @@
     <MESSAGE value="Test interpolating with very little points." />
     <MESSAGE value="Add Base64 Sspport&#10;" />
     <MESSAGE value="Fix drawPoint, it should not have to go through all the ordering shit that drawPoints goes through." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix drawPoint, it should not have to go through all the ordering shit that drawPoints goes through." />
+    <MESSAGE value="PDFWatcher now cleans up previous print jobs. It also doesnt wait to send packets, and sends much much larger packets.&#10;Close up inputstreams" />
+    <option name="LAST_COMMIT_MESSAGE" value="PDFWatcher now cleans up previous print jobs. It also doesnt wait to send packets, and sends much much larger packets.&#10;Close up inputstreams" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1863,21 +1860,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/web/WebSocketServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="760">
-          <caret line="49" column="47" selection-start-line="49" selection-start-column="47" selection-end-line="49" selection-end-column="47" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/PDFWatcher.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="245">
           <caret line="81" column="51" selection-start-line="81" selection-start-column="51" selection-end-line="81" selection-end-column="51" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/web/WebSocketServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="47" column="93" selection-start-line="47" selection-start-column="93" selection-end-line="47" selection-end-column="93" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
