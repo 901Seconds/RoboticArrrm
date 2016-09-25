@@ -19,6 +19,7 @@ import java.awt.font.TextLayout;
 import java.awt.geom.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public class SVGParser {
             return new Shape[]{new Rectangle2D.Float(0, 0, 1, 1)};
         }
     }
-    
+
     public Shape[] shapesFromXML(String fileName) {
         ArrayList<Shape> shapes = new ArrayList<>();
         File opened = new File(fileName);
@@ -92,7 +93,15 @@ public class SVGParser {
                     float tx = Float.parseFloat(transStrSplit[4]), ty = Float.parseFloat(transStrSplit[5]);
                     float sx = Float.parseFloat(transStrSplit[0]), sy = Float.parseFloat(transStrSplit[3]);
                     Path2D path2d = new Path2D.Double();
-                    BufferedImage img = ImageIO.read(new File(png));
+                    BufferedImage img;
+                    if (png.startsWith("data")) {
+                        String base64Image = png.split(",")[1];
+                        byte[] imageBytes = javax.xml.bind.DatatypeConverter.parseBase64Binary(base64Image);
+                        img = ImageIO.read(new ByteArrayInputStream(imageBytes));
+                    } else {
+                        img = ImageIO.read(new File(png));
+                    }
+
                     BufferedImage newBufferedImage = new BufferedImage((int)(sx*img.getWidth()),(int)(sy*img.getHeight()), BufferedImage.TYPE_BYTE_GRAY);
                     Graphics2D graphics2D = newBufferedImage.createGraphics();
                     graphics2D.setTransform(AffineTransform.getScaleInstance(sx,sy));
