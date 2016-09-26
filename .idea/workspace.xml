@@ -43,11 +43,21 @@
       <file leaf-file-name="SVGParser.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RoboticArrrmAPI/src/main/java/net/tangentmc/svg/SVGParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-640">
+            <state relative-caret-position="2216">
               <caret line="155" column="13" selection-start-line="155" selection-start-column="13" selection-end-line="155" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test.prn-page1.svg" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/website/test.prn-page1.svg">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="33" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -85,7 +95,7 @@
       <file leaf-file-name="PDFWatcher.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/PDFWatcher.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
+            <state relative-caret-position="-1082">
               <caret line="43" column="53" selection-start-line="43" selection-start-column="53" selection-end-line="43" selection-end-column="53" />
               <folding />
             </state>
@@ -1222,14 +1232,7 @@
       <workItem from="1473993799180" duration="1249000" />
       <workItem from="1474368250759" duration="27113000" />
       <workItem from="1474598402622" duration="11996000" />
-      <workItem from="1474631549920" duration="65359000" />
-    </task>
-    <task id="LOCAL-00258" summary="Clean up code to remove warnings">
-      <created>1473636380545</created>
-      <option name="number" value="00258" />
-      <option name="presentableId" value="LOCAL-00258" />
-      <option name="project" value="LOCAL" />
-      <updated>1473636380545</updated>
+      <workItem from="1474631549920" duration="66615000" />
     </task>
     <task id="LOCAL-00259" summary="Clean up SVG parser">
       <created>1473637504245</created>
@@ -1567,11 +1570,18 @@
       <option name="project" value="LOCAL" />
       <updated>1474857846968</updated>
     </task>
-    <option name="localTasksCounter" value="307" />
+    <task id="LOCAL-00307" summary="turn interp back on.">
+      <created>1474858623624</created>
+      <option name="number" value="00307" />
+      <option name="presentableId" value="LOCAL-00307" />
+      <option name="project" value="LOCAL" />
+      <updated>1474858623624</updated>
+    </task>
+    <option name="localTasksCounter" value="308" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="335890000" />
+    <option name="totallyTimeSpent" value="337146000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1656,7 +1666,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Drawpoint based web shapes need to have an index and UUID assicociated with them so that on the other side they can be ordered and then drawn" />
     <MESSAGE value="Remove some debug." />
     <MESSAGE value="Why did that change????" />
     <MESSAGE value="Push." />
@@ -1681,7 +1690,8 @@
     <MESSAGE value="ignore temp files" />
     <MESSAGE value="We need to remove the signatures from other jars" />
     <MESSAGE value="WHY DID THIS HAVE TO BREAK NOW???????" />
-    <option name="LAST_COMMIT_MESSAGE" value="WHY DID THIS HAVE TO BREAK NOW???????" />
+    <MESSAGE value="turn interp back on." />
+    <option name="LAST_COMMIT_MESSAGE" value="turn interp back on." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1826,14 +1836,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/website/test.prn-page1.svg">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-19460">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_102/src.zip!/java/util/function/Consumer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="175">
@@ -1930,16 +1932,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RoboticArrrmAPI/src/main/java/net/tangentmc/svg/SVGParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-640">
-          <caret line="155" column="13" selection-start-line="155" selection-start-column="13" selection-end-line="155" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RoboticArrrmLauncher/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="363">
@@ -1950,8 +1942,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/RoboticArrrmLauncher/src/main/java/net/tangentmc/PDFWatcher.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
+        <state relative-caret-position="-1082">
           <caret line="43" column="53" selection-start-line="43" selection-start-column="53" selection-end-line="43" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/test.prn-page1.svg">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RoboticArrrmAPI/src/main/java/net/tangentmc/svg/SVGParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2216">
+          <caret line="155" column="13" selection-start-line="155" selection-start-column="13" selection-end-line="155" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="618">
+          <caret line="84" column="18" selection-start-line="84" selection-start-column="18" selection-end-line="84" selection-end-column="18" />
           <folding />
         </state>
       </provider>
@@ -1960,14 +1978,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="341">
           <caret line="47" column="93" selection-start-line="47" selection-start-column="93" selection-end-line="47" selection-end-column="93" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RoboticArrrmJNI/src/main/java/net/tangentmc/RoboticArmJNI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="618">
-          <caret line="84" column="18" selection-start-line="84" selection-start-column="18" selection-end-line="84" selection-end-column="18" />
           <folding />
         </state>
       </provider>
