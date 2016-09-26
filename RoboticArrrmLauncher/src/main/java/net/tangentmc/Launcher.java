@@ -117,9 +117,8 @@ public class Launcher {
                                 cpt.isPenDown(),0,null);
                         setAngles(tmpPoint);
                     }
-                } else {
-                    setAngles(cpt);
                 }
+                setAngles(cpt);
                 last = cpt.cpy();
             } catch (InterruptedException e) {
                 e.printStackTrace();
