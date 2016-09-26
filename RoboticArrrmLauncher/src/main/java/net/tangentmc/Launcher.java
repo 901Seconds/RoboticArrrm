@@ -29,7 +29,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Launcher {
     //Min distance between two points
-    static final double LINE_MIN_DIST = 3;
+    static final double LINE_MIN_DIST =10;
     private BlockingQueue<DrawPoint> pointsToDraw = new LinkedBlockingQueue<>();
     private boolean left = false;
     private ArrayList<RoboticArm> arms = new ArrayList<>();
@@ -131,7 +131,7 @@ public class Launcher {
             Angle tuple = Utils.convertPoint(arm.getModel(),point);
             arm.setAngle(tuple.getTheta1(), tuple.getTheta2());
         }
-        UI.sleep(robotAlive?200:50);
+        UI.sleep(robotAlive?300:50);
     }
     //variables used for mouse manipulation
     private double lastX = -1, lastY = -1, scaleX = 1, scaleY = 1, width, height, xSpc, ySpc;

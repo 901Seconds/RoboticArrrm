@@ -12,9 +12,9 @@ import java.util.Arrays;
 class RoboticArmJNI implements RoboticArm {
     //These are calibration points, not real min/max.
     //That's handled by c.
-    private static final int ARM_1_MIN = 1500;
+    private static final int ARM_1_MIN = 1300;
     private static final int ARM_1_MAX = 1800;
-    private static final int ARM_2_MIN = 1500;
+    private static final int ARM_2_MIN = 1400;
     private static final int ARM_2_MAX = 1800;
     private double mArm1,mArm2,cArm1,cArm2;
     private RoboticArmModel theModel;
@@ -64,19 +64,19 @@ class RoboticArmJNI implements RoboticArm {
         setServo(0, ARM_1_MIN);
         UI.sleep(3000);
         double arm1MinAngle = readAngle(0);
-        UI.sleep(3000);
+        UI.sleep(5000);
 
         Trace.println("Arm 1 Max:");
         setServo(0, ARM_1_MAX);
         UI.sleep(3000);
         double arm1MaxAngle = readAngle(0);
-        UI.sleep(3000);
+        UI.sleep(5000);
 
         Trace.println("Arm 2 Min:");
         setServo(1, ARM_2_MIN);
         UI.sleep(3000);
         double arm2MinAngle = readAngle(1);
-        UI.sleep(3000);
+        UI.sleep(5000);
 
         Trace.println("Arm 2 Max:");
         setServo(1, ARM_2_MAX);
