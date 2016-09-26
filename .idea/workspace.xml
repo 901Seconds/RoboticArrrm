@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="562fd72b-2674-4bdb-9358-2e62d0a324de" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+    <list default="true" id="562fd72b-2674-4bdb-9358-2e62d0a324de" name="Default" comment="Add stuff to gitignore&#10;">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="RoboticArrrm.iws" />
@@ -75,7 +74,7 @@
       <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-527">
+            <state relative-caret-position="34">
               <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
               <folding />
             </state>
@@ -914,14 +913,7 @@
       <workItem from="1474368250759" duration="27113000" />
       <workItem from="1474598402622" duration="11996000" />
       <workItem from="1474631549920" duration="71418000" />
-      <workItem from="1474888028754" duration="2514000" />
-    </task>
-    <task id="LOCAL-00266" summary="Move fast if move up">
-      <created>1473651554129</created>
-      <option name="number" value="00266" />
-      <option name="presentableId" value="LOCAL-00266" />
-      <option name="project" value="LOCAL" />
-      <updated>1473651554129</updated>
+      <workItem from="1474888028754" duration="2549000" />
     </task>
     <task id="LOCAL-00267" summary="Wait when doing shit with the pen">
       <created>1473651938694</created>
@@ -1259,11 +1251,18 @@
       <option name="project" value="LOCAL" />
       <updated>1474890508685</updated>
     </task>
-    <option name="localTasksCounter" value="315" />
+    <task id="LOCAL-00315" summary="Add stuff to gitignore&#10;">
+      <created>1474890564888</created>
+      <option name="number" value="00315" />
+      <option name="presentableId" value="LOCAL-00315" />
+      <option name="project" value="LOCAL" />
+      <updated>1474890564888</updated>
+    </task>
+    <option name="localTasksCounter" value="316" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="344463000" />
+    <option name="totallyTimeSpent" value="344498000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1348,7 +1347,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="I AM AN IDIOT" />
     <MESSAGE value="Add a pen up button" />
     <MESSAGE value="Have pen not be so far down" />
     <MESSAGE value="Introduce a bit of a wait time" />
@@ -1373,7 +1371,8 @@
     <MESSAGE value="Change calbiration points" />
     <MESSAGE value="Focibly draw the point after interpolation" />
     <MESSAGE value="Some ideas." />
-    <option name="LAST_COMMIT_MESSAGE" value="Some ideas." />
+    <MESSAGE value="Add stuff to gitignore&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add stuff to gitignore&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1632,7 +1631,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-527">
+        <state relative-caret-position="34">
           <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
           <folding />
         </state>
