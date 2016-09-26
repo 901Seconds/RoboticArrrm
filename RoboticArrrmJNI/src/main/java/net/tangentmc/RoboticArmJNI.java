@@ -107,7 +107,7 @@ class RoboticArmJNI implements RoboticArm {
         //is not correctly flushed otherwise, and we receive no input.
         //If a computer has the script command, and the script inst found,
         //Or we forget sudo or the arm crashes, throw an exception
-        ProcessBuilder builder = new ProcessBuilder("script","-c","/home/pi/Arm/arm2");
+        ProcessBuilder builder = new ProcessBuilder("script","-c","../c stuff/Arm/arm2");
 
         process = builder.start();
         Thread.sleep(1000);
@@ -149,4 +149,5 @@ class RoboticArmJNI implements RoboticArm {
     //TODO: Should make it so that both motors are controlled at once with the pen being seperate.
     //TODO: I kinda want to swap out in the arm code using setmotor from arthurs libs and directly using gpioServo(4|17,pwm);
     //TODO: IF this still sucks, we could try ServoBlaster, tho thats a last resort.
+    //TODO: put arm2 in c stuff and use it from there.
 }
