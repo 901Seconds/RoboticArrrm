@@ -41,7 +41,7 @@ public class PDFWatcher {
         dir.register(watcher, ENTRY_MODIFY);
         new Thread(this::loop).start();
         try {
-            client = IO.socket("http://10.140.133.175:9092"/*"http://localhost:9092"*/);
+            client = IO.socket(/*"http://10.140.133.175:9092"*/"http://localhost:9092");
             client.connect();
         } catch (URISyntaxException e) {
             e.printStackTrace();

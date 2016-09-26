@@ -34,19 +34,6 @@ class RoboticArmJNI implements RoboticArm {
         out.println(servo);
         out.println(pulse);
         out.flush();
-        try {
-            String next;
-            while ((next = in.readLine())!= null) {
-                if (next.startsWith(MOTOR_PREFIX)) {
-                    Trace.println(next);
-                    return;
-                }
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
     }
     private void calibrate() {
         Trace.println("Initialization:");
@@ -158,5 +145,8 @@ class RoboticArmJNI implements RoboticArm {
 
     private static final String SET_MOTOR_COMMAND = "w";
     private static final String MEASURE_ANGLE_COMMAND = "m";
-    private static final String MOTOR_PREFIX = "Servo okay";
+    //TODO: it might be worth making a new arm2 executable that displays no text and is more accurate at reporting angles.
+    //TODO: Should make it so that both motors are controlled at once with the pen being seperate.
+    //TODO: I kinda want to swap out in the arm code using setmotor from arthurs libs and directly using gpioServo(4|17,pwm);
+    //TODO: IF this still sucks, we could try ServoBlaster, tho thats a last resort.
 }

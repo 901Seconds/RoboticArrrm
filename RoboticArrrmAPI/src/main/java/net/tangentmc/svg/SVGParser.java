@@ -26,10 +26,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class SVGParser {
-    public static final double MIN_X = 10;
-    public static final double MAX_X = 230;
-    public static final double MIN_Y = 30;
-    public static final double MAX_Y = 180;
+    private static final double MIN_X = 10;
+    private static final double MAX_X = 230;
+    private static final double MIN_Y = 30;
+    private static final double MAX_Y = 180;
     private static Shape[] parsePathShape(String svgPathShape) {
         try {
             AWTPathProducer pathProducer = new AWTPathProducer();
