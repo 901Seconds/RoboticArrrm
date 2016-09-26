@@ -16,6 +16,8 @@ class RoboticArmJNI implements RoboticArm {
     private static final int ARM_1_MAX = 1800;
     private static final int ARM_2_MIN = 1400;
     private static final int ARM_2_MAX = 1800;
+    private static final int SERVO_1_PIN = 4;
+    private static final int SERVO_2_PIN = 17;
     private double mArm1,mArm2,cArm1,cArm2;
     private RoboticArmModel theModel;
 
