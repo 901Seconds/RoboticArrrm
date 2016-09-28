@@ -74,7 +74,6 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
         fill(255, 0, 0);
         ellipse(tCPs[2], tCPs[3], 10, 10);
 
-        plotter.drawPoints(tCPs,theta1,theta2,penDown);
     }
 
     private void ellipse(double X1, double Y1, double width, double height) {
@@ -94,6 +93,8 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
     public void setAngle(double theta1, double theta2) {
         this.theta1 = theta1;
         this.theta2 = theta2;
+        double[] tCPs = theArms.findTCPPos(theta1, theta2);
+        plotter.drawPoints(tCPs,theta1,theta2);
         loop();
     }
 
@@ -101,10 +102,9 @@ public class RoboticArmSimulation extends PApplet implements RoboticArm {
     public RoboticArmModel getModel() {
         return theArms;
     }
-    private boolean penDown = false;
 
     public void setPenMode(boolean down) {
-        penDown = down;
+        plotter.penDown = down;
     }
 
     void flagClear() {

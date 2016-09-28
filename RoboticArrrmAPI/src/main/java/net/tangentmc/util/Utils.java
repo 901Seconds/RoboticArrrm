@@ -29,11 +29,18 @@ public class Utils {
     public static ArrayList<DrawPoint> getAllPoints(Shape shape, double minDist) {
         ArrayList<DrawPoint> points = new ArrayList<>();
         double[] coords = new double[6];
+        double[] lastMove = new double[6];
         FlatteningPathIterator it = new FlatteningPathIterator(shape.getPathIterator(new AffineTransform()),minDist);
         for (; !it.isDone(); it.next()) {
             int type = it.currentSegment(coords);
-            //MOVE_TO is pen up, since you want to move without drawing
-            points.add(new DrawPoint(coords[0],coords[1],type!=PathIterator.SEG_MOVETO,1,null));
+            if (type == PathIterator.SEG_CLOSE)
+            {
+                points.add(new DrawPoint(lastMove[0],lastMove[1],true,1,null));
+            } else {
+                //MOVE_TO is pen up, since you want to move without drawing
+                points.add(new DrawPoint(coords[0],coords[1],type!= PathIterator.SEG_MOVETO,1,null));
+            }
+            if (type == PathIterator.SEG_MOVETO) lastMove = coords.clone();
         }
 
         return points;

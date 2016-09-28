@@ -1,12 +1,16 @@
 package net.tangentmc;
 
 import com.sanjay900.ProcessingRunner;
+import ecs100.UI;
 import processing.core.PApplet;
+
+import java.util.Queue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class RoboticArmPlotter extends PApplet {
     boolean willClear = false;
-    private boolean penDown;
-    private boolean lastPenDown = false;
+    boolean penDown;
+    private Queue<Object[]> drawables = new LinkedBlockingQueue<>();
     RoboticArmPlotter() {
         ProcessingRunner.run(this);
     }
@@ -15,33 +19,33 @@ public class RoboticArmPlotter extends PApplet {
     }
 
     public void setup() {
-        noLoop();
-        background(30, 35, 40);
+        background(255, 255, 255);
     }
-    private double[] tCPs;
     public void draw() {
-        if (lasttCPs == null) lasttCPs = tCPs;
+        if (drawables.isEmpty()) return;
+        Object[] draw = drawables.poll();
+        double[] lasttCPs = (double[]) draw[0];
+        double[] tCPs = (double[]) draw[1];
+        double theta1 = (double) draw[2];
+        double theta2 = (double) draw[3];
+        boolean penDown = (boolean) draw[4];
         if (willClear) {
-            background(30, 35, 40);
+            background(255, 255, 255);
             willClear = false;
         }
-        if (tCPs == null) return;
-        erasePrevFrame();
-        if (penDown && lastPenDown) {
-            stroke(200);
+        if (tCPs == null || lasttCPs == null) return;
+        if (penDown) {
+            stroke(0, 0, 0);
             line(lasttCPs[0], lasttCPs[1], tCPs[0], tCPs[1]);
-            stroke(255, 0, 0);
+            stroke(0, 0, 0);
             line(lasttCPs[2], lasttCPs[3], tCPs[2], tCPs[3]);
-        }/* else {
+        } else {
             //pen up
-            stroke(0, 255, 0);
-            line(lasttCPs[0], lasttCPs[1], tCPs[0], tCPs[1]);
-            line(lasttCPs[2], lasttCPs[3], tCPs[2], tCPs[3]);
-        }*/
+            //stroke(255, 255, 255);
+            //line(lasttCPs[0], lasttCPs[1], tCPs[0], tCPs[1]);
+        }
         drawAngleGraph(theta1,theta2);
         drawAngleVis(theta1,theta2);
-        lasttCPs = tCPs;
-        lastPenDown = penDown;
     }
 
     private void line(double X1, double Y1, double X2, double Y2) {
@@ -65,26 +69,22 @@ public class RoboticArmPlotter extends PApplet {
         stroke(0, 255, 0);
         fill(0, 200, 0);
         point(((float) (frameCount % 700) * width / 700), (float)(height - 40 * theta2));
-        fill(30, 35, 40, 3);
+        fill(255, 255, 255, 3);
         noStroke();
         rect((((frameCount - 20) % 700) * width / 700), height - 150, 200, 150);
     }
 
     private void erasePrevFrame() {
         noStroke();
-        fill(30, 35, 40, 1);
+        fill(255,255,255, 1);
         rect(0, 0, width, height);
-        fill(30, 35, 40);
+        fill(255,255,255);
         rect(0, 0, width, 100);
     }
-    private double theta1,theta2;
     private double[] lasttCPs = null;
-    void drawPoints(double[] tCPs, double theta1, double theta2, boolean penDown) {
-        this.penDown = penDown;
-        this.tCPs = tCPs;
-        this.theta1 = theta1;
-        this.theta2 = theta2;
-        loop();
+    void drawPoints(double[] tCPs, double theta1, double theta2) {
+        drawables.add(new Object[]{lasttCPs,tCPs,theta1,theta2,penDown});
+        lasttCPs = tCPs;
     }
 }
 

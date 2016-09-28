@@ -29,7 +29,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Launcher {
     //Min distance between two points
-    static final double LINE_MIN_DIST =2;
+    static final double LINE_MIN_DIST =100;
     private BlockingQueue<DrawPoint> pointsToDraw = new LinkedBlockingQueue<>();
     private boolean left = false;
     private ArrayList<RoboticArm> arms = new ArrayList<>();
@@ -68,7 +68,6 @@ public class Launcher {
         try {
             robot.init();
         } catch (Exception e) {
-            e.printStackTrace();
             UI.printMessage(e.getLocalizedMessage());
             robotAlive = false;
         }
@@ -96,20 +95,20 @@ public class Launcher {
         while (true) {
             try {
                 DrawPoint cpt = pointsToDraw.take();
+                UI.clearGraphics();
                 DrawPoint tmpPoint;
                 if(last == null) {
                     last = cpt.cpy();
-                    //Make sure to trigger pen down events.
-                    last.setPenDown(!cpt.isPenDown());
+                    last.setPenDown(false);
                 }
                 double dist = last.dist(cpt);
+                draw();
                 if (last.isPenDown() != cpt.isPenDown()) {
                     arms.forEach(arm -> {
                         arm.setPenMode(cpt.isPenDown());
-                        UI.sleep(robotAlive?150:10);
+                        UI.sleep(robotAlive?150:0);
                     });
                 }
-                draw();
                 if (dist > LINE_MIN_DIST && cpt.isPenDown()) {
                     for (double t = 0; t < 1; t+=LINE_MIN_DIST/dist) {
                         tmpPoint = new DrawPoint(Utils.lerp(t,last.getX(),cpt.getX()),
@@ -119,7 +118,7 @@ public class Launcher {
                     }
                 }
                 setAngles(cpt);
-                last = cpt.cpy();
+                last = cpt;
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -130,7 +129,7 @@ public class Launcher {
             Angle tuple = Utils.convertPoint(arm.getModel(),point);
             arm.setAngle(tuple.getTheta1(), tuple.getTheta2());
         }
-        UI.sleep(robotAlive?300:50);
+       UI.sleep(robotAlive?300:0);
     }
     //variables used for mouse manipulation
     private double lastX = -1, lastY = -1, scaleX = 1, scaleY = 1, width, height, xSpc, ySpc;

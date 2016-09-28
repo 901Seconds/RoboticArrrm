@@ -1,5 +1,6 @@
 package net.tangentmc.svg;
 
+import net.coobird.thumbnailator.Thumbnails;
 import org.apache.batik.parser.AWTPathProducer;
 import org.apache.batik.parser.ParseException;
 import org.apache.batik.parser.PathParser;
@@ -30,18 +31,17 @@ public class SVGParser {
     private static final double MAX_X = 230;
     private static final double MIN_Y = 30;
     private static final double MAX_Y = 180;
-    private static Shape[] parsePathShape(String svgPathShape) {
+    private static Shape parsePathShape(String svgPathShape) {
         try {
             AWTPathProducer pathProducer = new AWTPathProducer();
             PathParser pathParser = new PathParser();
             pathParser.setPathHandler(pathProducer);
             pathParser.parse(svgPathShape);
-            Shape shape = pathProducer.getShape();
-            return new Shape[]{shape};
+            return pathProducer.getShape();
 
         } catch (ParseException ex) {
             // Fallback to default square shape if shape is incorrect
-            return new Shape[]{new Rectangle2D.Float(0, 0, 1, 1)};
+            return new Rectangle2D.Float(0, 0, 1, 1);
         }
     }
 
@@ -51,6 +51,12 @@ public class SVGParser {
         try {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document doc = builder.parse(opened);
+            double swidth = Double.parseDouble(doc.getElementsByTagName("svg").item(0).getAttributes().getNamedItem("width").getNodeValue());
+            double sheight = Double.parseDouble(doc.getElementsByTagName("svg").item(0).getAttributes().getNamedItem("height").getNodeValue());
+            double proportion = swidth/sheight;
+            double newHeight = MAX_Y-MIN_Y;
+            double newWidth = newHeight*proportion;
+            AffineTransform transform = AffineTransform.getScaleInstance(newWidth / swidth, newHeight / sheight);
             //Parse and store symbols
             NodeList pathList = doc.getElementsByTagName("path");
             for (int i = 0; i < pathList.getLength(); i++) {
@@ -59,7 +65,7 @@ public class SVGParser {
                     Element path = (Element) p;
                     if (path.getParentNode().getNodeName().contains("clip")) continue;
                     String d = path.getAttribute("d");
-                    Collections.addAll(shapes, parsePathShape(d));
+                    Collections.addAll(shapes, transform.createTransformedShape(parsePathShape(d)));
 
                 }
             }
@@ -75,9 +81,9 @@ public class SVGParser {
                     if (path.hasAttribute("rx")) {
                         double rx = getAttrib("rx",path);
                         double ry = getAttrib("ry",path);
-                        shapes.add(new RoundRectangle2D.Double(x,y,width,height,rx,ry));
+                        shapes.add(transform.createTransformedShape(new RoundRectangle2D.Double(x,y,width,height,rx,ry)));
                     } else {
-                        shapes.add(new Rectangle2D.Double(x,y,width,height));
+                        shapes.add(transform.createTransformedShape(new Rectangle2D.Double(x,y,width,height)));
                     }
                 }
             }
@@ -92,6 +98,8 @@ public class SVGParser {
                     String[] transStrSplit = transStr.split(",");
                     float tx = Float.parseFloat(transStrSplit[4]), ty = Float.parseFloat(transStrSplit[5]);
                     float sx = Float.parseFloat(transStrSplit[0]), sy = Float.parseFloat(transStrSplit[3]);
+                    tx = (float) (tx*transform.getScaleX());
+                    ty = (float) (ty*transform.getScaleY());
                     Path2D path2d = new Path2D.Double();
                     BufferedImage img;
                     if (png.startsWith("data")) {
@@ -103,11 +111,9 @@ public class SVGParser {
                     } else {
                         img = ImageIO.read(new File(png));
                     }
-
-                    BufferedImage newBufferedImage = new BufferedImage((int)(sx*img.getWidth()),(int)(sy*img.getHeight()), BufferedImage.TYPE_BYTE_GRAY);
-                    Graphics2D graphics2D = newBufferedImage.createGraphics();
-                    graphics2D.setTransform(AffineTransform.getScaleInstance(sx,sy));
-                    graphics2D.drawImage(img, 0, 0, Color.WHITE, null);
+                    img = Thumbnails.of(img).scale(sx*transform.getScaleX(),sy*transform.getScaleY()).asBufferedImage();
+                    BufferedImage newBufferedImage = new BufferedImage(img.getWidth(),img.getHeight(), BufferedImage.TYPE_BYTE_GRAY);
+                    newBufferedImage.createGraphics().drawImage(img, 0, 0, Color.WHITE, null);
                     img = newBufferedImage;
                     byte[] pixels = ((DataBufferByte)img.getRaster().getDataBuffer()).getData();
                     boolean cur = false, last = false;
@@ -150,7 +156,7 @@ public class SVGParser {
                     double r = getAttrib("r",path);
                     double x = getAttrib("cx",path);
                     double y = getAttrib("cy",path);
-                    shapes.add(new Ellipse2D.Double(x,y,r,r));
+                    shapes.add(transform.createTransformedShape(new Ellipse2D.Double(x,y,r,r)));
 
                 }
             }
@@ -163,7 +169,7 @@ public class SVGParser {
                     double ry = getAttrib("ry",path);
                     double x = getAttrib("cx",path);
                     double y = getAttrib("cy",path);
-                    shapes.add(new Ellipse2D.Double(x,y,rx,ry));
+                    shapes.add(transform.createTransformedShape(new Ellipse2D.Double(x,y,rx,ry)));
 
                 }
             }
@@ -176,7 +182,7 @@ public class SVGParser {
                     double y1 = getAttrib("y1",path);
                     double x2 = getAttrib("x2",path);
                     double y2 = getAttrib("y2",path);
-                    shapes.add(new Line2D.Double(x1,y1,x2,y2));
+                    shapes.add(transform.createTransformedShape(new Line2D.Double(x1,y1,x2,y2)));
 
                 }
             }
@@ -192,7 +198,7 @@ public class SVGParser {
                         path2d.lineTo(getPoints(points[i]).getX(),getPoints(points[i]).getY());
                     }
                     path2d.closePath();
-                    shapes.add(path2d);
+                    shapes.add(transform.createTransformedShape(path2d));
                 }
             }
             pathList = doc.getElementsByTagName("polyline");
@@ -206,7 +212,7 @@ public class SVGParser {
                     for (int i1 = 1; i1 < points.length; i1++) {
                         path2d.lineTo(getPoints(points[i]).getX(),getPoints(points[i]).getY());
                     }
-                    shapes.add(path2d);
+                    shapes.add(transform.createTransformedShape(path2d));
                 }
             }
             pathList = doc.getElementsByTagName("text");
@@ -216,56 +222,38 @@ public class SVGParser {
                     Element path = (Element) p;
                     double x = getAttrib("x",path);
                     double y = getAttrib("y",path);
-                    Font parentfont = parseStyle(path,null);
+                    Font parentfont = parseStyle(path,null,transform);
                     Font font;
                     if (path.hasChildNodes()) {
                         Element tPath = path;
                         x = getAttrib("x",path,x);
                         y = getAttrib("y",path,y);
+                        x*=transform.getScaleX();
+                        y*=transform.getScaleY();
                         for (int i1 = 0; i1 < tPath.getChildNodes().getLength(); i1++)
                             if (tPath.getChildNodes().item(i1) instanceof DeferredTextImpl) {
-                                font = parseStyle(tPath, parentfont);
+                                font = parseStyle(tPath, parentfont, transform);
                                 shapes.add(getTextShape(path.getTextContent(), font, x, y));
                             } else {
                                 path = (Element) tPath.getChildNodes().item(i1);
                                 if (path.getTextContent().isEmpty()) continue;
-                                font = parseStyle(path, parentfont);
+                                font = parseStyle(path, parentfont, transform);
                                 shapes.add(getTextShape(path.getTextContent(), font, x, y));
                             }
                     }
                 }
             }
+            transform = AffineTransform.getTranslateInstance(MIN_X,MIN_Y);
+            for (int i = 0; i < shapes.size(); i++) {
+                shapes.set(i,transform.createTransformedShape(shapes.get(i)));
+            }
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
-        }
-        double minX = Double.MAX_VALUE,maxX = 0,minY=Double.MAX_VALUE,maxY=0;
-        for (Shape shape: shapes) {
-            minX = Math.min(minX,shape.getBounds().getX());
-            minY = Math.min(minY,shape.getBounds().getY());
-            maxX = Math.max(maxX,shape.getBounds().getMaxX());
-            maxY = Math.max(maxY,shape.getBounds().getMaxY());
-        }
-        double width = maxX-minX;
-        double height = maxY-minY;
-        double proportion = width/height;
-        double newHeight = Math.min(height,MAX_Y-MIN_Y);
-        double newWidth = proportion*newHeight;
-        proportion = newHeight/newWidth;
-        newWidth = Math.min(newWidth,MAX_X-MIN_X);
-        newHeight = proportion*newWidth;
-        AffineTransform transform = new AffineTransform();
-        double tx=Math.max(minX,MIN_X),ty=Math.max(minY,MIN_Y);
-        tx = Math.min(tx,MAX_X-newWidth);
-        ty = Math.min(ty,MAX_Y-newHeight);
-        transform.translate(tx,ty);
-        transform.scale(newWidth/width,newHeight/height);
-        for (int i = 0; i < shapes.size(); i++) {
-            shapes.set(i,transform.createTransformedShape(shapes.get(i)));
         }
         return shapes.toArray(new Shape[0]);
 
     }
-    private Font parseStyle(Element path, Font font) {
+    private Font parseStyle(Element path, Font font, AffineTransform transform) {
         float size = font==null?10:font.getSize();
         String family = font==null?null:font.getFamily();
         if (path.hasAttribute("style")) {
@@ -283,6 +271,7 @@ public class SVGParser {
             family = path.getAttribute("font-family");
         }
 
+        size*=transform.getScaleY();
         return new Font(family,Font.PLAIN, (int) size);
     }
     private double getAttrib(String attrib, Element path, double def) {

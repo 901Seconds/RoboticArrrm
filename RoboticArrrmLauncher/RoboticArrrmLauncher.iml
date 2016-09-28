@@ -78,6 +78,7 @@
     <orderEntry type="library" name="Maven: org.boofcv:geo:0.17" level="project" />
     <orderEntry type="library" name="Maven: org.imgscalr:imgscalr-lib:4.2" level="project" />
     <orderEntry type="library" name="Maven: org.bouncycastle:bcprov-jdk16:1.46" level="project" />
+    <orderEntry type="library" name="Maven: net.coobird:thumbnailator:0.4.8" level="project" />
     <orderEntry type="module" module-name="RoboticArrrmJNI" />
     <orderEntry type="module" module-name="RoboticArrrmSimulation" />
     <orderEntry type="library" name="Maven: com.sanjay900:ProcessingWrapper:1.2" level="project" />
