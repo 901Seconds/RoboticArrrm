@@ -100,7 +100,6 @@ public class SVGParser {
                     float sx = Float.parseFloat(transStrSplit[0]), sy = Float.parseFloat(transStrSplit[3]);
                     tx = (float) (tx*transform.getScaleX());
                     ty = (float) (ty*transform.getScaleY());
-                    Path2D path2d = new Path2D.Double();
                     BufferedImage img;
                     if (png.startsWith("data")) {
                         String base64Image = png.split(",")[1];
@@ -115,39 +114,8 @@ public class SVGParser {
                     BufferedImage newBufferedImage = new BufferedImage(img.getWidth(),img.getHeight(), BufferedImage.TYPE_BYTE_GRAY);
                     newBufferedImage.createGraphics().drawImage(img, 0, 0, Color.WHITE, null);
                     img = newBufferedImage;
-                    byte[] pixels = ((DataBufferByte)img.getRaster().getDataBuffer()).getData();
-                    boolean cur = false, last = false;
-                    int dir = 1;
-                    path2d.moveTo(tx,ty);
-                    for (int y = 0; y < img.getHeight(); y++) {
-                        path2d.moveTo((dir==1?0:img.getWidth())+tx,y+ty);
-                        //Alternate direction so that the pen doesnt cross the page
-                        for (int x = dir==1?0:img.getWidth()-1; x >= 0 && x < img.getWidth();x+=dir) {
-                            cur = pixels[(y * img.getWidth()) + x] >= 0;
-                            if (cur != last) {
-                                if (last) {
-                                    path2d.lineTo(x+tx,y+ty);
-                                } else {
-                                    path2d.moveTo(x + tx, y + ty);
-                                }
-                            }
-                            last = cur;
-                        }
-                        //If your at the end of the page, and the pen was down, we should finish that stroke
-                        if (cur && dir == 1) {
-                            path2d.lineTo(img.getWidth()+ tx, y + ty);
-                        } else if (!cur && dir == 1) {
-                            path2d.moveTo(img.getWidth()+ tx, y + ty);
-                        }
-                        if (cur && dir == -1) {
-                            path2d.lineTo(tx, y + ty);
-                        }
-                        if (!cur && dir == -1) {
-                            path2d.moveTo(tx, y + ty);
-                        }
-                        dir = -dir;
-                    }
-                    shapes.add(path2d);
+
+                    shapes.add(getImagePath(img,tx,ty));
                 }
             }
 
@@ -256,6 +224,44 @@ public class SVGParser {
         return shapes.toArray(new Shape[0]);
 
     }
+
+    public static Shape getImagePath(BufferedImage img, float tx, float ty) {
+        Path2D.Double path2d = new Path2D.Double();
+        byte[] pixels = ((DataBufferByte)img.getRaster().getDataBuffer()).getData();
+        boolean cur = false, last = false;
+        int dir = 1;
+        path2d.moveTo(tx,ty);
+        for (int y = 0; y < img.getHeight(); y++) {
+            path2d.moveTo((dir==1?0:img.getWidth())+tx,y+ty);
+            //Alternate direction so that the pen doesnt cross the page
+            for (int x = dir==1?0:img.getWidth()-1; x >= 0 && x < img.getWidth();x+=dir) {
+                cur = pixels[(y * img.getWidth()) + x] >= 0;
+                if (cur != last) {
+                    if (last) {
+                        path2d.lineTo(x+tx,y+ty);
+                    } else {
+                        path2d.moveTo(x + tx, y + ty);
+                    }
+                }
+                last = cur;
+            }
+            //If your at the end of the page, and the pen was down, we should finish that stroke
+            if (cur && dir == 1) {
+                path2d.lineTo(img.getWidth()+ tx, y + ty);
+            } else if (!cur && dir == 1) {
+                path2d.moveTo(img.getWidth()+ tx, y + ty);
+            }
+            if (cur && dir == -1) {
+                path2d.lineTo(tx, y + ty);
+            }
+            if (!cur && dir == -1) {
+                path2d.moveTo(tx, y + ty);
+            }
+            dir = -dir;
+        }
+        return path2d;
+    }
+
     private Font parseStyle(Element path, Font font, AffineTransform transform) {
         float size = font==null?10:font.getSize();
         String family = font==null?null:font.getFamily();

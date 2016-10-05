@@ -91,48 +91,15 @@ public class Launcher {
     private void startStream() {
         try {
             Robot robot = new Robot();
-            Path2D path2d = new Path2D.Double();
-            BufferedImage img = new BufferedImage(200,200, BufferedImage.TYPE_BYTE_GRAY);
-            byte[] pixels = ((DataBufferByte) img.getRaster().getDataBuffer()).getData();
+            BufferedImage img = new BufferedImage(200,150, BufferedImage.TYPE_BYTE_GRAY);
             Rectangle screenRect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
             Graphics2D graphics2D = img.createGraphics();
             while (true) {
-                graphics2D.drawImage(Thumbnails.of(robot.createScreenCapture(screenRect)).size(200,200).asBufferedImage(), 0, 0, Color.WHITE, null);
-
-                boolean cur = false, last = false;
-                int dir = 1;
-                int tx = 30,ty=30;
-                path2d.moveTo(tx,ty);
-                for (int y = 0; y < img.getHeight(); y++) {
-                    path2d.moveTo((dir==1?0:img.getWidth())+tx,y+ty);
-                    //Alternate direction so that the pen doesnt cross the page
-                    for (int x = dir==1?0:img.getWidth()-1; x >= 0 && x < img.getWidth();x+=dir) {
-                        cur = pixels[(y * img.getWidth()) + x] >= 0;
-                        if (cur != last) {
-                            if (cur) {
-                                path2d.moveTo(x + tx, y + ty);
-                            } else {
-                                //Remember, if your going from black to white, you want to draw the line to the prev
-                                //pixel, not current, so take dir
-                                path2d.lineTo(x + tx, y + ty);
-                            }
-                        }
-                        last = cur;
-                    }
-                    //If your at the end of the page, and the pen was down, we should finish that stroke
-                    if (cur && dir == 1) {
-                        path2d.lineTo(img.getWidth()+1+ tx, y + ty);
-                    }
-                    if (cur && dir == -1) {
-                        path2d.lineTo(tx-1, y + ty);
-                    }
-                    dir = -dir;
-                }
-                addShape(new ShapeObject(new Shape[]{path2d}));
+                graphics2D.drawImage(Thumbnails.of(robot.createScreenCapture(screenRect)).size(200,150).asBufferedImage(), 0, 0, Color.WHITE, null);
+                addShape(new ShapeObject(new Shape[]{SVGParser.getImagePath(img,30,30)}));
                 while (!pointsToDraw.isEmpty()) {
                     UI.sleep(1000);
                 }
-                path2d = new Path2D.Double();
             }
 
         } catch (AWTException | IOException e) {
