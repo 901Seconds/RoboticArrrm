@@ -264,8 +264,8 @@ public class Launcher {
                     else path.moveTo(point.getX(), point.getY());
                 }
 
-                //UI.clearGraphics();
-                //UI.getGraphics().draw(path);
+                UI.clearGraphics();
+                UI.getGraphics().draw(path);
             }
             if (current != null) {
                 UI.clearGraphics();
@@ -278,7 +278,7 @@ public class Launcher {
                     UI.getGraphics().draw(transform.createTransformedShape(s2));
                 }
             }
-            // UI.repaintAllGraphics();
+            UI.repaintAllGraphics();
         });
     }
 

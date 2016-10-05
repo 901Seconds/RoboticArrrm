@@ -125,24 +125,25 @@ public class SVGParser {
                         for (int x = dir==1?0:img.getWidth()-1; x >= 0 && x < img.getWidth();x+=dir) {
                             cur = pixels[(y * img.getWidth()) + x] >= 0;
                             if (cur != last) {
-                                path2d.moveTo(x+tx,y+ty);
-                            } else {
-                                path2d.lineTo(x+tx,y+ty);
+                                if (last) {
+                                    path2d.lineTo(x+tx,y+ty);
+                                } else {
+                                    path2d.moveTo(x + tx, y + ty);
+                                }
                             }
                             last = cur;
                         }
                         //If your at the end of the page, and the pen was down, we should finish that stroke
                         if (cur && dir == 1) {
-                            path2d.lineTo(img.getWidth()+1+ tx, y + ty);
+                            path2d.lineTo(img.getWidth()+ tx, y + ty);
                         } else if (!cur && dir == 1) {
-
-                            path2d.moveTo(img.getWidth()+1+ tx, y + ty);
+                            path2d.moveTo(img.getWidth()+ tx, y + ty);
                         }
                         if (cur && dir == -1) {
-                            path2d.lineTo(tx-1, y + ty);
+                            path2d.lineTo(tx, y + ty);
                         }
                         if (!cur && dir == -1) {
-                            path2d.moveTo(tx-1, y + ty);
+                            path2d.moveTo(tx, y + ty);
                         }
                         dir = -dir;
                     }
