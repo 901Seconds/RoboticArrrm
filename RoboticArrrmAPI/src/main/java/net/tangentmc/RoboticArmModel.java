@@ -89,13 +89,13 @@ public class RoboticArmModel {
 
 
     private double[] findElbowPosition(double targetX, double targetY) {
-        //co-ordinates of the center point of a line drawn from the shoulders to the mouse
+        //co-ordinates of the center point of a line drawn from the shoulders to the target
         double o1XC = (targetX+o1X)/2;
         double o1YC = (targetY+o1Y)/2;
         double o2XC = (targetX+o2X)/2;
         double o2YC = (targetY+o2Y)/2;
 
-        //length of the line between the shoulders and the mouse
+        //length of the line between the shoulders and the target
         double abs1 = absLength(o1X,targetX,o1Y,targetY);
         double abs2 = absLength(o2X,targetX,o2Y,targetY);
 
@@ -104,7 +104,7 @@ public class RoboticArmModel {
         double o1R = findOp(l,abs1/2);
         double o2R = findOp(l,abs2/2);
 
-        //finds the angle of the line from the shoulders to the mouse
+        //finds the angle of the line from the shoulders to the target
         //and the inverse reciprocal
         double o1NormalAngle = Math.atan2(-(targetX-o1X),(targetY-o1Y));
         double o2NormalAngle = Math.atan2(-(targetX-o2X),(targetY-o2Y));
