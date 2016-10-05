@@ -99,8 +99,8 @@ public class RoboticArmModel {
         double abs1 = absLength(o1X,targetX,o1Y,targetY);
         double abs2 = absLength(o2X,targetX,o2Y,targetY);
 
-        //radius of a circle centered halfway between the shoulders and the mouse so that the distance
-        //between its intersection with the reach of the shoulders and the mouse is equal to l
+        //radius of a circle centered halfway between the shoulders and the target so that the distance
+        //between its intersection with the reach of the shoulders and the target is equal to l
         double o1R = findOp(l,abs1/2);
         double o2R = findOp(l,abs2/2);
 

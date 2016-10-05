@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class SVGParser {
-    private static final double MIN_X = 10;
+    private static final double MIN_X = 30;
     private static final double MAX_X = 230;
     private static final double MIN_Y = 30;
     private static final double MAX_Y = 180;
@@ -125,22 +125,24 @@ public class SVGParser {
                         for (int x = dir==1?0:img.getWidth()-1; x >= 0 && x < img.getWidth();x+=dir) {
                             cur = pixels[(y * img.getWidth()) + x] >= 0;
                             if (cur != last) {
-                                if (cur) {
-                                    path2d.moveTo(x+tx,y+ty);
-                                } else {
-                                    //Remember, if your going from black to white, you want to draw the line to the prev
-                                    //pixel, not current, so take dir
-                                    path2d.lineTo(x-dir+tx,y+ty);
-                                }
+                                path2d.moveTo(x+tx,y+ty);
+                            } else {
+                                path2d.lineTo(x+tx,y+ty);
                             }
                             last = cur;
                         }
                         //If your at the end of the page, and the pen was down, we should finish that stroke
                         if (cur && dir == 1) {
-                            path2d.lineTo(img.getWidth()+ tx, y + ty);
+                            path2d.lineTo(img.getWidth()+1+ tx, y + ty);
+                        } else if (!cur && dir == 1) {
+
+                            path2d.moveTo(img.getWidth()+1+ tx, y + ty);
                         }
                         if (cur && dir == -1) {
-                            path2d.lineTo(tx, y + ty);
+                            path2d.lineTo(tx-1, y + ty);
+                        }
+                        if (!cur && dir == -1) {
+                            path2d.moveTo(tx-1, y + ty);
                         }
                         dir = -dir;
                     }

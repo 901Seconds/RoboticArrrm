@@ -15,37 +15,41 @@ public class RoboticArmPlotter extends PApplet {
         ProcessingRunner.run(this);
     }
     public void settings() {
-        size(1280, 800);
+        size(1280, 800,P2D);
     }
 
     public void setup() {
+        frameRate(1000);
         background(255, 255, 255);
     }
     public void draw() {
-        if (drawables.isEmpty()) return;
-        Object[] draw = drawables.poll();
-        double[] lasttCPs = (double[]) draw[0];
-        double[] tCPs = (double[]) draw[1];
-        double theta1 = (double) draw[2];
-        double theta2 = (double) draw[3];
-        boolean penDown = (boolean) draw[4];
-        if (willClear) {
-            background(255, 255, 255);
-            willClear = false;
+        scale(3);
+        translate(-width/8,-height/8);
+        while (!drawables.isEmpty()) {
+            Object[] draw = drawables.poll();
+            double[] lasttCPs = (double[]) draw[0];
+            double[] tCPs = (double[]) draw[1];
+            double theta1 = (double) draw[2];
+            double theta2 = (double) draw[3];
+            boolean penDown = (boolean) draw[4];
+            if (willClear) {
+                background(255, 255, 255);
+                willClear = false;
+            }
+            if (tCPs == null || lasttCPs == null) return;
+            if (penDown) {
+                stroke(0, 0, 0);
+                line(lasttCPs[0], lasttCPs[1], tCPs[0], tCPs[1]);
+                //stroke(0, 0, 0);
+                //line(lasttCPs[2], lasttCPs[3], tCPs[2], tCPs[3]);
+            } else {
+                //pen up
+                stroke(255, 255, 255);
+                line(lasttCPs[0], lasttCPs[1], tCPs[0], tCPs[1]);
+            }
+           // drawAngleGraph(theta1, theta2);
+           // drawAngleVis(theta1, theta2);
         }
-        if (tCPs == null || lasttCPs == null) return;
-        if (penDown) {
-            stroke(0, 0, 0);
-            line(lasttCPs[0], lasttCPs[1], tCPs[0], tCPs[1]);
-            stroke(0, 0, 0);
-            line(lasttCPs[2], lasttCPs[3], tCPs[2], tCPs[3]);
-        } else {
-            //pen up
-            //stroke(255, 255, 255);
-            //line(lasttCPs[0], lasttCPs[1], tCPs[0], tCPs[1]);
-        }
-        drawAngleGraph(theta1,theta2);
-        drawAngleVis(theta1,theta2);
     }
 
     private void line(double X1, double Y1, double X2, double Y2) {
