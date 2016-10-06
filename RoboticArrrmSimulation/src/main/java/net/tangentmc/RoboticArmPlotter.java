@@ -15,7 +15,7 @@ public class RoboticArmPlotter extends PApplet {
         ProcessingRunner.run(this);
     }
     public void settings() {
-        size(1280, 800,P2D);
+        size(800, 600);
     }
 
     public void setup() {
