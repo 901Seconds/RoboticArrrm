@@ -77,7 +77,6 @@ public class Launcher {
             robot.init();
         } catch (Exception e) {
             UI.printMessage(e.getLocalizedMessage());
-            e.printStackTrace();
             robotAlive = false;
         }
         new WebServer(this);

@@ -38,7 +38,7 @@ class RoboticArmJNI implements RoboticArm {
         //is not correctly flushed otherwise, and we receive no input.
         //If a computer has the script command, and the script inst found,
         //Or we forget sudo or the arm crashes, throw an exception
-        ProcessBuilder builder = new ProcessBuilder("script","-c","../c stuff/Arm/arm2");
+        ProcessBuilder builder = new ProcessBuilder("script","-c","../Arm/arm2");
         Process process = builder.start();
         UI.sleep(1000);
         if (!process.isAlive()) {
