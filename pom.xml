@@ -38,7 +38,7 @@
         <repository>
             <id>tangentmc</id>
             <name>TangentMC Internal Repository</name>
-            <url>https://maven.tangentmc.net/repository/tangent/</url>
+            <url>http://maven.tangentmc.net/repository/tangent/</url>
         </repository>
     </distributionManagement>
     <properties>
