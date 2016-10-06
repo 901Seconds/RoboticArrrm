@@ -6,7 +6,7 @@
 
 # Maven
 log/
-/website/test.prn*
+#/website/test.prn*
 ### Maven template
 target/
 pom.xml.tag
