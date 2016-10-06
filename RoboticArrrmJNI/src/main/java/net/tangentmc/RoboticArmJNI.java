@@ -24,6 +24,7 @@ class RoboticArmJNI implements RoboticArm {
         //Arthur and servoblaster use a different pin, but it happens to be servoblasters pin 3
         if (servo == 2) servo = 3;
         servoBlaster.println(servo+"="+pulse+"us");
+        System.out.println(servo+"="+pulse+"us");
         servoBlaster.flush();
     }
 
@@ -56,20 +57,20 @@ class RoboticArmJNI implements RoboticArm {
         Trace.println("Starting Calibration:");
         Trace.println("Arm 1 Min:");
         setServo(0, ARM_1_MIN);
-        UI.sleep(300);
+        UI.sleep(3000);
         double arm1MinAngle = readAngle(0, in, out);
         Trace.println("Arm 1 Max:");
         setServo(0, ARM_1_MAX);
-        UI.sleep(300);
+        UI.sleep(3000);
         double arm1MaxAngle = readAngle(0, in, out);
         Trace.println("Arm 2 Min:");
         setServo(0, ARM_1_MIN);
         setServo(1, ARM_2_MIN);
-        UI.sleep(300);
+        UI.sleep(3000);
         double arm2MinAngle = readAngle(1, in, out);
         Trace.println("Arm 2 Max:");
         setServo(1, ARM_2_MAX);
-        UI.sleep(300);
+        UI.sleep(3000);
         double arm2MaxAngle = readAngle(1, in, out);
 
         Trace.println("Calculating Constants:");
@@ -129,6 +130,7 @@ class RoboticArmJNI implements RoboticArm {
             calibrate();
         } catch (IOException | InterruptedException e) {
             servoBlaster = null;
+            e.printStackTrace();
             throw e;
         }
     }
